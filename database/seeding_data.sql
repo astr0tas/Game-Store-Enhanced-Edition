@@ -1,9 +1,12 @@
 use game_store;
 
+-- add customers section
 insert into customer values('CUSTOMER01','Lê Văn B','b_le@gmail.com',null,0.0,'none',0,'b_le123','bLe0123');
 
+-- add admins section
 insert into admin values('ADMIN01','Nguyễn Văn A','a_nguyen@gmail.com','0123456789',null,'a_nguyen123','aNguyen0123');
 
+-- add categories section
 insert into category values('Arcade & Rhythm'),
 ('Fighting & Martial Arts'),
 ('First-Person Shooter'),
@@ -46,6 +49,7 @@ insert into category values('Arcade & Rhythm'),
 
 set @picture_path:='E:/Projects/Game_Store_2023/database/Pictures';
 
+-- add games section
 insert into game values('Elden Ring',59.99,0,'THE NEW FANTASY ACTION RPG.
 Rise, Tarnished, and be guided by grace to brandish the power of the Elden Ring and become an Elden Lord in the Lands Between.
 • A Vast World Full of Excitement
@@ -107,8 +111,10 @@ DirectX: Version 12
 Network: Broadband Internet connection
 Additional Notes: Estimated performance: 1080p/60fps ・Framerate might drop in graphics-intensive scenes. ・AMD Radeon RX 6700 XT or NVIDIA GeForce RTX 2070 required to support ray tracing.',load_file(concat(@picture_path,'/Resident Evil 4/Resident_evil_4_pic1.jpg')),load_file(concat(@picture_path,'/Resident Evil 4/Resident_evil_4_pic2.jpeg')),load_file(concat(@picture_path,'/Resident Evil 4/Resident_evil_4_pic3.jpg')),load_file(concat(@picture_path,'/Resident Evil 4/Resident_evil_4_pic4.jpg')));
 
+-- add categories to games section
 insert into belongs_to values('Elden Ring','Action RPG'),('Resident Evil 4','Third-Person Shooter'),('Resident Evil 4','Story-Rich');
 
+-- add activation codes section
 insert into activation_code(game_name,code) values('Elden Ring','SQT8CXG8VWKBP9QB'),('Elden Ring','LV47LGEFPY2PXZ67'),('Elden Ring','KYZXNH7B95FTG5RL'),
 ('Resident Evil 4','MTPAJHMJMBPVHR9X'),('Resident Evil 4','N56GEPPGFHB7VVKE'),('Resident Evil 4','ZR2ZXN4QXDTWJQ7U');
 
