@@ -111,11 +111,51 @@ DirectX: Version 12
 Network: Broadband Internet connection
 Additional Notes: Estimated performance: 1080p/60fps ・Framerate might drop in graphics-intensive scenes. ・AMD Radeon RX 6700 XT or NVIDIA GeForce RTX 2070 required to support ray tracing.',load_file(concat(@picture_path,'/Resident Evil 4/Resident_evil_4_pic1.jpg')),load_file(concat(@picture_path,'/Resident Evil 4/Resident_evil_4_pic2.jpeg')),load_file(concat(@picture_path,'/Resident Evil 4/Resident_evil_4_pic3.jpg')),load_file(concat(@picture_path,'/Resident Evil 4/Resident_evil_4_pic4.jpg')));
 
+insert into game values('God of War',49.99,0.4,'Enter the Norse realm
+His vengeance against the Gods of Olympus years behind him, Kratos now lives as a man in the realm of Norse Gods and monsters. It is in this harsh, unforgiving world that he must fight to survive… and teach his son to do the same.
+
+Grasp a second chance
+Kratos is a father again. As mentor and protector to Atreus, a son determined to earn his respect, he is forced to deal with and control the rage that has long defined him while out in a very dangerous world with his son.
+
+Journey to a dark, elemental world of fearsome creatures
+From the marble and columns of ornate Olympus to the gritty forests, mountains and caves of pre-Viking Norse lore, this is a distinctly new realm with its own pantheon of creatures, monsters and gods.
+
+Engage in visceral, physical combat
+With an over the shoulder camera that brings the player closer to the action than ever before, fights in God of War™ mirror the pantheon of Norse creatures Kratos will face: grand, gritty and grueling. A new main weapon and new abilities retain the defining spirit of the God of War series while presenting a vision of conflict that forges new ground in the genre.
+PC FEATURES
+High Fidelity Graphics
+Striking visuals enhanced on PC. Enjoy true 4K resolution, on supported devices, [MU1] with unlocked framerates for peak performance. Dial in your settings via a wide range of graphical presets and options including higher resolution shadows, improved screen space reflections, the addition of GTAO and SSDO, and much more.
+
+NVIDIA® DLSS and Reflex Support
+Quality meets performance. Harness the AI power of NVIDIA Deep Learning Super Sampling (DLSS) to boost frame rates and generate beautiful, sharp images on select Nvidia GPUs. Utilize NVIDIA Reflex low latency technology allowing you to react quicker and hit harder combos with the responsive gameplay you crave on GeForce GPUs.
+
+Controls Customization
+Play your way. With support for the DUALSHOCK®4 and DUALSENSE® wireless controllers, a wide range of other gamepads, and fully customizable bindings for mouse and keyboard, you have the power to fine-tune every action to match your playstyle.
+
+Ultra-wide Support
+Immerse yourself like never before. Journey through the Norse realms taking in breathtaking vistas in panoramic widescreen. With 21:9 ultra-widescreen support, God of War™ presents a cinema quality experience that further expands the original seamless theatrical vision.',0,'Requires a 64-bit processor and operating system
+OS: Windows 10 64-bit
+Processor: Intel i5-2500k (4 core 3.3 GHz) or AMD Ryzen 3 1200 (4 core 3.1 GHz)
+Memory: 8 GB RAM
+Graphics: NVIDIA GTX 960 (4 GB) or AMD R9 290X (4 GB)
+DirectX: Version 11
+Storage: 70 GB available space
+Additional Notes: DirectX feature level 11_1 required','Requires a 64-bit processor and operating system
+OS: Windows 10 64-bit
+Processor: Intel i5-6600k (4 core 3.5 GHz) or AMD Ryzen 5 2400 G (4 core 3.6 GHz)
+Memory: 8 GB RAM
+Graphics: NVIDIA GTX 1060 (6 GB) or AMD RX 570 (4 GB)
+DirectX: Version 11
+Storage: 70 GB available space
+Additional Notes: DirectX feature level 11_1 required',load_file(concat(@picture_path,'/God of war/gow_1.jpg')),load_file(concat(@picture_path,'/God of war/gow_2.jpeg')),load_file(concat(@picture_path,'/God of war/gow_3.jpg')),load_file(concat(@picture_path,'/God of war/gow_4.jpg')));
+
 -- add categories to games section
 insert into belongs_to values('Elden Ring','Action RPG'),('Resident Evil 4','Third-Person Shooter'),('Resident Evil 4','Story-Rich');
+insert into belongs_to values('God of War','Story-Rich'),('God of War','Hack & Slash'),('God of War','Action RPG');
 
 -- add activation codes section
 insert into activation_code(game_name,code) values('Elden Ring','SQT8CXG8VWKBP9QB'),('Elden Ring','LV47LGEFPY2PXZ67'),('Elden Ring','KYZXNH7B95FTG5RL'),
 ('Resident Evil 4','MTPAJHMJMBPVHR9X'),('Resident Evil 4','N56GEPPGFHB7VVKE'),('Resident Evil 4','ZR2ZXN4QXDTWJQ7U');
+insert into activation_code(game_name,code) values('God of War','ZUGJX32CGJTLXVXX'),('God of War','WVTKJKK8VL3ALFXF'),('God of War','DP44F8XHCGEBQSNB');
 
 -- select * from activation_code;
