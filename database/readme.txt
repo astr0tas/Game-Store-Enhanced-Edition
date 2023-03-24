@@ -7,7 +7,8 @@ Step 3: Past this code 'max_allowed_packet=1024M' below it, this will allow you 
 Step 4: Find 'secure-file-priv'; if it has a value, set it to "", this will allow you to insert images/files freely from anywhere.
 Step 5: Save and exit the file.
 Step 6: Press Window + R and search for services.msc, locate MySQL80 and restart it.
-Step 7: You are ready to go!
+Step 7: Open the seeding_data.sql file and change the value of @path to your own directory of the project (it should be: <your_dir>/Game_Store_2023/database/Pictures).
+Step 8: You are ready to go!
 
 
 ==>> Next run the create_manager.sql file first then create_database.sql and finally seeding_data.sql
