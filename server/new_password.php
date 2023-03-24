@@ -17,17 +17,13 @@
       if ($conn->connect_error) {
             die("Connection failed: " . $conn->connect_error);
       }
-      $sql = "SELECT username,userpassword from customer";
-      $result = $conn->query($sql);
-
-      $success = false;
-      if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                  if ($row['username'] == $_POST['username'] && $row['userpassword'] == $_POST['password'])
-                        $success = true;
-            }
+      $sql = $conn->prepare("UPDATE customer SET userpassword=? where username=?");
+      $sql->bind_param("ss", $_POST['password'], $_POST['username']);
+      if ($sql->execute() === TRUE) {
+            echo "Password updated successfully";
+      } else {
+            echo "Error updating Password: " . $conn->error;
       }
-      $success = (int)$success;
-      echo $success;
+      $sql->close();
       $conn->close();
       ?>

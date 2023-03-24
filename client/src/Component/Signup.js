@@ -36,17 +36,23 @@ function Signup()
       formData.append("password", inputs.password);
       if (inputs.phone)
         formData.append("phone", inputs.phone);
-      axios.post('http://localhost/login.php', formData)
+      axios.post('http://localhost/sign_up.php', formData)
         .then(res =>
         {
           if (res.data === "email")
+          {
             alert("This email is already used!"); // This can be replace with a pop-up
+            document.getElementById("signUpForm").reset();
+          }
           else if (res.data === "username")
+          {
             alert("This username is already used!"); // This can be replace with a pop-up
+            document.getElementById("signUpForm").reset();
+          }
           else
           {
             alert("Register successfully!"); // This can be replace with a pop-up
-            //Navigate(); // Need to navigate to the dashboard
+            Navigate("/");
           }
         })
         .catch(error => console.log(error));
@@ -56,7 +62,7 @@ function Signup()
   return (
     <div class="Signup  d-flex align-items-center">
       <div class="container d-flex justify-content-end align-items-center ">
-        <form class="form-sign-up col-4 me-5 w-25 border p-3 rounded rounded-3 bg-info bg-gradient shadow-lg" onSubmit={ formSubmit }>
+        <form class="form-sign-up col-4 me-5 w-25 border p-3 rounded rounded-3 bg-info bg-gradient shadow-lg" onSubmit={ formSubmit } id="signUpForm">
           <h1 class="text-center mb-5">Register</h1>
           <input type="text" class="form-control mb-4 rounded-pill" placeholder="Your name" name="name" onChange={ formChange } /> {/*This is required*/ }
           <input type="text" class="form-control mb-4 rounded-pill" placeholder="Your email" name="email" onChange={ formChange } /> {/*This is required*/ }
@@ -65,7 +71,7 @@ function Signup()
           <input type="password" class="form-control mb-4 rounded-pill" placeholder="Your password" name="password" onChange={ formChange } /> {/*This is required*/ }
           <input type="password" class="form-control mb-4 rounded-pill" placeholder="Re-enter your password" name="re_password" onChange={ formChange } /> {/*This is required*/ }
           <input type="submit" class="btn btn-primary rounded-pill w-100 my-4" />
-          <div class="text-center">Already have an account? <a href="https://www.facebook.com/">Sign in</a></div>
+          <div class="text-center">Already have an account? <a href="/">Sign in</a></div>
         </form>
       </div>
     </div>

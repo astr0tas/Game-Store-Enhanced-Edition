@@ -17,13 +17,13 @@
       if ($conn->connect_error) {
             die("Connection failed: " . $conn->connect_error);
       }
-      $sql = "SELECT username,userpassword from customer";
+      $sql = "SELECT username from customer";
       $result = $conn->query($sql);
 
       $success = false;
       if ($result->num_rows > 0) {
             while ($row = $result->fetch_assoc()) {
-                  if ($row['username'] == $_POST['username'] && $row['userpassword'] == $_POST['password'])
+                  if ($row['username'] == $_POST['username'])
                         $success = true;
             }
       }
