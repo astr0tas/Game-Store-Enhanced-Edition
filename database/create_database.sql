@@ -2,16 +2,16 @@ create schema game_store;
 
 use game_store;
 
-create table category(type varchar(20) primary key);
+create table category(type varchar(50) primary key);
 
 create table game(
 	name varchar(100) primary key,
     price float,
     discount float,
-    description varchar(255),
+    description text,
     ratings float,
-    spec_minimum varchar(255),
-    spec_recommended varchar(255),
+    spec_minimum text,
+    spec_recommended text,
     picture_1 mediumblob,
     picture_2 mediumblob,
     picture_3 mediumblob,
