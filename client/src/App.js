@@ -10,7 +10,12 @@ import CustomerMenu from './Component/Customer/menu';
 // import CusDetail from './Component/Admin/cusdetail';
 // import CusList from './Component/Admin/cuslist';
 import Dashboard from './Component/Admin/menu';
-import Stat from './Component/Admin/Stat';
+// import Stat from './Component/Admin/Stat';
+import AdminHome from './Component/Admin/home';
+import AdminLogin from './Component/Admin/Login';
+import AdminForgotPassword from './Component/Admin/ForgotPassword';
+import AdminCreateNewPassword from './Component/Admin/CreateNewPassword'
+
 function App()
 {
   return (
@@ -28,14 +33,17 @@ function App()
             </Route>
           </Route>
           <Route path="/admin">
+            <Route index element={ <AdminLogin /> } />
+            <Route path="forgot_password" element={ <AdminForgotPassword /> } />
+            <Route path="create_new_password" element={ <AdminCreateNewPassword /> } />
             <Route element={ <Dashboard /> }>
-              <Route index element={ <Stat /> } />{/*this is only temporary */ }
+              <Route path="home" element={ <AdminHome /> } />
             </Route>
           </Route>
 
         </Routes>
       </BrowserRouter>
-    </div>
+    </div >
   );
 }
 

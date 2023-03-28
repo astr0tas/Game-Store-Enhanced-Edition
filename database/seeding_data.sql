@@ -158,4 +158,4 @@ insert into activation_code(game_name,code) values('Elden Ring','SQT8CXG8VWKBP9Q
 ('Resident Evil 4','MTPAJHMJMBPVHR9X'),('Resident Evil 4','N56GEPPGFHB7VVKE'),('Resident Evil 4','ZR2ZXN4QXDTWJQ7U');
 insert into activation_code(game_name,code) values('God of War','ZUGJX32CGJTLXVXX'),('God of War','WVTKJKK8VL3ALFXF'),('God of War','DP44F8XHCGEBQSNB');
 
--- select * from customer;
+-- select * from admin;

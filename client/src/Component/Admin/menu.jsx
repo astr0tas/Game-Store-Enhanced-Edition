@@ -28,7 +28,7 @@ function AdminMenu()
           <Nav.Link href="#" className='item  mt-3'><AiOutlineBarChart /> Statistic</Nav.Link>
         </Nav.Item>
         <Nav.Item className="mt-auto mb-3">
-          <Nav.Link href="#" className='logout_button'><AiOutlineLogout /> Log out</Nav.Link>
+          <Nav.Link href="/admin" className='logout_button'><AiOutlineLogout /> Log out</Nav.Link>
         </Nav.Item>
       </Nav>
       <Outlet />
