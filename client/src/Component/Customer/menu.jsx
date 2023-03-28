@@ -18,16 +18,16 @@ function CustomerMenu()
                               <Nav.Link href="#" className="link-dark user d-flex justify-content-center"><VscAccount size={ 100 } /></Nav.Link>
                         </Nav.Item>
                         <Nav.Item>
-                              <Nav.Link href="#" className='item mt-3 pb-3'><BiHomeAlt2 /> Home</Nav.Link>
+                              <Nav.Link href="#" className='item mt-3 pb-3' id="home"><BiHomeAlt2 />Home</Nav.Link>
                         </Nav.Item>
                         <Nav.Item>
-                              <Nav.Link href="#" className='item mt-3 pb-3'><GiRetroController /> Game</Nav.Link>
+                              <Nav.Link href="#" className='item mt-3 pb-3' id="game"><GiRetroController />Game</Nav.Link>
                         </Nav.Item>
                         <Nav.Item>
-                              <Nav.Link href="#" className='item mt-3 pb-3'><BsCart /> Cart</Nav.Link>
+                              <Nav.Link href="#" className='item mt-3 pb-3' id="cart"><BsCart /> Cart</Nav.Link>
                         </Nav.Item>
                         <Nav.Item>
-                              <Nav.Link href="#" className='item mt-3 pb-3'><AiOutlineHeart /> Wishlist</Nav.Link>
+                              <Nav.Link href="#" className='item mt-3 pb-3' id="wish"><AiOutlineHeart />Wishlist</Nav.Link>
                         </Nav.Item>
                         <Nav.Item className="mt-auto mb-3">
                               <Nav.Link href="/" className='logout_button'><AiOutlineLogout /> Log out</Nav.Link>
