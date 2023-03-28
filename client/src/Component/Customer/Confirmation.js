@@ -1,4 +1,4 @@
-import '../css/Confirmation.css';
+import '../../css/Customer/Confirmation.css';
 function Confirmation() {
   return (
     <div class="Confirmation  d-flex align-items-center">

@@ -1,4 +1,4 @@
-import '../css/ForgotPassword.css';
+import '../../css/Customer/ForgotPassword.css';
 //import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -34,7 +34,7 @@ function ForgotPassword()
     event.preventDefault();
     const formData = new FormData();
     formData.append("username", username);
-    axios.post('http://localhost/recovery.php', formData)
+    axios.post('http://localhost/customer/recovery.php', formData)
       .then(res =>
       {
         if (res.data)

@@ -4,19 +4,20 @@
       header("Access-Control-Allow-Headers: *");
       header('Access-Control-Allow-Methods:  POST, GET');
 
-      $servername = "localhost";
-      $username = "owner";
-      $password = "owner123";
-      $database = "game_store";
-      $port = "3306";
+      // $servername = "localhost";
+      // $username = "owner";
+      // $password = "owner123";
+      // $database = "game_store";
+      // $port = "3306";
 
-      // Create connection
-      $conn = new mysqli($servername, $username, $password, $database, $port);
+      // // Create connection
+      // $conn = new mysqli($servername, $username, $password, $database, $port);
 
-      // Check connection
-      if ($conn->connect_error) {
-            die("Connection failed: " . $conn->connect_error);
-      }
+      // // Check connection
+      // if ($conn->connect_error) {
+      //       die("Connection failed: " . $conn->connect_error);
+      // }
+      require("../connect_database.php");
       $sql = "SELECT email,username from customer";
       $result = $conn->query($sql);
 
@@ -47,5 +48,6 @@
       $sql->bind_param("ssssss", $id, $_POST['name'], $_POST['email'], $_POST['phone'], $_POST['username'], $_POST['password']);
       $sql->execute();
       $sql->close();
-      $conn->close();
+      require("../close_connection.php");
+      // $conn->close();
       ?>

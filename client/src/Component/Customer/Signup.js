@@ -1,4 +1,4 @@
-import '../css/Signup.css';
+import '../../css/Customer/Signup.css';
 import axios from 'axios';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -36,7 +36,7 @@ function Signup()
       formData.append("password", inputs.password);
       if (inputs.phone)
         formData.append("phone", inputs.phone);
-      axios.post('http://localhost/sign_up.php', formData)
+      axios.post('http://localhost/customer/sign_up.php', formData)
         .then(res =>
         {
           if (res.data === "email")

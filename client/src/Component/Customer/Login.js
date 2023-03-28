@@ -1,4 +1,4 @@
-import '../css/Login.css';
+import '../../css/Customer/Login.css';
 import { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -36,7 +36,7 @@ function Login()
     const formData = new FormData();
     formData.append("username", inputs.username);
     formData.append("password", inputs.password);
-    axios.post('http://localhost/login.php', formData)
+    axios.post('http://localhost/customer/login.php', formData)
       .then(res =>
       {
         if (res.data)

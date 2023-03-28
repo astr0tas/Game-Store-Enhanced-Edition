@@ -1,11 +1,11 @@
 import './App.css';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css'
-import Login from './Component/Login';
-import Signup from './Component/Signup';
-import ForgotPassword from './Component/ForgotPassword';
-import CreateNewPassWord from './Component/CreateNewPassword';
-import Confirmation from './Component/Confirmation';
+import Login from './Component/Customer/Login';
+import Signup from './Component/Customer/Signup';
+import ForgotPassword from './Component/Customer/ForgotPassword';
+import CreateNewPassWord from './Component/Customer/CreateNewPassword';
+import Confirmation from './Component/Customer/Confirmation';
 function App()
 {
   return (

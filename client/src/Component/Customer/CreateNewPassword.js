@@ -1,4 +1,4 @@
-import '../css/CreateNewPassword.css';
+import '../../css/Customer/CreateNewPassword.css';
 import axios from 'axios';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -25,7 +25,7 @@ function CreateNewPassword()
       const formData = new FormData();
       formData.append("username", username);
       formData.append("password", password);
-      axios.post('http://localhost/new_password.php', formData)
+      axios.post('http://localhost/customer/new_password.php', formData)
         .then(res =>
         {
           console.log(res.data);
