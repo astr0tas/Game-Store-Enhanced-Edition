@@ -13,19 +13,19 @@ function AdminMenu()
     <div style={ { display: 'flex', flexDirection: 'row', backgroundColor: "#B9FDFD" } }>
       <Nav className="flex-column menu_container bg-light">
         <Nav.Item>
-          <Nav.Link href="#" className="link-dark user"><VscAccount size={ 100 } /></Nav.Link>
+          <Nav.Link href="#" className="link-dark user d-flex justify-content-center"><VscAccount size={ 100 } /></Nav.Link>
         </Nav.Item>
         <Nav.Item>
-          <Nav.Link href="#" className='item  mt-3'><BiHomeAlt2 /> Home</Nav.Link>
+          <Nav.Link href="#" className='item  mt-3 pb-3'><BiHomeAlt2 /> Home</Nav.Link>
         </Nav.Item>
         <Nav.Item>
-          <Nav.Link href="#" className='item  mt-3'><GiRetroController /> Game</Nav.Link>
+          <Nav.Link href="#" className='item  mt-3 pb-3'><GiRetroController /> Game</Nav.Link>
         </Nav.Item>
         <Nav.Item>
-          <Nav.Link href="#" className='item mt-3'><BsPerson /> Customer</Nav.Link>
+          <Nav.Link href="#" className='item mt-3 pb-3'><BsPerson /> Customer</Nav.Link>
         </Nav.Item>
         <Nav.Item>
-          <Nav.Link href="#" className='item  mt-3'><AiOutlineBarChart /> Statistic</Nav.Link>
+          <Nav.Link href="#" className='item  mt-3 pb-3'><AiOutlineBarChart /> Statistic</Nav.Link>
         </Nav.Item>
         <Nav.Item className="mt-auto mb-3">
           <Nav.Link href="/admin" className='logout_button'><AiOutlineLogout /> Log out</Nav.Link>

@@ -28,4 +28,5 @@
 
 .menu_container {
       height: 100vh;
+      box-sizing: border-box;
 }
