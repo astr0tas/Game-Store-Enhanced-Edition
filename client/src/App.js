@@ -6,17 +6,28 @@ import Signup from './Component/Customer/Signup';
 import ForgotPassword from './Component/Customer/ForgotPassword';
 import CreateNewPassWord from './Component/Customer/CreateNewPassword';
 import Confirmation from './Component/Customer/Confirmation';
+// import CusDetail from './Component/Admin/cusdetail';
+// import CusList from './Component/Admin/cuslist';
+import Dashboard from './Component/Admin/dashboard';
+// import Stat from './Component/Admin/Stat';
 function App()
 {
   return (
     <div className="App">
       <BrowserRouter>
         <Routes>
-          <Route index element={ <Login /> } />
-          <Route path="sign_up" element={ <Signup /> } />
-          <Route path="forgot_password" element={ <ForgotPassword /> } />
-          <Route path="create_new_password" element={ <CreateNewPassWord /> } />
-          <Route path="confirm" element={ <Confirmation /> } />
+          <Route path="/">
+            <Route index element={ <Login /> } />
+            <Route path="sign_up" element={ <Signup /> } />
+            <Route path="forgot_password" element={ <ForgotPassword /> } />
+            <Route path="create_new_password" element={ <CreateNewPassWord /> } />
+            <Route path="confirm" element={ <Confirmation /> } />
+          </Route>
+          <Route path="/admin">
+            <Route index element={ <Dashboard /> }>
+
+            </Route>
+          </Route>
         </Routes>
       </BrowserRouter>
     </div>
