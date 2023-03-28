@@ -1,10 +1,10 @@
-.chart{
+.chart {
   width: 85%;
-  height: 100%;
+  height: 100vh;
   right: 0;
-  background-color: #B9FDFD;
 }
-.chart>img{
+
+.chart>img {
   align-self: center;
 }
 
@@ -13,53 +13,65 @@
   background-color: #E6E6E6;
   height: 800px;
 }
-.icon{
+
+.icon {
   scale: 1.5;
 }
-.menu>div{
+
+.menu>div {
   font-size: large;
   align-content: center;
   height: 50px;
 }
-.logout{
+
+.logout {
   bottom: 0;
   position: fixed;
 }
-.logout>Button{
+
+.logout>Button {
   color: red;
 }
-.category{
+
+.category {
   background-color: #D9D9D9;
   position: fixed;
   bottom: 0;
-  height:60px;
+  height: 60px;
   padding-top: 20px;
   width: 91.8%;
   right: 0;
 }
-select{
+
+select {
   border-radius: 10px;
 }
-input[type="date"]{
+
+input[type="date"] {
   border-radius: 30px;
 }
-#crit{
+
+#crit {
   margin-right: 30px;
 }
-#reg{
+
+#reg {
   margin-right: 30px;
 }
-#gametype{
+
+#gametype {
   margin-right: 30px;
 }
-Button{
+
+Button {
   font-size: 20px;
-  text-align:left;
+  text-align: left;
   width: 100%;
   height: 100%;
   border: none;
   background-color: #E6E6E6;
 }
-Button:hover{
+
+Button:hover {
   background-color: #00b5ee;
 }

@@ -6,10 +6,11 @@ import Signup from './Component/Customer/Signup';
 import ForgotPassword from './Component/Customer/ForgotPassword';
 import CreateNewPassWord from './Component/Customer/CreateNewPassword';
 import Confirmation from './Component/Customer/Confirmation';
+import CustomerMenu from './Component/Customer/menu';
 // import CusDetail from './Component/Admin/cusdetail';
 // import CusList from './Component/Admin/cuslist';
-import Dashboard from './Component/Admin/dashboard';
-// import Stat from './Component/Admin/Stat';
+import Dashboard from './Component/Admin/menu';
+import Stat from './Component/Admin/Stat';
 function App()
 {
   return (
@@ -22,12 +23,16 @@ function App()
             <Route path="forgot_password" element={ <ForgotPassword /> } />
             <Route path="create_new_password" element={ <CreateNewPassWord /> } />
             <Route path="confirm" element={ <Confirmation /> } />
-          </Route>
-          <Route path="/admin">
-            <Route index element={ <Dashboard /> }>
+            <Route path="test" element={ <CustomerMenu /> }> {/*this is only temporary */ }
 
             </Route>
           </Route>
+          <Route path="/admin">
+            <Route element={ <Dashboard /> }>
+              <Route index element={ <Stat /> } />{/*this is only temporary */ }
+            </Route>
+          </Route>
+
         </Routes>
       </BrowserRouter>
     </div>
