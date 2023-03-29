@@ -21,36 +21,34 @@ export default function AdminHome()
       }, [limit]);
 
       return (
-            <div className='container-fluid'>
-                  <div className='toppage'>
-                        <div className='sale'>
-                              <img className='pic' alt='' src="https://images2.thanhnien.vn/Uploaded/phongdt/2022_04_22/god-7624.png" />
-                              <div className='price'>
-                                    $70
-                              </div>
-                              <p>SOLD: XXX</p>
+            <div className='toppage'>
+                  <div className='sale'>
+                        <img className='pic' alt='' src="https://images2.thanhnien.vn/Uploaded/phongdt/2022_04_22/god-7624.png" />
+                        <div className='price'>
+                              $70
                         </div>
-                        {/* <div className='sale'>
-                              <img className='pic' alt='' src="https://images2.thanhnien.vn/Uploaded/phongdt/2022_04_22/god-7624.png" />
-                              <div className='price'>
-                                    $70
-                              </div>
-                              <p>SOLD: XXX</p>
-                        </div> */}
-                        {/* <div className='sale'>
-                              <img className='pic' alt='' src="https://images2.thanhnien.vn/Uploaded/phongdt/2022_04_22/god-7624.png" />
-                              <div className='price'>
-                                    $70
-                              </div>
-                              <p>SOLD: XXX</p>
+                        <p>SOLD: XXX</p>
+                  </div>
+                  <div className='sale'>
+                        <img className='pic' alt='' src="https://images2.thanhnien.vn/Uploaded/phongdt/2022_04_22/god-7624.png" />
+                        <div className='price'>
+                              $70
                         </div>
-                        <div className='sale'>
-                              <img className='pic' alt='' src="https://images2.thanhnien.vn/Uploaded/phongdt/2022_04_22/god-7624.png" />
-                              <div className='price'>
-                                    $70
-                              </div>
-                              <p>SOLD: XXX</p>
-                        </div> */}
+                        <p>SOLD: XXX</p>
+                  </div>
+                  <div className='sale'>
+                        <img className='pic' alt='' src="https://images2.thanhnien.vn/Uploaded/phongdt/2022_04_22/god-7624.png" />
+                        <div className='price'>
+                              $70
+                        </div>
+                        <p>SOLD: XXX</p>
+                  </div>
+                  <div className='sale'>
+                        <img className='pic' alt='' src="https://images2.thanhnien.vn/Uploaded/phongdt/2022_04_22/god-7624.png" />
+                        <div className='price'>
+                              $70
+                        </div>
+                        <p>SOLD: XXX</p>
                   </div>
             </div>
       )
