@@ -32,6 +32,7 @@
     width: 185px;
     background-color: rgb(208, 208, 208);
     position: fixed;
+    flex-wrap: nowrap;
 }
 
 body {
