@@ -13,7 +13,7 @@ function AdminMenu()
     <div style={ { display: 'flex', flexDirection: 'row', backgroundColor: "#B9FDFD" } }>
       <Nav className="flex-column menu_container bg-light">
         <Nav.Item>
-          <Nav.Link href="#" className="link-dark user d-flex justify-content-center"><VscAccount size={ 100 } /></Nav.Link>
+          <Nav.Link href="#" className="link-dark user d-flex justify-content-center"><VscAccount size={ 70 } /></Nav.Link>
         </Nav.Item>
         <Nav.Item>
           <Nav.Link href="#" className='item  mt-3 pb-3' id="home"><BiHomeAlt2 />Home</Nav.Link>

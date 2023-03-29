@@ -1,6 +1,6 @@
 .item,
 .logout_button {
-    font-size: 40px;
+    font-size: 25px;
 }
 
 .logout_button {
@@ -29,4 +29,5 @@
 .menu_container {
     height: 100vh;
     box-sizing: border-box;
+    width: 185px;
 }
