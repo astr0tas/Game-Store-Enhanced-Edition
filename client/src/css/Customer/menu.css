@@ -30,4 +30,11 @@
       height: 100vh;
       box-sizing: border-box;
       width: 185px;
+      background-color: rgb(208, 208, 208);
+      position: fixed;
+      flex-wrap: nowrap;
+}
+
+body {
+      background-color: #B9FDFD;
 }

@@ -12,8 +12,8 @@ import { BsCart } from "react-icons/bs";
 function CustomerMenu()
 {
       return (
-            <div style={ { position: 'fixed', top: 0, left: 0, right: 0, display: 'flex', flexDirection: 'row', backgroundColor: "#B9FDFD"} }>
-                  <Nav className=" flex-column menu_container bg-light">
+            <>
+                  <Nav className=" flex-column menu_container">
                         <Nav.Item>
                               <Nav.Link href="#" className="link-dark user d-flex justify-content-center"><VscAccount size={ 70 } /></Nav.Link>
                         </Nav.Item>
@@ -34,7 +34,7 @@ function CustomerMenu()
                         </Nav.Item>
                   </Nav>
                   <Outlet />
-            </div>
+            </>
       );
 }
 
