@@ -30,7 +30,7 @@ function AdminMenu()
           <Nav.Item className="mt-auto mb-3">
             <Nav.Link href="/" className='logout_button'><AiOutlineLogout /> Log out</Nav.Link>
           </Nav.Item>
-        </Nav>
+      </Nav>
       {/* <ul>
         <li><a href="#"><VscAccount size={ 70 } /></a></li>
         <li><a href="#"><BiHomeAlt2 />Home</a></li>
