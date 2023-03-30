@@ -21,7 +21,7 @@ create table game(
 create table activation_code(
 	game_name varchar(100) references game(name),
     code varchar(16) unique,
-    status varchar(13) default 'available' check(status='out of stock' or status='available'),
+    status varchar(13) default 'available' check(status='used' or status='available'),
     primary key(game_name,code)
 );
 

@@ -36,6 +36,7 @@ function Login()
     const formData = new FormData();
     formData.append("username", inputs.username);
     formData.append("password", inputs.password);
+    
     axios.post('http://localhost/customer/login.php', formData)
       .then(res =>
       {

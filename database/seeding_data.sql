@@ -147,7 +147,7 @@ Memory: 8 GB RAM
 Graphics: NVIDIA GTX 1060 (6 GB) or AMD RX 570 (4 GB)
 DirectX: Version 11
 Storage: 70 GB available space
-Additional Notes: DirectX feature level 11_1 required',load_file(concat(@picture_path,'/God of war/gow_1.jpg')),load_file(concat(@picture_path,'/God of war/gow_2.jpeg')),load_file(concat(@picture_path,'/God of war/gow_3.jpg')),load_file(concat(@picture_path,'/God of war/gow_4.jpg')));
+Additional Notes: DirectX feature level 11_1 required',load_file(concat(@picture_path,'/God of war/gow_1.jpg')),load_file(concat(@picture_path,'/God of war/gow_2.jpg')),load_file(concat(@picture_path,'/God of war/gow_3.jpg')),load_file(concat(@picture_path,'/God of war/gow_4.jpg')));
 
 -- add categories to games section
 insert into belongs_to values('Elden Ring','Action RPG'),('Resident Evil 4','Third-Person Shooter'),('Resident Evil 4','Story-Rich');
@@ -156,6 +156,11 @@ insert into belongs_to values('God of War','Story-Rich'),('God of War','Hack & S
 -- add activation codes section
 insert into activation_code(game_name,code) values('Elden Ring','SQT8CXG8VWKBP9QB'),('Elden Ring','LV47LGEFPY2PXZ67'),('Elden Ring','KYZXNH7B95FTG5RL'),
 ('Resident Evil 4','MTPAJHMJMBPVHR9X'),('Resident Evil 4','N56GEPPGFHB7VVKE'),('Resident Evil 4','ZR2ZXN4QXDTWJQ7U');
+insert into activation_code values('Elden Ring','SQT8CXG8VWKBP9Q1','used'),('Elden Ring','LV47LGEFPY2PXZ6F','used'),('Elden Ring','KYZXNH7B95FTG5RC','used'),
+('Resident Evil 4','MTPAJHMJMBPVHR9W','used'),('Resident Evil 4','N56GEPPGFHB7VVKA','used'),('Resident Evil 4','ZR2ZXN4QXDTWJQ79','used');
 insert into activation_code(game_name,code) values('God of War','ZUGJX32CGJTLXVXX'),('God of War','WVTKJKK8VL3ALFXF'),('God of War','DP44F8XHCGEBQSNB');
+insert into activation_code values('God of War','ZUGJX32CGJTLXVXH','used'),('God of War','WVTKJKK8VL3ALFXO','used'),('God of War','DP44F8XHCGEBQSNI','used');
 
--- select * from admin;
+-- select * from game;
+-- select * from game join activation_code on game.name=activation_code.game_name;
+-- select name,picture_1,price,count(*) as total_sale from game join activation_code on game.name=activation_code.game_name where status='used' group by name order by total_sale desc,name limit 5;
