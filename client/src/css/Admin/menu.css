@@ -1,4 +1,4 @@
-.item,
+/* .item,
 .logout_button {
     font-size: 25px;
 }
@@ -38,56 +38,111 @@
 
 body {
     background-color: #B9FDFD;
+} */
+
+.admin-menu .dropdown {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    margin-top: 10px;
+    margin-left: 10px;
+    align-self: flex-start;
 }
 
-/* ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    width: 10%;
-    background-color: #c8c8c8;
+.admin-menu {
     position: fixed;
+}
+
+.admin-menu .menu_container a {
+    text-decoration: none;
+    font-size: 30px;
+}
+
+.admin-menu .menu_container a:hover {
+    cursor: pointer;
+}
+
+.admin-menu .tabs a:hover {
+    background-color: rgb(52, 137, 255);
+    color: white;
+}
+
+.admin-menu .tabs a:active {
+    background-color: blue;
+}
+
+.admin-menu .logout_button {
+    margin-top: auto;
+    margin-bottom: 20px;
+    color: red;
+}
+
+.admin-menu .profile {
+    height: 70px;
+    width: 70px;
+}
+
+.admin-menu .logout_button:active {
+    color: rgb(251, 163, 163);
+}
+
+.admin-menu .menu_container {
+    width: 180px;
+    background-color: white;
     height: 100%;
     overflow: auto;
 }
 
-li a{
-    box-sizing: border-box;
-    display: block;
-        text-decoration: none;
-            font-size: 30px;
+.admin-menu .tabs {
+    height: 25%;
 }
 
-li:not(:first-child) a {
-    color: blue;
-    margin-top:20px;
-    padding-left:10px;
+.admin-page {
+    margin-left: 180px;
+    width: calc(100% - 180px);
 }
 
-li:first-child a {
-    color: rgb(0, 0, 0);
-    margin-top: 20px;
-    margin-left: 30%;
+@media only screen and (max-height:500px) {
+    .admin-menu .tabs {
+        height: auto;
+    }
 }
 
-li:last-child a {
-    color: rgb(255, 0, 0);
-    margin-top: 55vh;
+@media only screen and (max-width:992px) {
+    .admin-menu .menu_container a {
+        font-size: 20px;
+    }
+
+    .admin-menu .profile {
+        height: 50px;
+        width: 50px;
+    }
+
+    .admin-menu .menu_container {
+        width: 120px;
+    }
+
+    .admin-page {
+        width: calc(100% - 120px);
+        margin-left: 120px;
+    }
 }
 
-li:not(:first-child,:last-child) a:hover {
-    background-color: #00f7ff;
-    color: white;
-}
 
-li:not(:first-child, :last-child) a:active {
-    background-color: blue;
-    color: white;
-}
+@media only screen and (max-width:575px) {
+    .admin-menu .dropdown:first-child {
+        display: block;
+        margin-top: 10px;
+        margin-left: 10px;
+        align-self: flex-start;
+    }
 
-@media (min-width: 1921px) {
-    li:last-child a {
-            color: rgb(255, 0, 0);
-            margin-top: 68vh;
-        }
-} */
+    .admin-page {
+        width: 100%;
+        margin-left: 0;
+    }
+
+    .admin-menu .menu_container .padding_when_collapse {
+        margin-top: 50px;
+    }
+}

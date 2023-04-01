@@ -54,7 +54,7 @@ function AdminLogin()
   }
 
   return (
-    <div className="Login  d-flex align-items-center">
+    <div className="Login d-flex align-items-center">
       <div className="container d-flex justify-content-end align-items-center ">
         <div className="form-sign-up col-4 me-5 w-25 border p-3 rounded rounded-3 bg-info bg-gradient shadow-lg">
           <h1 className="text-center mb-3 pb-3 border-bottom border-secondary border-2">Login</h1>

@@ -1,4 +1,4 @@
-.item,
+/* .item,
 .logout_button {
       font-size: 25px;
 }
@@ -27,9 +27,9 @@
 }
 
 .menu_container {
-      height: 100vh;
+      height: 100%;
       box-sizing: border-box;
-      width: 185px;
+      width: 150px;
       background-color: rgb(208, 208, 208);
       position: fixed;
       flex-wrap: nowrap;
@@ -38,4 +38,58 @@
 
 body {
       background-color: #B9FDFD;
+} */
+
+.customer-menu {
+      position: fixed;
+}
+
+.customer-menu .menu_container a {
+      text-decoration: none;
+      font-size: 30px;
+}
+
+.customer-menu .menu_container a:hover {
+      cursor: pointer;
+}
+
+.customer-menu .tabs a:hover {
+      background-color: rgb(52, 137, 255);
+      color: white;
+}
+
+.customer-menu .tabs a:active {
+      background-color: blue;
+}
+
+.customer-menu .logout_button {
+      margin-top: auto;
+      margin-bottom: 20px;
+      color: red;
+}
+
+.customer-menu .logout_button:active {
+      color: rgb(251, 163, 163);
+}
+
+.customer-menu .menu_container {
+      width: 150px;
+      background-color: white;
+      height: 100%;
+      overflow: auto;
+}
+
+.customer-menu .tabs {
+      height: 25%;
+}
+
+.customer-page {
+      margin-left: 100px;
+      width: calc(100% - 100px);
+}
+
+@media only screen and (max-height:450px) {
+      .customer-menu .tabs {
+            height: auto;
+      }
 }
