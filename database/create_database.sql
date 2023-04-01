@@ -19,15 +19,15 @@ create table game(
 );
 
 create table activation_code(
-	game_name varchar(100) references game(name),
+	game_name varchar(100) references game(name) on delete cascade on update cascade,
     code varchar(16) unique,
     status varchar(13) default 'available' check(status='used' or status='available'),
     primary key(game_name,code)
 );
 
 create table belongs_to(
-	game_name varchar(100) references game(name),
-    category_type varchar(20) references category(type),
+	game_name varchar(100) references game(name) on delete cascade on update cascade,
+    category_type varchar(20) references category(type) on delete cascade on update cascade,
     primary key(game_name,category_type)
 );
 
@@ -54,14 +54,14 @@ create table admin(
 );
 
 create table wishlist(
-	game_name varchar(100) references game(name),
-    customer_id varchar(10) references customer(id),
+	game_name varchar(100) references game(name) on delete cascade on update cascade,
+    customer_id varchar(10) references customer(id) on delete cascade on update cascade,
     primary key(game_name,customer_id)
 );
 
 create table shopping_cart(
-	game_name varchar(100) references game(name),
-    customer_id varchar(10) references customer(id),
+	game_name varchar(100) references game(name) on delete cascade on update cascade,
+    customer_id varchar(10) references customer(id) on delete cascade on update cascade,
     amount int default 1 check(amount>=1),
     primary key(game_name,customer_id)
 );
@@ -74,22 +74,22 @@ create table purchase_history_description(
 );
 
 create table purchase_history(
-	customer_id varchar(10) references customer(id),
+	customer_id varchar(10) references customer(id) on delete cascade on update cascade,
     game_name varchar(100),
     code varchar(16),
-    description_id varchar(10) references purchase_history_description(id),
+    description_id varchar(10) references purchase_history_description(id) on delete cascade on update cascade,
     primary key(customer_id,game_name,code,description_id),
-    foreign key(game_name,code) references activation_code(game_name,code)
+    foreign key(game_name,code) references activation_code(game_name,code) on delete cascade on update cascade
 );
 
 create table old_category(
-	description_id varchar(10) references update_game_description(id),
+	description_id varchar(10) references update_game_description(id) on delete cascade on update cascade,
     type varchar(20),
     primary key(description_id,type)
 );
 
 create table new_category(
-	description_id varchar(10) references update_game_description(id),
+	description_id varchar(10) references update_game_description(id) on delete cascade on update cascade,
     type varchar(20),
     primary key(description_id,type)
 );
@@ -120,14 +120,14 @@ create table update_game_description(
 );
 
 create table update_game(
-	admin_id varchar(10) references admin(id),
-    game_name varchar(100) references game(name),
-    description_id varchar(10) references update_game_description(id),
+	admin_id varchar(10) references admin(id) on delete cascade on update cascade,
+    game_name varchar(100) references game(name) on delete cascade on update cascade,
+    description_id varchar(10) references update_game_description(id) on delete cascade on update cascade,
     primary key(admin_id,game_name,description_id)
 );
 
 create table added_code(
-	description_id varchar(10) references add_code_description(id),
+	description_id varchar(10) references add_code_description(id) on delete cascade on update cascade,
     code varchar(16),
     primary key(description_id,code)
 );
@@ -138,9 +138,9 @@ create table add_code_description(
 );
 
 create table add_code(
-	game_name varchar(100) references game(name),
-    admin_id varchar(10) references admin(id),
-    description_id varchar(10) references add_code_description(id),
+	game_name varchar(100) references game(name) on delete cascade on update cascade,
+    admin_id varchar(10) references admin(id) on delete cascade on update cascade,
+    description_id varchar(10) references add_code_description(id) on delete cascade on update cascade,
     primary key(game_name,admin_id,description_id)
 );
 
@@ -154,8 +154,8 @@ create table update_user_description(
 );
 
 create table update_user(
-	customer_id varchar(10) references customer(id),
-    admin_id varchar(10) references admin(id),
-    description_id varchar(10) references update_user_description(id),
+	customer_id varchar(10) references customer(id) on delete cascade on update cascade,
+    admin_id varchar(10) references admin(id) on delete cascade on update cascade,
+    description_id varchar(10) references update_user_description(id) on delete cascade on update cascade,
     primary key(customer_id,admin_id,description_id)
 );
