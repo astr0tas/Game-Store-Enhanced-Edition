@@ -7,10 +7,12 @@ import ForgotPassword from './Component/Customer/ForgotPassword';
 import CreateNewPassWord from './Component/Customer/CreateNewPassword';
 import Confirmation from './Component/Customer/Confirmation';
 import CustomerMenu from './Component/Customer/menu';
+
 // import CusDetail from './Component/Admin/cusdetail';
 // import CusList from './Component/Admin/cuslist';
-import AdminMenu from './Component/Admin/menu';
 // import Stat from './Component/Admin/Stat';
+
+import AdminMenu from './Component/Admin/menu';
 import AdminHome from './Component/Admin/home';
 import AdminLogin from './Component/Admin/Login';
 import AdminForgotPassword from './Component/Admin/ForgotPassword';
