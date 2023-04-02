@@ -28,17 +28,20 @@ export default function AdminHome()
                         {
                               for (let i = 0; i < res.data.length; i++)
                               {
-                                    // console.log(res.data[i]);
-                                    // const data = new Uint8Array(Object.values(res.data[i].picture_1));
-                                    // const blob = new Blob([data], { type: "image/png" });
-                                    // const url = URL.createObjectURL(blob);
+                                    console.log(res.data[i]);
+                                    const data = new Uint8Array(Object.values(res.data[i].picture_1));
+                                    const blob = new Blob([data], { type: "image/jpg" });
+                                    const url = URL.createObjectURL(blob);
 
-                                    // let div = $("<div>");
-                                    // div.addClass("sale");
-                                    // div.append($("<img>").addClass("pic").attr("src", url).attr("alt","picture"));
-                                    // div.append($("<p>").text("$" + res.data[i].price).addClass("price"));
-                                    // div.append($("<p>").text("SOLD: " + res.data[i].total_sale));
-                                    // $(".toppage").append(div);
+                                    let div = $("<div>");
+                                    div.addClass("sale").addClass("d-flex").addClass("flex-column").addClass("align-items-center").addClass("justify-content-center");
+                                    div.append($("<img>").addClass("pic").attr("src", url).attr("alt", "picture"));
+                                    div.append($("<p>").text("$" + res.data[i].price));
+                                    div.append($("<p>").text("SOLD: " + res.data[i].total_sale));
+                                    if (i < 3)
+                                          $(".group").first().append(div);
+                                    else
+                                          $(".group").last().append(div);
 
                               }
                         })
@@ -58,7 +61,7 @@ export default function AdminHome()
                   </div>
                   <div className="best-sellers">
                         <div className="group">
-                              <div className='d-flex flex-column align-items-center justify-content-center sale'>
+                              {/* <div className='d-flex flex-column align-items-center justify-content-center sale'>
                                     <img className='pic' alt='' src="https://images2.thanhnien.vn/Uploaded/phongdt/2022_04_22/god-7624.png" />
                                     <div className='price'>
                                           $70
@@ -85,10 +88,10 @@ export default function AdminHome()
                                           $70
                                     </div>
                                     <p>SOLD: XXX</p>
-                              </div>
+                              </div> */}
                         </div>
                         <div className="group">
-                              <div className='d-flex flex-column align-items-center justify-content-center sale'>
+                              {/* <div className='d-flex flex-column align-items-center justify-content-center sale'>
                                     <img className='pic' alt='' src="https://images2.thanhnien.vn/Uploaded/phongdt/2022_04_22/god-7624.png" />
                                     <div className='price'>
                                           $70
@@ -115,7 +118,7 @@ export default function AdminHome()
                                           $70
                                     </div>
                                     <p>SOLD: XXX</p>
-                              </div>
+                              </div> */}
                         </div>
                   </div>
             </div>

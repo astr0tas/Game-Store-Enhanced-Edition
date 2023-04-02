@@ -47,7 +47,8 @@ insert into category values('Arcade & Rhythm'),
 ('Sports Sim'),
 ('Team Sports');
 
-set @picture_path:='F:/nam 3/web/btl/LTW_222/database/Pictures';
+-- set @picture_path:='F:/nam 3/web/btl/LTW_222/database/Pictures';
+set @picture_path:='E:\\Projects\\Game_Store_2023\\database\\Pictures';
 
 -- add games section
 insert into game values('Elden Ring',59.99,0,'THE NEW FANTASY ACTION RPG.
@@ -157,7 +158,7 @@ Now featuring additional Story Mode content and a fully-featured Photo Mode, Red
 
 With all new graphical and technical enhancements for deeper immersion, Red Dead Redemption 2 for PC takes full advantage of the power of the PC to bring every corner of this massive, rich and detailed world to life including increased draw distances; higher quality global illumination and ambient occlusion for improved day and night lighting; improved reflections and deeper, higher resolution shadows at all distances; tessellated tree textures and improved grass and fur textures for added realism in every plant and animal.
 
-Red Dead Redemption 2 for PC also offers HDR support, the ability to run high-end display setups with 4K resolution and beyond, multi-monitor configurations, widescreen configurations, faster frame rates and more.','Requires a 64-bit processor and operating system
+Red Dead Redemption 2 for PC also offers HDR support, the ability to run high-end display setups with 4K resolution and beyond, multi-monitor configurations, widescreen configurations, faster frame rates and more.',0,'Requires a 64-bit processor and operating system
 OS: Windows 10 - April 2018 Update (v1803)
 Processor: Intel® Core™ i7-4770K / AMD Ryzen 5 1500X
 Memory: 12 GB RAM
@@ -171,12 +172,12 @@ Memory: 12 GB RAM
 Graphics: Nvidia GeForce GTX 1060 6GB / AMD Radeon RX 480 4GB
 Network: Broadband Internet connection
 Storage: 150 GB available space
-Sound Card: Direct X Compatible',0, load_file(concat(@picture_path,'/Red Dead Redemption 2/RDR-pic1.jpg')),load_file(concat(@picture_path,'/Red Dead Redemption 2/RDR-pic2.jpg')), load_file(concat(@picture_path,'/Red Dead Redemption 2/RDR-pic3.jpg')), load_file(concat(@picture_path,'/Red Dead Redemption 2/RDR-pic4.jpg'))
+Sound Card: Direct X Compatible', load_file(concat(@picture_path,'/Red Dead Redemption 2/RDR-pic1.jpg')),load_file(concat(@picture_path,'/Red Dead Redemption 2/RDR-pic2.jpg')), load_file(concat(@picture_path,'/Red Dead Redemption 2/RDR-pic3.jpg')), load_file(concat(@picture_path,'/Red Dead Redemption 2/RDR-pic4.jpg'))
 );
 
 insert into game values('The Last of Us™ Part I', 59.99, 0, 'Experience the emotional storytelling and unforgettable characters in The Last of Us™, winner of over 200 Game of the Year awards.
 
-In a ravaged civilization, where infected and hardened survivors run rampant, Joel, a weary protagonist, is hired to smuggle 14-year-old Ellie out of a military quarantine zone. However, what starts as a small job soon transforms into a brutal cross-country journey.', 'Requires a 64-bit processor and operating system
+In a ravaged civilization, where infected and hardened survivors run rampant, Joel, a weary protagonist, is hired to smuggle 14-year-old Ellie out of a military quarantine zone. However, what starts as a small job soon transforms into a brutal cross-country journey.',0, 'Requires a 64-bit processor and operating system
 OS: Windows 10 (Version 1909 or Newer)
 Processor: AMD Ryzen 5 1500X, Intel Core i7-4770K
 Memory: 16 GB RAM
@@ -188,7 +189,7 @@ Processor: AMD Ryzen 5 3600X, Intel Core i7-8700
 Memory: 16 GB RAM
 Graphics: AMD Radeon RX 5700 XT (8 GB), AMD Radeon RX 6600 XT (8 GB), NVIDIA GeForce RTX 2070 SUPER (8 GB), NVIDIA GeForce RTX 3060 (8 GB)
 Storage: 100 GB available space
-Additional Notes: SSD Recommended',5, load_file(concat(@picture_path,'/The Last Of Us/tlou-1.jpg')), load_file(concat(@picture_path,'/The Last Of Us/tlou-2.jpg')), load_file(concat(@picture_path,'/The Last Of Us/tlou-3.jpg')), load_file(concat(@picture_path,'/The Last Of Us/tlou-4.jpg'))
+Additional Notes: SSD Recommended', load_file(concat(@picture_path,'/The Last Of Us 1/tlou-1.jpg')), load_file(concat(@picture_path,'/The Last Of Us 1/tlou-2.jpg')), load_file(concat(@picture_path,'/The Last Of Us 1/tlou-3.jpg')), load_file(concat(@picture_path,'/The Last Of Us 1/tlou-4.jpg'))
 );
 
 insert into game values('The Great War: Western Front™', 19.99, 0.3, 'The Great War: Western Front is the definitive World War 1 strategy game from Petroglyph, the makers of Command & Conquer™ Remastered & Star Wars™: Empire at War. Play a deciding role in history with this real-time tactical experience as you take charge in the pivotal Western Front from 1914 to 1919.
@@ -259,7 +260,7 @@ Memory: 16 GB RAM
 Graphics: NVIDIA GeForce 1080 Ti or AMD Radeon RX 5700 XT or INTEL Arc A770
 DirectX: Version 12
 Storage: 85 GB available space
-Additional Notes: SSD, 1080p/60 fps, High Quality Settings', load_file(concat(@picture_path,'/Hogwartz Legacy/hl-1.jpg')), load_file(concat(@picture_path,'/hogwart legacy/hl-2.jpg')), load_file(concat(@picture_path,'/hogwart legacy/hl-3.jpg')), load_file(concat(@picture_path,'/hogwart legacy/hl-4.jpg')));
+Additional Notes: SSD, 1080p/60 fps, High Quality Settings', load_file(concat(@picture_path,'/hogwart legacy/hl-1.jpg')), load_file(concat(@picture_path,'/hogwart legacy/hl-2.jpg')), load_file(concat(@picture_path,'/hogwart legacy/hl-3.jpg')), load_file(concat(@picture_path,'/hogwart legacy/hl-4.jpg')));
 
 insert into game values('Destiny 2', 10, 0, 'Dive into the world of Destiny 2 to explore the mysteries of the solar system and experience responsive first-person shooter combat. Unlock powerful elemental abilities and collect unique gear to customize your Guardian\'s look and playstyle. Enjoy Destiny 2’s cinematic story, challenging co-op missions, and a variety of PvP modes alone or with friends. Download for free today and write your legend in the stars.
 An Immersive Story
