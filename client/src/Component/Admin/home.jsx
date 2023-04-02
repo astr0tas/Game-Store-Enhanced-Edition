@@ -79,8 +79,29 @@ export default function AdminHome()
                                     </div>
                                     <p>SOLD: XXX</p>
                               </div>
+                              <div className='d-flex flex-column align-items-center justify-content-center sale'>
+                                    <img className='pic' alt='' src="https://images2.thanhnien.vn/Uploaded/phongdt/2022_04_22/god-7624.png" />
+                                    <div className='price'>
+                                          $70
+                                    </div>
+                                    <p>SOLD: XXX</p>
+                              </div>
                         </div>
                         <div className="group">
+                              <div className='d-flex flex-column align-items-center justify-content-center sale'>
+                                    <img className='pic' alt='' src="https://images2.thanhnien.vn/Uploaded/phongdt/2022_04_22/god-7624.png" />
+                                    <div className='price'>
+                                          $70
+                                    </div>
+                                    <p>SOLD: XXX</p>
+                              </div>
+                              <div className='d-flex flex-column align-items-center justify-content-center sale'>
+                                    <img className='pic' alt='' src="https://images2.thanhnien.vn/Uploaded/phongdt/2022_04_22/god-7624.png" />
+                                    <div className='price'>
+                                          $70
+                                    </div>
+                                    <p>SOLD: XXX</p>
+                              </div>
                               <div className='d-flex flex-column align-items-center justify-content-center sale'>
                                     <img className='pic' alt='' src="https://images2.thanhnien.vn/Uploaded/phongdt/2022_04_22/god-7624.png" />
                                     <div className='price'>
