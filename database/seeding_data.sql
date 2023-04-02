@@ -428,7 +428,7 @@ insert into belongs_to values('Red Dead Redemption 2','Story-Rich'),('Red Dead R
 insert into belongs_to values('The Great War: Western Front™','Strategy RPG'),('The Great War: Western Front™','Turn-Based');
 insert into belongs_to values('The Last of Us™ Part I','Story-Rich'),('The Last of Us™ Part I','Adventure RPG'), ('The Last of Us™ Part I','Third-Person Shooter');
 insert into belongs_to values('Riddle Joker', 'Visual Novel'), ('Riddle Joker', 'Story-Rich');
-insert into belongs_to values('Parquet', 'Visual Novel'), ('Riddle Joker', 'Story-Rich');
+insert into belongs_to values('Parquet', 'Visual Novel'), ('Parquet', 'Story-Rich');
 insert into belongs_to values('Grand Theft Auto V', 'Action RPG'), ('Grand Theft Auto V', 'First-Person Shooter');
 
 -- add activation codes section
@@ -442,10 +442,12 @@ insert into activation_code(game_name,code) values('Destiny 2', 'ORBZW5U6REET76T
 insert into activation_code(game_name,code) values('Hogwarts Legacy', 'STEU31JSYXBKA8O3'), ('Hogwarts Legacy','N6LVQVYTSBNTBI8K'), ('Hogwarts Legacy','VCH6HPTJGCMQ77Q5');
 insert into activation_code(game_name,code) values('MONSTER HUNTER RISE', 'LRBCO6ANBOEOKCOF'), ('Red Dead Redemption 2','CQKP1QOI2E98DHHC');
 insert into activation_code(game_name,code) values('The Great War: Western Front™', 'EO8BND6M67HDD7ST'), ('The Last of Us™ Part I','N04NAGGQT2NIZPC9'), ('The Last of Us™ Part I','7Y8BRVQD5FYJACOI');
+insert into activation_code(game_name,code) values('Riddle Joker', 'S1FJ8NFW4EYVE33D'), ('Parquet','XJMPMDRHI2A3OD04'), ('Grand Theft Auto V','2661A0VRJMBJABHS');
 insert into activation_code values ('Destiny 2', 'UEVY8Y944GITQNLK', 'used'), ('Destiny 2', 'LFDPNFUJ08J0ZFHJ', 'used'), ('Fallout 76','3KNE1VD7XWDDK46N', 'used');
 insert into activation_code values ('Hogwarts Legacy', '46QN0IRXT8NMS7U8', 'used'), ('MONSTER HUNTER RISE', 'ZT1VZSV776G09ZY5', 'used');
 insert into activation_code values ('Red Dead Redemption 2', 'HVYD219XROCELSH3', 'used'), ('Red Dead Redemption 2', 'AEOSR8SLXC2EOKG4', 'used'), ('Red Dead Redemption 2','IP6RA1PWE95YU4GH','used');
 insert into activation_code values ('The Great War: Western Front™', 'DAA4XQ8FY4OXF32X', 'used'), ('The Last of Us™ Part I', 'SKFZA1NRWA0TKJ24', 'used'), ('The Last of Us™ Part I','K6XSEDL9HATQSQ2S','used');
+insert into activation_code values ('Riddle Joker', 'Z2KI5Y03B491UB1F', 'used'), ('Parquet','EEWHOUYQAKJ25QQR', 'used'), ('Grand Theft Auto V','1UE640ECX4EE6X52', 'used');
 
 select * from game;
 -- select * from game join activation_code on game.name=activation_code.game_name;
