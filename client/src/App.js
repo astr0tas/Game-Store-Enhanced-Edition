@@ -1,4 +1,4 @@
-import './App.css';
+  import './App.css';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Login from './Component/Customer/Login';
@@ -50,3 +50,6 @@ function App()
 }
 
 export default App;
+
+
+

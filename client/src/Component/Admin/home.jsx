@@ -20,8 +20,8 @@ export default function AdminHome()
       {
             if (effectRan.current === false)
             {
-                  document.getElementById("home").style.backgroundColor = "blue";
-                  document.getElementById("home").style.color = "white";
+                  // document.getElementById("home").style.backgroundColor = "blue";
+                  // document.getElementById("home").style.color = "white";
 
                   axios.post('http://localhost/admin/best_seller.php')
                         .then(res =>

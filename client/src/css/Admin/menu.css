@@ -1,44 +1,47 @@
-/* .item,
-.logout_button {
-    font-size: 25px;
+/* .navbar-collapse.collapsing,
+.navbar-collapse.show {
+    visibility: visible;
+    height: auto !important;
 }
 
-.logout_button {
-    color: rgb(255, 71, 71);
+.navbar-collapse {
+    visibility: hidden;
+    height: 0;
+    transition: visibility 0s, height 0.3s;
 }
 
-.logout_button:hover {
-    color: rgb(255, 170, 170);
-    cursor: pointer;
+.admin_menu {
+    width: 180px;
 }
 
-.logout_button:active {
-    color: rgb(255, 0, 0);
+.tab,
+.logout {
+    font-size: 30px;
 }
 
-.item:hover {
-    background-color: lightblue;
-    cursor: pointer;
-    color: white;
+.tab {
+    color: blue;
+    margin-top: 20%;
 }
 
-.item:active {
-    background-color: rgb(0, 123, 255);
+.logout {
+    color: red;
 }
 
-.menu_container {
-    height: 100vh;
-    box-sizing: border-box;
-    width: 185px;
-    background-color: rgb(208, 208, 208);
-    position: fixed;
-    flex-wrap: nowrap;
-    overflow: auto;
+.admin_page{
+    margin-left:180px;
 }
 
-body {
-    background-color: #B9FDFD;
+.navbar_toggler{
+    left:0;
+}
+
+.nav_bar{
+    left:0;
 } */
+
+
+/*********************************************************/
 
 .admin-menu .dropdown {
     display: none;
@@ -144,5 +147,9 @@ body {
 
     .admin-menu .menu_container .padding_when_collapse {
         margin-top: 50px;
+    }
+
+    .admin-menu .menu_container {
+        transition: visibility 500ms ease-out, opacity 500ms ease-out;
     }
 }

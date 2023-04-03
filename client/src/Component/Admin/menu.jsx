@@ -5,7 +5,8 @@ import { AiOutlineBarChart, AiOutlineLogout, AiOutlineMenu } from "react-icons/a
 import { Outlet } from 'react-router-dom';
 import { VscAccount } from "react-icons/vsc";
 import { GiRetroController } from "react-icons/gi";
-import { useEffect, useRef } from 'react';
+import { useEffect, useState, useRef } from 'react';
+// import { Nav, Container, Navbar } from 'react-bootstrap';
 import $ from 'jquery';
 
 function AdminMenu()
@@ -17,12 +18,14 @@ function AdminMenu()
   {
     if ($(".menu_container").css("visibility") === "hidden")
     {
+      $(".menu_container").css("opacity", "1");
       $(".menu_container").css("visibility", "visible");
       $(".dropdown").first().css("display", "block");
       $(".dropdown").last().css("display", "block");
     }
     else
     {
+      $(".menu_container").css("opacity", "0");
       $(".menu_container").css("visibility", "hidden");
       $(".dropdown").first().css("display", "block");
       $(".dropdown").last().css("display", "none");
@@ -41,6 +44,7 @@ function AdminMenu()
       {
         if (window.innerWidth > 575)
         {
+          $(".menu_container").css("opacity", "1");
           $(".menu_container").css("visibility", "visible");
           $(".dropdown").css("display", "none");
         }
@@ -52,29 +56,39 @@ function AdminMenu()
     }
   });
 
+  // const [navbarExpanded, setNavbarExpanded] = useState(false);
+
+  // const handleNavbarToggle = () =>
+  // {
+  //   setNavbarExpanded(!navbarExpanded);
+  // }
+
   return (
     <>
-      {/* <Nav className=" flex-column menu_container">
-          <Nav.Item>
-            <Nav.Link href="#" className="link-dark user d-flex justify-content-center"><VscAccount size={ 70 } /></Nav.Link>
-          </Nav.Item>
-          <Nav.Item>
-            <Nav.Link href="#" className='item mt-3 pb-3' id="home"><BiHomeAlt2 />Home</Nav.Link>
-          </Nav.Item>
-          <Nav.Item>
-            <Nav.Link href="#" className='item mt-3 pb-3' id="game"><GiRetroController />Game</Nav.Link>
-          </Nav.Item>
-          <Nav.Item>
-            <Nav.Link href="#" className='item mt-3 pb-3' id="cart"><BsPerson />Customer</Nav.Link>
-          </Nav.Item>
-          <Nav.Item>
-            <Nav.Link href="#" className='item mt-3 pb-3' id="wish"><AiOutlineBarChart />Statistic</Nav.Link>
-          </Nav.Item>
-          <Nav.Item className="mt-auto mb-3">
-            <Nav.Link href="/" className='logout_button'><AiOutlineLogout /> Log out</Nav.Link>
-          </Nav.Item>
-      </Nav>
-      <Outlet /> */}
+      {/* <div className='admin_menu h-100 position-fixed'>
+        <Navbar bg="light" expand="lg" className='overflow-auto h-100 w-100' collapseOnSelect expanded={ navbarExpanded } onToggle={ handleNavbarToggle }>
+          <Container className="d-flex flex-column h-100 w-100 p-0">
+            <div className="navbar_toggler w-100">
+              <Navbar.Toggle aria-controls="basic-navbar-nav" />
+            </div>
+            <Navbar.Collapse id="basic-navbar-nav" className='h-75 w-100'>
+              <Nav className="flex-column h-100 w-100">
+                <div className='d-flex flex-column flex-grow-1'>
+                  <Nav.Link href="#" className='tab'><BiHomeAlt2 />Home</Nav.Link>
+                  <Nav.Link href="#" className='tab'><GiRetroController />Game</Nav.Link>
+                  <Nav.Link href="#" className='tab'><BsPerson />Customer</Nav.Link>
+                  <Nav.Link href="#" className='tab'><AiOutlineBarChart />Statistic</Nav.Link>
+                </div>
+                <Nav.Link href="#" className="mt-auto logout"><AiOutlineLogout /> Log out</Nav.Link>
+              </Nav>
+            </Navbar.Collapse>
+          </Container>
+        </Navbar>
+      </div>
+      <div className='admin_page h-100'>
+        <Outlet />
+      </div> */}
+
       <div className='admin-menu h-100'>
         <AiOutlineMenu size={ 25 } className="dropdown" onClick={ toggleMenu } type='button'></AiOutlineMenu>
         <div className="d-flex flex-column menu_container">
