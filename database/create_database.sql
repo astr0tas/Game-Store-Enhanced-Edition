@@ -1,3 +1,5 @@
+drop schema if exists game_store;
+
 create schema game_store;
 
 use game_store;
