@@ -2,6 +2,10 @@ use game_store;
 
 -- add customers section
 insert into customer values('CUSTOMER01','Lê Văn B','b_le@gmail.com',null,0.0,'none',0,'b_le123','bLe0123');
+insert into customer values('CUSTOMER02','John Wick','wicky@gmail.com',null,0.0,'none',0,'wicky123','Wicky123');
+insert into customer values('CUSTOMER03','John Wick','wicky1@gmail.com',null,0.0,'none',0,'wicky1234','Wicky123');
+insert into customer values('CUSTOMER04','John Wick','wicky2@gmail.com',null,0.0,'none',0,'wicky1235','Wicky123');
+insert into customer values('CUSTOMER05','John Wick','wicky3@gmail.com',null,0.0,'none',0,'wicky1236','Wicky123');
 
 -- add admins section
 insert into admin values('ADMIN01','Nguyễn Văn A','a_nguyen@gmail.com','0123456789',null,'a_nguyen123','aNguyen0123');
@@ -48,8 +52,8 @@ insert into category values('Arcade & Rhythm'),
 ('Team Sports');
 
 -- set @picture_path:='F:/nam 3/web/btl/LTW_222/database/Pictures';
--- set @picture_path:='E:\\Projects\\Game_Store_2023\\database\\Pictures';
-set @picture_path:='E:\\Projects\\Game_Store\\database\\Pictures';
+set @picture_path:='E:\\Projects\\Game_Store_2023\\database\\Pictures';
+-- set @picture_path:='E:\\Projects\\Game_Store\\database\\Pictures';
 
 -- add games section
 insert into game values('Elden Ring',59.99,0,'THE NEW FANTASY ACTION RPG.

@@ -1,145 +1,149 @@
-import { Link } from 'react-router-dom';
-import { MdOutlineClear } from 'react-icons/md';
 import { BsSearch } from 'react-icons/bs';
-import Button from 'react-bootstrap/Button';
-import { useState } from 'react';
-import { confirm } from "react-confirm-box";
-
+import { useEffect, useRef } from 'react';
+import axios from 'axios';
+import $ from 'jquery';
 import '../../css/Admin/cuslist.css';
 
 export default function CusList()
 {
-    const [detail, setDetail] = useState('');
-    const [check, setCheck] = useState('none');
-    const [conf, setConfirm] = useState('none');
-    const [del, setDel] = useState('');
-    const [value, setValue] = useState('');
-    const options = {
-        render: (message, onConfirm, onCancel) =>
-        {
-            return (
-                <div className='confirmbox'>
-                    <h1> { message } </h1>
-                    <Button onClick={ onConfirm }
-                        style={ {
-                            background: '#00B3EC',
-                            width: '200px',
-                            height: '50px',
-                            borderRadius: '20px',
-                            fontSize: 'large',
-                        } }> Yes </Button>
-                    <Button onClick={ onCancel }
-                        style={ {
-                            background: '#FF0000',
-                            width: '200px',
-                            height: '50px',
-                            borderRadius: '20px',
-                            fontSize: 'large',
-                        } }> No </Button>
-                </div>
-            );
-        }
-    }
+    const render = useRef(false);
 
-    const nocheck = {
-        render: (message, onConfirm, onCancel) =>
-        {
-            return (
-                <div className='confirmbox'>
-                    <h1> { message } </h1>
-                    <Button onClick={ onConfirm }
-                        style={ {
-                            background: '#00B3EC',
-                            width: '200px',
-                            height: '50px',
-                            borderRadius: '20px',
-                            fontSize: 'large',
-                        } }> Confirm </Button>
-                </div>
-            );
-        }
-    }
-
-    const clear = () =>
+    useEffect(() =>
     {
-        setValue('');
+        if (!render.current)
+        {
+            axios.get('http://localhost/admin/get_customer_list.php')
+                .then(res =>
+                {
+                    for (let i = 0; i < res.data.length; i++)
+                    {
+                        $(".table_body").append($("<tr>").append($("<th>").attr("scope", "row").text(i + 1))
+                            .append($("<td>").text(res.data[i].name))
+                            .append($("<td>").text(res.data[i].email))
+                            .append($("<td>").text(res.data[i].phone))
+                            .append($("<td>").text(res.data[i].total_spending))
+                            .append($("<td>").addClass("d-flex").addClass("align-items-center")
+                                .append($("<a>").text("Detail").addClass("detail").attr("href", "./" + res.data[i].id))
+                                .append($("<input>").addClass("checkbox").attr("type", "checkbox").attr("value", res.data[i].id))
+                            )
+                        );
+                    }
+                })
+                .catch(error => console.log(error));
+            render.current = true;
+        }
+    });
+
+    const delete_user = () =>
+    {
+
+        const checkedValues = $('input[type="checkbox"]:checked').map(function ()
+        {
+            return $(this).val();
+        }).get();
+
+        for (let i = 0; i < checkedValues.length; i++)
+        {
+            const formData = new FormData();
+            formData.append("id", checkedValues[i]);
+            axios.post('http://localhost/admin/delete_customer_list.php', formData)
+                .then(res =>
+                {
+                    console.log(res.data);
+                })
+                .catch(error => console.log(error));
+        }
+        window.location.href = "./customerlist";
+    }
+
+    const toggle_delete = () =>
+    {
+        $(".checkbox").prop("checked", false);
+        if ($(".delete").first().css("display") === "block")
+        {
+            $(".delete").last().css("display", "block");
+            $(".back").css("display", "block");
+            $(".delete").first().css("display", "none");
+            $(".detail").css("display", "none");
+            $(".checkbox").css("display", "block");
+        }
+        else
+        {
+            $(".delete").last().css("display", "none");
+            $(".back").css("display", "none");
+            $(".delete").first().css("display", "block");
+            $(".detail").css("display", "block");
+            $(".checkbox").css("display", "none");
+        }
+    }
+
+    const search = () =>
+    {
+        $(".table_body").empty();
+        const formData = new FormData();
+        formData.append("data", $("#search").val());
+        axios.post('http://localhost/admin/find_customer.php', formData)
+            .then(res =>
+            {
+                for (let i = 0; i < res.data.length; i++)
+                {
+                    $(".table_body").append($("<tr>").append($("<th>").attr("scope", "row").text(i + 1))
+                        .append($("<td>").text(res.data[i].name))
+                        .append($("<td>").text(res.data[i].email))
+                        .append($("<td>").text(res.data[i].phone))
+                        .append($("<td>").text(res.data[i].total_spending))
+                        .append($("<td>").addClass("d-flex").addClass("align-items-center")
+                            .append($("<a>").text("Detail").addClass("detail").attr("href", "./" + res.data[i].id))
+                            .append($("<input>").addClass("checkbox").attr("type", "checkbox").attr("value", res.data[i].id))
+                        )
+                    );
+                }
+            })
+            .catch(error => console.log(error));
     }
 
     return (
         <div className="d-flex flex-column align-items-center justify-content-center w-100 h-100">
+            <div className='cus_list_pop_up'>
+                <div className='d-flex flex-column align-items-center justify-content-around w-100 h-100'>
+                    <h2>Do you want to delete the selected user(s)?</h2>
+                    <div>
+                        <button className='no' onClick={ () => { $(".cus_list_pop_up").css("display", "none"); } }>No</button>
+                        <button className='yes' onClick={ () => { delete_user(); $(".cus_list_pop_up").css("display", "none"); } }>Yes</button>
+                    </div>
+                </div>
+            </div>
             <div className="cusList">
-                <div className='d-flex justify-content-end align-items-center'>
-                    <input className='search' id='search' type='text' placeholder='Game' value={ value } onChange={ (e) => setValue(e.target.value) } />
-                    <BsSearch id='scope' class="search_icon" size={ 20 } />
+                <div className='d-flex justify-content-end align-items-center w-100'>
+                    <form className='d-flex justify-content-end align-items-center w-100' style={ { height: "40px" } }>
+                        <input className='search' id='search' type='text' placeholder='Find' onKeyUp={ search } />
+                        <BsSearch id='scope' className="search_icon" size={ 20 } />
+                    </form>
                 </div>
-                {/* <div className="searchfield">
-                    <div className='searchbox'><i><BsSearch id='scope' /></i><input className='search' id='search' type='text' placeholder='name' value={ value } onChange={ (e) => setValue(e.target.value) } /> <Button onClick={ clear }><MdOutlineClear /></Button></div>
-                </div> */}
-                <div className='list'>
-                    <table id='customers' style={ { margin: 'auto' } }>
-                        <tr>
-                            <th style={ { width: '100px' } }> Customer</th>
-                            <th style={ { width: '200px' } }> Email</th>
-                            <th style={ { width: '200px' } }> Phone number</th>
-                            <th style={ { width: '200px' } }> Total spending</th>
-                            <th style={ { width: '100px' } }> Detail</th>
-                        </tr>
-                        <tr>
-                            <td> ABC</td>
-                            <td> ABC@gmail.com</td>
-                            <td> 0123456789</td>
-                            <td> $400</td>
-                            <td> <Link to='./detail'><Button style={ { display: `${ detail }` } }>Detail</Button></Link> <input type='checkbox' style={ { display: `${ check }` } } onChange={ (e) => handleChange(e) } /></td>
-                            {/* change onChange function  */ }
-                        </tr>
-                    </table>
-                    <button type='submit' onClick={ () =>
-                    {
-                        setDetail('none');
-                        setCheck('');
-                        setDel('none');
-                        setConfirm('');
-                    } } style={ { display: `${ del }`, margin: 'auto', backgroundColor: 'red', color: 'white', width: '100px', height: '50px', fontSize: 'large', borderRadius: '15px' } }> Delete user
-                    </button>
-                    <button onClick={ async () =>
-                    {
-                        const result = await confirm("Do you want to delete the selected user(s)?", options);
-                        if (result)
-                        {
-                            setDetail('');
-                            setCheck('none');
-                            setDel('');
-                            setConfirm('none');
-                            console.log("You click yes!");
-                            if (list_del.length === 0)
-                            {
-                                await confirm("No users selected!", nocheck);
-                            }
-                            else
-                            {
-                                await confirm("Users deleted!", nocheck);
-                            }
-                            return;
-                        }
-                        console.log("You click No!");
-                    } } style={ { display: `${ conf }`, margin: 'auto', backgroundColor: 'red', color: 'white', width: '100px', height: '50px', fontSize: 'large', borderRadius: '15px' } }> Confirm
-                    </button>
-                </div>
+                <form className="w-100" style={ { height: "calc(100% - 40px)" } }>
+                    <div className='w-100' style={ { height: "calc(100% - 100px)", overflow: "auto" } }>
+                        <table className="table table-hover mx-auto mt-3" style={ { width: "90%" } }>
+                            <thead style={ { borderBottom: "2px solid black" } }>
+                                <tr>
+                                    <th scope="col" className='col-1'>#</th>
+                                    <th scope="col" className='col-3'>Customer</th>
+                                    <th scope="col" className='col-2'>Email</th>
+                                    <th scope="col" className='col-2'>Phone number</th>
+                                    <th scope="col" className='col-2'>Total spending</th>
+                                    <th scope="col" className='col-2'>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody className="table_body">
+                            </tbody>
+                        </table>
+                    </div>
+                    <div className='w-100 d-flex justify-content-center align-items-center' style={ { height: "100px" } }>
+                        <button type="button" className='delete' onClick={ toggle_delete }>Delete user</button>
+                        <button type="button" className='back' onClick={ toggle_delete }>Back</button>
+                        <button type="button" className='delete' value="Confirm" onClick={ () => { $(".cus_list_pop_up").css("display", "block"); } }>Confirm</button>
+                    </div>
+                </form>
             </div>
         </div>
     )
-}
-
-const list_del = [];
-const handleChange = (e) =>
-{
-    let isChecked = e.target.checked;
-    if (isChecked)
-    {
-        list_del.push("ABC");
-    }
-    else
-    {
-        list_del.pop();
-    }
 }
