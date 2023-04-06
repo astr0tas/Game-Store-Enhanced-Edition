@@ -1,4 +1,4 @@
-  import './App.css';
+import './App.css';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css'
 import Login from './Component/Customer/Login';
@@ -9,7 +9,7 @@ import Confirmation from './Component/Customer/Confirmation';
 import CustomerMenu from './Component/Customer/menu';
 
 // import CusDetail from './Component/Admin/cusdetail';
-// import CusList from './Component/Admin/cuslist';
+import CusList from './Component/Admin/cuslist';
 // import Stat from './Component/Admin/Stat';
 
 import AdminMenu from './Component/Admin/menu';
@@ -40,6 +40,7 @@ function App()
             <Route path="create_new_password" element={ <AdminCreateNewPassword /> } />
             <Route element={ <AdminMenu /> }>
               <Route path="home" element={ <AdminHome /> } />
+              <Route path="customerlist" element={ <CusList /> } />
             </Route>
           </Route>
 

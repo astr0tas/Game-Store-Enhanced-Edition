@@ -3,7 +3,6 @@ import '../../css/Admin/Stat.css';
 export default function Stat() {
   return (
     <div className='chart'>
-      {/* <img src={require('../img/mainchart.png')} alt=''/> */}
       <div className='category'>
           <label for="crit">Criteria:</label>
           <select name="crit" id="crit">
