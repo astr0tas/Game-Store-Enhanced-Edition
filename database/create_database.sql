@@ -39,7 +39,7 @@ create table customer(
     email varchar(50) unique not null,
     phone varchar(10),
     total_spending double default 0.0,
-    membership_rank varchar(8) default 'none' check(membership_rank ='none' or membership_rank='bronze' or membership_rank='gold' or membership_rank='diamond' or membership_rank='special'),
+    membership_rank varchar(8) default 'None' check(membership_rank ='None' or membership_rank='Silver' or membership_rank='Gold' or membership_rank='Diamond' or membership_rank='Special'),
     membership_discount float default 0 check(0<=membership_discount and membership_discount<=5),
     username varchar(20) unique not null,
     userpassword varchar(20) not null
@@ -71,8 +71,7 @@ create table shopping_cart(
 create table purchase_history_description(
 	id varchar(10) primary key,
     method varchar(15) check(method='MoMo payment' or method='Online banking'),
-    date date not null,
-    amount int default 1 check(amount>=1)
+    date date not null
 );
 
 create table purchase_history(

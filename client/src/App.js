@@ -7,8 +7,7 @@ import ForgotPassword from './Component/Customer/ForgotPassword';
 import CreateNewPassWord from './Component/Customer/CreateNewPassword';
 import Confirmation from './Component/Customer/Confirmation';
 import CustomerMenu from './Component/Customer/menu';
-
-// import CusDetail from './Component/Admin/cusdetail';
+import CusDetail from './Component/Admin/cusdetail';
 import CusList from './Component/Admin/cuslist';
 // import Stat from './Component/Admin/Stat';
 
@@ -40,7 +39,10 @@ function App()
             <Route path="create_new_password" element={ <AdminCreateNewPassword /> } />
             <Route element={ <AdminMenu /> }>
               <Route path="home" element={ <AdminHome /> } />
-              <Route path="customerlist" element={ <CusList /> } />
+              <Route>
+                <Route path="customerlist" element={ <CusList /> } />
+                <Route path="customerlist/:id" element={ <CusDetail /> } />
+              </Route>
             </Route>
           </Route>
 

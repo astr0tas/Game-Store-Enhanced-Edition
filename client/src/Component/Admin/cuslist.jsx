@@ -12,6 +12,9 @@ export default function CusList()
     {
         if (!render.current)
         {
+            $("#customer").css("color", "white");
+            $("#customer").css("background-color", "#00B3EC");
+
             axios.get('http://localhost/admin/get_customer_list.php')
                 .then(res =>
                 {
@@ -23,7 +26,7 @@ export default function CusList()
                             .append($("<td>").text(res.data[i].phone))
                             .append($("<td>").text(res.data[i].total_spending))
                             .append($("<td>").addClass("d-flex").addClass("align-items-center")
-                                .append($("<a>").text("Detail").addClass("detail").attr("href", "./" + res.data[i].id))
+                                .append($("<a>").text("Detail").addClass("detail").attr("href", "./customerList/" + res.data[i].id))
                                 .append($("<input>").addClass("checkbox").attr("type", "checkbox").attr("value", res.data[i].id))
                             )
                         );
@@ -46,7 +49,7 @@ export default function CusList()
         {
             const formData = new FormData();
             formData.append("id", checkedValues[i]);
-            axios.post('http://localhost/admin/delete_customer_list.php', formData)
+            axios.post('http://localhost/admin/delete_customer.php', formData)
                 .then(res =>
                 {
                     console.log(res.data);
@@ -104,12 +107,14 @@ export default function CusList()
 
     return (
         <div className="d-flex flex-column align-items-center justify-content-center w-100 h-100">
-            <div className='cus_list_pop_up'>
-                <div className='d-flex flex-column align-items-center justify-content-around w-100 h-100'>
-                    <h2>Do you want to delete the selected user(s)?</h2>
-                    <div>
-                        <button className='no' onClick={ () => { $(".cus_list_pop_up").css("display", "none"); } }>No</button>
-                        <button className='yes' onClick={ () => { delete_user(); $(".cus_list_pop_up").css("display", "none"); } }>Yes</button>
+            <div className="w-100 h-100 pop_up_container">
+                <div className='cus_list_pop_up'>
+                    <div className='d-flex flex-column align-items-center justify-content-around w-100 h-100'>
+                        <h3 className="confirm_title">Do you want to delete the selected user(s)?</h3>
+                        <div className='confirm_boxes d-flex justify-content-between align-items-center'>
+                            <button className='no' onClick={ () => { $(".pop_up_container").css("display", "none"); } }>No</button>
+                            <button className='yes' onClick={ () => { delete_user(); $(".pop_up_container").css("display", "none"); } }>Yes</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -140,7 +145,7 @@ export default function CusList()
                     <div className='w-100 d-flex justify-content-center align-items-center' style={ { height: "100px" } }>
                         <button type="button" className='delete' onClick={ toggle_delete }>Delete user</button>
                         <button type="button" className='back' onClick={ toggle_delete }>Back</button>
-                        <button type="button" className='delete' value="Confirm" onClick={ () => { $(".cus_list_pop_up").css("display", "block"); } }>Confirm</button>
+                        <button type="button" className='delete' value="Confirm" onClick={ () => { $(".pop_up_container").css("display", "flex"); } }>Confirm</button>
                     </div>
                 </form>
             </div>

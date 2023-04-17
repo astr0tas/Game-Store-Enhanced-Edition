@@ -1,11 +1,11 @@
 use game_store;
 
 -- add customers section
-insert into customer values('CUSTOMER01','Lê Văn B','b_le@gmail.com',null,0.0,'none',0,'b_le123','bLe0123');
-insert into customer values('CUSTOMER02','John Wick','wicky@gmail.com',null,0.0,'none',0,'wicky123','Wicky123');
-insert into customer values('CUSTOMER03','John Wick','wicky1@gmail.com',null,0.0,'none',0,'wicky1234','Wicky123');
-insert into customer values('CUSTOMER04','John Wick','wicky2@gmail.com',null,0.0,'none',0,'wicky1235','Wicky123');
-insert into customer values('CUSTOMER05','John Wick','wicky3@gmail.com',null,0.0,'none',0,'wicky1236','Wicky123');
+insert into customer values('CUSTOMER01','Lê Văn B','b_le@gmail.com',null,0.0,'None',0,'b_le123','bLe0123');
+insert into customer values('CUSTOMER02','John Wick','wicky@gmail.com',null,0.0,'None',0,'wicky123','Wicky123');
+insert into customer values('CUSTOMER03','John Wick','wicky1@gmail.com',null,0.0,'None',0,'wicky1234','Wicky123');
+insert into customer values('CUSTOMER04','John Wick','wicky2@gmail.com',null,0.0,'None',0,'wicky1235','Wicky123');
+insert into customer values('CUSTOMER05','John Wick','wicky3@gmail.com',null,0.0,'None',0,'wicky1236','Wicky123');
 
 -- add admins section
 insert into admin values('ADMIN01','Nguyễn Văn A','a_nguyen@gmail.com','0123456789',null,'a_nguyen123','aNguyen0123');
@@ -455,6 +455,33 @@ insert into activation_code values ('Red Dead Redemption 2', 'HVYD219XROCELSH3',
 insert into activation_code values ('The Great War: Western Front™', 'DAA4XQ8FY4OXF32X', 'used'), ('The Last of Us™ Part I', 'SKFZA1NRWA0TKJ24', 'used'), ('The Last of Us™ Part I','K6XSEDL9HATQSQ2S','used');
 insert into activation_code values ('Riddle Joker', 'Z2KI5Y03B491UB1F', 'used'), ('Parquet','EEWHOUYQAKJ25QQR', 'used'), ('Grand Theft Auto V','1UE640ECX4EE6X52', 'used');
 
-select * from game;
+
+-- add purchase_history
+insert into purchase_history values('CUSTOMER01','Red Dead Redemption 2','HVYD219XROCELSH3','QM3J7S7V48'),
+('CUSTOMER01','Elden Ring','SQT8CXG8VWKBP9Q1','6CFQYWLV5S'),
+('CUSTOMER01','Elden Ring','LV47LGEFPY2PXZ6F','7YZLO77T1M'),
+('CUSTOMER01','Elden Ring','KYZXNH7B95FTG5RC','5B4180VD4J'),
+('CUSTOMER01','God of War','ZUGJX32CGJTLXVXH','IXQZCPG0A8'),
+('CUSTOMER01','God of War','WVTKJKK8VL3ALFXO','YZV9DV5CKM'),
+('CUSTOMER01','God of War','DP44F8XHCGEBQSNI','F6XN96I8KY'),
+('CUSTOMER01','Hogwarts Legacy','46QN0IRXT8NMS7U8','00FUSNNXUR'),
+('CUSTOMER01','Fallout 76','3KNE1VD7XWDDK46N','GSNZCXWTWC'),
+('CUSTOMER01','The Last of Us™ Part I','SKFZA1NRWA0TKJ24','IW9MNCBZKR');
+
+
+-- add purchase_history_description
+insert into purchase_history_description values('QM3J7S7V48','Online banking','2023-04-17'),
+('6CFQYWLV5S','Online banking','2023-04-17'),
+('7YZLO77T1M','Online banking','2023-04-16'),
+('5B4180VD4J','Online banking','2023-04-15'),
+('IXQZCPG0A8','Online banking','2023-04-14'),
+('YZV9DV5CKM','Online banking','2023-04-13'),
+('F6XN96I8KY','Online banking','2023-04-17'),
+('00FUSNNXUR','Online banking','2023-04-15'),
+('GSNZCXWTWC','Online banking','2023-04-16'),
+('IW9MNCBZKR','Online banking','2023-04-13');
+
+
+-- select * from game;
 -- select * from game join activation_code on game.name=activation_code.game_name;
 -- select name,picture_1,price,count(*) as total_sale from game join activation_code on game.name=activation_code.game_name where status='used' group by name order by total_sale desc,name limit 5;

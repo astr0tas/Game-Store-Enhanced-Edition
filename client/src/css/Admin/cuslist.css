@@ -80,26 +80,30 @@
     display: none;
 }
 
-.cus_list_pop_up {
-    width: 40%;
-    height: 20%;
+.pop_up_container {
     position: absolute;
-    top: 30%;
-    left: 35%;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.cus_list_pop_up {
+    width: 30%;
+    height: 20%;
     background-color: #BEBEBE;
     border: 2px solid black;
     border-radius: 20px;
-    display: none;
 }
 
 .cus_list_pop_up .yes {
     margin: auto;
     background-color: red;
     color: white;
-    width: 150px;
+    width: 100px;
     height: 50px;
     font-size: large;
-    border-radius: 15px
+    border-radius: 15px;
 }
 
 .cus_list_pop_up .yes:active {
@@ -110,38 +114,55 @@
     margin: auto;
     background-color: #00c3ff;
     color: white;
-    width: 150px;
+    width: 100px;
     height: 50px;
     font-size: large;
     border-radius: 15px;
-    margin-left: 0;
-    margin-right: 50px;
 }
 
 .cus_list_pop_up .no:active {
     background-color: #73deff;
 }
 
-@media only screen and (max-width:1600px) {
+.cus_list_pop_up .confirm_boxes {
+    width: 50%;
+}
+
+@media only screen and (max-width:2200px) {
     .cus_list_pop_up {
-        width: 50%;
-        height: 20%;
-        left: 32%;
+        width: 40%;
+    }
+}
+
+@media only screen and (max-width:1600px) {
+    .cus_list_pop_up .confirm_title {
+        font-size: 20px;
+    }
+
+    .cus_list_pop_up .confirm_boxes {
+        width: 75%;
     }
 }
 
 @media only screen and (max-width:1264px) {
-    .cus_list_pop_up {
-        width: 60%;
-        height: 20%;
-        left: 32%;
+    .cus_list_pop_up .confirm_title {
+        font-size: 15px;
+    }
+
+    .cus_list_pop_up .yes {
+        width: 80px;
+        height: 40px;
+        font-size: 15px;
+    }
+
+    .cus_list_pop_up .no {
+        width: 80px;
+        height: 40px;
+        font-size: 15px;
     }
 }
 
 @media only screen and (max-width:996px) {
-    .cus_list_pop_up {
-        width: 70%;
-        height: 20%;
-        left: 20%;
-    }
+    /* .cus_list_pop_up .confirm_title {} */
+
 }

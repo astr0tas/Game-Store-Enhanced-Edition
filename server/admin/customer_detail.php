@@ -1,0 +1,19 @@
+<?php
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Headers: *");
+header('Access-Control-Allow-Methods:  POST, GET');
+
+require("../connect_database.php");
+$data = $_POST["data"];
+$sql = "SELECT id,name,email,phone,total_spending, membership_rank, membership_discount from customer where id= '$data'";
+$result = $conn->query($sql);
+
+$arr = [];
+if ($result->num_rows > 0) {
+      while ($row = $result->fetch_assoc()) {
+            $arr[] = $row;
+      }
+}
+
+echo json_encode($arr);
+require("../close_connection.php");
