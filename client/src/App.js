@@ -15,7 +15,8 @@ import AdminMenu from './Component/Admin/menu';
 import AdminHome from './Component/Admin/home';
 import AdminLogin from './Component/Admin/Login';
 import AdminForgotPassword from './Component/Admin/ForgotPassword';
-import AdminCreateNewPassword from './Component/Admin/CreateNewPassword'
+import AdminCreateNewPassword from './Component/Admin/CreateNewPassword';
+import GameList from './Component/Admin/gamelist';
 
 function App()
 {
@@ -42,6 +43,9 @@ function App()
               <Route>
                 <Route path="customerlist" element={ <CusList /> } />
                 <Route path="customerlist/:id" element={ <CusDetail /> } />
+              </Route>
+              <Route>
+                <Route path="gamelist" element={ <GameList /> } />
               </Route>
             </Route>
           </Route>

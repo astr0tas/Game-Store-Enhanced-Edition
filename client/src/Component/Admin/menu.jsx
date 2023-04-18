@@ -66,8 +66,8 @@ function AdminMenu()
           </div>
           <div className='d-flex flex-column justify-content-between mt-5 tabs'>
             <a href="./home" className='item mt-3 pb-3' id="home"><BiHomeAlt2 />Home</a>
-            <a href="#" className='item mt-3 pb-3' id="game"><GiRetroController />Game</a>
-            <a href="./customerList" className='item mt-3 pb-3' id="customer"><BsPerson />Customer</a>
+            <a href="./gamelist" className='item mt-3 pb-3' id="game"><GiRetroController />Game</a>
+            <a href="./customerlist" className='item mt-3 pb-3' id="customer"><BsPerson />Customer</a>
             <a href="#" className='item mt-3 pb-3' id="stats"><AiOutlineBarChart />Statistic</a>
           </div>
           <a href="#" className='logout_button'><AiOutlineLogout /> Log out</a>

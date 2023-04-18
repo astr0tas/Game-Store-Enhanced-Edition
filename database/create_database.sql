@@ -83,80 +83,80 @@ create table purchase_history(
     foreign key(game_name,code) references activation_code(game_name,code) on delete cascade on update cascade
 );
 
-create table old_category(
-	description_id varchar(10) references update_game_description(id) on delete cascade on update cascade,
-    type varchar(20),
-    primary key(description_id,type)
-);
+-- create table old_category(
+-- 	description_id varchar(10) references update_game_description(id) on delete cascade on update cascade,
+--     type varchar(20),
+--     primary key(description_id,type)
+-- );
 
-create table new_category(
-	description_id varchar(10) references update_game_description(id) on delete cascade on update cascade,
-    type varchar(20),
-    primary key(description_id,type)
-);
+-- create table new_category(
+-- 	description_id varchar(10) references update_game_description(id) on delete cascade on update cascade,
+--     type varchar(20),
+--     primary key(description_id,type)
+-- );
 
-create table update_game_description(
-	id varchar(10) primary key,
-    date date not null,
-    old_name varchar(100) not null,
-    old_price float,
-    old_discount float,
-    old_description varchar(255),
-    old_spec_minimum varchar(255),
-    old_spec_recommended varchar(255),
-    old_picture_1 mediumblob,
-    old_picture_2 mediumblob,
-    old_picture_3 mediumblob,
-    old_picture_4 mediumblob,
-    new_name varchar(100) not null,
-    new_price float,
-    new_discount float,
-    new_description varchar(255),
-    new_spec_minimum varchar(255),
-    new_spec_recommended varchar(255),
-    new_picture_1 mediumblob,
-    new_picture_2 mediumblob,
-    new_picture_3 mediumblob,
-    new_picture_4 mediumblob
-);
+-- create table update_game_description(
+-- 	id varchar(10) primary key,
+--     date date not null,
+--     old_name varchar(100) not null,
+--     old_price float,
+--     old_discount float,
+--     old_description varchar(255),
+--     old_spec_minimum varchar(255),
+--     old_spec_recommended varchar(255),
+--     old_picture_1 mediumblob,
+--     old_picture_2 mediumblob,
+--     old_picture_3 mediumblob,
+--     old_picture_4 mediumblob,
+--     new_name varchar(100) not null,
+--     new_price float,
+--     new_discount float,
+--     new_description varchar(255),
+--     new_spec_minimum varchar(255),
+--     new_spec_recommended varchar(255),
+--     new_picture_1 mediumblob,
+--     new_picture_2 mediumblob,
+--     new_picture_3 mediumblob,
+--     new_picture_4 mediumblob
+-- );
 
-create table update_game(
-	admin_id varchar(10) references admin(id) on delete cascade on update cascade,
-    game_name varchar(100) references game(name) on delete cascade on update cascade,
-    description_id varchar(10) references update_game_description(id) on delete cascade on update cascade,
-    primary key(admin_id,game_name,description_id)
-);
+-- create table update_game(
+-- 	admin_id varchar(10) references admin(id) on delete cascade on update cascade,
+--     game_name varchar(100) references game(name) on delete cascade on update cascade,
+--     description_id varchar(10) references update_game_description(id) on delete cascade on update cascade,
+--     primary key(admin_id,game_name,description_id)
+-- );
 
-create table added_code(
-	description_id varchar(10) references add_code_description(id) on delete cascade on update cascade,
-    code varchar(16),
-    primary key(description_id,code)
-);
+-- create table added_code(
+-- 	description_id varchar(10) references add_code_description(id) on delete cascade on update cascade,
+--     code varchar(16),
+--     primary key(description_id,code)
+-- );
 
-create table add_code_description(
-	id varchar(10) primary key,
-    date date not null
-);
+-- create table add_code_description(
+-- 	id varchar(10) primary key,
+--     date date not null
+-- );
 
-create table add_code(
-	game_name varchar(100) references game(name) on delete cascade on update cascade,
-    admin_id varchar(10) references admin(id) on delete cascade on update cascade,
-    description_id varchar(10) references add_code_description(id) on delete cascade on update cascade,
-    primary key(game_name,admin_id,description_id)
-);
+-- create table add_code(
+-- 	game_name varchar(100) references game(name) on delete cascade on update cascade,
+--     admin_id varchar(10) references admin(id) on delete cascade on update cascade,
+--     description_id varchar(10) references add_code_description(id) on delete cascade on update cascade,
+--     primary key(game_name,admin_id,description_id)
+-- );
 
-create table update_user_description(
-	id varchar(10) primary key,
-    date date not null,
-    old_membership_rank varchar(8) check(old_membership_rank='none' or old_membership_rank='bronze' or old_membership_rank='gold' or old_membership_rank='diamond' or old_membership_rank='special'),
-    old_membership_discount float check(0<=old_membership_discount and old_membership_discount<=5),
-    new_membership_rank varchar(8) check(new_membership_rank='none' or new_membership_rank='bronze' or new_membership_rank='gold' or new_membership_rank='diamond' or new_membership_rank='special'),
-    new_membership_discount float check(0<=new_membership_discount and new_membership_discount<=5)
-);
+-- create table update_user_description(
+-- 	id varchar(10) primary key,
+--     date date not null,
+--     old_membership_rank varchar(8) check(old_membership_rank='none' or old_membership_rank='bronze' or old_membership_rank='gold' or old_membership_rank='diamond' or old_membership_rank='special'),
+--     old_membership_discount float check(0<=old_membership_discount and old_membership_discount<=5),
+--     new_membership_rank varchar(8) check(new_membership_rank='none' or new_membership_rank='bronze' or new_membership_rank='gold' or new_membership_rank='diamond' or new_membership_rank='special'),
+--     new_membership_discount float check(0<=new_membership_discount and new_membership_discount<=5)
+-- );
 
-create table update_user(
-	customer_id varchar(10) references customer(id) on delete cascade on update cascade,
-    admin_id varchar(10) references admin(id) on delete cascade on update cascade,
-    description_id varchar(10) references update_user_description(id) on delete cascade on update cascade,
-    primary key(customer_id,admin_id,description_id)
-);
+-- create table update_user(
+-- 	customer_id varchar(10) references customer(id) on delete cascade on update cascade,
+--     admin_id varchar(10) references admin(id) on delete cascade on update cascade,
+--     description_id varchar(10) references update_user_description(id) on delete cascade on update cascade,
+--     primary key(customer_id,admin_id,description_id)
+-- );
