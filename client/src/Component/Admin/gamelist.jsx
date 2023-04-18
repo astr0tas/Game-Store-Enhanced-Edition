@@ -4,19 +4,22 @@ import axios from 'axios';
 import $ from 'jquery';
 import styles from '../../css/Admin/gamelist.module.css';
 import { useNavigate } from 'react-router-dom';
+import ReactDOM from 'react-dom/client';
+import { AiFillStar } from 'react-icons/ai';
+
 
 const Game = (props) =>
 {
       return (
             <tr>
-                  <th scope='row'>{ props.i + 1 }</th>
-                  <td>{ props.name }</td>
-                  <td>{ props.price }</td>
-                  <td>{ props.solds }</td>
-                  <td>{ props.ratings }</td>
-                  <td className='d-flex align-items-center justify-content-center'>
-                        <a href={ `./gamelist/${ props.name }` }></a>
-                        <input className={ `${ styles.checkbox }` } type="checkbox" value={ props.name }></input>
+                  <th scope='row' className='col-1'>{ props.i + 1 }</th>
+                  <td className='col-4'>{ props.name }</td>
+                  <td className="text-center col-1">${ props.price }</td>
+                  <td className="text-center col-2">{ props.solds }</td>
+                  <td className="text-center col-2"><AiFillStar style={ { color: "yellow", fontSize: "25px" } } />{ props.ratings }</td>
+                  <td className='col-2 text-center'>
+                        < a href={ `./gamelist/${ props.id }` } className={ `${ styles.detail }` }>Detail</a>
+                        <input className={ `${ styles.checkbox }` } type="checkbox" value={ props.id }></input>
                   </td>
             </tr>
       );
@@ -38,28 +41,18 @@ export default function GameList()
                   axios.get('http://localhost/admin/get_game_list.php')
                         .then(res =>
                         {
-                              console.log(res);
                               let temp = [];
                               for (let i = 0; i < res.data.length; i++)
-                              {
-                                    // $(".game_list_table_body").append($("<tr>").append($("<th>").attr("scope", "row").text(i + 1))
-                                    //       .append($("<td>").text(res.data[i].name))
-                                    //       .append($("<td>").text(res.data[i].price))
-                                    //       .append($("<td>").text(res.data[i].solds))
-                                    //       .append($("<td>").text(res.data[i].total_spending))
-                                    //       .append($("<td>").addClass("d-flex").addClass("align-items-center").addClass("justify-content-center")
-                                    //             .append($("<a>").text("Detail").addClass(styles.detail).attr("href", "./customerList/" + res.data[i].id))
-                                    //             .append($("<input>").addClass(styles.checkbox).attr("type", "checkbox").attr("value", res.data[i].id))
-                                    //       )
-                                    // );
-                              }
+                                    temp.push(<Game key={ i } i={ i } id={ res.data[i].id } name={ res.data[i].name } price={ res.data[i].price } solds={ res.data[i].solds } ratings={ res.data[i].ratings } discount={ res.data[i].discount } />);
+                              const target = ReactDOM.createRoot(document.getElementById('game_list_table_body'));
+                              target.render(<>{ temp }</>);
                         })
                         .catch(error => console.log(error));
                   render.current = true;
             }
       });
 
-      const delete_user = () =>
+      const delete_game = () =>
       {
 
             const checkedValues = $('input[type="checkbox"]:checked').map(function ()
@@ -69,9 +62,10 @@ export default function GameList()
 
             for (let i = 0; i < checkedValues.length; i++)
             {
+                  console.log(checkedValues[i]);
                   const formData = new FormData();
                   formData.append("id", checkedValues[i]);
-                  axios.post('http://localhost/admin/delete_customer.php', formData)
+                  axios.post('http://localhost/admin/delete_game.php', formData)
                         .then(res =>
                         {
                               console.log(res.data);
@@ -91,14 +85,14 @@ export default function GameList()
                   $(`.${ styles.delete }`).first().css("display", "none");
                   $(`.${ styles.detail }`).css("display", "none");
                   $(`.${ styles.add }`).css("display", "none");
-                  $(`.${ styles.checkbox }`).css("display", "block");
+                  $(`.${ styles.checkbox }`).css("display", "inline-block");
             }
             else
             {
                   $(`.${ styles.delete }`).last().css("display", "none");
                   $(`.${ styles.back }`).css("display", "none");
                   $(`.${ styles.delete }`).first().css("display", "block");
-                  $(`.${ styles.detail }`).css("display", "block");
+                  $(`.${ styles.detail }`).css("display", "inline-block");
                   $(`.${ styles.add }`).css("display", "block");
                   $(`.${ styles.checkbox }`).css("display", "none");
             }
@@ -106,25 +100,17 @@ export default function GameList()
 
       const search = () =>
       {
-            $(".table_body").empty();
+            $("#game_list_table_body").empty();
             const formData = new FormData();
             formData.append("data", $("#search").val());
-            axios.post('http://localhost/admin/find_customer.php', formData)
+            axios.post('http://localhost/admin/find_game.php', formData)
                   .then(res =>
                   {
+                        let temp = [];
                         for (let i = 0; i < res.data.length; i++)
-                        {
-                              $(".table_body").append($("<tr>").append($("<th>").attr("scope", "row").text(i + 1))
-                                    .append($("<td>").text(res.data[i].name))
-                                    .append($("<td>").text(res.data[i].email))
-                                    .append($("<td>").text(res.data[i].phone))
-                                    .append($("<td>").text(res.data[i].total_spending))
-                                    .append($("<td>").addClass("d-flex").addClass("align-items-center")
-                                          .append($("<a>").text("Detail").addClass("detail").attr("href", "./" + res.data[i].id))
-                                          .append($("<input>").addClass("checkbox").attr("type", "checkbox").attr("value", res.data[i].id))
-                                    )
-                              );
-                        }
+                              temp.push(<Game key={ i } i={ i } id={ res.data[i].id } name={ res.data[i].name } price={ res.data[i].price } solds={ res.data[i].solds } ratings={ res.data[i].ratings } discount={ res.data[i].discount } />);
+                        const target = ReactDOM.createRoot(document.getElementById('game_list_table_body'));
+                        target.render(<>{ temp }</>);
                   })
                   .catch(error => console.log(error));
       }
@@ -143,7 +129,7 @@ export default function GameList()
                                     <h3 className={ `${ styles.confirm_title }` }>Do you want to delete the selected game(s)?</h3>
                                     <div className={ `${ styles.confirm_boxes } d-flex justify-content-between align-items-center` }>
                                           <button className={ `${ styles.no }` } onClick={ () => { $(`.${ styles.pop_up_container }`).css("display", "none"); } }>No</button>
-                                          <button className={ `${ styles.yes }` } onClick={ () => { delete_user(); $(`.${ styles.pop_up_container }`).css("display", "none"); } }>Yes</button>
+                                          <button className={ `${ styles.yes }` } onClick={ () => { delete_game(); $(`.${ styles.pop_up_container }`).css("display", "none"); } }>Yes</button>
                                     </div>
                               </div>
                         </div>
@@ -156,8 +142,8 @@ export default function GameList()
                               </form>
                         </div>
                         <form className="w-100" style={ { height: "calc(100% - 40px)" } }>
-                              <div className='w-100' style={ { height: "calc(100% - 100px)", overflow: "auto" } }>
-                                    <table className="table table-hover mx-auto mt-3" style={ { width: "90%" } }>
+                              <div className='w-100'>
+                                    <table className="table table-hover mx-auto mt-3 mb-0 " style={ { width: "90%" } }>
                                           <thead style={ { borderBottom: "2px solid black" } }>
                                                 <tr>
                                                       <th scope="col" className='col-1'>#</th>
@@ -168,7 +154,11 @@ export default function GameList()
                                                       <th scope="col" className='col-2 text-center'>Action</th>
                                                 </tr>
                                           </thead>
-                                          <tbody className="game_list_table_body">
+                                    </table>
+                              </div>
+                              <div className='w-100' style={ { height: "calc(100% - 150px)", overflow: "auto" } }>
+                                    <table className="table table-hover mx-auto" style={ { width: "90%" } }>
+                                          <tbody id="game_list_table_body">
                                           </tbody>
                                     </table>
                               </div>

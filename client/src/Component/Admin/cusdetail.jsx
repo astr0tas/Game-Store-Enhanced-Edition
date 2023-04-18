@@ -66,7 +66,7 @@ export default function CusDetail()
                 let temp = [];
                 const root = ReactDOM.createRoot(document.getElementById('history'));
                 for (let i = 0; i < res.data.length; i++)
-                    temp.push(<History name={ res.data[i].game_name } code={ res.data[i].code } date={ res.data[i].date } price={ res.data[i].price } method={ res.data[i].method } />);
+                    temp.push(<History key={ i } name={ res.data[i].name } code={ res.data[i].code } date={ res.data[i].date } price={ res.data[i].price } method={ res.data[i].method } />);
                 root.render(<>{ temp }</>);
             })
             .catch(error => console.log(error));

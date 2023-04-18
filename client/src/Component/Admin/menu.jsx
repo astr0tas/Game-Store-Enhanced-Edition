@@ -36,9 +36,7 @@ function AdminMenu()
   {
     if (!render.current)
     {
-      console.log("render");
       render.current = true;
-
       window.addEventListener('resize', () =>
       {
         if (window.innerWidth > 575)
@@ -65,9 +63,9 @@ function AdminMenu()
             <a href="#" className="link-dark d-flex justify-content-center"><VscAccount className='profile' /></a>
           </div>
           <div className='d-flex flex-column justify-content-between mt-5 tabs'>
-            <a href="./home" className='item mt-3 pb-3' id="home"><BiHomeAlt2 />Home</a>
-            <a href="./gamelist" className='item mt-3 pb-3' id="game"><GiRetroController />Game</a>
-            <a href="./customerlist" className='item mt-3 pb-3' id="customer"><BsPerson />Customer</a>
+            <a href="/admin/home" className='item mt-3 pb-3' id="home"><BiHomeAlt2 />Home</a>
+            <a href="/admin/gamelist" className='item mt-3 pb-3' id="game"><GiRetroController />Game</a>
+            <a href="/admin/customerlist" className='item mt-3 pb-3' id="customer"><BsPerson />Customer</a>
             <a href="#" className='item mt-3 pb-3' id="stats"><AiOutlineBarChart />Statistic</a>
           </div>
           <a href="#" className='logout_button'><AiOutlineLogout /> Log out</a>

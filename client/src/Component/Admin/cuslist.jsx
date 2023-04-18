@@ -3,6 +3,24 @@ import { useEffect, useRef } from 'react';
 import axios from 'axios';
 import $ from 'jquery';
 import '../../css/Admin/cuslist.css';
+import ReactDOM from 'react-dom/client';
+
+const Customer = (props) =>
+{
+    return (
+        <tr>
+            <td scope='row' className='col-1'>{ props.i + 1 }</td>
+            <td className='col-3'>{ props.name }</td>
+            <td className='col-2'>{ props.email }</td>
+            <td className='col-2'>{ props.phone }</td>
+            <td className='col-2'>{ props.spending }</td>
+            <td className='col-2'>
+                <a href={ `./customerlist/${ props.id }` } className='detail'>Detail</a>
+                <input type='checkbox' className='checkbox' value={ props.id }></input>
+            </td>
+        </tr>
+    );
+}
 
 export default function CusList()
 {
@@ -18,19 +36,11 @@ export default function CusList()
             axios.get('http://localhost/admin/get_customer_list.php')
                 .then(res =>
                 {
+                    let temp = [];
                     for (let i = 0; i < res.data.length; i++)
-                    {
-                        $(".table_body").append($("<tr>").append($("<th>").attr("scope", "row").text(i + 1))
-                            .append($("<td>").text(res.data[i].name))
-                            .append($("<td>").text(res.data[i].email))
-                            .append($("<td>").text(res.data[i].phone))
-                            .append($("<td>").text(res.data[i].total_spending))
-                            .append($("<td>").addClass("d-flex").addClass("align-items-center")
-                                .append($("<a>").text("Detail").addClass("detail").attr("href", "./customerList/" + res.data[i].id))
-                                .append($("<input>").addClass("checkbox").attr("type", "checkbox").attr("value", res.data[i].id))
-                            )
-                        );
-                    }
+                        temp.push(<Customer key={ i } i={ i } name={ res.data[i].name } email={ res.data[i].email } phone={ res.data[i].phone } spending={ res.data[i].total_spending } id={ res.data[i].id } />);
+                    const target = ReactDOM.createRoot(document.getElementById('table_body'));
+                    target.render(<>{ temp }</>);
                 })
                 .catch(error => console.log(error));
             render.current = true;
@@ -75,32 +85,24 @@ export default function CusList()
             $(".delete").last().css("display", "none");
             $(".back").css("display", "none");
             $(".delete").first().css("display", "block");
-            $(".detail").css("display", "block");
+            $(".detail").css("display", "inline-block");
             $(".checkbox").css("display", "none");
         }
     }
 
     const search = () =>
     {
-        $(".table_body").empty();
+        $("#table_body").empty();
         const formData = new FormData();
         formData.append("data", $("#search").val());
         axios.post('http://localhost/admin/find_customer.php', formData)
             .then(res =>
             {
+                let temp = [];
                 for (let i = 0; i < res.data.length; i++)
-                {
-                    $(".table_body").append($("<tr>").append($("<th>").attr("scope", "row").text(i + 1))
-                        .append($("<td>").text(res.data[i].name))
-                        .append($("<td>").text(res.data[i].email))
-                        .append($("<td>").text(res.data[i].phone))
-                        .append($("<td>").text(res.data[i].total_spending))
-                        .append($("<td>").addClass("d-flex").addClass("align-items-center")
-                            .append($("<a>").text("Detail").addClass("detail").attr("href", "./" + res.data[i].id))
-                            .append($("<input>").addClass("checkbox").attr("type", "checkbox").attr("value", res.data[i].id))
-                        )
-                    );
-                }
+                    temp.push(<Customer key={ i } i={ i } name={ res.data[i].name } email={ res.data[i].email } phone={ res.data[i].phone } spending={ res.data[i].total_spending } id={ res.data[i].id } />);
+                const target = ReactDOM.createRoot(document.getElementById('table_body'));
+                target.render(<>{ temp }</>);
             })
             .catch(error => console.log(error));
     }
@@ -126,8 +128,8 @@ export default function CusList()
                     </form>
                 </div>
                 <form className="w-100" style={ { height: "calc(100% - 40px)" } }>
-                    <div className='w-100' style={ { height: "calc(100% - 100px)", overflow: "auto" } }>
-                        <table className="table table-hover mx-auto mt-3" style={ { width: "90%" } }>
+                    <div className='w-100'>
+                        <table className="table table-hover mx-auto mt-3 mb-0" style={ { width: "90%" } }>
                             <thead style={ { borderBottom: "2px solid black" } }>
                                 <tr>
                                     <th scope="col" className='col-1'>#</th>
@@ -138,7 +140,11 @@ export default function CusList()
                                     <th scope="col" className='col-2'>Action</th>
                                 </tr>
                             </thead>
-                            <tbody className="table_body">
+                        </table>
+                    </div>
+                    <div className='w-100' style={ { height: "calc(100% - 150px)", overflow: "auto" } }>
+                        <table className="table table-hover mx-auto mt-1" style={ { width: "90%" } }>
+                            <tbody id="table_body">
                             </tbody>
                         </table>
                     </div>

@@ -56,7 +56,7 @@ set @picture_path:='E:\\Projects\\Game_Store_2023\\database\\Pictures';
 -- set @picture_path:='E:\\Projects\\Game_Store\\database\\Pictures';
 
 -- add games section
-insert into game values('Elden Ring',59.99,0,'THE NEW FANTASY ACTION RPG.
+insert into game values('GAME01','Elden Ring',59.99,0,'THE NEW FANTASY ACTION RPG.
 Rise, Tarnished, and be guided by grace to brandish the power of the Elden Ring and become an Elden Lord in the Lands Between.
 • A Vast World Full of Excitement
 A vast world where open fields with a variety of situations and huge dungeons with complex and three-dimensional designs are seamlessly connected. As you explore, the joy of discovering unknown and overwhelming threats await you, leading to a high sense of accomplishment.
@@ -81,7 +81,7 @@ DirectX: Version 12
 Storage: 60 GB available space
 Sound Card: Windows Compatible Audio Device',load_file(concat(@picture_path,'/Elden ring/Elden_ring_pic1.jpg')),load_file(concat(@picture_path,'/Elden ring/Elden_ring_pic2.jpg')),load_file(concat(@picture_path,'/Elden ring/Elden_ring_pic3.jpg')),load_file(concat(@picture_path,'/Elden ring/Elden_ring_pic4.jpg')));
 
-insert into game values('Resident Evil 4',59.99,0,'Survival is just the beginning.
+insert into game values('GAME02','Resident Evil 4',59.99,0,'Survival is just the beginning.
 
 Six years have passed since the biological disaster in Raccoon City.
 Agent Leon S. Kennedy, one of the survivors of the incident, has been sent to rescue the president\'s kidnapped daughter.
@@ -117,7 +117,7 @@ DirectX: Version 12
 Network: Broadband Internet connection
 Additional Notes: Estimated performance: 1080p/60fps ・Framerate might drop in graphics-intensive scenes. ・AMD Radeon RX 6700 XT or NVIDIA GeForce RTX 2070 required to support ray tracing.',load_file(concat(@picture_path,'/Resident Evil 4/Resident_evil_4_pic1.jpg')),load_file(concat(@picture_path,'/Resident Evil 4/Resident_evil_4_pic2.jpeg')),load_file(concat(@picture_path,'/Resident Evil 4/Resident_evil_4_pic3.jpg')),load_file(concat(@picture_path,'/Resident Evil 4/Resident_evil_4_pic4.jpg')));
 
-insert into game values('God of War',49.99,0.4,'Enter the Norse realm
+insert into game values('GAME03','God of War',49.99,0.4,'Enter the Norse realm
 His vengeance against the Gods of Olympus years behind him, Kratos now lives as a man in the realm of Norse Gods and monsters. It is in this harsh, unforgiving world that he must fight to survive… and teach his son to do the same.
 
 Grasp a second chance
@@ -155,7 +155,7 @@ DirectX: Version 11
 Storage: 70 GB available space
 Additional Notes: DirectX feature level 11_1 required',load_file(concat(@picture_path,'/God of war/gow_1.jpg')),load_file(concat(@picture_path,'/God of war/gow_2.jpg')),load_file(concat(@picture_path,'/God of war/gow_3.jpg')),load_file(concat(@picture_path,'/God of war/gow_4.jpg')));
 
-insert into game values('Red Dead Redemption 2', 42.62, 0, 'America, 1899.
+insert into game values('GAME04','Red Dead Redemption 2', 42.62, 0, 'America, 1899.
 
 Arthur Morgan and the Van der Linde gang are outlaws on the run. With federal agents and the best bounty hunters in the nation massing on their heels, the gang must rob, steal and fight their way across the rugged heartland of America in order to survive. As deepening internal divisions threaten to tear the gang apart, Arthur must make a choice between his own ideals and loyalty to the gang who raised him.
 
@@ -180,7 +180,7 @@ Storage: 150 GB available space
 Sound Card: Direct X Compatible', load_file(concat(@picture_path,'/Red Dead Redemption 2/RDR-pic1.jpg')),load_file(concat(@picture_path,'/Red Dead Redemption 2/RDR-pic2.jpg')), load_file(concat(@picture_path,'/Red Dead Redemption 2/RDR-pic3.jpg')), load_file(concat(@picture_path,'/Red Dead Redemption 2/RDR-pic4.jpg'))
 );
 
-insert into game values('The Last of Us™ Part I', 59.99, 0, 'Experience the emotional storytelling and unforgettable characters in The Last of Us™, winner of over 200 Game of the Year awards.
+insert into game values('GAME05','The Last of Us™ Part I', 59.99, 0, 'Experience the emotional storytelling and unforgettable characters in The Last of Us™, winner of over 200 Game of the Year awards.
 
 In a ravaged civilization, where infected and hardened survivors run rampant, Joel, a weary protagonist, is hired to smuggle 14-year-old Ellie out of a military quarantine zone. However, what starts as a small job soon transforms into a brutal cross-country journey.',0, 'Requires a 64-bit processor and operating system
 OS: Windows 10 (Version 1909 or Newer)
@@ -197,7 +197,7 @@ Storage: 100 GB available space
 Additional Notes: SSD Recommended', load_file(concat(@picture_path,'/The Last Of Us 1/tlou-1.jpg')), load_file(concat(@picture_path,'/The Last Of Us 1/tlou-2.jpg')), load_file(concat(@picture_path,'/The Last Of Us 1/tlou-3.jpg')), load_file(concat(@picture_path,'/The Last Of Us 1/tlou-4.jpg'))
 );
 
-insert into game values('The Great War: Western Front™', 19.99, 0.3, 'The Great War: Western Front is the definitive World War 1 strategy game from Petroglyph, the makers of Command & Conquer™ Remastered & Star Wars™: Empire at War. Play a deciding role in history with this real-time tactical experience as you take charge in the pivotal Western Front from 1914 to 1919.
+insert into game values('GAME06','The Great War: Western Front™', 19.99, 0.3, 'The Great War: Western Front is the definitive World War 1 strategy game from Petroglyph, the makers of Command & Conquer™ Remastered & Star Wars™: Empire at War. Play a deciding role in history with this real-time tactical experience as you take charge in the pivotal Western Front from 1914 to 1919.
 
 Pick your faction and lead your forces to victory, by directing your armies in gritty real-time battles and by guiding high-level decisions in turn-based strategic gameplay. Dig detailed trenches, research new technologies such as poison gas and tanks, and make decisions that will have a profound and lasting effect on your success. Think like a Commander to either relive history - or redefine it.
 
@@ -219,7 +219,7 @@ DirectX: Version 11
 Storage: 13 GB available space
 Additional Notes: SSD Recommended', load_file(concat(@picture_path,'/The Great War Western Front/greatwar-1.jpg')), load_file(concat(@picture_path,'/The Great War Western Front/greatwar-2.jpg')), load_file(concat(@picture_path,'/The Great War Western Front/greatwar-3.jpg')), load_file(concat(@picture_path,'/The Great War Western Front/greatwar-4.jpg')));
 
-insert into game values('Fallout 76', 31.99,0.1, 'Bethesda Game Studios, the award-winning creators of Skyrim and Fallout 4, welcome you to Fallout 76. Twenty-five years after the bombs fell, you and your fellow Vault Dwellers—chosen from the nation’s best and brightest – emerge into post-nuclear America on Reclamation Day, 2102. Play solo or join together as you explore, quest, build, and triumph against the wasteland’s greatest threats. Explore a vast wasteland, devastated by nuclear war, in this open-world multiplayer addition to the Fallout story. Experience the largest, most dynamic world ever created in the legendary Fallout universe.
+insert into game values('GAME07','Fallout 76', 31.99,0.1, 'Bethesda Game Studios, the award-winning creators of Skyrim and Fallout 4, welcome you to Fallout 76. Twenty-five years after the bombs fell, you and your fellow Vault Dwellers—chosen from the nation’s best and brightest – emerge into post-nuclear America on Reclamation Day, 2102. Play solo or join together as you explore, quest, build, and triumph against the wasteland’s greatest threats. Explore a vast wasteland, devastated by nuclear war, in this open-world multiplayer addition to the Fallout story. Experience the largest, most dynamic world ever created in the legendary Fallout universe.
 
 The Mutation Invasion is here and mutations from Daily Ops\' missions have infected Public Events! Play a Mutated Public Event every hour for additional rewards and challenges, and jump back into Daily Ops to earn scaling rewards and experience a new variety of locations, enemies, and mutations.
 Immersive Questlines and Engaging Characters
@@ -247,7 +247,7 @@ Graphics: NVIDIA GTX 970 4GB /AMD R9 290X 4GB
 Network: Broadband Internet connection
 Storage: 80 GB available space', load_file(concat(@picture_path,'/fallout76/f-1.jpg')),  load_file(concat(@picture_path,'/fallout76/f-2.jpg')),  load_file(concat(@picture_path,'/fallout76/f-3.jpg')),  load_file(concat(@picture_path,'/fallout76/f-4.jpg')));
 
-insert into game values('Hogwarts Legacy', 49.99, 0.1, 'Hogwarts Legacy is an open-world action RPG set in the world first introduced in the Harry Potter books. Embark on a journey through familiar and new locations as you explore and discover magical beasts, customize your character and craft potions, master spell casting, upgrade talents and become the wizard you want to be.
+insert into game values('GAME08','Hogwarts Legacy', 49.99, 0.1, 'Hogwarts Legacy is an open-world action RPG set in the world first introduced in the Harry Potter books. Embark on a journey through familiar and new locations as you explore and discover magical beasts, customize your character and craft potions, master spell casting, upgrade talents and become the wizard you want to be.
 
 
 
@@ -267,7 +267,7 @@ DirectX: Version 12
 Storage: 85 GB available space
 Additional Notes: SSD, 1080p/60 fps, High Quality Settings', load_file(concat(@picture_path,'/hogwart legacy/hl-1.jpg')), load_file(concat(@picture_path,'/hogwart legacy/hl-2.jpg')), load_file(concat(@picture_path,'/hogwart legacy/hl-3.jpg')), load_file(concat(@picture_path,'/hogwart legacy/hl-4.jpg')));
 
-insert into game values('Destiny 2', 10, 0, 'Dive into the world of Destiny 2 to explore the mysteries of the solar system and experience responsive first-person shooter combat. Unlock powerful elemental abilities and collect unique gear to customize your Guardian\'s look and playstyle. Enjoy Destiny 2’s cinematic story, challenging co-op missions, and a variety of PvP modes alone or with friends. Download for free today and write your legend in the stars.
+insert into game values('GAME09','Destiny 2', 10, 0, 'Dive into the world of Destiny 2 to explore the mysteries of the solar system and experience responsive first-person shooter combat. Unlock powerful elemental abilities and collect unique gear to customize your Guardian\'s look and playstyle. Enjoy Destiny 2’s cinematic story, challenging co-op missions, and a variety of PvP modes alone or with friends. Download for free today and write your legend in the stars.
 An Immersive Story
 You are a Guardian, defender of the Last City of humanity in a solar system under siege by infamous villains. Look to the stars and stand against the darkness. Your legend begins now.
 Guardian Classes
@@ -304,7 +304,7 @@ Graphics: NVIDIA® GeForce® GTX 970 4GB or GTX 1060 6GB / AMD R9 390 8GB Memory
 Network: Broadband Internet connection
 Storage: 105 GB available space', load_file(concat(@picture_path,'/destiny2/destiny2-1.jpg')), load_file(concat(@picture_path,'/destiny2/destiny2-2.jpg')), load_file(concat(@picture_path,'/destiny2/destiny2-3.jpg')), load_file(concat(@picture_path,'/destiny2/destiny2-4.jpg')));
 
-insert into game values('MONSTER HUNTER RISE', 39.99, 0.2, 'Rise to the challenge and join the hunt! In Monster Hunter Rise, the latest installment in the award-winning and top-selling Monster Hunter series, you’ll become a hunter, explore brand new maps and use a variety of weapons to take down fearsome monsters as part of an all-new storyline. The PC release also comes packed with a number of additional visual and performance enhancing optimizations.
+insert into game values('GAME10','MONSTER HUNTER RISE', 39.99, 0.2, 'Rise to the challenge and join the hunt! In Monster Hunter Rise, the latest installment in the award-winning and top-selling Monster Hunter series, you’ll become a hunter, explore brand new maps and use a variety of weapons to take down fearsome monsters as part of an all-new storyline. The PC release also comes packed with a number of additional visual and performance enhancing optimizations.
 
 
 Ferocious monsters with unique ecologies
@@ -362,7 +362,7 @@ Network: Broadband Internet connection
 Storage: 36 GB available space
 Additional Notes: 1080p/30fps when graphics settings are set to "Average". System requirements subject to change during game development.', load_file(concat(@picture_path,'/monhun/monhun-1.jpg')), load_file(concat(@picture_path,'/monhun/monhun-2.jpg')), load_file(concat(@picture_path,'/monhun/monhun-3.jpg')), load_file(concat(@picture_path,'/monhun/monhun-4.jpg')));
 
-insert into game values('Riddle Joker', 19.99, 0.1, 'Riddle Joker is a Japanese-style visual novel produced by Yuzusoft, a Japanese developer of romance VNs.
+insert into game values('GAME11','Riddle Joker', 19.99, 0.1, 'Riddle Joker is a Japanese-style visual novel produced by Yuzusoft, a Japanese developer of romance VNs.
 The game won numerous awards on the year of its release in Japan for its art, music, and characters.
 
 Story:
@@ -386,7 +386,7 @@ DirectX: Version 9.0c
 Storage: 8 GB available space', 'Processor: CPU 2.66GHz or more
 Memory: 4 GB RAM', load_file(concat(@picture_path,'/Riddle Joker/rj-1.jpg')), load_file(concat(@picture_path,'/Riddle Joker/rj-2.jpg')), load_file(concat(@picture_path,'/Riddle Joker/rj-3.jpg')), load_file(concat(@picture_path,'/Riddle Joker/rj-4.jpg')));
 
-insert into game values('Parquet', 15.99, 0, 'In the near future, a technology called Brain-Machine Interface connects the brain and machines. This technology brings about a new paradigm and opens the gates to the digitization of human memory itself.
+insert into game values('GAME12','Parquet', 15.99, 0, 'In the near future, a technology called Brain-Machine Interface connects the brain and machines. This technology brings about a new paradigm and opens the gates to the digitization of human memory itself.
 From these new discoveries, "he" is born. An illegal experiment mixes thousands of memories into a single vessel, creating a wholly new being.
 Having only the memories of others, doubts about who he truly is start arising in his mind, until he gathers the courage to go out into the world in search of his true self.
 As he steps into the real world, he meets two girls, Kido Tsubasa and Ibaraki Rino.
@@ -399,7 +399,7 @@ Processor: 1.7 GHz or above
 Memory: 1 GB RAM
 Graphics: 1GB VRAM', load_file(concat(@picture_path,'/Parquet/parquet-1.jpg')), load_file(concat(@picture_path,'/Parquet/parquet-2.jpg')), load_file(concat(@picture_path,'/Parquet/parquet-3.jpg')), load_file(concat(@picture_path,'/Parquet/parquet-4.jpg')));
 
-insert into game values('Grand Theft Auto V', 19.49, 0.1, 'When a young street hustler, a retired bank robber and a terrifying psychopath find themselves entangled with some of the most frightening and deranged elements of the criminal underworld, the U.S. government and the entertainment industry, they must pull off a series of dangerous heists to survive in a ruthless city in which they can trust nobody, least of all each other.
+insert into game values('GAME13','Grand Theft Auto V', 19.49, 0.1, 'When a young street hustler, a retired bank robber and a terrifying psychopath find themselves entangled with some of the most frightening and deranged elements of the criminal underworld, the U.S. government and the entertainment industry, they must pull off a series of dangerous heists to survive in a ruthless city in which they can trust nobody, least of all each other.
 
 Grand Theft Auto V for PC offers players the option to explore the award-winning world of Los Santos and Blaine County in resolutions of up to 4k and beyond, as well as the chance to experience the game running at 60 frames per second.
 
@@ -426,47 +426,47 @@ Storage: 72 GB available space
 Sound Card: 100% DirectX 10 compatible', load_file(concat(@picture_path,'/GTA V/gta-1.jpg')), load_file(concat(@picture_path,'/GTA V/gta-2.jpg')), load_file(concat(@picture_path,'/GTA V/gta-3.jpg')), load_file(concat(@picture_path,'/GTA V/gta-4.jpg')));
 
 -- add categories to games section
-insert into belongs_to values('Elden Ring','Action RPG'),('Resident Evil 4','Third-Person Shooter'),('Resident Evil 4','Story-Rich');
-insert into belongs_to values('God of War','Story-Rich'),('God of War','Hack & Slash'),('God of War','Action RPG');
-insert into belongs_to values('Destiny 2', 'First-Person Shooter'), ('Fallout 76', 'First-Person Shooter'), ('Hogwarts Legacy', 'Adventure RPG'), ('Hogwarts Legacy', 'Story-Rich');
-insert into belongs_to values('MONSTER HUNTER RISE','Story-Rich'),('MONSTER HUNTER RISE','Hack & Slash'), ('MONSTER HUNTER RISE','Action RPG');
-insert into belongs_to values('Red Dead Redemption 2','Story-Rich'),('Red Dead Redemption 2','Third-Person Shooter'), ('Red Dead Redemption 2','Adventure RPG');
-insert into belongs_to values('The Great War: Western Front™','Strategy RPG'),('The Great War: Western Front™','Turn-Based');
-insert into belongs_to values('The Last of Us™ Part I','Story-Rich'),('The Last of Us™ Part I','Adventure RPG'), ('The Last of Us™ Part I','Third-Person Shooter');
-insert into belongs_to values('Riddle Joker', 'Visual Novel'), ('Riddle Joker', 'Story-Rich');
-insert into belongs_to values('Parquet', 'Visual Novel'), ('Parquet', 'Story-Rich');
-insert into belongs_to values('Grand Theft Auto V', 'Action RPG'), ('Grand Theft Auto V', 'First-Person Shooter');
+insert into belongs_to values('GAME01','Action RPG'),('GAME02','Third-Person Shooter'),('GAME02','Story-Rich');
+insert into belongs_to values('GAME03','Story-Rich'),('GAME03','Hack & Slash'),('GAME03','Action RPG');
+insert into belongs_to values('GAME09', 'First-Person Shooter'), ('GAME07', 'First-Person Shooter'), ('GAME08', 'Adventure RPG'), ('GAME08', 'Story-Rich');
+insert into belongs_to values('GAME10','Story-Rich'),('GAME10','Hack & Slash'), ('GAME10','Action RPG');
+insert into belongs_to values('GAME04','Story-Rich'),('GAME04','Third-Person Shooter'), ('GAME04','Adventure RPG');
+insert into belongs_to values('GAME06','Strategy RPG'),('GAME06','Turn-Based');
+insert into belongs_to values('GAME05','Story-Rich'),('GAME05','Adventure RPG'), ('GAME05','Third-Person Shooter');
+insert into belongs_to values('GAME11', 'Visual Novel'), ('GAME11', 'Story-Rich');
+insert into belongs_to values('GAME12', 'Visual Novel'), ('GAME12', 'Story-Rich');
+insert into belongs_to values('GAME13', 'Action RPG'), ('GAME13', 'First-Person Shooter');
 
 -- add activation codes section
-insert into activation_code(game_name,code) values('Elden Ring','SQT8CXG8VWKBP9QB'),('Elden Ring','LV47LGEFPY2PXZ67'),('Elden Ring','KYZXNH7B95FTG5RL'),
-('Resident Evil 4','MTPAJHMJMBPVHR9X'),('Resident Evil 4','N56GEPPGFHB7VVKE'),('Resident Evil 4','ZR2ZXN4QXDTWJQ7U');
-insert into activation_code values('Elden Ring','SQT8CXG8VWKBP9Q1','used'),('Elden Ring','LV47LGEFPY2PXZ6F','used'),('Elden Ring','KYZXNH7B95FTG5RC','used'),
-('Resident Evil 4','MTPAJHMJMBPVHR9W','used'),('Resident Evil 4','N56GEPPGFHB7VVKA','used'),('Resident Evil 4','ZR2ZXN4QXDTWJQ79','used');
-insert into activation_code(game_name,code) values('God of War','ZUGJX32CGJTLXVXX'),('God of War','WVTKJKK8VL3ALFXF'),('God of War','DP44F8XHCGEBQSNB');
-insert into activation_code values('God of War','ZUGJX32CGJTLXVXH','used'),('God of War','WVTKJKK8VL3ALFXO','used'),('God of War','DP44F8XHCGEBQSNI','used');
-insert into activation_code(game_name,code) values('Destiny 2', 'ORBZW5U6REET76TM'), ('Fallout 76','2Y6ZV5CRYLGDRMRO'), ('Fallout 76','VG5KTJFGXGHIFRAK');
-insert into activation_code(game_name,code) values('Hogwarts Legacy', 'STEU31JSYXBKA8O3'), ('Hogwarts Legacy','N6LVQVYTSBNTBI8K'), ('Hogwarts Legacy','VCH6HPTJGCMQ77Q5');
-insert into activation_code(game_name,code) values('MONSTER HUNTER RISE', 'LRBCO6ANBOEOKCOF'), ('Red Dead Redemption 2','CQKP1QOI2E98DHHC');
-insert into activation_code(game_name,code) values('The Great War: Western Front™', 'EO8BND6M67HDD7ST'), ('The Last of Us™ Part I','N04NAGGQT2NIZPC9'), ('The Last of Us™ Part I','7Y8BRVQD5FYJACOI');
-insert into activation_code(game_name,code) values('Riddle Joker', 'S1FJ8NFW4EYVE33D'), ('Parquet','XJMPMDRHI2A3OD04'), ('Grand Theft Auto V','2661A0VRJMBJABHS');
-insert into activation_code values ('Destiny 2', 'UEVY8Y944GITQNLK', 'used'), ('Destiny 2', 'LFDPNFUJ08J0ZFHJ', 'used'), ('Fallout 76','3KNE1VD7XWDDK46N', 'used');
-insert into activation_code values ('Hogwarts Legacy', '46QN0IRXT8NMS7U8', 'used'), ('MONSTER HUNTER RISE', 'ZT1VZSV776G09ZY5', 'used');
-insert into activation_code values ('Red Dead Redemption 2', 'HVYD219XROCELSH3', 'used'), ('Red Dead Redemption 2', 'AEOSR8SLXC2EOKG4', 'used'), ('Red Dead Redemption 2','IP6RA1PWE95YU4GH','used');
-insert into activation_code values ('The Great War: Western Front™', 'DAA4XQ8FY4OXF32X', 'used'), ('The Last of Us™ Part I', 'SKFZA1NRWA0TKJ24', 'used'), ('The Last of Us™ Part I','K6XSEDL9HATQSQ2S','used');
-insert into activation_code values ('Riddle Joker', 'Z2KI5Y03B491UB1F', 'used'), ('Parquet','EEWHOUYQAKJ25QQR', 'used'), ('Grand Theft Auto V','1UE640ECX4EE6X52', 'used');
+insert into activation_code(game_id,code) values('GAME01','SQT8CXG8VWKBP9QB'),('GAME01','LV47LGEFPY2PXZ67'),('GAME01','KYZXNH7B95FTG5RL'),
+('GAME02','MTPAJHMJMBPVHR9X'),('GAME02','N56GEPPGFHB7VVKE'),('GAME02','ZR2ZXN4QXDTWJQ7U');
+insert into activation_code values('GAME01','SQT8CXG8VWKBP9Q1','used'),('GAME01','LV47LGEFPY2PXZ6F','used'),('GAME01','KYZXNH7B95FTG5RC','used'),
+('GAME02','MTPAJHMJMBPVHR9W','used'),('GAME02','N56GEPPGFHB7VVKA','used'),('GAME02','ZR2ZXN4QXDTWJQ79','used');
+insert into activation_code(game_id,code) values('GAME03','ZUGJX32CGJTLXVXX'),('GAME03','WVTKJKK8VL3ALFXF'),('GAME03','DP44F8XHCGEBQSNB');
+insert into activation_code values('GAME03','ZUGJX32CGJTLXVXH','used'),('GAME03','WVTKJKK8VL3ALFXO','used'),('GAME03','DP44F8XHCGEBQSNI','used');
+insert into activation_code(game_id,code) values('GAME09', 'ORBZW5U6REET76TM'), ('GAME07','2Y6ZV5CRYLGDRMRO'), ('GAME07','VG5KTJFGXGHIFRAK');
+insert into activation_code(game_id,code) values('GAME08', 'STEU31JSYXBKA8O3'), ('GAME08','N6LVQVYTSBNTBI8K'), ('GAME08','VCH6HPTJGCMQ77Q5');
+insert into activation_code(game_id,code) values('GAME10', 'LRBCO6ANBOEOKCOF'), ('GAME04','CQKP1QOI2E98DHHC');
+insert into activation_code(game_id,code) values('GAME06', 'EO8BND6M67HDD7ST'), ('GAME05','N04NAGGQT2NIZPC9'), ('GAME05','7Y8BRVQD5FYJACOI');
+insert into activation_code(game_id,code) values('GAME11', 'S1FJ8NFW4EYVE33D'), ('GAME12','XJMPMDRHI2A3OD04'), ('GAME13','2661A0VRJMBJABHS');
+insert into activation_code values ('GAME09', 'UEVY8Y944GITQNLK', 'used'), ('GAME09', 'LFDPNFUJ08J0ZFHJ', 'used'), ('GAME07','3KNE1VD7XWDDK46N', 'used');
+insert into activation_code values ('GAME08', '46QN0IRXT8NMS7U8', 'used'), ('GAME10', 'ZT1VZSV776G09ZY5', 'used');
+insert into activation_code values ('GAME04', 'HVYD219XROCELSH3', 'used'), ('GAME04', 'AEOSR8SLXC2EOKG4', 'used'), ('GAME04','IP6RA1PWE95YU4GH','used');
+insert into activation_code values ('GAME06', 'DAA4XQ8FY4OXF32X', 'used'), ('GAME05', 'SKFZA1NRWA0TKJ24', 'used'), ('GAME05','K6XSEDL9HATQSQ2S','used');
+insert into activation_code values ('GAME11', 'Z2KI5Y03B491UB1F', 'used'), ('GAME12','EEWHOUYQAKJ25QQR', 'used'), ('GAME13','1UE640ECX4EE6X52', 'used');
 
 
 -- add purchase_history
-insert into purchase_history values('CUSTOMER01','Red Dead Redemption 2','HVYD219XROCELSH3','QM3J7S7V48'),
-('CUSTOMER01','Elden Ring','SQT8CXG8VWKBP9Q1','6CFQYWLV5S'),
-('CUSTOMER01','Elden Ring','LV47LGEFPY2PXZ6F','7YZLO77T1M'),
-('CUSTOMER01','Elden Ring','KYZXNH7B95FTG5RC','5B4180VD4J'),
-('CUSTOMER01','God of War','ZUGJX32CGJTLXVXH','IXQZCPG0A8'),
-('CUSTOMER01','God of War','WVTKJKK8VL3ALFXO','YZV9DV5CKM'),
-('CUSTOMER01','God of War','DP44F8XHCGEBQSNI','F6XN96I8KY'),
-('CUSTOMER01','Hogwarts Legacy','46QN0IRXT8NMS7U8','00FUSNNXUR'),
-('CUSTOMER01','Fallout 76','3KNE1VD7XWDDK46N','GSNZCXWTWC'),
-('CUSTOMER01','The Last of Us™ Part I','SKFZA1NRWA0TKJ24','IW9MNCBZKR');
+insert into purchase_history values('CUSTOMER01','GAME04','HVYD219XROCELSH3','QM3J7S7V48'),
+('CUSTOMER01','GAME01','SQT8CXG8VWKBP9Q1','6CFQYWLV5S'),
+('CUSTOMER01','GAME01','LV47LGEFPY2PXZ6F','7YZLO77T1M'),
+('CUSTOMER01','GAME01','KYZXNH7B95FTG5RC','5B4180VD4J'),
+('CUSTOMER01','GAME03','ZUGJX32CGJTLXVXH','IXQZCPG0A8'),
+('CUSTOMER01','GAME03','WVTKJKK8VL3ALFXO','YZV9DV5CKM'),
+('CUSTOMER01','GAME03','DP44F8XHCGEBQSNI','F6XN96I8KY'),
+('CUSTOMER01','GAME08','46QN0IRXT8NMS7U8','00FUSNNXUR'),
+('CUSTOMER01','GAME07','3KNE1VD7XWDDK46N','GSNZCXWTWC'),
+('CUSTOMER01','GAME05','SKFZA1NRWA0TKJ24','IW9MNCBZKR');
 
 
 -- add purchase_history_description

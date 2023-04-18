@@ -30,7 +30,11 @@
       border-radius: 5px;
       text-decoration: none;
       width: 50px;
-      text-align: center;
+      display: inline-block;
+}
+
+.detail:hover {
+      color: white;
 }
 
 .detail:active {
@@ -65,7 +69,6 @@
 }
 
 .add {
-      /* margin: auto; */
       background-color: #00c3ff;
       color: white;
       width: 150px;
@@ -73,7 +76,6 @@
       font-size: large;
       border-radius: 15px;
       margin-left: 50px;
-      /* margin-right: 50px; */
 }
 
 .back:active,
@@ -173,9 +175,4 @@
             height: 40px;
             font-size: 15px;
       }
-}
-
-@media only screen and (max-width:996px) {
-      /* .cus_list_pop_up .confirm_title {} */
-
 }

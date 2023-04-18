@@ -31,6 +31,7 @@
     text-decoration: none;
     width: 50px;
     text-align: center;
+    display: inline-block
 }
 
 .cusList .detail:active {
@@ -160,9 +161,4 @@
         height: 40px;
         font-size: 15px;
     }
-}
-
-@media only screen and (max-width:996px) {
-    /* .cus_list_pop_up .confirm_title {} */
-
 }
