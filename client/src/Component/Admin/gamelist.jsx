@@ -38,7 +38,7 @@ export default function GameList()
                   $("#game").css("color", "white");
                   $("#game").css("background-color", "#00B3EC");
 
-                  axios.get('http://localhost/admin/get_game_list.php')
+                  axios.get('http://localhost/admin/game/list')
                         .then(res =>
                         {
                               let temp = [];
@@ -65,7 +65,7 @@ export default function GameList()
                   console.log(checkedValues[i]);
                   const formData = new FormData();
                   formData.append("id", checkedValues[i]);
-                  axios.post('http://localhost/admin/delete_game.php', formData)
+                  axios.post('http://localhost/admin/game/delete', formData)
                         .then(res =>
                         {
                               console.log(res.data);
@@ -103,7 +103,7 @@ export default function GameList()
             $("#game_list_table_body").empty();
             const formData = new FormData();
             formData.append("data", $("#search").val());
-            axios.post('http://localhost/admin/find_game.php', formData)
+            axios.post('http://localhost/admin/game/find', formData)
                   .then(res =>
                   {
                         let temp = [];

@@ -16,7 +16,8 @@ class CustomerModel
             }
       }
 
-      public function getList() {
+      public function getList()
+      {
             $sql = 'SELECT id,name,email,phone,total_spending from customer';
             $result = $this->db->query($sql);
             $arr = array();
@@ -28,7 +29,8 @@ class CustomerModel
             return $arr;
       }
 
-      public function find($data) {
+      public function find($data)
+      {
             $arr = [];
             $sql = "SELECT id,name,email,phone,total_spending from customer where name like '%$data%'";
             $result = $this->db->query($sql);
@@ -38,7 +40,7 @@ class CustomerModel
                               $arr[] = $row;
                   }
             }
-            $data= explode('@', $data)[0];
+            $data = explode('@', $data)[0];
             $sql = "SELECT id,name,email,phone,total_spending from customer where SUBSTRING_INDEX(email, '@', 1) like '%$data%'";
             $result = $this->db->query($sql);
             if ($result->num_rows > 0) {
@@ -57,6 +59,48 @@ class CustomerModel
                   }
             }
             return $arr;
+      }
+
+      public function delete($data)
+      {
+            $sql = "DELETE FROM customer WHERE id='$data'";
+            $result = $this->db->query($sql);
+            return $result;
+      }
+
+      public function detail($data)
+      {
+            $sql = "SELECT id,name,email,phone,total_spending, membership_rank, membership_discount from customer where id= '$data'";
+            $result = $this->db->query($sql);
+            if ($result->num_rows > 0) {
+                  // while ($row = $result->fetch_assoc()) {
+                  //       $arr[] = $row;
+                  // }
+                  return $result->fetch_assoc();
+            }
+      }
+
+      public function history($data)
+      {
+            $sql = "select name, code, date, price, method from purchase_history 
+            join purchase_history_description on description_id = purchase_history_description.id and customer_id='$data'
+            join game on game_id = game.id order by date desc,name asc";
+            $result = $this->db->query($sql);
+            $arr = [];
+            if ($result->num_rows > 0) {
+                  while ($row = $result->fetch_assoc()) {
+                        $arr[] = $row;
+                  }
+            }
+            return $arr;
+      }
+
+      public function edit($id, $rank, $discount)
+      {
+            $sql = "update customer 
+            set membership_rank = '$rank', membership_discount = '$discount'
+            where id='$id'";
+            return $this->db->query($sql);
       }
 
       //   public function update($id, $data) {

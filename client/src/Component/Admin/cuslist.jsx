@@ -33,11 +33,9 @@ export default function CusList()
             $("#customer").css("color", "white");
             $("#customer").css("background-color", "#00B3EC");
 
-            // axios.get('http://localhost/admin/get_customer_list.php')
-            axios.get('http://localhost/customer/getList')
+            axios.get('http://localhost/admin/customer/getList')
                 .then(res =>
                 {
-                    // console.log(res);
                     let temp = [];
                     for (let i = 0; i < res.data.length; i++)
                         temp.push(<Customer key={ i } i={ i } name={ res.data[i].name } email={ res.data[i].email } phone={ res.data[i].phone } spending={ res.data[i].total_spending } id={ res.data[i].id } />);
@@ -61,14 +59,14 @@ export default function CusList()
         {
             const formData = new FormData();
             formData.append("id", checkedValues[i]);
-            axios.post('http://localhost/admin/delete_customer.php', formData)
+            axios.post('http://localhost/admin/customer/delete', formData)
                 .then(res =>
                 {
-                    console.log(res.data);
+                    console.log(res);
                 })
                 .catch(error => console.log(error));
         }
-        window.location.href = "./customerlist";
+        window.location.reload();
     }
 
     const toggle_delete = () =>
@@ -97,10 +95,9 @@ export default function CusList()
         $("#table_body").empty();
         const formData = new FormData();
         formData.append("data", $("#search").val());
-        axios.post('http://localhost/customer/find', formData)
+        axios.post('http://localhost/admin/customer/find', formData)
             .then(res =>
             {
-                // console.log(res);
                 let temp = [];
                 for (let i = 0; i < res.data.length; i++)
                     temp.push(<Customer key={ i } i={ i } name={ res.data[i].name } email={ res.data[i].email } phone={ res.data[i].phone } spending={ res.data[i].total_spending } id={ res.data[i].id } />);

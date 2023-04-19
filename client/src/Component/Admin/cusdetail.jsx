@@ -36,20 +36,19 @@ export default function CusDetail()
 
             const formData = new FormData();
             formData.append("data", id);
-            axios.post('http://localhost/admin/customer_detail.php', formData)
+            axios.post('http://localhost/admin/customer/detail', formData)
                 .then(res =>
                 {
-                    // console.log(res);
                     setCustomer({
-                        name: res.data[0].name,
-                        email: res.data[0].email,
-                        phone: res.data[0].phone === null ? customer.phone : res.data[0].phone,
-                        spending: res.data[0].total_spending,
-                        rank: res.data[0].membership_rank,
-                        discount: res.data[0].membership_discount
+                        name: res.data.name,
+                        email: res.data.email,
+                        phone: res.data.phone === null ? customer.phone : res.data[0].phone,
+                        spending: res.data.total_spending,
+                        rank: res.data.membership_rank,
+                        discount: res.data.membership_discount
                     });
-                    $(".select_menu").val(res.data[0].membership_rank);
-                    $(".discount_input").val(res.data[0].membership_discount);
+                    $(".select_menu").val(res.data.membership_rank);
+                    $(".discount_input").val(res.data.membership_discount);
                 })
             render.current = true;
         }
@@ -59,10 +58,9 @@ export default function CusDetail()
     {
         const formData = new FormData();
         formData.append("data", id);
-        axios.post('http://localhost/admin/get_customer_history.php', formData)
+        axios.post('http://localhost/admin/customer/detail/history', formData)
             .then(res =>
             {
-                console.log(res);
                 let temp = [];
                 const root = ReactDOM.createRoot(document.getElementById('history'));
                 for (let i = 0; i < res.data.length; i++)
@@ -116,7 +114,7 @@ export default function CusDetail()
             formData.append("id", id);
             formData.append("rank", $(`.select_menu`).val());
             formData.append("discount", $(`.discount_input`).val());
-            axios.post('http://localhost/admin/edit_customer.php', formData)
+            axios.post('http://localhost/admin/customer/detail/edit', formData)
                 .then(res =>
                 {
                     console.log(res);
@@ -135,7 +133,7 @@ export default function CusDetail()
     {
         const formData = new FormData();
         formData.append("id", id);
-        axios.post('http://localhost/admin/delete_customer.php', formData)
+        axios.post('http://localhost/admin/customer/delete', formData)
             .then(res =>
             {
                 console.log(res);
