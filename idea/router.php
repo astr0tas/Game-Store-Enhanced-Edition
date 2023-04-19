@@ -22,10 +22,8 @@ class Router {
     $method = $_SERVER['REQUEST_METHOD'];
     $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
     $action = $this->routes[$method][$path] ?? false;
-
     if ($action) {
       list($controller_name, $method_name) = explode('@', $action);
-
       $controller = new $controller_name();
       $controller->$method_name();
     } else {

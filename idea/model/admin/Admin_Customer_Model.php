@@ -16,26 +16,48 @@ class CustomerModel
             }
       }
 
-      //   public function getAll() {
-      //     $sql = 'SELECT * FROM users';
-      //     $result = $this->db->query($sql);
-      //     $users = array();
+      public function getList() {
+            $sql = 'SELECT id,name,email,phone,total_spending from customer';
+            $result = $this->db->query($sql);
+            $arr = array();
+            if ($result->num_rows > 0) {
+                  while ($row = $result->fetch_assoc()) {
+                        $arr[] = $row;
+                  }
+            }
+            return $arr;
+      }
 
-      //     if ($result->num_rows > 0) {
-      //       while ($row = $result->fetch_assoc()) {
-      //         $users[] = $row;
-      //       }
-      //     }
-
-      //     return $users;
-      //   }
-
-      //   public function create($data) {
-      //     $name = $data['name'];
-      //     $email = $data['email'];
-      //     $sql = "INSERT INTO users (name, email) VALUES ('$name', '$email')";
-      //     $this->db->query($sql);
-      //   }
+      public function find($data) {
+            $arr = [];
+            $sql = "SELECT id,name,email,phone,total_spending from customer where name like '%$data%'";
+            $result = $this->db->query($sql);
+            if ($result->num_rows > 0) {
+                  while ($row = $result->fetch_assoc()) {
+                        if (!in_array($row, $arr))
+                              $arr[] = $row;
+                  }
+            }
+            $data= explode('@', $data)[0];
+            $sql = "SELECT id,name,email,phone,total_spending from customer where SUBSTRING_INDEX(email, '@', 1) like '%$data%'";
+            $result = $this->db->query($sql);
+            if ($result->num_rows > 0) {
+                  while ($row = $result->fetch_assoc()) {
+                        if (!in_array($row, $arr))
+                              $arr[] = $row;
+                  }
+            }
+            $data = $_POST["data"];
+            $sql = "SELECT id,name,email,phone,total_spending from customer where phone LIKE '%$data%'";
+            $result = $this->db->query($sql);
+            if ($result->num_rows > 0) {
+                  while ($row = $result->fetch_assoc()) {
+                        if (!in_array($row, $arr))
+                              $arr[] = $row;
+                  }
+            }
+            return $arr;
+      }
 
       //   public function update($id, $data) {
       //     $name = $data['name'];

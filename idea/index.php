@@ -1,22 +1,20 @@
       <?php
       // include required files
-      require_once('./router.php');
-      require_once('./controller/Admin_Controller.php');
-      require_once('./controller/Customer_Controller.php');
-
-      // require_once('model.php');
+      require_once('router.php');
+      require_once('controller/Admin_Controller.php');
+      require_once('controller/Customer_Controller.php');
+      require_once('cors.php');
 
       // instantiate router
       $router = new Router();
 
       // define routes
-
-      
       // customer routes
 
 
       // admin routes
-
+      $router->get("/customer/getList","AdminCustomerController@getList");
+      $router->post("/customer/find","AdminCustomerController@find");
 
 
       // $router->get('/', 'HomeController@index');

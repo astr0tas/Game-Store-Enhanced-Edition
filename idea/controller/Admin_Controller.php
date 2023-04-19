@@ -1,6 +1,7 @@
 <?php
-require_once('../model/admin/Admin_Customer_Model.php');
-require_once('../model/admin/Admin_Game_Model.php');
+require_once(__DIR__.'\\..\\model\\admin\\Admin_Customer_Model.php');
+require_once(__DIR__.'\\..\\model\\admin\\Admin_Game_Model.php');
+// require_once(__DIR__."\\..\\cors.php");
 
 class AdminCustomerController
 {
@@ -13,10 +14,16 @@ class AdminCustomerController
             $this->game_model=new GameModel();
       }
 
-      //   public function index() {
-      //     $users = $this->model->getAll();
-      //     echo json_encode($users);
-      //   }
+      public function getList() {
+            $arr = $this->customer_model->getList();
+            echo json_encode($arr);
+      }
+
+      public function find() {
+            $data = $_POST["data"];
+            $arr = $this->customer_model->find($data);
+            echo json_encode($arr);
+      }
 
       //   public function store() {
       //     $data = json_decode(file_get_contents('php://input'), true);
