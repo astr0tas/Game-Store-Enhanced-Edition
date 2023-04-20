@@ -31,9 +31,10 @@ function App()
             <Route path="create_new_password" element={ <CreateNewPassWord /> } />
             <Route path="confirm" element={ <Confirmation /> } />
             <Route path="test" element={ <CustomerMenu /> }> {/*this is only temporary */ }
-
+            
             </Route>
           </Route>
+
           <Route path="/admin">
             <Route index element={ <AdminLogin /> } />
             <Route path="forgot_password" element={ <AdminForgotPassword /> } />
