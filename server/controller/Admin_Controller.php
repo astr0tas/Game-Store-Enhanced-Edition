@@ -2,7 +2,7 @@
 require_once(__DIR__ . '\\..\\model\\admin\\Admin_Customer_Model.php');
 require_once(__DIR__ . '\\..\\model\\admin\\Admin_Game_Model.php');
 
-class AdminCustomerController
+class AdminController
 {
       private $customer_model;
       private $game_model;

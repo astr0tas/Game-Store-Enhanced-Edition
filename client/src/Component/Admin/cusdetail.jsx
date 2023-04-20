@@ -106,7 +106,7 @@ export default function CusDetail()
 
     const confirmChange = () =>
     {
-        if ($(`.select_menu`).val() === "Special" && $(`.discount_input`).val() > 5)
+        if ($(`.select_menu`).val() === "Special" && ($(`.discount_input`).val() > 5 || $(`.discount_input`).val() < 0))
             $(`.${ styles.pop_up }`).css("display", "flex");
         else
         {
@@ -197,7 +197,7 @@ export default function CusDetail()
                 </div>
             </div>
             <div className={ `position-absolute flex-column align-items-center justify-content-around ${ styles.pop_up }` }>
-                <h3>Discount value should be less or equal to 5% only!</h3>
+                <h3>Discount value should be greater or equal to 0% and less than or equal to 5% only!</h3>
                 <button className={ `${ styles.OK }` } onClick={ () =>
                 {
                     $(`.${ styles.pop_up }`).css("display", "none");

@@ -9,8 +9,9 @@ class CustomerModel
             $user = 'owner';
             $password = 'owner123';
             $database = 'game_store';
+            $port='3306';
 
-            $this->db = new mysqli($host, $user, $password, $database);
+            $this->db = new mysqli($host, $user, $password, $database,$port);
             if ($this->db->connect_error) {
                   die('Connection failed: ' . $this->db->connect_error);
             }
@@ -73,9 +74,6 @@ class CustomerModel
             $sql = "SELECT id,name,email,phone,total_spending, membership_rank, membership_discount from customer where id= '$data'";
             $result = $this->db->query($sql);
             if ($result->num_rows > 0) {
-                  // while ($row = $result->fetch_assoc()) {
-                  //       $arr[] = $row;
-                  // }
                   return $result->fetch_assoc();
             }
       }

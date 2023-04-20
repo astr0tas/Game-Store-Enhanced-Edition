@@ -1,24 +1,30 @@
 <?php
-class Router {
+class Router
+{
   private $routes = array();
 
-  public function get($path, $action) {
+  public function get($path, $action)
+  {
     $this->routes['GET'][$path] = $action;
   }
 
-  public function post($path, $action) {
+  public function post($path, $action)
+  {
     $this->routes['POST'][$path] = $action;
   }
 
-  public function put($path, $action) {
+  public function put($path, $action)
+  {
     $this->routes['PUT'][$path] = $action;
   }
 
-  public function delete($path, $action) {
+  public function delete($path, $action)
+  {
     $this->routes['DELETE'][$path] = $action;
   }
 
-  public function run() {
+  public function run()
+  {
     $method = $_SERVER['REQUEST_METHOD'];
     $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
     $action = $this->routes[$method][$path] ?? false;
@@ -32,4 +38,3 @@ class Router {
     }
   }
 }
-?>

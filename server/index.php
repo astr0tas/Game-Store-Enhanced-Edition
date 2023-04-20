@@ -11,17 +11,17 @@
       // define routes
       // customer routes
 
-
+      
       // admin routes
-      $router->get("/admin/customer/getList", "AdminCustomerController@getCustomerList");
-      $router->post("/admin/customer/find", "AdminCustomerController@findCustomer");
-      $router->post("/admin/customer/delete", "AdminCustomerController@deleteCustomer");
-      $router->post("/admin/customer/detail", "AdminCustomerController@customerDetail");
-      $router->post("/admin/customer/detail/history", "AdminCustomerController@customerHistory");
-      $router->post("/admin/customer/detail/edit", "AdminCustomerController@editCustomer");
-      $router->get("/admin/game/list", "AdminCustomerController@getGameList");
-      $router->post("/admin/game/delete", "AdminCustomerController@deleteGame");
-      $router->post("/admin/game/find", "AdminCustomerController@findGame");
+      $router->get("/admin/customer/getList", "AdminController@getCustomerList");
+      $router->post("/admin/customer/find", "AdminController@findCustomer");
+      $router->post("/admin/customer/delete", "AdminController@deleteCustomer");
+      $router->post("/admin/customer/detail", "AdminController@customerDetail");
+      $router->post("/admin/customer/detail/history", "AdminController@customerHistory");
+      $router->post("/admin/customer/detail/edit", "AdminController@editCustomer");
+      $router->get("/admin/game/list", "AdminController@getGameList");
+      $router->post("/admin/game/delete", "AdminController@deleteGame");
+      $router->post("/admin/game/find", "AdminController@findGame");
 
       // run router
       $router->run();

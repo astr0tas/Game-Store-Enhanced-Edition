@@ -9,8 +9,9 @@ class GameModel
             $user = 'owner';
             $password = 'owner123';
             $database = 'game_store';
+            $port = '3306';
 
-            $this->db = new mysqli($host, $user, $password, $database);
+            $this->db = new mysqli($host, $user, $password, $database, $port);
             if ($this->db->connect_error) {
                   die('Connection failed: ' . $this->db->connect_error);
             }
