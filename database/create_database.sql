@@ -8,7 +8,7 @@ create table category(type varchar(50) primary key);
 
 create table game(
 	id varchar(10) primary key,
-	name varchar(100) unique not null,
+	name varchar(255) not null,
     price float,
     discount float,
     description text,
@@ -30,7 +30,7 @@ create table activation_code(
 
 create table belongs_to(
 	game_id varchar(10) references game(id) on delete cascade on update cascade,
-    category_type varchar(20) references category(type) on delete cascade on update cascade,
+    category_type varchar(50) references category(type) on delete cascade on update cascade,
     primary key(game_id,category_type)
 );
 

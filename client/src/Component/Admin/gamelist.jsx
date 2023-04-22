@@ -68,7 +68,7 @@ export default function GameList()
                   axios.post('http://localhost/admin/game/delete', formData)
                         .then(res =>
                         {
-                              console.log(res.data);
+                              console.log(res);
                         })
                         .catch(error => console.log(error));
             }
@@ -98,27 +98,33 @@ export default function GameList()
             }
       }
 
+      let timer;
+
       const search = () =>
       {
-            $("#game_list_table_body").empty();
-            const formData = new FormData();
-            formData.append("data", $("#search").val());
-            axios.post('http://localhost/admin/game/find', formData)
-                  .then(res =>
-                  {
-                        let temp = [];
-                        for (let i = 0; i < res.data.length; i++)
-                              temp.push(<Game key={ i } i={ i } id={ res.data[i].id } name={ res.data[i].name } price={ res.data[i].price } solds={ res.data[i].solds } ratings={ res.data[i].ratings } discount={ res.data[i].discount } />);
-                        const target = ReactDOM.createRoot(document.getElementById('game_list_table_body'));
-                        target.render(<>{ temp }</>);
-                  })
-                  .catch(error => console.log(error));
+            clearTimeout(timer);
+            timer = setTimeout(() =>
+            {
+                  $("#game_list_table_body").empty();
+                  const formData = new FormData();
+                  formData.append("data", $("#search").val());
+                  axios.post('http://localhost/admin/game/find', formData)
+                        .then(res =>
+                        {
+                              let temp = [];
+                              for (let i = 0; i < res.data.length; i++)
+                                    temp.push(<Game key={ i } i={ i } id={ res.data[i].id } name={ res.data[i].name } price={ res.data[i].price } solds={ res.data[i].solds } ratings={ res.data[i].ratings } discount={ res.data[i].discount } />);
+                              const target = ReactDOM.createRoot(document.getElementById('game_list_table_body'));
+                              target.render(<>{ temp }</>);
+                        })
+                        .catch(error => console.log(error));
+            }, 500);
       }
 
       const addGame = (event) =>
       {
             event.preventDefault();
-            //Navigate();
+            Navigate("/admin/addgame");
       }
 
       return (
