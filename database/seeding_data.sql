@@ -117,7 +117,7 @@ DirectX: Version 12
 Network: Broadband Internet connection
 Additional Notes: Estimated performance: 1080p/60fps ・Framerate might drop in graphics-intensive scenes. ・AMD Radeon RX 6700 XT or NVIDIA GeForce RTX 2070 required to support ray tracing.',load_file(concat(@picture_path,'/Resident Evil 4/Resident_evil_4_pic1.jpg')),load_file(concat(@picture_path,'/Resident Evil 4/Resident_evil_4_pic2.jpeg')),load_file(concat(@picture_path,'/Resident Evil 4/Resident_evil_4_pic3.jpg')),load_file(concat(@picture_path,'/Resident Evil 4/Resident_evil_4_pic4.jpg')));
 
-insert into game values('GAME03','God of War',49.99,0.4,'Enter the Norse realm
+insert into game values('GAME03','God of War',49.99,40,'Enter the Norse realm
 His vengeance against the Gods of Olympus years behind him, Kratos now lives as a man in the realm of Norse Gods and monsters. It is in this harsh, unforgiving world that he must fight to survive… and teach his son to do the same.
 
 Grasp a second chance
@@ -197,7 +197,7 @@ Storage: 100 GB available space
 Additional Notes: SSD Recommended', load_file(concat(@picture_path,'/The Last Of Us 1/tlou-1.jpg')), load_file(concat(@picture_path,'/The Last Of Us 1/tlou-2.jpg')), load_file(concat(@picture_path,'/The Last Of Us 1/tlou-3.jpg')), load_file(concat(@picture_path,'/The Last Of Us 1/tlou-4.jpg'))
 );
 
-insert into game values('GAME06','The Great War: Western Front™', 19.99, 0.3, 'The Great War: Western Front is the definitive World War 1 strategy game from Petroglyph, the makers of Command & Conquer™ Remastered & Star Wars™: Empire at War. Play a deciding role in history with this real-time tactical experience as you take charge in the pivotal Western Front from 1914 to 1919.
+insert into game values('GAME06','The Great War: Western Front™', 19.99, 30, 'The Great War: Western Front is the definitive World War 1 strategy game from Petroglyph, the makers of Command & Conquer™ Remastered & Star Wars™: Empire at War. Play a deciding role in history with this real-time tactical experience as you take charge in the pivotal Western Front from 1914 to 1919.
 
 Pick your faction and lead your forces to victory, by directing your armies in gritty real-time battles and by guiding high-level decisions in turn-based strategic gameplay. Dig detailed trenches, research new technologies such as poison gas and tanks, and make decisions that will have a profound and lasting effect on your success. Think like a Commander to either relive history - or redefine it.
 
@@ -219,7 +219,7 @@ DirectX: Version 11
 Storage: 13 GB available space
 Additional Notes: SSD Recommended', load_file(concat(@picture_path,'/The Great War Western Front/greatwar-1.jpg')), load_file(concat(@picture_path,'/The Great War Western Front/greatwar-2.jpg')), load_file(concat(@picture_path,'/The Great War Western Front/greatwar-3.jpg')), load_file(concat(@picture_path,'/The Great War Western Front/greatwar-4.jpg')));
 
-insert into game values('GAME07','Fallout 76', 31.99,0.1, 'Bethesda Game Studios, the award-winning creators of Skyrim and Fallout 4, welcome you to Fallout 76. Twenty-five years after the bombs fell, you and your fellow Vault Dwellers—chosen from the nation’s best and brightest – emerge into post-nuclear America on Reclamation Day, 2102. Play solo or join together as you explore, quest, build, and triumph against the wasteland’s greatest threats. Explore a vast wasteland, devastated by nuclear war, in this open-world multiplayer addition to the Fallout story. Experience the largest, most dynamic world ever created in the legendary Fallout universe.
+insert into game values('GAME07','Fallout 76', 31.99,10, 'Bethesda Game Studios, the award-winning creators of Skyrim and Fallout 4, welcome you to Fallout 76. Twenty-five years after the bombs fell, you and your fellow Vault Dwellers—chosen from the nation’s best and brightest – emerge into post-nuclear America on Reclamation Day, 2102. Play solo or join together as you explore, quest, build, and triumph against the wasteland’s greatest threats. Explore a vast wasteland, devastated by nuclear war, in this open-world multiplayer addition to the Fallout story. Experience the largest, most dynamic world ever created in the legendary Fallout universe.
 
 The Mutation Invasion is here and mutations from Daily Ops\' missions have infected Public Events! Play a Mutated Public Event every hour for additional rewards and challenges, and jump back into Daily Ops to earn scaling rewards and experience a new variety of locations, enemies, and mutations.
 Immersive Questlines and Engaging Characters
@@ -247,7 +247,7 @@ Graphics: NVIDIA GTX 970 4GB /AMD R9 290X 4GB
 Network: Broadband Internet connection
 Storage: 80 GB available space', load_file(concat(@picture_path,'/fallout76/f-1.jpg')),  load_file(concat(@picture_path,'/fallout76/f-2.jpg')),  load_file(concat(@picture_path,'/fallout76/f-3.jpg')),  load_file(concat(@picture_path,'/fallout76/f-4.jpg')));
 
-insert into game values('GAME08','Hogwarts Legacy', 49.99, 0.1, 'Hogwarts Legacy is an open-world action RPG set in the world first introduced in the Harry Potter books. Embark on a journey through familiar and new locations as you explore and discover magical beasts, customize your character and craft potions, master spell casting, upgrade talents and become the wizard you want to be.
+insert into game values('GAME08','Hogwarts Legacy', 49.99, 10, 'Hogwarts Legacy is an open-world action RPG set in the world first introduced in the Harry Potter books. Embark on a journey through familiar and new locations as you explore and discover magical beasts, customize your character and craft potions, master spell casting, upgrade talents and become the wizard you want to be.
 
 
 
@@ -304,7 +304,7 @@ Graphics: NVIDIA® GeForce® GTX 970 4GB or GTX 1060 6GB / AMD R9 390 8GB Memory
 Network: Broadband Internet connection
 Storage: 105 GB available space', load_file(concat(@picture_path,'/destiny2/destiny2-1.jpg')), load_file(concat(@picture_path,'/destiny2/destiny2-2.jpg')), load_file(concat(@picture_path,'/destiny2/destiny2-3.jpg')), load_file(concat(@picture_path,'/destiny2/destiny2-4.jpg')));
 
-insert into game values('GAME10','MONSTER HUNTER RISE', 39.99, 0.2, 'Rise to the challenge and join the hunt! In Monster Hunter Rise, the latest installment in the award-winning and top-selling Monster Hunter series, you’ll become a hunter, explore brand new maps and use a variety of weapons to take down fearsome monsters as part of an all-new storyline. The PC release also comes packed with a number of additional visual and performance enhancing optimizations.
+insert into game values('GAME10','MONSTER HUNTER RISE', 39.99, 20, 'Rise to the challenge and join the hunt! In Monster Hunter Rise, the latest installment in the award-winning and top-selling Monster Hunter series, you’ll become a hunter, explore brand new maps and use a variety of weapons to take down fearsome monsters as part of an all-new storyline. The PC release also comes packed with a number of additional visual and performance enhancing optimizations.
 
 
 Ferocious monsters with unique ecologies
@@ -362,7 +362,7 @@ Network: Broadband Internet connection
 Storage: 36 GB available space
 Additional Notes: 1080p/30fps when graphics settings are set to "Average". System requirements subject to change during game development.', load_file(concat(@picture_path,'/monhun/monhun-1.jpg')), load_file(concat(@picture_path,'/monhun/monhun-2.jpg')), load_file(concat(@picture_path,'/monhun/monhun-3.jpg')), load_file(concat(@picture_path,'/monhun/monhun-4.jpg')));
 
-insert into game values('GAME11','Riddle Joker', 19.99, 0.1, 'Riddle Joker is a Japanese-style visual novel produced by Yuzusoft, a Japanese developer of romance VNs.
+insert into game values('GAME11','Riddle Joker', 19.99, 10, 'Riddle Joker is a Japanese-style visual novel produced by Yuzusoft, a Japanese developer of romance VNs.
 The game won numerous awards on the year of its release in Japan for its art, music, and characters.
 
 Story:
@@ -399,7 +399,7 @@ Processor: 1.7 GHz or above
 Memory: 1 GB RAM
 Graphics: 1GB VRAM', load_file(concat(@picture_path,'/Parquet/parquet-1.jpg')), load_file(concat(@picture_path,'/Parquet/parquet-2.jpg')), load_file(concat(@picture_path,'/Parquet/parquet-3.jpg')), load_file(concat(@picture_path,'/Parquet/parquet-4.jpg')));
 
-insert into game values('GAME13','Grand Theft Auto V', 19.49, 0.1, 'When a young street hustler, a retired bank robber and a terrifying psychopath find themselves entangled with some of the most frightening and deranged elements of the criminal underworld, the U.S. government and the entertainment industry, they must pull off a series of dangerous heists to survive in a ruthless city in which they can trust nobody, least of all each other.
+insert into game values('GAME13','Grand Theft Auto V', 19.49, 10, 'When a young street hustler, a retired bank robber and a terrifying psychopath find themselves entangled with some of the most frightening and deranged elements of the criminal underworld, the U.S. government and the entertainment industry, they must pull off a series of dangerous heists to survive in a ruthless city in which they can trust nobody, least of all each other.
 
 Grand Theft Auto V for PC offers players the option to explore the award-winning world of Los Santos and Blaine County in resolutions of up to 4k and beyond, as well as the chance to experience the game running at 60 frames per second.
 

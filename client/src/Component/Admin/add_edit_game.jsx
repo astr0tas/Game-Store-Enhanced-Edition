@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 import styles from '../../css/Admin/add_edit_game.module.css';
 import { BiTrash } from 'react-icons/bi';
 import { useRef, useEffect, useState } from 'react';
@@ -16,15 +16,19 @@ export const AddGame = () =>
       const [price, setPrice] = useState(null);
       const [discount, setDiscount] = useState(null);
       const [tag, setTag] = useState([]);
+      const [removedTag, setRemovedTag] = useState([]);
       const [codes, setCodes] = useState(null);
       const [description, setDescription] = useState(null);
       const [minSpec, setMinSpec] = useState(null);
       const [recSpec, setRecSpec] = useState(null);
 
-      const removeTag = (tagToRemove) =>
+      const removeTag = () =>
       {
-            const updatedTags = tag.filter((tag) => tag !== tagToRemove);
-            setTag(updatedTags);
+            for (let i = 0; i < removedTag.length; i++)
+            {
+                  const index = tag.indexOf(removedTag[i]);
+                  tag.splice(index, 1);
+            }
       };
 
       useEffect(() =>
@@ -41,7 +45,7 @@ export const AddGame = () =>
                                     $("<input>").attr("type", "checkbox").val(res.data[i].type).on('change', function (event)
                                     {
                                           if (!event.target.checked)
-                                                removeTag(event.target.value);
+                                                setRemovedTag(prevTags => [...prevTags, event.target.value]);
                                           else
                                                 setTag(prevTags => [...prevTags, event.target.value]);
                                     })
@@ -64,7 +68,7 @@ export const AddGame = () =>
                                           $("<input>").attr("type", "checkbox").val(res.data[i + 1].type).on('change', function (event)
                                           {
                                                 if (!event.target.checked)
-                                                      removeTag(event.target.value);
+                                                      setRemovedTag(prevTags => [...prevTags, event.target.value]);
                                                 else
                                                       setTag(prevTags => [...prevTags, event.target.value]);
                                           })
@@ -86,7 +90,7 @@ export const AddGame = () =>
                                           $("<input>").attr("type", "checkbox").val(res.data[i + 1].type).on('change', function (event)
                                           {
                                                 if (!event.target.checked)
-                                                      removeTag(event.target.value);
+                                                      setRemovedTag(prevTags => [...prevTags, event.target.value]);
                                                 else
                                                       setTag(prevTags => [...prevTags, event.target.value]);
                                           })
@@ -98,7 +102,7 @@ export const AddGame = () =>
                                           $("<input>").attr("type", "checkbox").val(res.data[i + 2].type).on('change', function (event)
                                           {
                                                 if (!event.target.checked)
-                                                      removeTag(event.target.value);
+                                                      setRemovedTag(prevTags => [...prevTags, event.target.value]);
                                                 else
                                                       setTag(prevTags => [...prevTags, event.target.value]);
                                           })
@@ -125,23 +129,38 @@ export const AddGame = () =>
       const loadPicture = (e, number) =>
       {
             e.preventDefault();
-            const file = e.target.files[0];
-            if (number === 1)
-                  setPic1(file);
-            else if (number === 2)
-                  setPic2(file);
-            else if (number === 3)
-                  setPic3(file);
-            else
-                  setPic4(file);
-            const reader = new FileReader();
-            reader.readAsArrayBuffer(file);
-            reader.onload = () =>
+            if (e.target.files.length === 0)
             {
-                  const blob = new Blob([reader.result], { type: file.type });
-                  const url = URL.createObjectURL(blob);
-                  $(`.${ styles.images }_${ number }`).attr("src", url);
-            };
+                  if (number === 1)
+                        setPic1(null);
+                  else if (number === 2)
+                        setPic2(null);
+                  else if (number === 3)
+                        setPic3(null);
+                  else
+                        setPic4(null);
+                  $(`.${ styles.images }_${ number }`).attr("src", "");
+            }
+            else
+            {
+                  const file = e.target.files[0];
+                  if (number === 1)
+                        setPic1(file);
+                  else if (number === 2)
+                        setPic2(file);
+                  else if (number === 3)
+                        setPic3(file);
+                  else
+                        setPic4(file);
+                  const reader = new FileReader();
+                  reader.readAsArrayBuffer(file);
+                  reader.onload = () =>
+                  {
+                        const blob = new Blob([reader.result], { type: file.type });
+                        const url = URL.createObjectURL(blob);
+                        $(`.${ styles.images }_${ number }`).attr("src", url);
+                  };
+            }
       }
 
       const createGame = (event) =>
@@ -151,6 +170,7 @@ export const AddGame = () =>
                   $(`.${ styles.pop_up }`).css("display", "flex");
             else
             {
+                  removeTag();
                   const formData = new FormData();
                   formData.append("picture1", pic1);
                   formData.append("picture2", pic2);
@@ -196,6 +216,7 @@ export const AddGame = () =>
             });
             $(`.${ styles.categories }`).css("display", "none");
             setTag([]);
+            setRemovedTag([]);
       }
 
       return (
@@ -214,7 +235,7 @@ export const AddGame = () =>
                   </div>
                   <div className={ `${ styles.board }` }>
                         <div className={ `mt-2 w-100 d-flex justify-content-center align-items-center` }>
-                              <input type="text" placeholder="Enter game's name" className={ `${ styles.name }` } defaultValue="" onChange={ (e) =>
+                              <input type="text" placeholder="Enter game's name" className={ `${ styles.name }` } onChange={ (e) =>
                               {
                                     setName(e.target.value);
                               } }></input>
@@ -296,19 +317,33 @@ export const EditGame = () =>
       const [pic2, setPic2] = useState(null);
       const [pic3, setPic3] = useState(null);
       const [pic4, setPic4] = useState(null);
+      const [oldPic1, setOldPic1] = useState(null);
+      const [oldPic2, setOldPic2] = useState(null);
+      const [oldPic3, setOldPic3] = useState(null);
+      const [oldPic4, setOldPic4] = useState(null);
       const [name, setName] = useState(null);
       const [price, setPrice] = useState(null);
       const [discount, setDiscount] = useState(null);
       const [tag, setTag] = useState([]);
+      const [removedTag, setRemovedTag] = useState([]);
+      const [oldTag, setOldTag] = useState([]);
       const [codes, setCodes] = useState(null);
       const [description, setDescription] = useState(null);
+      const [oldDescription, setOldDescription] = useState(null);
       const [minSpec, setMinSpec] = useState(null);
+      const [oldMinSpec, setOldMinSpec] = useState(null);
       const [recSpec, setRecSpec] = useState(null);
+      const [oldRecSpec, setOldRecSpec] = useState(null);
 
-      const removeTag = (tagToRemove) =>
+      const id = useParams().id;
+
+      const removeTag = () =>
       {
-            const updatedTags = tag.filter((tag) => tag !== tagToRemove);
-            setTag(updatedTags);
+            for (let i = 0; i < removedTag.length; i++)
+            {
+                  const index = tag.indexOf(removedTag[i]);
+                  tag.splice(index, 1);
+            }
       };
 
       useEffect(() =>
@@ -325,9 +360,13 @@ export const EditGame = () =>
                                     $("<input>").attr("type", "checkbox").val(res.data[i].type).on('change', function (event)
                                     {
                                           if (!event.target.checked)
-                                                removeTag(event.target.value);
+                                          {
+                                                setRemovedTag(prevTags => [...prevTags, event.target.value])
+                                          }
                                           else
+                                          {
                                                 setTag(prevTags => [...prevTags, event.target.value]);
+                                          }
                                     })
                               )
                                     .append(
@@ -348,9 +387,13 @@ export const EditGame = () =>
                                           $("<input>").attr("type", "checkbox").val(res.data[i + 1].type).on('change', function (event)
                                           {
                                                 if (!event.target.checked)
-                                                      removeTag(event.target.value);
+                                                {
+                                                      setRemovedTag(prevTags => [...prevTags, event.target.value])
+                                                }
                                                 else
+                                                {
                                                       setTag(prevTags => [...prevTags, event.target.value]);
+                                                }
                                           })
                                     )
                                           .append(
@@ -370,9 +413,13 @@ export const EditGame = () =>
                                           $("<input>").attr("type", "checkbox").val(res.data[i + 1].type).on('change', function (event)
                                           {
                                                 if (!event.target.checked)
-                                                      removeTag(event.target.value);
+                                                {
+                                                      setRemovedTag(prevTags => [...prevTags, event.target.value])
+                                                }
                                                 else
+                                                {
                                                       setTag(prevTags => [...prevTags, event.target.value]);
+                                                }
                                           })
                                     )
                                           .append(
@@ -382,9 +429,13 @@ export const EditGame = () =>
                                           $("<input>").attr("type", "checkbox").val(res.data[i + 2].type).on('change', function (event)
                                           {
                                                 if (!event.target.checked)
-                                                      removeTag(event.target.value);
+                                                {
+                                                      setRemovedTag(prevTags => [...prevTags, event.target.value])
+                                                }
                                                 else
+                                                {
                                                       setTag(prevTags => [...prevTags, event.target.value]);
+                                                }
                                           })
                                     )
                                           .append(
@@ -401,6 +452,52 @@ export const EditGame = () =>
                                     );
                               }
                         }
+                        const formData = new FormData();
+                        formData.append("id", id);
+                        axios.post('http://localhost/admin/game/update/category', formData).then(Response =>
+                        {
+                              for (let i = 0; i < Response.data.length; i++)
+                              {
+                                    $('input[type="checkbox"][value="' + Response.data[i].category_type + '"]').prop("checked", true);
+                                    setOldTag(prevTags => [...prevTags, Response.data[i].category_type]);
+                                    setTag(prevTags => [...prevTags, Response.data[i].category_type]);
+                              }
+                        }).catch(error => { console.log(error); })
+                        axios.post('http://localhost/admin/game/update/info', formData).then(Response =>
+                        {
+                              $(`.${ styles.name }`).val(Response.data.name);
+                              setName(Response.data.name);
+                              $(`.gamePrice`).val(Response.data.price);
+                              setPrice(Response.data.price);
+                              $(`.gameDiscount`).val(Response.data.discount);
+                              const data1 = new Uint8Array(Object.values(Response.data.picture_1));
+                              const blob1 = new Blob([data1], { type: "image/jpg" });
+                              const url1 = URL.createObjectURL(blob1);
+                              setOldPic1(url1);
+                              $(`.${ styles.images }_1`).attr("src", url1);
+                              const data2 = new Uint8Array(Object.values(Response.data.picture_2));
+                              const blob2 = new Blob([data2], { type: "image/jpg" });
+                              const url2 = URL.createObjectURL(blob2);
+                              setOldPic2(url2);
+                              $(`.${ styles.images }_2`).attr("src", url2);
+                              const data3 = new Uint8Array(Object.values(Response.data.picture_3));
+                              const blob3 = new Blob([data3], { type: "image/jpg" });
+                              const url3 = URL.createObjectURL(blob3);
+                              setOldPic3(url3);
+                              $(`.${ styles.images }_3`).attr("src", url3);
+                              const data4 = new Uint8Array(Object.values(Response.data.picture_4));
+                              const blob4 = new Blob([data4], { type: "image/jpg" });
+                              const url4 = URL.createObjectURL(blob4);
+                              setOldPic4(url4);
+                              $(`.${ styles.images }_4`).attr("src", url4);
+                              setDiscount(Response.data.discount);
+                              setMinSpec(Response.data.spec_minimum);
+                              setOldMinSpec(Response.data.spec_minimum);
+                              setRecSpec(Response.data.spec_recommended);
+                              setOldRecSpec(Response.data.spec_recommended);
+                              setDescription(Response.data.description);
+                              setOldDescription(Response.data.description);
+                        }).catch(error => { console.log(error); })
                   }).catch(error => { console.log(error); })
                   render.current = true;
             }
@@ -416,32 +513,61 @@ export const EditGame = () =>
       const loadPicture = (e, number) =>
       {
             e.preventDefault();
-            const file = e.target.files[0];
-            if (number === 1)
-                  setPic1(file);
-            else if (number === 2)
-                  setPic2(file);
-            else if (number === 3)
-                  setPic3(file);
-            else
-                  setPic4(file);
-            const reader = new FileReader();
-            reader.readAsArrayBuffer(file);
-            reader.onload = () =>
+            if (e.target.files.length === 0)
             {
-                  const blob = new Blob([reader.result], { type: file.type });
-                  const url = URL.createObjectURL(blob);
-                  $(`.${ styles.images }_${ number }`).attr("src", url);
-            };
+                  if (number === 1)
+                  {
+                        setPic1(null);
+                        $(`.${ styles.images }_${ number }`).attr("src", oldPic1);
+                  }
+                  else if (number === 2)
+                  {
+                        setPic2(null);
+                        $(`.${ styles.images }_${ number }`).attr("src", oldPic2);
+                  }
+                  else if (number === 3)
+                  {
+                        setPic3(null);
+                        $(`.${ styles.images }_${ number }`).attr("src", oldPic3);
+                  }
+                  else
+                  {
+                        setPic4(null);
+                        $(`.${ styles.images }_${ number }`).attr("src", oldPic4);
+                  }
+            }
+            else
+            {
+                  const file = e.target.files[0];
+                  if (number === 1)
+                        setPic1(file);
+                  else if (number === 2)
+                        setPic2(file);
+                  else if (number === 3)
+                        setPic3(file);
+                  else
+                        setPic4(file);
+                  const reader = new FileReader();
+                  reader.readAsArrayBuffer(file);
+                  reader.onload = () =>
+                  {
+                        const blob = new Blob([reader.result], { type: file.type });
+                        const url = URL.createObjectURL(blob);
+                        $(`.${ styles.images }_${ number }`).attr("src", url);
+                  };
+            }
       }
 
-      const createGame = (event) =>
+      const updateGame = (event) =>
       {
             event.preventDefault();
             if (name === null)
                   $(`.${ styles.pop_up }`).css("display", "flex");
             else
             {
+                  console.log(tag);
+                  console.log(removedTag);
+                  removeTag();
                   const formData = new FormData();
                   formData.append("picture1", pic1);
                   formData.append("picture2", pic2);
@@ -453,24 +579,28 @@ export const EditGame = () =>
                   formData.append("minSpec", minSpec);
                   formData.append("recSpec", recSpec);
                   formData.append("name", name);
-                  axios.post('http://localhost/admin/game/create', formData).then(res =>
+                  formData.append("id", id);
+                  axios.post('http://localhost/admin/game/update', formData).then(res =>
                   {
-                        const formData1 = new FormData();
-                        formData1.append("codes", codes);
-                        formData1.append("id", res.data);
-                        axios.post('http://localhost/admin/game/addCode', formData1).then(Response =>
-                        {
-                              console.log(Response);
-                        }).catch(error => { console.log(error); })
-
-                        const formData2 = new FormData();
-                        formData2.append("tag", tag);
-                        formData2.append("id", res.data);
-                        axios.post('http://localhost/admin/game/addTag', formData2).then(Response =>
-                        {
-                              console.log(Response);
-                        }).catch(error => { console.log(error); })
+                        console.log(res);
                   }).catch(error => { console.log(error); })
+
+                  const formData1 = new FormData();
+                  formData1.append("codes", codes);
+                  formData1.append("id", id);
+                  axios.post('http://localhost/admin/game/addCode', formData1).then(Response =>
+                  {
+                        console.log(Response);
+                  }).catch(error => { console.log(error); })
+
+                  const formData2 = new FormData();
+                  formData2.append("tag", tag);
+                  formData2.append("id", id);
+                  axios.post('http://localhost/admin/game/addTag', formData2).then(Response =>
+                  {
+                        console.log(Response);
+                  }).catch(error => { console.log(error); })
+                  goBack();
             }
       }
 
@@ -486,7 +616,10 @@ export const EditGame = () =>
                   $(this).prop("checked", false);
             });
             $(`.${ styles.categories }`).css("display", "none");
-            setTag([]);
+            for (let i = 0; i < oldTag.length; i++)
+                  $('input[type="checkbox"][value="' + oldTag[i] + '"]').prop("checked", true);
+            setTag(oldTag);
+            setRemovedTag([]);
       }
 
       return (
@@ -505,9 +638,12 @@ export const EditGame = () =>
                   </div>
                   <div className={ `${ styles.board }` }>
                         <div className={ `mt-2 w-100 d-flex justify-content-center align-items-center` }>
-                              <input type="text" placeholder="Enter game's name" className={ `${ styles.name }` } defaultValue="" onChange={ (e) =>
+                              <input type="text" placeholder="Enter game's name" className={ `${ styles.name }` } onChange={ (e) =>
                               {
-                                    setName(e.target.value);
+                                    if (e.target.value === "")
+                                          setName(null);
+                                    else
+                                          setName(e.target.value);
                               } }></input>
                               <BiTrash className={ `${ styles.trash }` } />
                         </div>
@@ -515,35 +651,41 @@ export const EditGame = () =>
                               height: "40%"
                         } }>
                               <div className={ `w-25 h-100 d-flex flex-column justify-content-center align-items-center` }>
-                                    <img alt="" className={ `${ styles.images } ${ styles.images }_1` } src="https://static.vecteezy.com/system/resources/thumbnails/004/141/669/small_2x/no-photo-or-blank-image-icon-loading-images-or-missing-image-mark-image-not-available-or-image-coming-soon-sign-simple-nature-silhouette-in-frame-isolated-illustration-vector.jpg"></img>
+                                    <img alt="" className={ `${ styles.images } ${ styles.images }_1` } ></img>
                                     <input type='file' className={ `${ styles.browse }  mt-3 mb-0` } onChange={ (e) => { loadPicture(e, 1) } } accept=".jpg,.jpeg,.png"></input>
                               </div>
                               <div className={ `w-25 h-100 d-flex flex-column justify-content-center align-items-center` }>
-                                    <img alt="" className={ `${ styles.images } ${ styles.images }_2` } src="https://static.vecteezy.com/system/resources/thumbnails/004/141/669/small_2x/no-photo-or-blank-image-icon-loading-images-or-missing-image-mark-image-not-available-or-image-coming-soon-sign-simple-nature-silhouette-in-frame-isolated-illustration-vector.jpg"></img>
+                                    <img alt="" className={ `${ styles.images } ${ styles.images }_2` }></img>
                                     <input type='file' className={ `${ styles.browse }  mt-3 mb-0` } onChange={ (e) => { loadPicture(e, 2) } } accept=".jpg,.jpeg,.png"></input>
                               </div>
                               <div className={ `w-25 h-100 d-flex flex-column justify-content-center align-items-center` }>
-                                    <img alt="" className={ `${ styles.images } ${ styles.images }_3` } src="https://static.vecteezy.com/system/resources/thumbnails/004/141/669/small_2x/no-photo-or-blank-image-icon-loading-images-or-missing-image-mark-image-not-available-or-image-coming-soon-sign-simple-nature-silhouette-in-frame-isolated-illustration-vector.jpg"></img>
+                                    <img alt="" className={ `${ styles.images } ${ styles.images }_3` } ></img>
                                     <input type='file' className={ `${ styles.browse }  mt-3 mb-0` } onChange={ (e) => { loadPicture(e, 3) } } accept=".jpg,.jpeg,.png"></input>
                               </div>
                               <div className={ `w-25 h-100 d-flex flex-column justify-content-center align-items-center` }>
-                                    <img alt="" className={ `${ styles.images } ${ styles.images }_4` } src="https://static.vecteezy.com/system/resources/thumbnails/004/141/669/small_2x/no-photo-or-blank-image-icon-loading-images-or-missing-image-mark-image-not-available-or-image-coming-soon-sign-simple-nature-silhouette-in-frame-isolated-illustration-vector.jpg"></img>
+                                    <img alt="" className={ `${ styles.images } ${ styles.images }_4` } ></img>
                                     <input type='file' className={ `${ styles.browse } mt-3 mb-0` } onChange={ (e) => { loadPicture(e, 4) } } accept=".jpg,.jpeg,.png"></input>
                               </div>
                         </div>
                         <div className={ `d-flex align-items-center justify-content-around w-100 mt-5 mb-5 ${ styles.margining }` }>
                               <div className="d-flex align-items-center">
                                     <p className={ `${ styles.font }` }>Price ($)</p>
-                                    <input className={ `${ styles.input }` } type="number" placeholder='Enter a price' onChange={ (e) =>
+                                    <input className={ `${ styles.input } gamePrice` } type="number" placeholder='Enter a price' onChange={ (e) =>
                                     {
-                                          setPrice(e.target.value);
+                                          if (e.target.value === "")
+                                                setPrice(null);
+                                          else
+                                                setPrice(e.target.value);
                                     } }></input>
                               </div>
                               <div className="d-flex align-items-center" >
                                     <p className={ `${ styles.font }` }>Discount (%)</p>
-                                    <input className={ `${ styles.input }` } type="number" onChange={ (e) =>
+                                    <input className={ `${ styles.input } gameDiscount` } type="number" onChange={ (e) =>
                                     {
-                                          setDiscount(e.target.value);
+                                          if (e.target.value === "")
+                                                setDiscount(null);
+                                          else
+                                                setDiscount(e.target.value);
                                     } }></input>
                               </div>
                               <div className="d-flex align-items-center">
@@ -559,22 +701,40 @@ export const EditGame = () =>
                               </div>
                               <div className="d-flex align-items-center">
                                     <p className={ `${ styles.font }` }>Description</p>
-                                    <input type='file' className={ `${ styles.browse }` } accept=".txt" onChange={ (e) => { setDescription(e.target.files[0]); } }></input>
+                                    <input type='file' className={ `${ styles.browse }` } accept=".txt" onChange={ (e) =>
+                                    {
+                                          if (e.target.files.length === 0)
+                                                setDescription(oldDescription);
+                                          else
+                                                setDescription(e.target.files[0]);
+                                    } }></input>
                               </div>
                         </div>
                         <div className={ `d-flex align-items-center justify-content-around w-100 mt-5 mb-5 ${ styles.margining }` }>
                               <div className="d-flex align-items-center">
                                     <p className={ `${ styles.font }` }>Minimum system requirement</p>
-                                    <input type='file' className={ `${ styles.browse }` } accept=".txt" onChange={ (e) => { setMinSpec(e.target.files[0]); } }></input>
+                                    <input type='file' className={ `${ styles.browse }` } accept=".txt" onChange={ (e) =>
+                                    {
+                                          if (e.target.files.length === 0)
+                                                setMinSpec(oldMinSpec);
+                                          else
+                                                setMinSpec(e.target.files[0]);
+                                    } }></input>
                               </div>
                               <div className="d-flex align-items-center">
                                     <p className={ `${ styles.font }` }>Recommended system requirement</p>
-                                    <input type='file' className={ `${ styles.browse }` } accept=".txt" onChange={ (e) => { setRecSpec(e.target.files[0]); } }></input>
+                                    <input type='file' className={ `${ styles.browse }` } accept=".txt" onChange={ (e) =>
+                                    {
+                                          if (e.target.files.length === 0)
+                                                setRecSpec(oldRecSpec);
+                                          else
+                                                setRecSpec(e.target.files[0]);
+                                    } }></input>
                               </div>
                         </div>
                         <div className={ `d-flex align-items-center justify-content-center mt-auto mb-4` }>
                               <button type='button' className={ `${ styles.cancel }` } onClick={ goBack }>Back</button>
-                              <button type="button" className={ `${ styles.confirm }` } onClick={ createGame }>Confirm</button>
+                              <button type="button" className={ `${ styles.confirm }` } onClick={ updateGame }>Confirm</button>
                         </div>
                   </div>
             </div>

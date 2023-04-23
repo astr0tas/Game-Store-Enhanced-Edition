@@ -8,7 +8,7 @@ create table category(type varchar(50) primary key);
 
 create table game(
 	id varchar(10) primary key,
-	name varchar(255) not null,
+	name varchar(255) unique not null,
     price float,
     discount float,
     description text,
