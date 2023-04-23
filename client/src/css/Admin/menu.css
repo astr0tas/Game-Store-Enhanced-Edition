@@ -9,6 +9,7 @@
 
 .admin-menu {
     position: fixed;
+    z-index: 500;
 }
 
 .admin-menu .menu_container a {

@@ -150,7 +150,7 @@ export default function CusDetail()
                     <button className={ `mx-3 ${ styles.back }` }><a href="../customerList">Back</a></button>
                 </div>
                 <div className={ `d-flex align-items-center justify-content-around w-100` } style={ { height: "40%" } }>
-                    <img src={ require('../../img/defaultavt.jpg') } alt='avatar' />
+                    <img className={ `${ styles.img }` } src={ require('../../img/defaultavt.jpg') } alt='avatar' />
                     <div className={ `w-50 h-100 d-flex flex-column justify-content-center ${ styles.info }` }>
                         <p>Name: { customer.name }</p>
                         <p>Email: { customer.email }</p>
@@ -204,7 +204,7 @@ export default function CusDetail()
                 } }>OKAY</button>
             </div>
             <div className={ `position-absolute flex-column align-items-center justify-content-around ${ styles.delete_pop_up }` }>
-                <h3>Are you really want to delete this customer's information?</h3>
+                <h3>Do you really want to delete this customer's information?</h3>
                 <div>
                     <button className={ `${ styles.delete_cancel } mx-3` } onClick={ () =>
                     {

@@ -200,6 +200,7 @@ export const AddGame = () =>
                               console.log(Response);
                         }).catch(error => { console.log(error); })
                   }).catch(error => { console.log(error); })
+                  window.location.href = "/admin/gamelist";
             }
       }
 
@@ -227,8 +228,8 @@ export const AddGame = () =>
                   </div>
                   <div className={ `${ styles.categories } w-50 h-50 position-absolute flex-column align-items-center` }>
                         <h1>Choose categories</h1>
-                        <div className={ `w-100 d-flex flex-column align-items-center justify-content-around ${ styles.categories_list }` }></div>
-                        <div className='mt-auto mb-3'>
+                        <div className={ `w-100 d-flex flex-column align-items-center justify-content-center ${ styles.categories_list }` }></div>
+                        <div className='mt-auto mb-xl-3 mb-1'>
                               <button className={ `mx-3 ${ styles.cancel }` } onClick={ stopChoosing }>Cancel</button>
                               <button className={ `mx-3 ${ styles.confirm }` } onClick={ () => { $(`.${ styles.categories }`).css("display", "none"); } }>Confirm</button>
                         </div>
@@ -630,8 +631,8 @@ export const EditGame = () =>
                   </div>
                   <div className={ `${ styles.categories } w-50 h-50 position-absolute flex-column align-items-center` }>
                         <h1>Choose categories</h1>
-                        <div className={ `w-100 d-flex flex-column align-items-center justify-content-around ${ styles.categories_list }` }></div>
-                        <div className='mt-auto mb-3'>
+                        <div className={ `w-100 d-flex flex-column align-items-center justify-content-center ${ styles.categories_list }` }></div>
+                        <div className='mt-auto mb-xl-3 mb-1'>
                               <button className={ `mx-3 ${ styles.cancel }` } onClick={ stopChoosing }>Cancel</button>
                               <button className={ `mx-3 ${ styles.confirm }` } onClick={ () => { $(`.${ styles.categories }`).css("display", "none"); } }>Confirm</button>
                         </div>

@@ -12,11 +12,11 @@ CREATE PROCEDURE addGame(
     in picture_1 text,
     in picture_2 text,
     in picture_3 text,
-    in picture_4 text
+    in picture_4 text,
+    out id varchar(10)
 )
 BEGIN
 	declare counter int;
-    declare id varchar(10);
     select count(*) into counter from game;
     if counter<10 then
 		set id:=concat("GAME0",counter+1);
@@ -24,7 +24,7 @@ BEGIN
 		set id:=concat("GAME",counter+1);
     end if;
     insert into game values(id,name,price,discount,description,0,spec_minimum,spec_recommended,load_file(picture_1),load_file(picture_2),load_file(picture_3),load_file(picture_4));
-    select id;
+    select @id;
 END $$
 DELIMITER ;
 

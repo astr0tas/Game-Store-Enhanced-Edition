@@ -6,6 +6,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      overflow: auto;
 }
 
 .name {
@@ -111,7 +112,7 @@
 
 .categories_list {
       height: 75%;
-      overflow: auto;
+      overflow: scroll;
 }
 
 .category_checkbox {
@@ -142,7 +143,7 @@
       border: 1px solid black;
 }
 
-@media only screen and (max-height:1000px) {
+@media only screen and (max-width:1280px) {
       .name {
             width: 500px;
             height: 30px;
@@ -169,15 +170,19 @@
             align-items: center;
       }
 
+      .category_checkbox {
+            height: 15px;
+      }
+
       .category_checkbox>* {
-            font-size: 20px;
+            font-size: 13px;
       }
 
       .category_checkbox>input {
-            width: 20px;
-            height: 20px;
-            min-width: 20px;
-            min-height: 20px;
+            width: 13px;
+            height: 13px;
+            min-width: 13px;
+            min-height: 13px;
             margin-right: 10px;
       }
 
@@ -189,10 +194,40 @@
       .trash {
             font-size: 30px;
       }
+
+      .categories>h1 {
+            font-size: 25px;
+      }
+
+      .cancel {
+            width: 100px;
+            height: 30px;
+            font-size: normal;
+            border-radius: 5px;
+      }
+
+      .confirm {
+            width: 100px;
+            height: 30px;
+            font-size: normal;
+            border-radius: 5px;
+      }
 }
 
-@media only screen and (max-height:900px) {
-      .browse {
+@media only screen and (max-width:1024px) {
+      .category_checkbox {
+            height: 13px;
+      }
+
+      .category_checkbox>* {
             font-size: 10px;
+      }
+
+      .category_checkbox>input {
+            width: 10px;
+            height: 10px;
+            min-width: 10px;
+            min-height: 10px;
+            margin-right: 10px;
       }
 }

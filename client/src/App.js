@@ -18,6 +18,7 @@ import AdminForgotPassword from './Component/Admin/ForgotPassword';
 import AdminCreateNewPassword from './Component/Admin/CreateNewPassword';
 import GameList from './Component/Admin/gamelist';
 import { AddGame, EditGame } from './Component/Admin/add_edit_game';
+import GameDetail from './Component/Admin/gamedetail';
 
 function App()
 {
@@ -48,7 +49,7 @@ function App()
               </Route>
               <Route>
                 <Route path="gamelist" element={ <GameList /> } />
-                <Route path="gamelist/:id" />
+                <Route path="gamelist/:id" element={ <GameDetail /> } />
                 <Route path="gamelist/:id/edit" element={ <EditGame /> } />
                 <Route path="addgame" element={ <AddGame /> } />
               </Route>
