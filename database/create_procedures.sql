@@ -90,6 +90,42 @@ BEGIN
 END $$
 DELIMITER ;
 
+DROP PROCEDURE IF EXISTS addCustomer;
+DELIMITER $$
+CREATE PROCEDURE addCustomer(
+	in name varchar(100),
+    in email varchar(50),
+    in phone varchar(10),
+    in username varchar(20),
+    in userpassword varchar(20),
+    out usedEmail varchar(50),
+    out usedUsername varchar(20)
+)
+BEGIN
+	declare numberOfCusomer int;
+	if email in (select customer.email from customer) then
+		set usedEmail:=email;		
+    end if;
+    if username in (select customer.username from customer) then
+		set usedUsername:=username;		
+    end if;
+    if usedEmail is null and usedUsername is null then
+		select count(id) into numberOfCusomer from customer;
+        if numberOfCusomer<10 then
+			insert into customer values(concat("CUSTOMER0",numberOfCusomer+1),name,email,phone,0.0,'None',0,username,userpassword);
+		else
+			insert into customer values(concat("CUSTOMER",numberOfCusomer+1),name,email,phone,0.0,'None',0,username,userpassword);
+        end if;
+    end if;
+END $$
+DELIMITER ;
+
+-- call addCustomer('Test','b_le1@gmail.com',null,'b_le1231','Test',@usedEmail,@usedUsername);
+-- select @usedEmail as email, @usedUsername as username;
+
+
+-- select * from customer;
+
 -- select * from game;
 -- select * from belongs_to order by game_id;
 -- select * from activation_code order by game_id;

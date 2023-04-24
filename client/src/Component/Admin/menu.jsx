@@ -31,7 +31,6 @@ function AdminMenu()
     }
   }
 
-
   useEffect(() =>
   {
     if (!render.current)

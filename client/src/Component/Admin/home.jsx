@@ -3,6 +3,28 @@ import { useEffect, useRef } from 'react';
 import axios from 'axios';
 import $ from 'jquery';
 import { TbFlame } from 'react-icons/tb';
+import { CiDiscount1 } from 'react-icons/ci';
+import ReactDOM from 'react-dom/client';
+
+
+const BestSeller = (props) =>
+{
+      useEffect(() =>
+      {
+            if (props.discount === "0")
+                  $(`.discount_${ props.id }`).css("display", "none");
+      });
+
+      return (
+            <div className={ `sale d-flex flex-column align-items-center ${ props.class }` }>
+                  <img className='pic' src={ props.url } alt=""></img>
+                  <div className='section'>
+                        <button className='detail d-flex align-items-center justify-content-center mt-3' onClick={ () => { window.location.href = `/admin/gamelist/${ props.id }`; } }>{ <CiDiscount1 className={ `discount_${ props.id }` } style={ { fontSize: '25px', color: "red" } } /> }${ (props.price - props.price * props.discount / 100.0).toFixed(2) }</button>
+                        <p className='sold mt-4'>SOLD: { props.total_sale }</p>
+                  </div>
+            </div>
+      );
+}
 
 
 export default function AdminHome()
@@ -21,30 +43,22 @@ export default function AdminHome()
                   axios.get('http://localhost/admin/getBestSeller')
                         .then(res =>
                         {
+                              const group1 = ReactDOM.createRoot(document.getElementsByClassName('group')[0]);
+                              const group2 = ReactDOM.createRoot(document.getElementsByClassName('group')[1]);
+                              let temp1 = [], temp2 = [];
+                              console.log(res);
                               for (let i = 0; i < res.data.length; i++)
                               {
                                     const data = new Uint8Array(Object.values(res.data[i].picture_1));
                                     const blob = new Blob([data], { type: "image/jpg" });
                                     const url = URL.createObjectURL(blob);
-
-                                    let div = $("<div>");
-                                    div.addClass("sale").addClass("d-flex").addClass("flex-column").addClass("align-items-center");
-                                    div.append($("<img>").addClass("pic").attr("src", url).attr("alt", "picture"));
-                                    div.append(
-                                          $("<div>").addClass("section").append(
-                                                $("<button>").addClass("detail").addClass("mt-4").text("$" + res.data[i].price).on("click", function ()
-                                                {
-                                                      window.location.href = `/admin/gamelist/${ res.data[i].id }`;
-                                                })
-                                          )
-                                                .append($("<p>").addClass("sold").addClass("mt-4").text("SOLD: " + res.data[i].total_sale))
-                                    );
                                     if (i < 3)
-                                          $(".group").first().append(div);
+                                          temp1.push(<BestSeller key={ i } url={ url } class={ "" } price={ res.data[i].price } id={ res.data[i].id } discount={ res.data[i].discount } total_sale={ res.data[i].total_sale } />);
                                     else
-                                          $(".group").last().append(div.addClass("mx-5"));
-
+                                          temp2.push(<BestSeller key={ i } url={ url } class={ "mx-5" } price={ res.data[i].price } id={ res.data[i].id } discount={ res.data[i].discount } total_sale={ res.data[i].total_sale } />);
                               }
+                              group1.render(<>{ temp1 }</>);
+                              group2.render(<>{ temp2 }</>);
                         })
                         .catch(error => console.log(error));
 

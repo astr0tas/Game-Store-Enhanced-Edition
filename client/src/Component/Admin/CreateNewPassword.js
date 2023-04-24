@@ -2,11 +2,11 @@ import '../../css/Customer/Login.css';
 import axios from 'axios';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { exportedUsername } from './ForgotPassword';
+import { exportedAdminUsername } from './ForgotPassword';
 import { AiOutlineCloseCircle } from 'react-icons/ai';
 
 
-function CreateNewPassword()
+function AdminCreateNewPassword()
 {
   const Navigate = useNavigate();
 
@@ -25,13 +25,13 @@ function CreateNewPassword()
     {
       setIsMatch(true);
       const formData = new FormData();
-      formData.append("username", exportedUsername);
+      formData.append("username", exportedAdminUsername);
       formData.append("password", password);
-      axios.post('http://localhost/new_password', formData)
+      axios.post('http://localhost/admin/new_password', formData)
         .then(res =>
         {
           console.log(res);
-          Navigate("/");
+          Navigate("/admin");
         })
         .catch(error => console.log(error));
     }
@@ -79,4 +79,4 @@ function CreateNewPassword()
   );
 }
 
-export default CreateNewPassword;
+export default AdminCreateNewPassword;

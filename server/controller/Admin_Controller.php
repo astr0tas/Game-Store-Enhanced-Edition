@@ -1,16 +1,19 @@
 <?php
 require_once(__DIR__ . '\\..\\model\\admin\\Admin_Customer_Model.php');
 require_once(__DIR__ . '\\..\\model\\admin\\Admin_Game_Model.php');
+require_once(__DIR__ . '\\..\\model\\admin\\Admin_Model.php');
 
 class AdminController
 {
       private $customer_model;
       private $game_model;
+      private $admin_model;
 
       public function __construct()
       {
             $this->customer_model = new CustomerModel();
             $this->game_model = new GameModel();
+            $this->admin_model = new AdminModel();
       }
 
       public function getCustomerList()
@@ -167,9 +170,9 @@ class AdminController
             echo json_encode($result);
       }
 
-      public function updateGetGameCategory()
+      public function getGameCategory()
       {
-            $result = $this->game_model->updateGetGameCategory($_POST['id']);
+            $result = $this->game_model->getGameCategory($_POST['id']);
             echo json_encode($result);
       }
 
@@ -249,5 +252,35 @@ class AdminController
       {
             $arr = $this->game_model->getBestSeller();
             echo json_encode($arr);
+      }
+
+      public function getGameStatus()
+      {
+            $id = $_POST['id'];
+            $arr = $this->game_model->getGameStatus($id);
+            echo json_encode($arr);
+      }
+
+      public function login()
+      {
+            $username = $_POST['username'];
+            $password = $_POST['password'];
+            $arr = $this->admin_model->login($username, $password);
+            echo json_encode($arr ? true : false);
+      }
+
+      public function recovery()
+      {
+            $username = $_POST['username'];
+            $arr = $this->admin_model->recovery($username);
+            echo json_encode($arr ? true : false);
+      }
+
+      public function newPassword()
+      {
+            $username = $_POST['username'];
+            $password = $_POST['password'];
+            $this->admin_model->newPassword($username, $password);
+            echo json_encode(array("message" => "success"));
       }
 }

@@ -155,7 +155,7 @@ DirectX: Version 11
 Storage: 70 GB available space
 Additional Notes: DirectX feature level 11_1 required',load_file(concat(@picture_path,'/God of war/gow_1.jpg')),load_file(concat(@picture_path,'/God of war/gow_2.jpg')),load_file(concat(@picture_path,'/God of war/gow_3.jpg')),load_file(concat(@picture_path,'/God of war/gow_4.jpg')));
 
-insert into game values('GAME04','Red Dead Redemption 2', 42.62, 0, 'America, 1899.
+insert into game values('GAME04','Red Dead Redemption 2', 42.62, 10, 'America, 1899.
 
 Arthur Morgan and the Van der Linde gang are outlaws on the run. With federal agents and the best bounty hunters in the nation massing on their heels, the gang must rob, steal and fight their way across the rugged heartland of America in order to survive. As deepening internal divisions threaten to tear the gang apart, Arthur must make a choice between his own ideals and loyalty to the gang who raised him.
 

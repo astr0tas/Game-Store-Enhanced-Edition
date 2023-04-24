@@ -455,7 +455,7 @@ export const EditGame = () =>
                         }
                         const formData = new FormData();
                         formData.append("id", id);
-                        axios.post('http://localhost/admin/game/update/category', formData).then(Response =>
+                        axios.post('http://localhost/admin/game/category', formData).then(Response =>
                         {
                               for (let i = 0; i < Response.data.length; i++)
                               {

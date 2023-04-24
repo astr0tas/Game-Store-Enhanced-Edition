@@ -11,6 +11,6 @@ Step 7: Open the seeding_data.sql file and change the value of @path to your own
 Step 8: You are ready to go!
 
 
-==>> Next run the create_manager.sql file first then create_database.sql and finally seeding_data.sql
+==>> Next run the create_manager.sql file first then create_database.sql and then seeding_data.sql finally create_procedures.sql
 
 ==>> Enjoy the pain!

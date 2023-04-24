@@ -24,41 +24,36 @@ function Signup()
   const formSubmit = (event) =>
   {
     event.preventDefault();
-    if (inputs.password !== inputs.re_password)
-    {
-      setIsMatch(false);
-    }
-    else
-    {
-      setIsMatch(true);
 
-      const formData = new FormData();
-      formData.append("name", inputs.name);
-      formData.append("email", inputs.email);
-      formData.append("username", inputs.username);
-      formData.append("password", inputs.password);
-      if (inputs.phone)
-        formData.append("phone", inputs.phone);
-      axios.post('http://localhost/customer/sign_up.php', formData)
-        .then(res =>
+    const formData = new FormData();
+    formData.append("name", inputs.name);
+    formData.append("email", inputs.email);
+    formData.append("username", inputs.username);
+    formData.append("password", inputs.password);
+    if (inputs.phone === "" || inputs.phone === "undefined")
+      inputs.phone = null;
+    formData.append("phone", inputs.phone);
+    axios.post('http://localhost/sign_up', formData)
+      .then(res =>
+      {
+        console.log(res);
+        if (res.data.email !== null || res.data.username !== null || inputs.password !== inputs.re_password)
         {
-          if (res.data === "email")
-          {
+          if (res.data.email !== null)
             setUsedEmail(true);
-          }
-          else if (res.data === "username")
-          {
+          if (res.data.username !== null)
             setUsedAccount(true);
-          }
-          else
-          {
-            setUsedEmail(false);
-            setUsedAccount(false);
-            // Navigate("/");
-          }
-        })
-        .catch(error => console.log(error));
-    }
+          if (inputs.password !== inputs.re_password)
+            setIsMatch(false);
+        }
+        else
+        {
+          setUsedEmail(false);
+          setUsedAccount(false);
+          Navigate("/");
+        }
+      })
+      .catch(error => console.log(error));
   }
 
   return (
@@ -67,75 +62,81 @@ function Signup()
       <div className="Login d-flex align-items-center justify-content-center">
         <div className="board d-flex justify-content-center align-items-center ">
           <div className="d-flex flex-column form align-items-center justify-content-around">
-            <h1 className="text-center mb-3 pb-3 border-bottom border-secondary border-2 w-100">Register</h1>
+            <h1 className="text-center mb-3 pb-3 border-bottom border-secondary border-2 w-100 sign_up_register">Register</h1>
             <form onSubmit={ formSubmit } id="loginForm" className='w-100 d-flex flex-column align-items-center justify-content-center'>
-              <input type="text" class="form-control mb-4 rounded-pill sign_up_input" placeholder="Your name" name="name" style={ { width: "80%", fontSize: "20px" } } onChange={ formChange } />
-              <input type="text" class="form-control mb-4 rounded-pill sign_up_input" placeholder="Your email" name="email" style={ { width: "80%", fontSize: "20px" } } onChange={ formChange } />
+              <input required type="text" class="form-control mb-4 rounded-pill sign_up_input" placeholder="Your name" name="name" style={ { width: "80%", fontSize: "20px" } } onChange={ formChange } />
+              <input required type="text" class="form-control mb-4 rounded-pill sign_up_input" placeholder="Your email" name="email" style={ { width: "80%", fontSize: "20px" } } onChange={ formChange } />
               <input type="text" class="form-control mb-4 rounded-pill sign_up_input" placeholder="Your phone number" name="phone" style={ { width: "80%", fontSize: "20px" } } onChange={ formChange } />
-              <input type="text" class="form-control mb-4 rounded-pill sign_up_input" placeholder="Your username" name="username" style={ { width: "80%", fontSize: "20px" } } onChange={ formChange } />
-              <input type="password" className="form-control mb-4 rounded-pill sign_up_input" placeholder="Enter your password" name="password" style={ { width: "80%", fontSize: "20px" } } onChange={ formChange } />
-              <input type="password" className="form-control mb-4 rounded-pill sign_up_input" placeholder="Re-enter your password" name="re_password" style={ { width: "80%", fontSize: "20px" } } onChange={ formChange } />
-              <div className="d-flex align-items-center">
-                {
-                  !isMatch &&
-                  <AiOutlineCloseCircle style={ {
-                    color: 'red',
-                    fontSize: "20px",
-                    marginRight: '5px'
-                  } } />
-                }
-                {
-                  !isMatch &&
-                  <p
-                    style={ {
+              <input required type="text" class="form-control mb-4 rounded-pill sign_up_input" placeholder="Your username" name="username" style={ { width: "80%", fontSize: "20px" } } onChange={ formChange } />
+              <input required type="password" className="form-control mb-4 rounded-pill sign_up_input" placeholder="Enter your password" name="password" style={ { width: "80%", fontSize: "20px" } } onChange={ formChange } />
+              <input required type="password" className="form-control mb-4 rounded-pill sign_up_input" placeholder="Re-enter your password" name="re_password" style={ { width: "80%", fontSize: "20px" } } onChange={ formChange } />
+              <div className="d-flex flex-column align-items-center">
+                <div className="d-flex align-items-center">
+                  {
+                    usedEmail &&
+                    <AiOutlineCloseCircle style={ {
                       color: 'red',
-                      fontSize: "16px",
-                      marginBottom: '0'
-                    } }
-                  >
-                    Passwords are not matched!
-                  </p>
-                }
-                {
-                  usedEmail &&
-                  <AiOutlineCloseCircle style={ {
-                    color: 'red',
-                    fontSize: "20px",
-                    marginRight: '5px'
-                  } } />
-                }
-                {
-                  usedEmail &&
-                  <p
-                    style={ {
+                      fontSize: "20px",
+                      marginRight: '5px'
+                    } } />
+                  }
+                  {
+                    usedEmail &&
+                    <p
+                      style={ {
+                        color: 'red',
+                        fontSize: "16px",
+                        marginBottom: '0'
+                      } }
+                    >
+                      This email is used!
+                    </p>
+                  }
+                </div>
+                <div className="d-flex align-items-center">
+                  {
+                    usedAccount &&
+                    <AiOutlineCloseCircle style={ {
                       color: 'red',
-                      fontSize: "16px",
-                      marginBottom: '0'
-                    } }
-                  >
-                    This email is used!
-                  </p>
-                }
-                {
-                  usedAccount &&
-                  <AiOutlineCloseCircle style={ {
-                    color: 'red',
-                    fontSize: "20px",
-                    marginRight: '5px'
-                  } } />
-                }
-                {
-                  usedAccount &&
-                  <p
-                    style={ {
+                      fontSize: "20px",
+                      marginRight: '5px'
+                    } } />
+                  }
+                  {
+                    usedAccount &&
+                    <p
+                      style={ {
+                        color: 'red',
+                        fontSize: "16px",
+                        marginBottom: '0'
+                      } }
+                    >
+                      This account name is used!
+                    </p>
+                  }
+                </div>
+                <div className="d-flex align-items-center">
+                  {
+                    !isMatch &&
+                    <AiOutlineCloseCircle style={ {
                       color: 'red',
-                      fontSize: "16px",
-                      marginBottom: '0'
-                    } }
-                  >
-                    This account name is used!
-                  </p>
-                }
+                      fontSize: "20px",
+                      marginRight: '5px'
+                    } } />
+                  }
+                  {
+                    !isMatch &&
+                    <p
+                      style={ {
+                        color: 'red',
+                        fontSize: "16px",
+                        marginBottom: '0'
+                      } }
+                    >
+                      Passwords are not matched!
+                    </p>
+                  }
+                </div>
               </div>
               <input type="submit" className="btn btn-primary rounded-pill sign_up_input" style={ { width: "80%", fontSize: "20px" } } value="Finish" />
             </form>

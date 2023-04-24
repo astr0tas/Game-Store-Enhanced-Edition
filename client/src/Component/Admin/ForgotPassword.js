@@ -1,41 +1,41 @@
 import '../../css/Customer/Login.css';
 import axios from 'axios';
-import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { exportedUsername } from './ForgotPassword';
+import { useState } from 'react';
 import { AiOutlineCloseCircle } from 'react-icons/ai';
 
+let exportedAdminUsername = "";
 
-function CreateNewPassword()
+function AdminForgotPassword()
 {
   const Navigate = useNavigate();
 
-  const [password, setPassword] = useState();
-  const [repassword, setRepassword] = useState();
-  const [isMatch, setIsMatch] = useState(true);
+  const [username, setUsername] = useState("");
+  const [isWrong, setIsWrong] = useState(false);
 
-  const formSubmit = (e) =>
+  const formSubmit = (event) =>
   {
-    e.preventDefault();
-    if (password !== repassword)
-    {
-      setIsMatch(false);
-    }
-    else
-    {
-      setIsMatch(true);
-      const formData = new FormData();
-      formData.append("username", exportedUsername);
-      formData.append("password", password);
-      axios.post('http://localhost/new_password', formData)
-        .then(res =>
+    event.preventDefault();
+    const formData = new FormData();
+    formData.append("username", username);
+
+    axios.post('http://localhost/admin/recovery', formData)
+      .then(res =>
+      {
+        if (res.data)
         {
-          console.log(res);
-          Navigate("/");
-        })
-        .catch(error => console.log(error));
-    }
+          setIsWrong(false);
+          exportedAdminUsername = username;
+          Navigate("/admin/create_new_password");
+        }
+        else
+        {
+          setIsWrong(true);
+        }
+      })
+      .catch(error => console.log(error));
   }
+
 
   return (
     <>
@@ -45,11 +45,10 @@ function CreateNewPassword()
           <div className="d-flex flex-column form align-items-center justify-content-around">
             <h1 className="text-center mb-3 pb-3 border-bottom border-secondary border-2 w-100">Password Recovery</h1>
             <form onSubmit={ formSubmit } id="loginForm" className='w-100 d-flex flex-column align-items-center justify-content-center'>
-              <input type="password" className="form-control mb-4 rounded-pill" placeholder="Enter your password" style={ { width: "80%", fontSize: "20px" } } onChange={ (e) => { setPassword(e.target.value); } } />
-              <input type="password" className="form-control mb-4 rounded-pill" placeholder="Re-enter your password" style={ { width: "80%", fontSize: "20px" } } onChange={ (e) => { setRepassword(e.target.value); } } />
+              <input type="text" className="form-control mb-4 rounded-pill" placeholder="Enter your username" name="username" style={ { width: "80%", fontSize: "20px" } } onChange={ (e) => { setUsername(e.target.value); } } />
               <div className="d-flex align-items-center">
                 {
-                  !isMatch &&
+                  isWrong &&
                   <AiOutlineCloseCircle style={ {
                     color: 'red',
                     fontSize: "20px",
@@ -57,7 +56,7 @@ function CreateNewPassword()
                   } } />
                 }
                 {
-                  !isMatch &&
+                  isWrong &&
                   <p
                     style={ {
                       color: 'red',
@@ -65,11 +64,11 @@ function CreateNewPassword()
                       marginBottom: '0'
                     } }
                   >
-                    Passwords are not matched!
+                    Username is not found!
                   </p>
                 }
               </div>
-              <input type="submit" className="btn btn-primary rounded-pill my-3" style={ { width: "80%", fontSize: "20px" } } value="Change my password" />
+              <input type="submit" className="btn btn-primary rounded-pill my-3" style={ { width: "80%", fontSize: "20px" } } value="Continue" />
             </form>
             <div className="text-center"><a href="/" style={ { fontSize: "20px" } }>Back to login</a></div>
           </div>
@@ -79,4 +78,5 @@ function CreateNewPassword()
   );
 }
 
-export default CreateNewPassword;
+export default AdminForgotPassword;
+export { exportedAdminUsername };

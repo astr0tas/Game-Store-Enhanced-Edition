@@ -43,7 +43,6 @@ export default function GameDetail()
                   axios.post('http://localhost/admin/game/detail', formData)
                         .then(res =>
                         {
-                              console.log(res)
                               const data1 = new Uint8Array(Object.values(res.data.picture_1));
                               const blob1 = new Blob([data1], { type: "image/jpg" });
                               const url1 = URL.createObjectURL(blob1);
@@ -72,7 +71,7 @@ export default function GameDetail()
                                     image4url: url4
                               });
                         }).catch(error => { console.log(error); })
-                  axios.post('http://localhost/admin/game/update/category', formData)
+                  axios.post('http://localhost/admin/game/category', formData)
                         .then(res =>
                         {
 
@@ -85,6 +84,22 @@ export default function GameDetail()
                               $(`.${ styles.tags }`).append(
                                     $("<p>").text(res.data[res.data.length - 1].category_type)
                               );
+                        }).catch(error => { console.log(error); })
+                  axios.post('http://localhost/admin/game/detail/status', formData)
+                        .then(res =>
+                        {
+                              if (res.data.length === 1)
+                              {
+                                    $(`.add_status`).append(
+                                          $("<p>").css("color", "#128400").text("Available")
+                                    );
+                              }
+                              else
+                              {
+                                    $(`.add_status`).append(
+                                          $("<p>").css("color", "red").text("Out of stock")
+                                    );
+                              }
                         }).catch(error => { console.log(error); })
                   render.current = true;
             }
@@ -142,32 +157,35 @@ export default function GameDetail()
                                           <img
                                                 className={ `d-block w-100 ${ styles.img }` }
                                                 src={ game.image1url }
-                                                alt="First image"
+                                                alt="First"
                                           />
                                     </Carousel.Item>
                                     <Carousel.Item>
                                           <img
                                                 className={ `d-block w-100 ${ styles.img }` }
                                                 src={ game.image2url }
-                                                alt="Second image"
+                                                alt="Second"
                                           />
                                     </Carousel.Item>
                                     <Carousel.Item>
                                           <img
                                                 className={ `d-block w-100 ${ styles.img }` }
                                                 src={ game.image3url }
-                                                alt="Third image"
+                                                alt="Third"
                                           />
                                     </Carousel.Item>
                                     <Carousel.Item>
                                           <img
                                                 className={ `d-block w-100 ${ styles.img }` }
                                                 src={ game.image4url }
-                                                alt="Fourth image"
+                                                alt="Fourth"
                                           />
                                     </Carousel.Item>
                               </Carousel>
                               <div className={ `w-50 h-100 d-flex flex-column justify-content-around ${ styles.info }` }>
+                                    <div className={ `d-flex align-items-center add_status` }>
+                                          <p>Status:&nbsp;&nbsp;</p>
+                                    </div>
                                     <div className={ `d-flex align-items-center ${ styles.tags }` }>
                                           <p>Tag:&nbsp;&nbsp;</p>
                                     </div>
@@ -177,7 +195,7 @@ export default function GameDetail()
                                                 color: 'red',
                                                 marginBottom: '16px'
                                           } } /> }
-                                          { parseFloat(game.discount) !== 0 && <p>{ game.discount }%</p> }
+                                          { parseFloat(game.discount) !== 0 && <p style={ { color: 'red' } }>{ game.discount }%</p> }
                                     </div>
                                     <p>Rating:&nbsp;<AiFillStar style={ { color: "yellow", fontSize: "25px" } } />&nbsp;{ game.rating }</p>
                                     <p>Sold:&nbsp;{ game.sold }</p>

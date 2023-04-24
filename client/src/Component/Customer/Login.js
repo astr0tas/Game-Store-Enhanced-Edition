@@ -27,6 +27,7 @@ const Login = () =>
     axios.post('http://localhost/login', formData)
       .then(res =>
       {
+        console.log(res);
         if (res.data)
         {
           setIsWrong(false);

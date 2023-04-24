@@ -6,6 +6,7 @@ import { TbFlame } from 'react-icons/tb';
 import { BsCart } from "react-icons/bs";
 import { AiOutlineHeart } from "react-icons/ai";
 import $ from 'jquery';
+import { CiDiscount1 } from 'react-icons/ci';
 
 const BestSeller = (props) =>
 {
@@ -31,11 +32,17 @@ const BestSeller = (props) =>
                   $(`.add_to_cart_${ id }`).css("color", "rgb(0, 0, 0)");
       }
 
+      useEffect(() =>
+      {
+            if (props.discount === "0")
+                  $(`.discount_${ props.id }`).css("display", "none");
+      });
+
       return (
             <div className={ `sale d-flex flex-column align-items-center ${ props.class }` }>
-                  <img className='pic' src={ props.url } alt="picture"></img>
+                  <img className='pic' src={ props.url } alt=""></img>
                   <div className='section'>
-                        <button className='detail' onClick={ () => { window.location.href = `/admin/gamelist/${ props.id }`; } }>${ props.price }</button>
+                        <button className='detail d-flex align-items-center justify-content-center' onClick={ () => { window.location.href = `/gamelist/${ props.id }`; } }>{ <CiDiscount1 className={ `discount_${ props.id }` } style={ { fontSize: '25px', color: "red" } } /> }${ (props.price - props.price * props.discount / 100.0).toFixed(2) }</button>
                         <div className='d-flex w-100 justify-content-center align-items-center' style={ {
                               marginTop: "3%",
                               marginBottom: "10px"
@@ -71,9 +78,9 @@ export default function CustomerHome()
                                     const blob = new Blob([data], { type: "image/jpg" });
                                     const url = URL.createObjectURL(blob);
                                     if (i < 3)
-                                          temp1.push(<BestSeller key={ i } url={ url } class={ "" } price={ res.data[i].price } id={ res.data[i].id } />);
+                                          temp1.push(<BestSeller key={ i } url={ url } class={ "" } price={ res.data[i].price } id={ res.data[i].id } discount={ res.data[i].discount } />);
                                     else
-                                          temp2.push(<BestSeller key={ i } url={ url } class={ "mx-5" } price={ res.data[i].price } id={ res.data[i].id } />);
+                                          temp2.push(<BestSeller key={ i } url={ url } class={ "mx-5" } price={ res.data[i].price } id={ res.data[i].id } discount={ res.data[i].discount } />);
                               }
                               group1.render(<>{ temp1 }</>);
                               group2.render(<>{ temp2 }</>);

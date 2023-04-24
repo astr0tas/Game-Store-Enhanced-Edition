@@ -16,6 +16,9 @@ import GameList from './Component/Admin/gamelist';
 import { AddGame, EditGame } from './Component/Admin/add_edit_game';
 import GameDetail from './Component/Admin/gamedetail';
 import CustomerHome from './Component/Customer/home';
+import AdminCreateNewPassword from './Component/Admin/CreateNewPassword';
+import AdminForgotPassword from './Component/Admin/ForgotPassword';
+import AdminLogin from './Component/Admin/Login';
 
 function App()
 {
@@ -34,9 +37,9 @@ function App()
           </Route>
 
           <Route path="/admin">
-            {/* <Route index element={ <AdminLogin /> } />
+            <Route index element={ <AdminLogin /> } />
             <Route path="forgot_password" element={ <AdminForgotPassword /> } />
-            <Route path="create_new_password" element={ <AdminCreateNewPassword /> } /> */}
+            <Route path="create_new_password" element={ <AdminCreateNewPassword /> } />
             <Route element={ <AdminMenu /> }>
               <Route path="home" element={ <AdminHome /> } />
               <Route>
