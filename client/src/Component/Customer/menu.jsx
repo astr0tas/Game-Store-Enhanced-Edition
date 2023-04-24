@@ -4,43 +4,70 @@ import { AiOutlineLogout } from "react-icons/ai";
 import { Outlet } from 'react-router-dom';
 import { VscAccount } from "react-icons/vsc";
 import { GiRetroController } from "react-icons/gi";
-import { Nav } from 'react-bootstrap';
-import { AiOutlineHeart } from "react-icons/ai";
+import { AiOutlineHeart, AiOutlineMenu } from "react-icons/ai";
 import { BsCart } from "react-icons/bs";
+import $ from 'jquery';
+import { useEffect, useRef } from 'react';
 
 
 function CustomerMenu()
 {
+      const render = useRef(false);
+
+      const toggleMenu = () =>
+      {
+            if ($(".menu_container").css("visibility") === "hidden")
+            {
+                  $(".menu_container").css("opacity", "1");
+                  $(".menu_container").css("visibility", "visible");
+                  $(".dropdown").first().css("display", "block");
+                  $(".dropdown").last().css("display", "block");
+            }
+            else
+            {
+                  $(".menu_container").css("opacity", "0");
+                  $(".menu_container").css("visibility", "hidden");
+                  $(".dropdown").first().css("display", "block");
+                  $(".dropdown").last().css("display", "none");
+            }
+      }
+
+
+      useEffect(() =>
+      {
+            if (!render.current)
+            {
+                  render.current = true;
+                  window.addEventListener('resize', () =>
+                  {
+                        if (window.innerWidth > 575)
+                        {
+                              $(".menu_container").css("opacity", "1");
+                              $(".menu_container").css("visibility", "visible");
+                              $(".dropdown").css("display", "none");
+                        }
+                        else
+                        {
+                              $(".dropdown").first().css("display", "block");
+                        }
+                  });
+            }
+      });
+
       return (
             <>
-                  {/* <Nav className=" flex-column menu_container">
-                        <Nav.Item>
-                              <Nav.Link href="#" className="link-dark user d-flex justify-content-center"><VscAccount size={ 70 } /></Nav.Link>
-                        </Nav.Item>
-                        <Nav.Item>
-                              <Nav.Link href="#" className='item mt-3 pb-3' id="home"><BiHomeAlt2 />Home</Nav.Link>
-                        </Nav.Item>
-                        <Nav.Item>
-                              <Nav.Link href="#" className='item mt-3 pb-3' id="game"><GiRetroController />Game</Nav.Link>
-                        </Nav.Item>
-                        <Nav.Item>
-                              <Nav.Link href="#" className='item mt-3 pb-3' id="cart"><BsCart /> Cart</Nav.Link>
-                        </Nav.Item>
-                        <Nav.Item>
-                              <Nav.Link href="#" className='item mt-3 pb-3' id="wish"><AiOutlineHeart />Wishlist</Nav.Link>
-                        </Nav.Item>
-                        <Nav.Item className="mt-auto mb-3">
-                              <Nav.Link href="/" className='logout_button'><AiOutlineLogout /> Log out</Nav.Link>
-                        </Nav.Item>
-                  </Nav>
-                  <Outlet /> */}
                   <div className='customer-menu h-100'>
+                        <AiOutlineMenu size={ 25 } className="dropdown" onClick={ toggleMenu } type='button'></AiOutlineMenu>
                         <div className="d-flex flex-column menu_container">
-                              <a href="#" className="link-dark user d-flex justify-content-center"><VscAccount size={ 70 } /></a>
+                              <AiOutlineMenu size={ 25 } className="dropdown" onClick={ toggleMenu } type='button'></AiOutlineMenu>
+                              <div className='padding_when_collapse'>
+                                    <a href="#" className="link-dark d-flex justify-content-center"><VscAccount className='profile' /></a>
+                              </div>
                               <div className='d-flex flex-column justify-content-between mt-5 tabs'>
                                     <a href="#" className='item mt-3 pb-3' id="home"><BiHomeAlt2 />Home</a>
                                     <a href="#" className='item mt-3 pb-3' id="game"><GiRetroController />Game</a>
-                                    <a href="#" className='item mt-3 pb-3' id="wish"><AiOutlineHeart />Wishlist</a>
+                                    <a href="#" className='item mt-3 pb-3' id="wishlist"><AiOutlineHeart />Wishlist</a>
+                                    <a href="#" className='item mt-3 pb-3' id="cart"><BsCart />Cart</a>
                               </div>
                               <a href="#" className='logout_button'><AiOutlineLogout /> Log out</a>
                         </div>

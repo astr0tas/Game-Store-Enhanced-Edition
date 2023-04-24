@@ -19,6 +19,7 @@ import AdminCreateNewPassword from './Component/Admin/CreateNewPassword';
 import GameList from './Component/Admin/gamelist';
 import { AddGame, EditGame } from './Component/Admin/add_edit_game';
 import GameDetail from './Component/Admin/gamedetail';
+import CustomerHome from './Component/Customer/home';
 
 function App()
 {
@@ -32,8 +33,8 @@ function App()
             <Route path="forgot_password" element={ <ForgotPassword /> } />
             <Route path="create_new_password" element={ <CreateNewPassWord /> } />
             <Route path="confirm" element={ <Confirmation /> } />
-            <Route path="test" element={ <CustomerMenu /> }> {/*this is only temporary */ }
-
+            <Route element={ <CustomerMenu /> }>
+              <Route path="home" element={ <CustomerHome /> } />
             </Route>
           </Route>
 
