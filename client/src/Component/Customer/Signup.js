@@ -1,7 +1,8 @@
-import '../../css/Customer/Signup.css';
+import '../../css/Customer/Login.css';
 import axios from 'axios';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { AiOutlineCloseCircle } from 'react-icons/ai';
 
 
 function Signup()
@@ -9,6 +10,9 @@ function Signup()
   const Navigate = useNavigate();
 
   const [inputs, setInputs] = useState({});
+  const [isMatch, setIsMatch] = useState(true);
+  const [usedEmail, setUsedEmail] = useState(false);
+  const [usedAccount, setUsedAccount] = useState(false);
 
   const formChange = (event) =>
   {
@@ -20,15 +24,14 @@ function Signup()
   const formSubmit = (event) =>
   {
     event.preventDefault();
-    let ok = true;
     if (inputs.password !== inputs.re_password)
     {
-      alert("Passwords are not match!"); // This can be replace with a pop-up
-      ok = false;
+      setIsMatch(false);
     }
-
-    if (ok)
+    else
     {
+      setIsMatch(true);
+
       const formData = new FormData();
       formData.append("name", inputs.name);
       formData.append("email", inputs.email);
@@ -41,18 +44,17 @@ function Signup()
         {
           if (res.data === "email")
           {
-            alert("This email is already used!"); // This can be replace with a pop-up
-            document.getElementById("signUpForm").reset();
+            setUsedEmail(true);
           }
           else if (res.data === "username")
           {
-            alert("This username is already used!"); // This can be replace with a pop-up
-            document.getElementById("signUpForm").reset();
+            setUsedAccount(true);
           }
           else
           {
-            alert("Register successfully!"); // This can be replace with a pop-up
-            Navigate("/");
+            setUsedEmail(false);
+            setUsedAccount(false);
+            // Navigate("/");
           }
         })
         .catch(error => console.log(error));
@@ -60,21 +62,88 @@ function Signup()
   }
 
   return (
-    <div class="Signup  d-flex align-items-center">
-      <div class="container d-flex justify-content-end align-items-center ">
-        <form class="form-sign-up col-4 me-5 w-25 border p-3 rounded rounded-3 bg-info bg-gradient shadow-lg" onSubmit={ formSubmit } id="signUpForm">
-          <h1 class="text-center mb-5">Register</h1>
-          <input type="text" class="form-control mb-4 rounded-pill" placeholder="Your name" name="name" onChange={ formChange } /> {/*This is required*/ }
-          <input type="text" class="form-control mb-4 rounded-pill" placeholder="Your email" name="email" onChange={ formChange } /> {/*This is required*/ }
-          <input type="text" class="form-control mb-4 rounded-pill" placeholder="Your phone number" name="phone" onChange={ formChange } />
-          <input type="text" class="form-control mb-4 rounded-pill" placeholder="Your username" name="username" onChange={ formChange } /> {/*This is required*/ }
-          <input type="password" class="form-control mb-4 rounded-pill" placeholder="Your password" name="password" onChange={ formChange } /> {/*This is required*/ }
-          <input type="password" class="form-control mb-4 rounded-pill" placeholder="Re-enter your password" name="re_password" onChange={ formChange } /> {/*This is required*/ }
-          <input type="submit" class="btn btn-primary rounded-pill w-100 my-4" />
-          <div class="text-center">Already have an account? <a href="/">Sign in</a></div>
-        </form>
-      </div>
-    </div>
+    <>
+      <div className='background'></div>
+      <div className="Login d-flex align-items-center justify-content-center">
+        <div className="board d-flex justify-content-center align-items-center ">
+          <div className="d-flex flex-column form align-items-center justify-content-around">
+            <h1 className="text-center mb-3 pb-3 border-bottom border-secondary border-2 w-100">Register</h1>
+            <form onSubmit={ formSubmit } id="loginForm" className='w-100 d-flex flex-column align-items-center justify-content-center'>
+              <input type="text" class="form-control mb-4 rounded-pill sign_up_input" placeholder="Your name" name="name" style={ { width: "80%", fontSize: "20px" } } onChange={ formChange } />
+              <input type="text" class="form-control mb-4 rounded-pill sign_up_input" placeholder="Your email" name="email" style={ { width: "80%", fontSize: "20px" } } onChange={ formChange } />
+              <input type="text" class="form-control mb-4 rounded-pill sign_up_input" placeholder="Your phone number" name="phone" style={ { width: "80%", fontSize: "20px" } } onChange={ formChange } />
+              <input type="text" class="form-control mb-4 rounded-pill sign_up_input" placeholder="Your username" name="username" style={ { width: "80%", fontSize: "20px" } } onChange={ formChange } />
+              <input type="password" className="form-control mb-4 rounded-pill sign_up_input" placeholder="Enter your password" name="password" style={ { width: "80%", fontSize: "20px" } } onChange={ formChange } />
+              <input type="password" className="form-control mb-4 rounded-pill sign_up_input" placeholder="Re-enter your password" name="re_password" style={ { width: "80%", fontSize: "20px" } } onChange={ formChange } />
+              <div className="d-flex align-items-center">
+                {
+                  !isMatch &&
+                  <AiOutlineCloseCircle style={ {
+                    color: 'red',
+                    fontSize: "20px",
+                    marginRight: '5px'
+                  } } />
+                }
+                {
+                  !isMatch &&
+                  <p
+                    style={ {
+                      color: 'red',
+                      fontSize: "16px",
+                      marginBottom: '0'
+                    } }
+                  >
+                    Passwords are not matched!
+                  </p>
+                }
+                {
+                  usedEmail &&
+                  <AiOutlineCloseCircle style={ {
+                    color: 'red',
+                    fontSize: "20px",
+                    marginRight: '5px'
+                  } } />
+                }
+                {
+                  usedEmail &&
+                  <p
+                    style={ {
+                      color: 'red',
+                      fontSize: "16px",
+                      marginBottom: '0'
+                    } }
+                  >
+                    This email is used!
+                  </p>
+                }
+                {
+                  usedAccount &&
+                  <AiOutlineCloseCircle style={ {
+                    color: 'red',
+                    fontSize: "20px",
+                    marginRight: '5px'
+                  } } />
+                }
+                {
+                  usedAccount &&
+                  <p
+                    style={ {
+                      color: 'red',
+                      fontSize: "16px",
+                      marginBottom: '0'
+                    } }
+                  >
+                    This account name is used!
+                  </p>
+                }
+              </div>
+              <input type="submit" className="btn btn-primary rounded-pill sign_up_input" style={ { width: "80%", fontSize: "20px" } } value="Finish" />
+            </form>
+            <div className="text-center"><a href="/" style={ { fontSize: "20px" } } className='sign_up_input'>Already have an account?</a></div>
+          </div>
+        </div>
+      </div >
+    </>
   );
 }
 

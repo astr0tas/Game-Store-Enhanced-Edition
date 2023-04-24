@@ -68,7 +68,7 @@ function AdminMenu()
             <a href="/admin/customerlist" className='item mt-3 pb-3' id="customer"><BsPerson />Customer</a>
             <a href="#" className='item mt-3 pb-3' id="stats"><AiOutlineBarChart />Statistic</a>
           </div>
-          <a href="#" className='logout_button'><AiOutlineLogout /> Log out</a>
+          <a href="/admin" className='logout_button'><AiOutlineLogout /> Log out</a>
         </div>
       </div>
       <div className='admin-page h-100'>

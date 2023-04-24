@@ -64,12 +64,12 @@ function CustomerMenu()
                                     <a href="#" className="link-dark d-flex justify-content-center"><VscAccount className='profile' /></a>
                               </div>
                               <div className='d-flex flex-column justify-content-between mt-5 tabs'>
-                                    <a href="#" className='item mt-3 pb-3' id="home"><BiHomeAlt2 />Home</a>
-                                    <a href="#" className='item mt-3 pb-3' id="game"><GiRetroController />Game</a>
+                                    <a href="/home" className='item mt-3 pb-3' id="home"><BiHomeAlt2 />Home</a>
+                                    <a href="" className='item mt-3 pb-3' id="game"><GiRetroController />Game</a>
                                     <a href="#" className='item mt-3 pb-3' id="wishlist"><AiOutlineHeart />Wishlist</a>
                                     <a href="#" className='item mt-3 pb-3' id="cart"><BsCart />Cart</a>
                               </div>
-                              <a href="#" className='logout_button'><AiOutlineLogout /> Log out</a>
+                              <a href="/" className='logout_button'><AiOutlineLogout /> Log out</a>
                         </div>
                   </div>
                   <div className='customer-page h-100'>

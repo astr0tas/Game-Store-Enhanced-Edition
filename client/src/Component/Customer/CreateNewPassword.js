@@ -1,8 +1,9 @@
-import '../../css/Customer/CreateNewPassword.css';
+import '../../css/Customer/Login.css';
 import axios from 'axios';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { username } from './ForgotPassword';
+import { exportedUsername } from './ForgotPassword';
+import { AiOutlineCloseCircle } from 'react-icons/ai';
 
 
 function CreateNewPassword()
@@ -11,44 +12,70 @@ function CreateNewPassword()
 
   const [password, setPassword] = useState();
   const [repassword, setRepassword] = useState();
+  const [isMatch, setIsMatch] = useState(true);
 
   const formSubmit = (e) =>
   {
     e.preventDefault();
     if (password !== repassword)
     {
-      alert("Passwords are not match!"); // This can be replaced with a pop-up
-      document.getElementById("new_password").reset();
+      setIsMatch(false);
     }
     else
     {
+      setIsMatch(true);
       const formData = new FormData();
-      formData.append("username", username);
+      formData.append("username", exportedUsername);
       formData.append("password", password);
-      axios.post('http://localhost/customer/new_password.php', formData)
+      axios.post('http://localhost/new_password', formData)
         .then(res =>
         {
-          console.log(res.data);
-          alert("Password changed successfully!"); // This can be replaced with a pop-up
-          Navigate("/");
+          console.log(res);
+          // Navigate("/");
         })
         .catch(error => console.log(error));
     }
   }
 
   return (
-    <div class="CreateNewPassword  d-flex align-items-center">
-      <div class="container d-flex justify-content-end align-items-center ">
-        <div class="form-sign-up col-4 me-5 w-25 border p-3 rounded rounded-3 bg-info bg-gradient shadow-lg">
-          <h1 class="text-center mb-5">Enter your new password</h1>
-          <form onSubmit={ formSubmit } id="new_password">
-            <input type="password" class="form-control mb-4 rounded-pill" placeholder="Password" onChange={ (e) => setPassword(e.target.value) } />
-            <input type="password" class="form-control mb-4 rounded-pill" placeholder="Re-enter password" onChange={ (e) => setRepassword(e.target.value) } />
-            <input type="submit" class="btn btn-primary rounded-pill w-100 my-4" value="Done" />
-          </form>
+    <>
+      <div className='background'></div>
+      <div className="Login d-flex align-items-center justify-content-center">
+        <div className="board d-flex justify-content-center align-items-center ">
+          <div className="d-flex flex-column form align-items-center justify-content-around">
+            <h1 className="text-center mb-3 pb-3 border-bottom border-secondary border-2 w-100">Password Recovery</h1>
+            <form onSubmit={ formSubmit } id="loginForm" className='w-100 d-flex flex-column align-items-center justify-content-center'>
+              <input type="password" className="form-control mb-4 rounded-pill" placeholder="Enter your password" style={ { width: "80%", fontSize: "20px" } } onChange={ (e) => { setPassword(e.target.value); } } />
+              <input type="password" className="form-control mb-4 rounded-pill" placeholder="Re-enter your password" style={ { width: "80%", fontSize: "20px" } } onChange={ (e) => { setRepassword(e.target.value); } } />
+              <div className="d-flex align-items-center">
+                {
+                  !isMatch &&
+                  <AiOutlineCloseCircle style={ {
+                    color: 'red',
+                    fontSize: "20px",
+                    marginRight: '5px'
+                  } } />
+                }
+                {
+                  !isMatch &&
+                  <p
+                    style={ {
+                      color: 'red',
+                      fontSize: "16px",
+                      marginBottom: '0'
+                    } }
+                  >
+                    Passwords are not matched!
+                  </p>
+                }
+              </div>
+              <input type="submit" className="btn btn-primary rounded-pill my-3" style={ { width: "80%", fontSize: "20px" } } value="Change my password" />
+            </form>
+            <div className="text-center"><a href="/" style={ { fontSize: "20px" } }>Back to login</a></div>
+          </div>
         </div>
-      </div>
-    </div>
+      </div >
+    </>
   );
 }
 
