@@ -7,6 +7,9 @@ import { BsCart } from "react-icons/bs";
 import { AiOutlineHeart } from "react-icons/ai";
 import $ from 'jquery';
 import { CiDiscount1 } from 'react-icons/ci';
+import { checkCookie } from '../tools/cookie';
+import { useNavigate } from 'react-router-dom';
+import { domain } from '../tools/domain';
 
 const BestSeller = (props) =>
 {
@@ -59,14 +62,18 @@ export default function CustomerHome()
 {
       const effectRan = useRef(false);
 
+      const Navigate = useNavigate();
+
       useEffect(() =>
       {
+            if (!checkCookie("PHPSESSID"))
+                  Navigate("/");
             if (effectRan.current === false)
             {
                   document.getElementById("home").style.backgroundColor = "#00B3EC";
                   document.getElementById("home").style.color = "white";
 
-                  axios.get('http://localhost/getBestSeller')
+                  axios.get(`http://${ domain }/getBestSeller`)
                         .then(res =>
                         {
                               const group1 = ReactDOM.createRoot(document.getElementsByClassName('group')[0]);

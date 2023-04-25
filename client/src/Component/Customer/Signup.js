@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { AiOutlineCloseCircle } from 'react-icons/ai';
+import { domain } from '../tools/domain';
 
 
 function Signup()
@@ -33,7 +34,7 @@ function Signup()
     if (inputs.phone === "" || inputs.phone === "undefined")
       inputs.phone = null;
     formData.append("phone", inputs.phone);
-    axios.post('http://localhost/sign_up', formData)
+    axios.post(`http://${domain}/sign_up`, formData)
       .then(res =>
       {
         console.log(res);

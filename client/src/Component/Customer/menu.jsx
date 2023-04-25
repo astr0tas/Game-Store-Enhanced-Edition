@@ -8,6 +8,9 @@ import { AiOutlineHeart, AiOutlineMenu } from "react-icons/ai";
 import { BsCart } from "react-icons/bs";
 import $ from 'jquery';
 import { useEffect, useRef } from 'react';
+import { deleteCookie } from '../tools/cookie';
+import axios from 'axios';
+import { domain } from '../tools/domain';
 
 
 function CustomerMenu()
@@ -30,6 +33,12 @@ function CustomerMenu()
                   $(".dropdown").first().css("display", "block");
                   $(".dropdown").last().css("display", "none");
             }
+      }
+
+      const logOut = async () =>
+      {
+            await axios.get(`http://${domain}/logout`, { withCredentials: true }).then(res => { console.log(res); }).catch(err => { console.log(err); });
+            deleteCookie("PHPSESSID");
       }
 
 
@@ -61,7 +70,7 @@ function CustomerMenu()
                         <div className="d-flex flex-column menu_container">
                               <AiOutlineMenu size={ 25 } className="dropdown" onClick={ toggleMenu } type='button'></AiOutlineMenu>
                               <div className='padding_when_collapse'>
-                                    <a href="#" className="link-dark d-flex justify-content-center"><VscAccount className='profile' /></a>
+                                    <a href="myself" className="link-dark d-flex justify-content-center mt-2"><VscAccount className='profile' /></a>
                               </div>
                               <div className='d-flex flex-column justify-content-between mt-5 tabs'>
                                     <a href="/home" className='item mt-3 pb-3' id="home"><BiHomeAlt2 />Home</a>
@@ -69,7 +78,7 @@ function CustomerMenu()
                                     <a href="#" className='item mt-3 pb-3' id="wishlist"><AiOutlineHeart />Wishlist</a>
                                     <a href="#" className='item mt-3 pb-3' id="cart"><BsCart />Cart</a>
                               </div>
-                              <a href="/" className='logout_button'><AiOutlineLogout /> Log out</a>
+                              <a href="/" className='logout_button' onClick={ () => { logOut() } }><AiOutlineLogout /> Log out</a>
                         </div>
                   </div>
                   <div className='customer-page h-100'>

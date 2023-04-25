@@ -4,6 +4,9 @@ import axios from 'axios';
 import $ from 'jquery';
 import '../../css/Admin/cuslist.css';
 import ReactDOM from 'react-dom/client';
+import { checkCookie } from '../tools/cookie';
+import { useNavigate } from 'react-router-dom';
+import { domain } from '../tools/domain';
 
 const Customer = (props) =>
 {
@@ -26,14 +29,19 @@ export default function CusList()
 {
     const render = useRef(false);
 
+    const Navigate = useNavigate();
+
     useEffect(() =>
     {
+        if (!checkCookie("PHPSESSID"))
+            Navigate("/admin");
+
         if (!render.current)
         {
             $("#customer").css("color", "white");
             $("#customer").css("background-color", "#00B3EC");
 
-            axios.get('http://localhost/admin/customer/getList')
+            axios.get(`http://${domain}/admin/customer/getList`)
                 .then(res =>
                 {
                     let temp = [];
@@ -59,7 +67,7 @@ export default function CusList()
         {
             const formData = new FormData();
             formData.append("id", checkedValues[i]);
-            axios.post('http://localhost/admin/customer/delete', formData)
+            axios.post(`http://${domain}/admin/customer/delete`, formData)
                 .then(res =>
                 {
                     console.log(res);
@@ -95,7 +103,7 @@ export default function CusList()
         $("#table_body").empty();
         const formData = new FormData();
         formData.append("data", $("#search").val());
-        axios.post('http://localhost/admin/customer/find', formData)
+        axios.post(`http://${domain}/admin/customer/find`, formData)
             .then(res =>
             {
                 let temp = [];

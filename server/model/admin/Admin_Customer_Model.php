@@ -9,9 +9,9 @@ class CustomerModel
             $user = 'owner';
             $password = 'owner123';
             $database = 'game_store';
-            $port='3306';
+            $port = '3306';
 
-            $this->db = new mysqli($host, $user, $password, $database,$port);
+            $this->db = new mysqli($host, $user, $password, $database, $port);
             if ($this->db->connect_error) {
                   die('Connection failed: ' . $this->db->connect_error);
             }
@@ -93,10 +93,16 @@ class CustomerModel
             return $arr;
       }
 
-      public function edit($id, $rank, $discount)
+      public function edit($id, $rank, $discount, $email, $phone)
       {
-            $sql = "update customer 
-            set membership_rank = '$rank', membership_discount = '$discount'
+            $sql = "";
+            if ($phone === "null")
+                  $sql = "update customer 
+            set membership_rank = '$rank', membership_discount = '$discount',email='$email',phone=null
+            where id='$id'";
+            else
+                  $sql = "update customer 
+            set membership_rank = '$rank', membership_discount = '$discount',email='$email',phone='$phone'
             where id='$id'";
             return $this->db->query($sql);
       }

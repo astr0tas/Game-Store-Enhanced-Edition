@@ -19,6 +19,7 @@ import CustomerHome from './Component/Customer/home';
 import AdminCreateNewPassword from './Component/Admin/CreateNewPassword';
 import AdminForgotPassword from './Component/Admin/ForgotPassword';
 import AdminLogin from './Component/Admin/Login';
+import CusPersonalInfo from './Component/Customer/personalInfo';
 
 function App()
 {
@@ -32,6 +33,7 @@ function App()
             <Route path="forgot_password" element={ <ForgotPassword /> } />
             <Route path="create_new_password" element={ <CreateNewPassWord /> } />
             <Route element={ <CustomerMenu /> }>
+              <Route path="myself" element={ <CusPersonalInfo /> } />
               <Route path="home" element={ <CustomerHome /> } />
             </Route>
           </Route>

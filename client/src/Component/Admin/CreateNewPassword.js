@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { exportedAdminUsername } from './ForgotPassword';
 import { AiOutlineCloseCircle } from 'react-icons/ai';
+import { domain } from '../tools/domain';
 
 
 function AdminCreateNewPassword()
@@ -27,7 +28,7 @@ function AdminCreateNewPassword()
       const formData = new FormData();
       formData.append("username", exportedAdminUsername);
       formData.append("password", password);
-      axios.post('http://localhost/admin/new_password', formData)
+      axios.post(`http://${domain}/admin/new_password`, formData)
         .then(res =>
         {
           console.log(res);

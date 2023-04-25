@@ -9,6 +9,8 @@ import FormattedText from '../tools/formatText';
 import { Carousel } from "react-bootstrap";
 import '../../css/carousel.css';
 import { CiDiscount1 } from 'react-icons/ci';
+import { checkCookie } from '../tools/cookie';
+import { domain } from '../tools/domain';
 
 
 export default function GameDetail()
@@ -33,6 +35,9 @@ export default function GameDetail()
       const Navigate = useNavigate();
       useEffect(() =>
       {
+            if (!checkCookie("PHPSESSID"))
+                  Navigate("/admin");
+
             if (!render.current)
             {
                   $("#game").css("color", "white");
@@ -40,7 +45,7 @@ export default function GameDetail()
 
                   const formData = new FormData();
                   formData.append("id", id);
-                  axios.post('http://localhost/admin/game/detail', formData)
+                  axios.post(`http://${domain}/admin/game/detail`, formData)
                         .then(res =>
                         {
                               const data1 = new Uint8Array(Object.values(res.data.picture_1));
@@ -71,7 +76,7 @@ export default function GameDetail()
                                     image4url: url4
                               });
                         }).catch(error => { console.log(error); })
-                  axios.post('http://localhost/admin/game/category', formData)
+                  axios.post(`http://${domain}/admin/game/category`, formData)
                         .then(res =>
                         {
 
@@ -85,7 +90,7 @@ export default function GameDetail()
                                     $("<p>").text(res.data[res.data.length - 1].category_type)
                               );
                         }).catch(error => { console.log(error); })
-                  axios.post('http://localhost/admin/game/detail/status', formData)
+                  axios.post(`http://${domain}/admin/game/detail/status`, formData)
                         .then(res =>
                         {
                               if (res.data.length === 1)
@@ -109,7 +114,7 @@ export default function GameDetail()
       {
             const formData = new FormData();
             formData.append("id", id);
-            axios.post('http://localhost/admin/game/delete', formData)
+            axios.post(`http://${domain}/admin/game/delete`, formData)
                   .then(res =>
                   {
                         console.log(res);

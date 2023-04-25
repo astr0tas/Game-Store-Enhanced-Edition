@@ -11,6 +11,10 @@
       // define routes
       // customer routes
       $router->get("/getBestSeller", "CustomerController@getBestSeller");
+      $router->get("/logout", "CustomerController@logout");
+      $router->get("/myself", "CustomerController@myself");
+      $router->get("/myself/history", "CustomerController@myHistory");
+      $router->post("/myself/edit", "CustomerController@updateMySelf");
       $router->post("/login", "CustomerController@login");
       $router->post("/recovery", "CustomerController@recovery");
       $router->post("/new_password", "CustomerController@newPassword");
@@ -21,6 +25,7 @@
       $router->get("/admin/game/list", "AdminController@getGameList");
       $router->get("/admin/game/categories", "AdminController@getCategories");
       $router->get("/admin/getBestSeller", "AdminController@getBestSeller");
+      $router->get("/admin/logout", "AdminController@logout");
       $router->post("/admin/customer/find", "AdminController@findCustomer");
       $router->post("/admin/customer/delete", "AdminController@deleteCustomer");
       $router->post("/admin/customer/detail", "AdminController@customerDetail");

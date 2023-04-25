@@ -1,8 +1,10 @@
 import '../../css/Customer/Login.css';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { AiOutlineCloseCircle } from 'react-icons/ai';
+import { checkCookie } from '../tools/cookie';
+import { domain } from '../tools/domain';
 
 const AdminLogin = () =>
 {
@@ -24,12 +26,13 @@ const AdminLogin = () =>
     const formData = new FormData();
     formData.append("username", inputs.username);
     formData.append("password", inputs.password);
-    axios.post('http://localhost/admin/login', formData)
+    axios.post(`http://${domain}/admin/login`, formData)
       .then(res =>
       {
         console.log(res);
         if (res.data)
         {
+          document.cookie = `${ res.data.name }=${ res.data.value }; path="/";`;
           setIsWrong(false);
           Navigate("/admin/home");
         }
@@ -40,6 +43,12 @@ const AdminLogin = () =>
       })
       .catch(error => console.log(error));
   }
+
+  useEffect(() =>
+  {
+    if (checkCookie("PHPSESSID"))
+      Navigate("/admin/home");
+  });
 
   return (
     <>

@@ -2,6 +2,7 @@
 require_once(__DIR__ . '\\..\\model\\admin\\Admin_Customer_Model.php');
 require_once(__DIR__ . '\\..\\model\\admin\\Admin_Game_Model.php');
 require_once(__DIR__ . '\\..\\model\\admin\\Admin_Model.php');
+require_once(__DIR__ . '\\..\\model\\admin\\Admin_Session.php');
 
 class AdminController
 {
@@ -55,7 +56,9 @@ class AdminController
             $id = $_POST["id"];
             $rank = $_POST["rank"];
             $discount = $_POST["discount"];
-            $result = $this->customer_model->edit($id, $rank, $discount);
+            $email = $_POST["email"];
+            $phone = $_POST["phone"];
+            $result = $this->customer_model->edit($id, $rank, $discount, $email, $phone);
             echo json_encode(array("message" => $result ? "success" : "failed"));
       }
 
@@ -266,7 +269,20 @@ class AdminController
             $username = $_POST['username'];
             $password = $_POST['password'];
             $arr = $this->admin_model->login($username, $password);
-            echo json_encode($arr ? true : false);
+            if ($arr) {
+                  startAdminSession($arr['id']);
+            } else
+                  echo json_encode(false);
+      }
+
+      public function logout()
+      {
+            foreach ($_COOKIE as $name => $value) {
+                  if ($name === "PHPSESSID") {
+                        echo json_encode(killAdminSession($value));
+                        break;
+                  }
+            }
       }
 
       public function recovery()

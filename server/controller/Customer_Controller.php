@@ -1,6 +1,7 @@
 <?php
 require_once(__DIR__ . '\\..\\model\\customer\\Customer_Game_Model.php');
 require_once(__DIR__ . '\\..\\model\\customer\\Customer_Model.php');
+require_once(__DIR__ . '\\..\\model\\customer\\Customer_Session.php');
 
 class CustomerController
 {
@@ -24,7 +25,20 @@ class CustomerController
             $username = $_POST['username'];
             $password = $_POST['password'];
             $arr = $this->customer_model->login($username, $password);
-            echo json_encode($arr ? true : false);
+            if ($arr) {
+                  startSession($arr['id']);
+            } else
+                  echo json_encode(false);
+      }
+
+      public function logout()
+      {
+            foreach ($_COOKIE as $name => $value) {
+                  if ($name === "PHPSESSID") {
+                        echo json_encode(kill($value));
+                        break;
+                  }
+            }
       }
 
       public function recovery()
@@ -50,5 +64,25 @@ class CustomerController
             $password = $_POST['password'];
             $phone = $_POST['phone'];
             echo json_encode($this->customer_model->signUp($name, $email, $username, $password, $phone));
+      }
+
+      public function myself()
+      {
+            echo json_encode($this->customer_model->myself());
+      }
+
+      public function myHistory()
+      {
+            echo json_encode($this->customer_model->myHistory());
+      }
+
+      public function updateMySelf()
+      {
+            $name = $_POST['name'];
+            $email = $_POST['email'];
+            $phone = $_POST['phone'];
+            $password = $_POST['password'];
+            $result = $this->customer_model->updateMySelf($name, $email, $phone, $password);
+            echo json_encode(array("message" => $result ? "success" : "failed"));
       }
 }

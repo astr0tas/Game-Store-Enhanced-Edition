@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { AiOutlineCloseCircle } from 'react-icons/ai';
+import { domain } from '../tools/domain';
 
 let exportedUsername = "";
 
@@ -19,7 +20,7 @@ function ForgotPassword()
     const formData = new FormData();
     formData.append("username", username);
 
-    axios.post('http://localhost/recovery', formData)
+    axios.post(`http://${domain}/recovery`, formData)
       .then(res =>
       {
         if (res.data)

@@ -4,6 +4,8 @@ import { BiTrash } from 'react-icons/bi';
 import { useRef, useEffect, useState } from 'react';
 import $ from 'jquery';
 import axios from 'axios';
+import { checkCookie } from '../tools/cookie';
+import { domain } from '../tools/domain';
 
 export const AddGame = () =>
 {
@@ -31,13 +33,18 @@ export const AddGame = () =>
             }
       };
 
+      const Navigate = useNavigate();
+
       useEffect(() =>
       {
+            if (!checkCookie("PHPSESSID"))
+                  Navigate("/admin");
+
             if (!render.current)
             {
                   $("#game").css("color", "white");
                   $("#game").css("background-color", "#00B3EC");
-                  axios.get('http://localhost/admin/game/categories').then(res =>
+                  axios.get(`http://${domain}/admin/game/categories`).then(res =>
                   {
                         for (let i = 0; i < res.data.length; i += 3)
                         {
@@ -182,12 +189,12 @@ export const AddGame = () =>
                   formData.append("minSpec", minSpec);
                   formData.append("recSpec", recSpec);
                   formData.append("name", name);
-                  axios.post('http://localhost/admin/game/create', formData).then(res =>
+                  axios.post(`http://${domain}/admin/game/create`, formData).then(res =>
                   {
                         const formData1 = new FormData();
                         formData1.append("codes", codes);
                         formData1.append("id", res.data);
-                        axios.post('http://localhost/admin/game/addCode', formData1).then(Response =>
+                        axios.post(`http://${domain}/admin/game/addCode`, formData1).then(Response =>
                         {
                               console.log(Response);
                         }).catch(error => { console.log(error); })
@@ -195,7 +202,7 @@ export const AddGame = () =>
                         const formData2 = new FormData();
                         formData2.append("tag", tag);
                         formData2.append("id", res.data);
-                        axios.post('http://localhost/admin/game/addTag', formData2).then(Response =>
+                        axios.post(`http://${domain}/admin/game/addTag`, formData2).then(Response =>
                         {
                               console.log(Response);
                         }).catch(error => { console.log(error); })
@@ -349,11 +356,14 @@ export const EditGame = () =>
 
       useEffect(() =>
       {
+            if (!checkCookie("PHPADMINSESSID"))
+                  Navigate("/");
+
             if (!render.current)
             {
                   $("#game").css("color", "white");
                   $("#game").css("background-color", "#00B3EC");
-                  axios.get('http://localhost/admin/game/categories').then(res =>
+                  axios.get(`http://${domain}/admin/game/categories`).then(res =>
                   {
                         for (let i = 0; i < res.data.length; i += 3)
                         {
@@ -455,7 +465,7 @@ export const EditGame = () =>
                         }
                         const formData = new FormData();
                         formData.append("id", id);
-                        axios.post('http://localhost/admin/game/category', formData).then(Response =>
+                        axios.post(`http://${domain}/admin/game/category`, formData).then(Response =>
                         {
                               for (let i = 0; i < Response.data.length; i++)
                               {
@@ -464,7 +474,7 @@ export const EditGame = () =>
                                     setTag(prevTags => [...prevTags, Response.data[i].category_type]);
                               }
                         }).catch(error => { console.log(error); })
-                        axios.post('http://localhost/admin/game/update/info', formData).then(Response =>
+                        axios.post(`http://${domain}/admin/game/update/info`, formData).then(Response =>
                         {
                               $(`.${ styles.name }`).val(Response.data.name);
                               setName(Response.data.name);
@@ -581,7 +591,7 @@ export const EditGame = () =>
                   formData.append("recSpec", recSpec);
                   formData.append("name", name);
                   formData.append("id", id);
-                  axios.post('http://localhost/admin/game/update', formData).then(res =>
+                  axios.post(`http://${domain}/admin/game/update`, formData).then(res =>
                   {
                         console.log(res);
                   }).catch(error => { console.log(error); })
@@ -589,7 +599,7 @@ export const EditGame = () =>
                   const formData1 = new FormData();
                   formData1.append("codes", codes);
                   formData1.append("id", id);
-                  axios.post('http://localhost/admin/game/addCode', formData1).then(Response =>
+                  axios.post(`http://${domain}/admin/game/addCode`, formData1).then(Response =>
                   {
                         console.log(Response);
                   }).catch(error => { console.log(error); })
@@ -597,7 +607,7 @@ export const EditGame = () =>
                   const formData2 = new FormData();
                   formData2.append("tag", tag);
                   formData2.append("id", id);
-                  axios.post('http://localhost/admin/game/addTag', formData2).then(Response =>
+                  axios.post(`http://${domain}/admin/game/addTag`, formData2).then(Response =>
                   {
                         console.log(Response);
                   }).catch(error => { console.log(error); })
