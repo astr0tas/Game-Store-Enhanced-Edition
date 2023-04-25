@@ -1,5 +1,5 @@
 import '../../css/Customer/home.css';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import ReactDOM from 'react-dom/client';
 import { TbFlame } from 'react-icons/tb';
@@ -13,32 +13,62 @@ import { domain } from '../tools/domain';
 
 const BestSeller = (props) =>
 {
+      const [status, setStatus] = useState(false);
+
       const addToWishlist = (event, id) =>
       {
             event.preventDefault();
             if ($(`.add_to_wishlist_${ id }`).css("color") === "rgb(0, 0, 0)")
             {
                   $(`.add_to_wishlist_${ id }`).css("color", "red");
+                  const formData = new FormData();
+                  formData.append('game_id', id);
+                  axios.post(`http://${ domain }/addWishlist`, formData, { withCredentials: true }).then(res => { console.log(res); }).catch(err => { console.log(err); })
             }
             else
             {
                   $(`.add_to_wishlist_${ id }`).css("color", "rgb(0, 0, 0)");
+                  const formData = new FormData();
+                  formData.append('game_id', id);
+                  axios.post(`http://${ domain }/removeWishlis`, formData, { withCredentials: true }).then(res => { console.log(res); }).catch(err => { console.log(err); })
             }
       }
 
       const addToCart = (event, id) =>
       {
             event.preventDefault();
-            if ($(`.add_to_cart_${ id }`).css("color") === "rgb(0, 0, 0)")
-                  $(`.add_to_cart_${ id }`).css("color", "#00B3EC");
+            if (status)
+            {
+                  if ($(`.add_to_cart_${ id }`).css("color") === "rgb(0, 0, 0)")
+                  {
+                        $(`.add_to_cart_${ id }`).css("color", "#00B3EC");
+                        const formData = new FormData();
+                        formData.append('game_id', id);
+                        axios.post(`http://${ domain }/addCart`, formData, { withCredentials: true }).then(res => { console.log(res); }).catch(err => { console.log(err); })
+                  }
+                  else
+                  {
+                        $(`.add_to_cart_${ id }`).css("color", "rgb(0, 0, 0)");
+                        const formData = new FormData();
+                        formData.append('game_id', id);
+                        axios.post(`http://${ domain }/removeCart`, formData, { withCredentials: true }).then(res => { console.log(res); }).catch(err => { console.log(err); })
+                  }
+            }
             else
-                  $(`.add_to_cart_${ id }`).css("color", "rgb(0, 0, 0)");
+                  $('.out_of_stock_pop_up').css("display", "flex");
       }
 
       useEffect(() =>
       {
             if (props.discount === "0")
                   $(`.discount_${ props.id }`).css("display", "none");
+            const formData = new FormData();
+            formData.append('id', props.id);
+            axios.post(`http://${ domain }/gameStatus`, formData)
+                  .then(res =>
+                  {
+                        setStatus(res.data);
+                  }).catch(err => { console.log(err); })
       });
 
       return (
@@ -112,6 +142,10 @@ export default function CustomerHome()
                               <div className="group">
                               </div>
                         </div>
+                  </div>
+                  <div className='position-absolute out_of_stock_pop_up flex-column align-items-center justify-content-between'>
+                        <h2 className='mt-3 mt-md-5'>This game is out of stock!</h2>
+                        <button className='mb-3 mb-md-5 OKAY' onClick={ () => { $('.out_of_stock_pop_up').css("display", "none"); } }>OKAY</button>
                   </div>
             </div>
       )

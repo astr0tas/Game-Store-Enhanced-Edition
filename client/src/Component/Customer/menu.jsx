@@ -8,7 +8,7 @@ import { AiOutlineHeart, AiOutlineMenu } from "react-icons/ai";
 import { BsCart } from "react-icons/bs";
 import $ from 'jquery';
 import { useEffect, useRef } from 'react';
-import { deleteCookie } from '../tools/cookie';
+import { deleteCustomerCookie } from '../tools/cookie';
 import axios from 'axios';
 import { domain } from '../tools/domain';
 
@@ -38,7 +38,7 @@ function CustomerMenu()
       const logOut = async () =>
       {
             await axios.get(`http://${domain}/logout`, { withCredentials: true }).then(res => { console.log(res); }).catch(err => { console.log(err); });
-            deleteCookie("PHPSESSID");
+            deleteCustomerCookie();
       }
 
 

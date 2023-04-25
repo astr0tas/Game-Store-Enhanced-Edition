@@ -32,7 +32,7 @@ const AdminLogin = () =>
         console.log(res);
         if (res.data)
         {
-          document.cookie = `${ res.data.name }=${ res.data.value }; path="/";`;
+          document.cookie = `${ res.data.name }=${ res.data.value }; path=/admin;`;
           setIsWrong(false);
           Navigate("/admin/home");
         }

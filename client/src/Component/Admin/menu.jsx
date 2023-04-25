@@ -6,7 +6,7 @@ import { Outlet } from 'react-router-dom';
 import { VscAccount } from "react-icons/vsc";
 import { GiRetroController } from "react-icons/gi";
 import { useEffect, useRef } from 'react';
-import { deleteCookie } from '../tools/cookie';
+import { deleteAdminCookie } from '../tools/cookie';
 import $ from 'jquery';
 import axios from 'axios';
 import { domain } from '../tools/domain';
@@ -57,8 +57,8 @@ function AdminMenu()
 
   const logOut = async () =>
   {
-    await axios.get(`http://${domain}/admin/logout`, { withCredentials: true }).then(res => { console.log(res); }).catch(err => { console.log(err); });
-    deleteCookie("PHPSESSID");
+    await axios.get(`http://${ domain }/admin/logout`, { withCredentials: true }).then(res => { console.log(res); }).catch(err => { console.log(err); });
+    deleteAdminCookie();
   }
 
   return (
@@ -68,7 +68,7 @@ function AdminMenu()
         <div className="d-flex flex-column menu_container">
           <AiOutlineMenu size={ 25 } className="dropdown" onClick={ toggleMenu } type='button'></AiOutlineMenu>
           <div className='padding_when_collapse'>
-            <a href="#" className="link-dark d-flex justify-content-center mt-2"><VscAccount className='profile' /></a>
+            <a href="/admin/myself" className="link-dark d-flex justify-content-center mt-2"><VscAccount className='profile' /></a>
           </div>
           <div className='d-flex flex-column justify-content-between mt-5 tabs'>
             <a href="/admin/home" className='item mt-3 pb-3' id="home"><BiHomeAlt2 />Home</a>

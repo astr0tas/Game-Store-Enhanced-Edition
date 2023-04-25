@@ -123,8 +123,13 @@ DELIMITER ;
 -- call addCustomer('Test','b_le1@gmail.com',null,'b_le1231','Test',@usedEmail,@usedUsername);
 -- select @usedEmail as email, @usedUsername as username;
 
+-- select * from wishlist;
+
+-- select * from shopping_cart;
 
 -- select * from customer;
+
+select * from admin;
 
 -- select * from game;
 -- select * from belongs_to order by game_id;

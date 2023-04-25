@@ -31,7 +31,7 @@ const Login = () =>
       {
         if (res.data)
         {
-          document.cookie = `${ res.data.name }=${ res.data.value }; path="/";`;
+          document.cookie = `${ res.data.name }=${ res.data.value }; path=/;`;
           setIsWrong(false);
           Navigate("/home");
         }
@@ -62,7 +62,7 @@ const Login = () =>
               <div className="d-flex align-items-center">
                 {
                   isWrong &&
-                  <AiOutlineCloseCircle style={ {
+                  <AiOutlineCloseCircle className='not_correct' style={ {
                     color: 'red',
                     fontSize: "20px",
                     marginRight: '5px'
@@ -70,7 +70,7 @@ const Login = () =>
                 }
                 {
                   isWrong &&
-                  <p
+                  <p className='not_correct'
                     style={ {
                       color: 'red',
                       fontSize: "16px",

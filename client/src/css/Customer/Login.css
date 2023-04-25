@@ -39,6 +39,7 @@
     margin-bottom: 0 !important;
 }
 
+
 @media only screen and (max-width:1280px) {
     .Login .board {
         width: 80%;
@@ -58,5 +59,13 @@
 
     .Login .form {
         width: 70%;
+    }
+
+    .Login .not_correct:first-child {
+        font-size: 16px !important;
+    }
+
+    .Login .not_correct:last-child {
+        font-size: 11px !important;
     }
 }

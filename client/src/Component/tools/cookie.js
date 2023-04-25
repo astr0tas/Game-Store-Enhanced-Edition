@@ -12,12 +12,7 @@ export function checkCookie(cookieName)
       return false;
 }
 
-export function deleteCookie(name)
-{
-      document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
-}
-
-// export function getCookie(cookieName)
+// function getCookie(cookieName)
 // {
 //       const cookies = document.cookie.split("; ");
 //       for (let i = 0; i < cookies.length; i++)
@@ -30,3 +25,14 @@ export function deleteCookie(name)
 //       }
 //       return "";
 // }
+
+export function deleteCustomerCookie()
+{
+      document.cookie = 'PHPSESSID=; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/';
+}
+
+export function deleteAdminCookie()
+{
+      document.cookie = 'PHPSESSID=; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/admin';
+      document.cookie = 'PHPSESSID=; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/';
+}

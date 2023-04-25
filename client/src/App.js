@@ -1,25 +1,26 @@
 import './App.css';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import 'bootstrap/dist/css/bootstrap.min.css'
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 import Login from './Component/Customer/Login';
 import Signup from './Component/Customer/Signup';
 import ForgotPassword from './Component/Customer/ForgotPassword';
 import CreateNewPassWord from './Component/Customer/CreateNewPassword';
 import CustomerMenu from './Component/Customer/menu';
+import CusPersonalInfo from './Component/Customer/personalInfo';
+import CustomerHome from './Component/Customer/home';
+
 import CusDetail from './Component/Admin/cusdetail';
 import CusList from './Component/Admin/cuslist';
-// import Stat from './Component/Admin/Stat';
-
 import AdminMenu from './Component/Admin/menu';
 import AdminHome from './Component/Admin/home';
 import GameList from './Component/Admin/gamelist';
 import { AddGame, EditGame } from './Component/Admin/add_edit_game';
 import GameDetail from './Component/Admin/gamedetail';
-import CustomerHome from './Component/Customer/home';
 import AdminCreateNewPassword from './Component/Admin/CreateNewPassword';
 import AdminForgotPassword from './Component/Admin/ForgotPassword';
 import AdminLogin from './Component/Admin/Login';
-import CusPersonalInfo from './Component/Customer/personalInfo';
+import AdminInfo from './Component/Admin/personalInfo';
 
 function App()
 {
@@ -43,6 +44,7 @@ function App()
             <Route path="forgot_password" element={ <AdminForgotPassword /> } />
             <Route path="create_new_password" element={ <AdminCreateNewPassword /> } />
             <Route element={ <AdminMenu /> }>
+              <Route path='myself' element={ <AdminInfo /> } />
               <Route path="home" element={ <AdminHome /> } />
               <Route>
                 <Route path="customerlist" element={ <CusList /> } />

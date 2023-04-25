@@ -31,10 +31,10 @@ function Signup()
     formData.append("email", inputs.email);
     formData.append("username", inputs.username);
     formData.append("password", inputs.password);
-    if (inputs.phone === "" || inputs.phone === "undefined")
+    if (inputs.phone === "" || typeof (inputs.phone) === "undefined")
       inputs.phone = null;
     formData.append("phone", inputs.phone);
-    axios.post(`http://${domain}/sign_up`, formData)
+    axios.post(`http://${ domain }/sign_up`, formData)
       .then(res =>
       {
         console.log(res);
