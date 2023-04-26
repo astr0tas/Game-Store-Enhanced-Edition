@@ -9,6 +9,10 @@ import CreateNewPassWord from './Component/Customer/CreateNewPassword';
 import CustomerMenu from './Component/Customer/menu';
 import CusPersonalInfo from './Component/Customer/personalInfo';
 import CustomerHome from './Component/Customer/home';
+import CustomerWishlist from './Component/Customer/wishlist';
+import CustomerGame from './Component/Customer/all_game';
+import CGameDetail from './Component/Customer/cgamedetail'
+
 
 import CusDetail from './Component/Admin/cusdetail';
 import CusList from './Component/Admin/cuslist';
@@ -22,6 +26,13 @@ import AdminForgotPassword from './Component/Admin/ForgotPassword';
 import AdminLogin from './Component/Admin/Login';
 import AdminInfo from './Component/Admin/personalInfo';
 
+
+//test cart
+
+import Shop from './Component/test/pages/shop/shop';
+import Cart from './Component/test/pages/cart/cart';
+import { ShopContextProvider } from './Component/test/context/shop-context';
+import Payout from './Component/test/pages/cart/payout'
 function App()
 {
   return (
@@ -36,6 +47,9 @@ function App()
             <Route element={ <CustomerMenu /> }>
               <Route path="myself" element={ <CusPersonalInfo /> } />
               <Route path="home" element={ <CustomerHome /> } />
+              <Route path="allgames" element={ <CustomerGame /> } />
+              <Route path="allgames/:id" element={ <CGameDetail /> } />
+              <Route path="wishlist" element={ <CustomerWishlist /> } />
             </Route>
           </Route>
 
@@ -61,6 +75,19 @@ function App()
 
         </Routes>
       </BrowserRouter>
+      <ShopContextProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route element={ <CustomerMenu /> }>
+              <Route path="shop/cart" element={ <Cart /> } />
+              <Route path="shop" element={ <Shop /> } />
+              <Route path="/payout" element={ <Payout /> } />
+
+            </Route>
+
+          </Routes>
+        </BrowserRouter>
+      </ShopContextProvider>
     </div >
   );
 }

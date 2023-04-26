@@ -122,7 +122,6 @@ DELIMITER ;
 
 -- call addCustomer('Test','b_le1@gmail.com',null,'b_le1231','Test',@usedEmail,@usedUsername);
 -- select @usedEmail as email, @usedUsername as username;
-
 -- select * from wishlist;
 
 -- select * from shopping_cart;

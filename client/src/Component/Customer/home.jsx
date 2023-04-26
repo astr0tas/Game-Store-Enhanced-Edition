@@ -42,6 +42,8 @@ const BestSeller = (props) =>
                   if ($(`.add_to_cart_${ id }`).css("color") === "rgb(0, 0, 0)")
                   {
                         $(`.add_to_cart_${ id }`).css("color", "#00B3EC");
+                        if ($(`.add_to_wishlist_${ id }`).css("color") === "rgb(255, 0, 0)")
+                              $(`.add_to_wishlist_${ id }`).css("color", "rgb(0, 0, 0)");
                         const formData = new FormData();
                         formData.append('game_id', id);
                         axios.post(`http://${ domain }/addCart`, formData, { withCredentials: true }).then(res => { console.log(res); }).catch(err => { console.log(err); })
@@ -69,13 +71,25 @@ const BestSeller = (props) =>
                   {
                         setStatus(res.data);
                   }).catch(err => { console.log(err); })
+            axios.post(`http://${ domain }/isAddedToWishlist`, formData, { withCredentials: true })
+                  .then(res =>
+                  {
+                        if (res.data)
+                              $(`.add_to_wishlist_${ props.id }`).css("color", "red");
+                  }).catch(err => { console.log(err); })
+            axios.post(`http://${ domain }/isAddedToCart`, formData, { withCredentials: true })
+                  .then(res =>
+                  {
+                        if (res.data)
+                              $(`.add_to_cart_${ props.id }`).css("color", "#00B3EC");
+                  }).catch(err => { console.log(err); })
       });
 
       return (
             <div className={ `sale d-flex flex-column align-items-center ${ props.class }` }>
                   <img className='pic' src={ props.url } alt=""></img>
                   <div className='section'>
-                        <button className='detail d-flex align-items-center justify-content-center' onClick={ () => { window.location.href = `/gamelist/${ props.id }`; } }>{ <CiDiscount1 className={ `discount_${ props.id }` } style={ { fontSize: '1.5rem', color: "red",marginTop:"3px" } } /> }${ (props.price - props.price * props.discount / 100.0).toFixed(2) }</button>
+                        <button className='detail d-flex align-items-center justify-content-center' onClick={ () => { window.location.href = `/allgames/${ props.id }`; } }>{ <CiDiscount1 className={ `discount_${ props.id }` } style={ { fontSize: '1.5rem', color: "red", marginTop: "3px" } } /> }${ (props.price - props.price * props.discount / 100.0).toFixed(2) }</button>
                         <div className='d-flex w-100 justify-content-center align-items-center icons'>
                               <BsCart className={ `mx-3 add_to_cart add_to_cart_${ props.id }` } onClick={ (e) => { addToCart(e, props.id) } } />
                               <AiOutlineHeart className={ `mx-3 add_to_wishlist add_to_wishlist_${ props.id }` } onClick={ (e) => { addToWishlist(e, props.id) } } />

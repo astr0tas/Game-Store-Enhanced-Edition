@@ -24,6 +24,12 @@
       $router->post("/gameStatus", "CustomerController@gameStatus");
       $router->post("/addCart", "CustomerController@addCart");
       $router->post("/removeCart", "CustomerController@removeCart");
+      $router->post("/getAllGames", "CustomerController@getAllGames");
+      $router->post("/getWishlist", "CustomerController@getWishlist");
+      $router->post("/isAddedToCart", "CustomerController@isAddedToCart");
+      $router->post("/isAddedToWishlist", "CustomerController@isAddedToWishlist");
+      $router->post("/findGame", "CustomerController@findGame");
+      $router->post("/findWishlist", "CustomerController@findWishlist");
 
       // admin routes
       $router->get("/admin/customer/getList", "AdminController@getCustomerList");

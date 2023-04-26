@@ -120,4 +120,52 @@ class CustomerController
             $result = $this->game_model->removeCart($game_id);
             echo json_encode(array("message" => $result ? "success" : "failed"));
       }
+
+      public function getAllGames()
+      {
+            $limit = $_POST['limit'];
+            $offset = $_POST['offset'];
+            $result = $this->game_model->getAllGames($limit, $offset);
+            echo json_encode($result);
+      }
+
+      public function getWishlist()
+      {
+            $limit = $_POST['limit'];
+            $offset = $_POST['offset'];
+            $result = $this->game_model->getWishlist($limit, $offset);
+            echo json_encode($result);
+      }
+
+      public function isAddedToWishlist()
+      {
+            $game_id = $_POST['id'];
+            $result = $this->game_model->isAddedToWishlist($game_id);
+            echo json_encode($result ? true : false);
+      }
+
+      public function isAddedToCart()
+      {
+            $game_id = $_POST['id'];
+            $result = $this->game_model->isAddedToCart($game_id);
+            echo json_encode($result ? true : false);
+      }
+
+      public function findGame()
+      {
+            $name = $_POST['name'];
+            $limit = $_POST['limit'];
+            $offset = $_POST['offset'];
+            $result = $this->game_model->findGame($name, $limit, $offset);
+            echo json_encode($result);
+      }
+
+      public function findWishlist()
+      {
+            $name = $_POST['name'];
+            $limit = $_POST['limit'];
+            $offset = $_POST['offset'];
+            $result = $this->game_model->findWishlist($name, $limit, $offset);
+            echo json_encode($result);
+      }
 }
