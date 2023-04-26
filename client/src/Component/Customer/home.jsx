@@ -75,11 +75,8 @@ const BestSeller = (props) =>
             <div className={ `sale d-flex flex-column align-items-center ${ props.class }` }>
                   <img className='pic' src={ props.url } alt=""></img>
                   <div className='section'>
-                        <button className='detail d-flex align-items-center justify-content-center' onClick={ () => { window.location.href = `/gamelist/${ props.id }`; } }>{ <CiDiscount1 className={ `discount_${ props.id }` } style={ { fontSize: '25px', color: "red" } } /> }${ (props.price - props.price * props.discount / 100.0).toFixed(2) }</button>
-                        <div className='d-flex w-100 justify-content-center align-items-center' style={ {
-                              marginTop: "3%",
-                              marginBottom: "10px"
-                        } }>
+                        <button className='detail d-flex align-items-center justify-content-center' onClick={ () => { window.location.href = `/gamelist/${ props.id }`; } }>{ <CiDiscount1 className={ `discount_${ props.id }` } style={ { fontSize: '1.5rem', color: "red",marginTop:"3px" } } /> }${ (props.price - props.price * props.discount / 100.0).toFixed(2) }</button>
+                        <div className='d-flex w-100 justify-content-center align-items-center icons'>
                               <BsCart className={ `mx-3 add_to_cart add_to_cart_${ props.id }` } onClick={ (e) => { addToCart(e, props.id) } } />
                               <AiOutlineHeart className={ `mx-3 add_to_wishlist add_to_wishlist_${ props.id }` } onClick={ (e) => { addToWishlist(e, props.id) } } />
                         </div>

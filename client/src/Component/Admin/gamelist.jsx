@@ -35,7 +35,7 @@ export default function GameList()
 
       useEffect(() =>
       {
-            if (!checkCookie("PHPSESSID"))
+            if (!checkCookie("PHPADMINSESSID"))
                   Navigate("/admin");
 
             if (!render.current)

@@ -7,15 +7,15 @@
             $_SESSION['id'] = $id;
 
             // Get the session cookie
-            $session_name = session_name();
             $session_id = session_id();
 
             // Return session data to the client
-            echo json_encode(array("name" => $session_name, "value" => $session_id));
+            echo json_encode(array("name" => "PHPADMINSESSID", "value" => $session_id));
       }
 
       function killAdminSession($id) // Destroy a specific session
       {
+            ini_set('session.use_cookies', 0);
             session_id($id);
             session_start();
             session_unset();

@@ -35,7 +35,7 @@ export default function GameDetail()
       const Navigate = useNavigate();
       useEffect(() =>
       {
-            if (!checkCookie("PHPSESSID"))
+            if (!checkCookie("PHPADMINSESSID"))
                   Navigate("/admin");
 
             if (!render.current)

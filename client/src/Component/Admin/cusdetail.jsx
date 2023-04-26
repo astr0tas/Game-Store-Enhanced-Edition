@@ -31,7 +31,7 @@ export default function CusDetail()
 
     useEffect(() =>
     {
-        if (!checkCookie("PHPSESSID"))
+        if (!checkCookie("PHPADMINSESSID"))
             Navigate("/admin");
 
         if (!render.current)

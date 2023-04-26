@@ -19,6 +19,11 @@
       $router->post("/recovery", "CustomerController@recovery");
       $router->post("/new_password", "CustomerController@newPassword");
       $router->post("/sign_up", "CustomerController@signUp");
+      $router->post("/addWishlist", "CustomerController@addWishlist");
+      $router->post("/removeWishlis", "CustomerController@removeWishlis");
+      $router->post("/gameStatus", "CustomerController@gameStatus");
+      $router->post("/addCart", "CustomerController@addCart");
+      $router->post("/removeCart", "CustomerController@removeCart");
 
       // admin routes
       $router->get("/admin/customer/getList", "AdminController@getCustomerList");
@@ -26,6 +31,8 @@
       $router->get("/admin/game/categories", "AdminController@getCategories");
       $router->get("/admin/getBestSeller", "AdminController@getBestSeller");
       $router->get("/admin/logout", "AdminController@logout");
+      $router->get("/admin/myself", "AdminController@myself");
+      $router->post("/admin/myself/edit", "AdminController@updateMySelf");
       $router->post("/admin/customer/find", "AdminController@findCustomer");
       $router->post("/admin/customer/delete", "AdminController@deleteCustomer");
       $router->post("/admin/customer/detail", "AdminController@customerDetail");

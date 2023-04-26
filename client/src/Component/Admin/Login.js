@@ -26,7 +26,7 @@ const AdminLogin = () =>
     const formData = new FormData();
     formData.append("username", inputs.username);
     formData.append("password", inputs.password);
-    axios.post(`http://${domain}/admin/login`, formData)
+    axios.post(`http://${ domain }/admin/login`, formData)
       .then(res =>
       {
         console.log(res);
@@ -46,7 +46,7 @@ const AdminLogin = () =>
 
   useEffect(() =>
   {
-    if (checkCookie("PHPSESSID"))
+    if (checkCookie("PHPADMINSESSID"))
       Navigate("/admin/home");
   });
 

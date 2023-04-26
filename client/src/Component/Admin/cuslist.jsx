@@ -33,7 +33,7 @@ export default function CusList()
 
     useEffect(() =>
     {
-        if (!checkCookie("PHPSESSID"))
+        if (!checkCookie("PHPADMINSESSID"))
             Navigate("/admin");
 
         if (!render.current)

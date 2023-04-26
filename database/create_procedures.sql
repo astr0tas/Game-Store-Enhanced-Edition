@@ -129,7 +129,7 @@ DELIMITER ;
 
 -- select * from customer;
 
-select * from admin;
+-- select * from admin;
 
 -- select * from game;
 -- select * from belongs_to order by game_id;

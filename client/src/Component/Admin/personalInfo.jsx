@@ -18,8 +18,8 @@ export default function AdminInfo()
 
     useEffect(() =>
     {
-        if (!checkCookie("PHPSESSID"))
-            Navigate("/");
+        if (!checkCookie("PHPADMINSESSID"))
+            Navigate("/admin");
 
         if (!render.current)
         {

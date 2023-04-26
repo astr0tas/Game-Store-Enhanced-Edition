@@ -37,13 +37,13 @@ export default function AdminHome()
 
       useEffect(() =>
       {
-            if (!checkCookie("PHPSESSID"))
+            if (!checkCookie("PHPADMINSESSID"))
                   Navigate("/admin");
 
             if (effectRan.current === false)
             {
-                  document.getElementById("home").style.backgroundColor = "blue";
-                  document.getElementById("home").style.color = "#00B3EC";
+                  document.getElementById("home").style.backgroundColor = "#00B3EC";
+                  document.getElementById("home").style.color = "white";
 
                   axios.get(`http://${domain}/admin/getBestSeller`)
                         .then(res =>

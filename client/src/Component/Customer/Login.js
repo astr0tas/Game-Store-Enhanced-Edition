@@ -26,7 +26,7 @@ const Login = () =>
     const formData = new FormData();
     formData.append("username", inputs.username);
     formData.append("password", inputs.password);
-    axios.post(`http://${domain}/login`, formData)
+    axios.post(`http://${ domain }/login`, formData)
       .then(res =>
       {
         if (res.data)

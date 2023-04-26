@@ -278,7 +278,7 @@ class AdminController
       public function logout()
       {
             foreach ($_COOKIE as $name => $value) {
-                  if ($name === "PHPSESSID") {
+                  if ($name === "PHPADMINSESSID") {
                         echo json_encode(killAdminSession($value));
                         break;
                   }
@@ -298,5 +298,21 @@ class AdminController
             $password = $_POST['password'];
             $this->admin_model->newPassword($username, $password);
             echo json_encode(array("message" => "success"));
+      }
+
+      public function myself()
+      {
+            echo json_encode($this->admin_model->myself());
+      }
+
+      public function updateMySelf()
+      {
+            $name = $_POST['name'];
+            $email = $_POST['email'];
+            $phone = $_POST['phone'];
+            $address = $_POST['address'];
+            $password = $_POST['password'];
+            $result = $this->admin_model->updateMySelf($name, $email, $phone, $password, $address);
+            echo json_encode(array("message" => $result ? "success" : "failed"));
       }
 }
