@@ -41,7 +41,7 @@ export default function GameDetail()
 
                   const formData = new FormData();
                   formData.append("id", id);
-                  axios.post(`http://${domain}/admin/game/detail`, formData)
+                  axios.post(`http://${ domain }/admin/game/detail`, formData)
                         .then(res =>
                         {
                               const data1 = new Uint8Array(Object.values(res.data.picture_1));
@@ -72,7 +72,7 @@ export default function GameDetail()
                                     image4url: url4
                               });
                         }).catch(error => { console.log(error); })
-                  axios.post(`http://${domain}/admin/game/category`, formData)
+                  axios.post(`http://${ domain }/admin/game/category`, formData)
                         .then(res =>
                         {
 
@@ -86,7 +86,7 @@ export default function GameDetail()
                                     $("<p>").text(res.data[res.data.length - 1].category_type)
                               );
                         }).catch(error => { console.log(error); })
-                  axios.post(`http://${domain}/admin/game/detail/status`, formData)
+                  axios.post(`http://${ domain }/admin/game/detail/status`, formData)
                         .then(res =>
                         {
                               if (res.data.length === 1)
@@ -106,31 +106,33 @@ export default function GameDetail()
             }
       });
 
-      const addToWishlist = (event, id) => {
+      const addToWishlist = (event, id) =>
+      {
             event.preventDefault();
-            if ($(`.add_to_wishlist_${id}`).css("color") === "rgb(0, 0, 0)")
-              $(`.add_to_wishlist_${id}`).css("color", "red");
+            if ($(`.add_to_wishlist_${ id }`).css("color") === "rgb(0, 0, 0)")
+                  $(`.add_to_wishlist_${ id }`).css("color", "red");
             else
-              $(`.add_to_wishlist_${id}`).css("color", "rgb(0, 0, 0)");
-          }
-        
-          const addToCart = (event, id) => {
-            event.preventDefault();
-            if ($(`.add_to_cart_${id}`).css("color") === "rgb(0, 0, 0)")
-              $(`.add_to_cart_${id}`).css("color", "#00B3EC");
-            else
-              $(`.add_to_cart_${id}`).css("color", "rgb(0, 0, 0)");
-          }
+                  $(`.add_to_wishlist_${ id }`).css("color", "rgb(0, 0, 0)");
+      }
 
-      
-     
+      const addToCart = (event, id) =>
+      {
+            event.preventDefault();
+            if ($(`.add_to_cart_${ id }`).css("color") === "rgb(0, 0, 0)")
+                  $(`.add_to_cart_${ id }`).css("color", "#00B3EC");
+            else
+                  $(`.add_to_cart_${ id }`).css("color", "rgb(0, 0, 0)");
+      }
+
+
+
 
       return (
             <div className="d-flex flex-column align-items-center justify-content-center w-100 h-100">
                   <div className={ `${ styles.detail_board }` }>
                         <div className="d-flex align-items-center  justify-content-end w-100" style={ { height: "50px" } }>
                               <div className='mt-2'>
-                                    
+
                                     <button className={ ` mx-3 ${ styles.back }` }><a href={ `/allgames` }>Back</a></button>
                               </div>
                         </div>
@@ -193,10 +195,10 @@ export default function GameDetail()
                                           { parseFloat(game.discount) !== 0 && <p style={ { color: 'red' } }>{ game.discount }%</p> }
                                     </div>
                                     <p>Rating:&nbsp;<AiFillStar style={ { color: "yellow", fontSize: "25px" } } />&nbsp;{ game.rating }</p>
-                                    <div className='d-flex w-100 justify-content-center align-items-center ms-0'>
-          <BsCart className={`mx-3 add_to_cart add_to_cart_${game.id} ${ styles.icons }`}  onClick={(e) => { addToCart(e, game.id) }} />
-          <AiOutlineHeart className={`mx-3 add_to_wishlist add_to_wishlist_${game.id} ${ styles.icons }`}  onClick={(e) => { addToWishlist(e, game.id) }} />
-        </div>
+                                    <div className='d-flex w-100 align-items-center ms-0'>
+                                          <BsCart className={ `mx-3 add_to_cart add_to_cart_${ game.id } ${ styles.icons } ${ styles.foo }` } onClick={ (e) => { addToCart(e, game.id) } } />
+                                          <AiOutlineHeart className={ `mx-3 add_to_wishlist add_to_wishlist_${ game.id } ${ styles.icons } ${ styles.foo }` } onClick={ (e) => { addToWishlist(e, game.id) } } />
+                                    </div>
                               </div>
                         </div>
                         <div className="container-fluid overflow-auto mt-3">
@@ -209,7 +211,7 @@ export default function GameDetail()
 
                         </div>
                   </div>
-                  
+
             </div>
       )
 }

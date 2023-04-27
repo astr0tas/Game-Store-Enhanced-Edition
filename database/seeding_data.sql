@@ -1,14 +1,14 @@
 use game_store;
 
 -- add customers section
-insert into customer values('CUSTOMER01','Lê Văn B','b_le@gmail.com',null,0.0,'None',0,'b_le123','bLe0123');
-insert into customer values('CUSTOMER02','John Wick','wicky@gmail.com',null,0.0,'None',0,'wicky123','Wicky123');
-insert into customer values('CUSTOMER03','John Wick','wicky1@gmail.com',null,0.0,'None',0,'wicky1234','Wicky123');
-insert into customer values('CUSTOMER04','John Wick','wicky2@gmail.com',null,0.0,'None',0,'wicky1235','Wicky123');
-insert into customer values('CUSTOMER05','John Wick','wicky3@gmail.com',null,0.0,'None',0,'wicky1236','Wicky123');
+insert into customer values('CUSTOMER01','Lê Văn B','b_le@gmail.com',null,0.0,'None',0,'customer01','customer123');
+insert into customer values('CUSTOMER02','Nguyễn Văn T','t_nguyen@gmail.com',null,0.0,'None',0,'customer02','customer123');
+insert into customer values('CUSTOMER03','Trần Trung N','n_trung@gmail.com',null,0.0,'None',0,'customer03','customer123');
+insert into customer values('CUSTOMER04','Nguyễn Thị H','h_nguyen@gmail.com',null,0.0,'None',0,'customer04','customer123');
+insert into customer values('CUSTOMER05','Dương Minh T','t_duong@gmail.com',null,0.0,'None',0,'customer05','customer123');
 
 -- add admins section
-insert into admin values('ADMIN01','Nguyễn Văn A','a_nguyen@gmail.com','0123456789',null,'a_nguyen123','aNguyen0123');
+insert into admin values('ADMIN01','Nguyễn Văn A','admin@gmail.com','0123456789',null,'admin01','admin123');
 
 -- add categories section
 insert into category values('Arcade & Rhythm'),
@@ -52,8 +52,8 @@ insert into category values('Arcade & Rhythm'),
 ('Team Sports');
 
 -- set @picture_path:='F:/nam 3/web/btl/LTW_222/database/Pictures';
-set @picture_path:='E:\\Projects\\Game_Store_2023\\database\\Pictures';
--- set @picture_path:='E:\\Projects\\Game_Store\\database\\Pictures';
+-- set @picture_path:='E:\\Projects\\Game_Store_2023\\database\\Pictures';
+set @picture_path:='E:\\Projects\\Game_Store\\database\\Pictures';
 
 -- add games section
 insert into game values('GAME01','Elden Ring',59.99,0,'THE NEW FANTASY ACTION RPG.
@@ -440,48 +440,48 @@ insert into belongs_to values('GAME13', 'Action RPG'), ('GAME13', 'First-Person 
 -- add activation codes section
 insert into activation_code(game_id,code) values('GAME01','SQT8CXG8VWKBP9QB'),('GAME01','LV47LGEFPY2PXZ67'),('GAME01','KYZXNH7B95FTG5RL'),
 ('GAME02','MTPAJHMJMBPVHR9X'),('GAME02','N56GEPPGFHB7VVKE'),('GAME02','ZR2ZXN4QXDTWJQ7U');
-insert into activation_code values('GAME01','SQT8CXG8VWKBP9Q1','used'),('GAME01','LV47LGEFPY2PXZ6F','used'),('GAME01','KYZXNH7B95FTG5RC','used'),
-('GAME02','MTPAJHMJMBPVHR9W','used'),('GAME02','N56GEPPGFHB7VVKA','used'),('GAME02','ZR2ZXN4QXDTWJQ79','used');
+insert into activation_code values('GAME01','SQT8CXG8VWKBP9Q1','available'),('GAME01','LV47LGEFPY2PXZ6F','available'),('GAME01','KYZXNH7B95FTG5RC','available'),
+('GAME02','MTPAJHMJMBPVHR9W','available'),('GAME02','N56GEPPGFHB7VVKA','available'),('GAME02','ZR2ZXN4QXDTWJQ79','available');
 insert into activation_code(game_id,code) values('GAME03','ZUGJX32CGJTLXVXX'),('GAME03','WVTKJKK8VL3ALFXF'),('GAME03','DP44F8XHCGEBQSNB');
-insert into activation_code values('GAME03','ZUGJX32CGJTLXVXH','used'),('GAME03','WVTKJKK8VL3ALFXO','used'),('GAME03','DP44F8XHCGEBQSNI','used');
+insert into activation_code values('GAME03','ZUGJX32CGJTLXVXH','available'),('GAME03','WVTKJKK8VL3ALFXO','available'),('GAME03','DP44F8XHCGEBQSNI','available');
 insert into activation_code(game_id,code) values('GAME09', 'ORBZW5U6REET76TM'), ('GAME07','2Y6ZV5CRYLGDRMRO'), ('GAME07','VG5KTJFGXGHIFRAK');
 insert into activation_code(game_id,code) values('GAME08', 'STEU31JSYXBKA8O3'), ('GAME08','N6LVQVYTSBNTBI8K'), ('GAME08','VCH6HPTJGCMQ77Q5');
 insert into activation_code(game_id,code) values('GAME10', 'LRBCO6ANBOEOKCOF'), ('GAME04','CQKP1QOI2E98DHHC');
 insert into activation_code(game_id,code) values('GAME06', 'EO8BND6M67HDD7ST'), ('GAME05','N04NAGGQT2NIZPC9'), ('GAME05','7Y8BRVQD5FYJACOI');
 insert into activation_code(game_id,code) values('GAME11', 'S1FJ8NFW4EYVE33D'), ('GAME12','XJMPMDRHI2A3OD04'), ('GAME13','2661A0VRJMBJABHS');
-insert into activation_code values ('GAME09', 'UEVY8Y944GITQNLK', 'used'), ('GAME09', 'LFDPNFUJ08J0ZFHJ', 'used'), ('GAME07','3KNE1VD7XWDDK46N', 'used');
-insert into activation_code values ('GAME08', '46QN0IRXT8NMS7U8', 'used'), ('GAME10', 'ZT1VZSV776G09ZY5', 'used');
-insert into activation_code values ('GAME04', 'HVYD219XROCELSH3', 'used'), ('GAME04', 'AEOSR8SLXC2EOKG4', 'used'), ('GAME04','IP6RA1PWE95YU4GH','used');
-insert into activation_code values ('GAME06', 'DAA4XQ8FY4OXF32X', 'used'), ('GAME05', 'SKFZA1NRWA0TKJ24', 'used'), ('GAME05','K6XSEDL9HATQSQ2S','used');
-insert into activation_code values ('GAME11', 'Z2KI5Y03B491UB1F', 'used'), ('GAME12','EEWHOUYQAKJ25QQR', 'used'), ('GAME13','1UE640ECX4EE6X52', 'used');
+insert into activation_code values ('GAME09', 'UEVY8Y944GITQNLK', 'available'), ('GAME09', 'LFDPNFUJ08J0ZFHJ', 'available'), ('GAME07','3KNE1VD7XWDDK46N', 'available');
+insert into activation_code values ('GAME08', '46QN0IRXT8NMS7U8', 'available'), ('GAME10', 'ZT1VZSV776G09ZY5', 'available');
+insert into activation_code values ('GAME04', 'HVYD219XROCELSH3', 'available'), ('GAME04', 'AEOSR8SLXC2EOKG4', 'available'), ('GAME04','IP6RA1PWE95YU4GH','available');
+insert into activation_code values ('GAME06', 'DAA4XQ8FY4OXF32X', 'available'), ('GAME05', 'SKFZA1NRWA0TKJ24', 'available'), ('GAME05','K6XSEDL9HATQSQ2S','available');
+insert into activation_code values ('GAME11', 'Z2KI5Y03B491UB1F', 'available'), ('GAME12','EEWHOUYQAKJ25QQR', 'available'), ('GAME13','1UE640ECX4EE6X52', 'available');
 
 
 -- add purchase_history
-insert into purchase_history values('CUSTOMER01','GAME04','HVYD219XROCELSH3','QM3J7S7V48'),
-('CUSTOMER01','GAME01','SQT8CXG8VWKBP9Q1','6CFQYWLV5S'),
-('CUSTOMER01','GAME01','LV47LGEFPY2PXZ6F','7YZLO77T1M'),
-('CUSTOMER01','GAME01','KYZXNH7B95FTG5RC','5B4180VD4J'),
-('CUSTOMER01','GAME03','ZUGJX32CGJTLXVXH','IXQZCPG0A8'),
-('CUSTOMER01','GAME03','WVTKJKK8VL3ALFXO','YZV9DV5CKM'),
-('CUSTOMER01','GAME03','DP44F8XHCGEBQSNI','F6XN96I8KY'),
-('CUSTOMER01','GAME08','46QN0IRXT8NMS7U8','00FUSNNXUR'),
-('CUSTOMER01','GAME07','3KNE1VD7XWDDK46N','GSNZCXWTWC'),
-('CUSTOMER01','GAME05','SKFZA1NRWA0TKJ24','IW9MNCBZKR');
+-- insert into purchase_history values('CUSTOMER01','GAME04','HVYD219XROCELSH3','QM3J7S7V48'),
+-- ('CUSTOMER01','GAME01','SQT8CXG8VWKBP9Q1','6CFQYWLV5S'),
+-- ('CUSTOMER01','GAME01','LV47LGEFPY2PXZ6F','7YZLO77T1M'),
+-- ('CUSTOMER01','GAME01','KYZXNH7B95FTG5RC','5B4180VD4J'),
+-- ('CUSTOMER01','GAME03','ZUGJX32CGJTLXVXH','IXQZCPG0A8'),
+-- ('CUSTOMER01','GAME03','WVTKJKK8VL3ALFXO','YZV9DV5CKM'),
+-- ('CUSTOMER01','GAME03','DP44F8XHCGEBQSNI','F6XN96I8KY'),
+-- ('CUSTOMER01','GAME08','46QN0IRXT8NMS7U8','00FUSNNXUR'),
+-- ('CUSTOMER01','GAME07','3KNE1VD7XWDDK46N','GSNZCXWTWC'),
+-- ('CUSTOMER01','GAME05','SKFZA1NRWA0TKJ24','IW9MNCBZKR');
 
 
 -- add purchase_history_description
-insert into purchase_history_description values('QM3J7S7V48','Online banking','2023-04-17'),
-('6CFQYWLV5S','Online banking','2023-04-17'),
-('7YZLO77T1M','Online banking','2023-04-16'),
-('5B4180VD4J','Online banking','2023-04-15'),
-('IXQZCPG0A8','Online banking','2023-04-14'),
-('YZV9DV5CKM','Online banking','2023-04-13'),
-('F6XN96I8KY','Online banking','2023-04-17'),
-('00FUSNNXUR','Online banking','2023-04-15'),
-('GSNZCXWTWC','Online banking','2023-04-16'),
-('IW9MNCBZKR','Online banking','2023-04-13');
+-- insert into purchase_history_description values('QM3J7S7V48','Online banking','2023-04-17'),
+-- ('6CFQYWLV5S','Online banking','2023-04-17'),
+-- ('7YZLO77T1M','Online banking','2023-04-16'),
+-- ('5B4180VD4J','Online banking','2023-04-15'),
+-- ('IXQZCPG0A8','Online banking','2023-04-14'),
+-- ('YZV9DV5CKM','Online banking','2023-04-13'),
+-- ('F6XN96I8KY','Online banking','2023-04-17'),
+-- ('00FUSNNXUR','Online banking','2023-04-15'),
+-- ('GSNZCXWTWC','Online banking','2023-04-16'),
+-- ('IW9MNCBZKR','Online banking','2023-04-13');
 
 
 -- select * from game;
 -- select * from game join activation_code on game.name=activation_code.game_name;
--- select name,picture_1,price,count(*) as total_sale from game join activation_code on game.name=activation_code.game_name where status='used' group by name order by total_sale desc,name limit 5;
+-- select name,picture_1,price,count(*) as total_sale from game join activation_code on game.name=activation_code.game_name where status='available' group by name order by total_sale desc,name limit 5;

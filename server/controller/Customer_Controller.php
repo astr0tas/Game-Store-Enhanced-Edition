@@ -168,4 +168,39 @@ class CustomerController
             $result = $this->game_model->findWishlist($name, $limit, $offset);
             echo json_encode($result);
       }
+
+      public function getCart()
+      {
+            $result = $this->game_model->getCart();
+            echo json_encode($result);
+      }
+
+      public function displayCart()
+      {
+            $offset = $_POST['offset'];
+            $result = $this->game_model->displayCart($offset);
+            echo json_encode($result);
+      }
+
+      public function getCategory()
+      {
+            $id=$_POST['id'];
+            $result = $this->game_model->getCategory($id);
+            echo json_encode($result);
+      }
+
+      public function buyGame()
+      {
+            $games=$_POST['games'];
+            $method=$_POST['method'];
+            $result = $this->game_model->buyGame($games,$method);
+            echo json_encode(array("message"=>$result?"success":"failed"));
+      }
+
+      public function product()
+      {
+            $offset = $_POST['offset'];
+            $result = $this->game_model->product($offset);
+            echo json_encode($result);
+      }
 }

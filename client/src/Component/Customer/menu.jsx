@@ -73,10 +73,10 @@ function CustomerMenu()
                                     <a href="myself" className="link-dark d-flex justify-content-center mt-2"><VscAccount className='profile' /></a>
                               </div>
                               <div className='d-flex flex-column justify-content-between mt-5 tabs'>
-                                    <a href="/home" className='item mt-3 pb-3' id="home"><BiHomeAlt2 />Home</a>
-                                    <a href="/allgames" className='item mt-3 pb-3' id="game"><GiRetroController />Game</a>
-                                    <a href="/wishlist" className='item mt-3 pb-3' id="wishlist"><AiOutlineHeart />Wishlist</a>
-                                    <a href="#" className='item mt-3 pb-3' id="cart"><BsCart />Cart</a>
+                                    <a href="/home" className='item mt-3 pb-3 d-flex align-items-center' id="home"><BiHomeAlt2 />Home</a>
+                                    <a href="/allgames" className='item mt-3 pb-3 d-flex align-items-center' id="game"><GiRetroController />Game</a>
+                                    <a href="/wishlist" className='item mt-3 pb-3 d-flex align-items-center' id="wishlist"><AiOutlineHeart />Wishlist</a>
+                                    <a href="/cart" className='item mt-3 pb-3' id="cart"><BsCart />Cart</a>
                               </div>
                               <a href="/" className='logout_button' onClick={ () => { logOut() } }><AiOutlineLogout /> Log out</a>
                         </div>

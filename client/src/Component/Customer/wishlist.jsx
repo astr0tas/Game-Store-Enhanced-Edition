@@ -11,7 +11,7 @@ import { checkCookie } from '../tools/cookie';
 import { useNavigate } from 'react-router-dom';
 import { AiOutlineHeart } from "react-icons/ai";
 
-const BestSeller = (props) =>
+const Card = (props) =>
 {
       const [status, setStatus] = useState(false);
 
@@ -180,7 +180,7 @@ export default function CustomerWishlist()
                                           const blob = new Blob([data], { type: "image/jpg" });
                                           const url = URL.createObjectURL(blob);
                                           temp.push(
-                                                <BestSeller
+                                                <Card
                                                       key={ i }
                                                       url={ url }
                                                       price={ res.data[i].price }
@@ -199,7 +199,7 @@ export default function CustomerWishlist()
                                           const blob = new Blob([data], { type: "image/jpg" });
                                           const url = URL.createObjectURL(blob);
                                           temp.push(
-                                                <BestSeller
+                                                <Card
                                                       key={ i }
                                                       url={ url }
                                                       price={ res.data[i].price }
@@ -251,7 +251,7 @@ export default function CustomerWishlist()
                                           const blob = new Blob([data], { type: "image/jpg" });
                                           const url = URL.createObjectURL(blob);
                                           temp.push(
-                                                <BestSeller
+                                                <Card
                                                       key={ i }
                                                       url={ url }
                                                       price={ res.data[i].price }
@@ -270,7 +270,7 @@ export default function CustomerWishlist()
                                           const blob = new Blob([data], { type: "image/jpg" });
                                           const url = URL.createObjectURL(blob);
                                           temp.push(
-                                                <BestSeller
+                                                <Card
                                                       key={ i }
                                                       url={ url }
                                                       price={ res.data[i].price }

@@ -71,10 +71,10 @@ function AdminMenu()
             <a href="/admin/myself" className="link-dark d-flex justify-content-center mt-2"><VscAccount className='profile' /></a>
           </div>
           <div className='d-flex flex-column justify-content-between mt-5 tabs'>
-            <a href="/admin/home" className='item mt-3 pb-3' id="home"><BiHomeAlt2 />Home</a>
-            <a href="/admin/gamelist" className='item mt-3 pb-3' id="game"><GiRetroController />Game</a>
-            <a href="/admin/customerlist" className='item mt-3 pb-3' id="customer"><BsPerson />Customer</a>
-            <a href="#" className='item mt-3 pb-3' id="stats"><AiOutlineBarChart />Statistic</a>
+            <a href="/admin/home" className='item mt-3 pb-3 d-flex align-items-center' id="home"><BiHomeAlt2 />Home</a>
+            <a href="/admin/gamelist" className='item mt-3 pb-3 d-flex align-items-center' id="game"><GiRetroController />Game</a>
+            <a href="/admin/customerlist" className='item mt-3 pb-3 d-flex align-items-center' id="customer"><BsPerson />Customer</a>
+            <a href="#" className='item mt-3 pb-3 d-flex align-items-center' id="stats"><AiOutlineBarChart />Statistic</a>
           </div>
           <a href="/admin" className='logout_button' onClick={ logOut }><AiOutlineLogout /> Log out</a>
         </div>

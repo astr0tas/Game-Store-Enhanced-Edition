@@ -14,6 +14,8 @@
       $router->get("/logout", "CustomerController@logout");
       $router->get("/myself", "CustomerController@myself");
       $router->get("/myself/history", "CustomerController@myHistory");
+      $router->get("/getCart", "CustomerController@getCart");
+
       $router->post("/myself/edit", "CustomerController@updateMySelf");
       $router->post("/login", "CustomerController@login");
       $router->post("/recovery", "CustomerController@recovery");
@@ -30,6 +32,10 @@
       $router->post("/isAddedToWishlist", "CustomerController@isAddedToWishlist");
       $router->post("/findGame", "CustomerController@findGame");
       $router->post("/findWishlist", "CustomerController@findWishlist");
+      $router->post("/displayCart", "CustomerController@displayCart");
+      $router->post("/getCategory", "CustomerController@getCategory");
+      $router->post("/buyGame", "CustomerController@buyGame");
+      $router->post("/product","CustomerController@product");
 
       // admin routes
       $router->get("/admin/customer/getList", "AdminController@getCustomerList");
