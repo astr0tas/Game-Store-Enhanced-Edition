@@ -43,7 +43,8 @@ create table customer(
     membership_rank varchar(8) default 'None' check(membership_rank ='None' or membership_rank='Silver' or membership_rank='Gold' or membership_rank='Diamond' or membership_rank='Special'),
     membership_discount float default 0 check(0<=membership_discount and membership_discount<=5),
     username varchar(20) unique not null,
-    userpassword varchar(20) not null
+    userpassword varchar(20) not null,
+    image text
 );
 
 create table admin(
@@ -53,7 +54,8 @@ create table admin(
     phone varchar(10) not null,
     address varchar(150),
     username varchar(20) unique not null,
-    userpassword varchar(20) not null
+    userpassword varchar(20) not null,
+    image text not null
 );
 
 create table wishlist(

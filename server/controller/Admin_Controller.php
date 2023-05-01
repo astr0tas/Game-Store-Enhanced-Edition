@@ -17,8 +17,8 @@ class AdminController
             $this->admin_model = new AdminModel();
       }
 
-      /*Admin login*/
-      public function login()
+      /*Admin authentication*/
+      public function login() // Check if username and password found in db, if found start a session or else return false
       {
             $username = $_POST['username'];
             $password = $_POST['password'];
@@ -30,14 +30,14 @@ class AdminController
                   echo json_encode(false);
       }
 
-      public function recovery()
+      public function recovery() // Check if the username exists
       {
             $username = $_POST['username'];
             $arr = $this->admin_model->recovery($username);
             echo json_encode($arr ? true : false);
       }
 
-      public function newPassword()
+      public function newPassword() // Changing password
       {
             $username = $_POST['username'];
             $password = $_POST['password'];
@@ -50,7 +50,7 @@ class AdminController
             echo json_encode(endAdminSession($_COOKIE['PHPADMINSESSID']));
       }
 
-
+      /**/
 
       public function getCustomerList()
       {

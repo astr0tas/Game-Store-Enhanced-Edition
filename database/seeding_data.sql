@@ -8,7 +8,7 @@ insert into customer values('CUSTOMER04','Nguyễn Thị H','h_nguyen@gmail.com'
 insert into customer values('CUSTOMER05','Dương Minh T','t_duong@gmail.com',null,0.0,'None',0,'customer05','customer123');
 
 -- add admins section
-insert into admin values('ADMIN01','Nguyễn Văn A','admin@gmail.com','0123456789',null,'admin01','admin123');
+insert into admin values('ADMIN01','Nguyễn Văn A','admin@gmail.com','0123456789',null,'admin01','admin123','N/A');
 
 -- add categories section
 insert into category values('Arcade & Rhythm'),
