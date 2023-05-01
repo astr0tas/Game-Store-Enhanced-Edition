@@ -1,19 +1,17 @@
       <?php
       function startAdminSession($id)
       {
+            // Set the session cookie's name
+            ini_set('session.name', 'PHPADMINSESSID');
+            // Set the session cookie's attributes: expires - path - domain - secure - httpOnly
+            session_set_cookie_params(0, "/admin", null, false, false);
             // Start session
             session_start();
             // Set session variables for this $id
             $_SESSION['id'] = $id;
-
-            // Get the session cookie
-            $session_id = session_id();
-
-            // Return session data to the client
-            echo json_encode(array("name" => "PHPADMINSESSID", "value" => $session_id));
       }
 
-      function killAdminSession($id) // Destroy a specific session
+      function endAdminSession($id) // Destroy a specific session
       {
             ini_set('session.use_cookies', 0);
             session_id($id);

@@ -53,7 +53,7 @@ function App()
           </Route>
 
           <Route path="/admin">
-            {/* Login pages */ }
+            {/* Authentication pages */ }
             <Route index element={ <AdminLogin /> } />
             <Route path="recovery" element={ <AdminRecovery /> } />
             {/* Main pages */ }

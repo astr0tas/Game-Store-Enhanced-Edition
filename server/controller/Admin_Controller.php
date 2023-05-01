@@ -17,6 +17,41 @@ class AdminController
             $this->admin_model = new AdminModel();
       }
 
+      /*Admin login*/
+      public function login()
+      {
+            $username = $_POST['username'];
+            $password = $_POST['password'];
+            $arr = $this->admin_model->login($username, $password);
+            if ($arr) {
+                  startAdminSession($arr['id']);
+                  echo json_encode(true);
+            } else
+                  echo json_encode(false);
+      }
+
+      public function recovery()
+      {
+            $username = $_POST['username'];
+            $arr = $this->admin_model->recovery($username);
+            echo json_encode($arr ? true : false);
+      }
+
+      public function newPassword()
+      {
+            $username = $_POST['username'];
+            $password = $_POST['password'];
+            $this->admin_model->newPassword($username, $password);
+            echo json_encode(array("message" => "success"));
+      }
+
+      public function logout()
+      {
+            echo json_encode(endAdminSession($_COOKIE['PHPADMINSESSID']));
+      }
+
+
+
       public function getCustomerList()
       {
             $arr = $this->customer_model->getList();
@@ -262,42 +297,6 @@ class AdminController
             $id = $_POST['id'];
             $arr = $this->game_model->getGameStatus($id);
             echo json_encode($arr);
-      }
-
-      public function login()
-      {
-            $username = $_POST['username'];
-            $password = $_POST['password'];
-            $arr = $this->admin_model->login($username, $password);
-            if ($arr) {
-                  startAdminSession($arr['id']);
-            } else
-                  echo json_encode(false);
-      }
-
-      public function logout()
-      {
-            foreach ($_COOKIE as $name => $value) {
-                  if ($name === "PHPADMINSESSID") {
-                        echo json_encode(killAdminSession($value));
-                        break;
-                  }
-            }
-      }
-
-      public function recovery()
-      {
-            $username = $_POST['username'];
-            $arr = $this->admin_model->recovery($username);
-            echo json_encode($arr ? true : false);
-      }
-
-      public function newPassword()
-      {
-            $username = $_POST['username'];
-            $password = $_POST['password'];
-            $this->admin_model->newPassword($username, $password);
-            echo json_encode(array("message" => "success"));
       }
 
       public function myself()

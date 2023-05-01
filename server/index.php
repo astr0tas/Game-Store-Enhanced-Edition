@@ -1,15 +1,16 @@
       <?php
-      // include required files
+      // Include required files
       require_once('router.php');
-      require_once('controller/Admin_Controller.php');
-      require_once('controller/Customer_Controller.php');
       require_once('cors.php');
 
-      // instantiate router
+      // Instantiate router
       $router = new Router();
 
-      // define routes
-      // customer routes
+      // Define routes
+      ################################## General routes ##################################
+
+
+      ################################## Customer routes ##################################
       $router->get("/getBestSeller", "CustomerController@getBestSeller");
       $router->get("/logout", "CustomerController@logout");
       $router->get("/myself", "CustomerController@myself");
@@ -35,9 +36,23 @@
       $router->post("/displayCart", "CustomerController@displayCart");
       $router->post("/getCategory", "CustomerController@getCategory");
       $router->post("/buyGame", "CustomerController@buyGame");
-      $router->post("/product","CustomerController@product");
+      $router->post("/product", "CustomerController@product");
 
-      // admin routes
+      ################################## Admin routes ##################################
+      /*Admin authentication*/
+      $router->post("/admin/login", "AdminController@login");
+      $router->post("/admin/recovery", "AdminController@recovery");
+      $router->post("/admin/newPassword", "AdminController@newPassword");
+
+      /*Admin info*/
+
+      /*Admin home*/
+
+      /*Admin customer*/
+
+      /*Admin game*/
+
+      /*Admin statistic*/
       $router->get("/admin/customer/getList", "AdminController@getCustomerList");
       $router->get("/admin/game/list", "AdminController@getGameList");
       $router->get("/admin/game/categories", "AdminController@getCategories");
@@ -60,10 +75,7 @@
       $router->post("/admin/game/update", "AdminController@updateGame");
       $router->post("/admin/game/detail", "AdminController@getGameDetail");
       $router->post("/admin/game/detail/status", "AdminController@getGameStatus");
-      $router->post("/admin/login", "AdminController@login");
-      $router->post("/admin/recovery", "AdminController@recovery");
-      $router->post("/admin/new_password", "AdminController@newPassword");
 
-      // run router
+      // Run router
       $router->run();
       ?>
