@@ -1,6 +1,5 @@
 import './App.css';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Login from './Component/Customer/Login';
 import Signup from './Component/Customer/Signup';
@@ -15,17 +14,20 @@ import CGameDetail from './Component/Customer/cgamedetail'
 import { Cart } from './Component/Customer/cart';
 import { Product } from './Component/Customer/product';
 
+// Admin pages
+// Login pages
+import AdminLogin from './Component/Admin/Authentication/Login/Login.jsx';
+import AdminRecovery from './Component/Admin/Authentication/Recovery/Recovery';
+
+// Admin navbar
+import AdminMenu from './Component/Admin/Menu/menu';
 
 import CusDetail from './Component/Admin/cusdetail';
 import CusList from './Component/Admin/cuslist';
-import AdminMenu from './Component/Admin/menu';
-import AdminHome from './Component/Admin/home';
+import AdminHome from './Component/Admin/Home/Home.jsx';
 import GameList from './Component/Admin/gamelist';
 import { AddGame, EditGame } from './Component/Admin/add_edit_game';
 import GameDetail from './Component/Admin/gamedetail';
-import AdminCreateNewPassword from './Component/Admin/CreateNewPassword';
-import AdminForgotPassword from './Component/Admin/ForgotPassword';
-import AdminLogin from './Component/Admin/Login';
 import AdminInfo from './Component/Admin/personalInfo';
 
 function App()
@@ -51,9 +53,10 @@ function App()
           </Route>
 
           <Route path="/admin">
+            {/* Login pages */ }
             <Route index element={ <AdminLogin /> } />
-            <Route path="forgot_password" element={ <AdminForgotPassword /> } />
-            <Route path="create_new_password" element={ <AdminCreateNewPassword /> } />
+            <Route path="recovery" element={ <AdminRecovery /> } />
+            {/* Main pages */ }
             <Route element={ <AdminMenu /> }>
               <Route path='myself' element={ <AdminInfo /> } />
               <Route path="home" element={ <AdminHome /> } />
@@ -69,7 +72,6 @@ function App()
               </Route>
             </Route>
           </Route>
-
         </Routes>
       </BrowserRouter>
     </div >

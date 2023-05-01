@@ -1,6 +1,7 @@
 .App {
-    font-size: 14px !important;
+    font-family: Arial, Helvetica, sans-serif;
     height: 100vh;
     width: 100vw;
-    background-color: #B9FDFD;
+    height: 100dvh;
+    width: 100dvw;
 }

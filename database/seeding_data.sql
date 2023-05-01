@@ -52,8 +52,8 @@ insert into category values('Arcade & Rhythm'),
 ('Team Sports');
 
 -- set @picture_path:='F:/nam 3/web/btl/LTW_222/database/Pictures';
--- set @picture_path:='E:\\Projects\\Game_Store_2023\\database\\Pictures';
-set @picture_path:='E:\\Projects\\Game_Store\\database\\Pictures';
+set @picture_path:='E:\\Projects\\Game-Store-Enhanced-Edition\\database\\Pictures';
+-- set @picture_path:='E:\\Projects\\Game_Store\\database\\Pictures';
 
 -- add games section
 insert into game values('GAME01','Elden Ring',59.99,0,'THE NEW FANTASY ACTION RPG.
