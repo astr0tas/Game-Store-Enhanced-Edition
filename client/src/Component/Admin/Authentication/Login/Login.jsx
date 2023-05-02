@@ -1,15 +1,16 @@
 import styles from './Login.module.css';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { AiOutlineCloseCircle } from 'react-icons/ai';
 import { checkCookie } from '../../../tools/cookie';
 import { domain } from '../../../tools/domain';
-import $ from 'jquery';
 
 const AdminLogin = () =>
 {
   const Navigate = useNavigate();
+
+  const resize = useRef(null);
 
   const [inputs, setInputs] = useState({});
   const [isWrong, setIsWrong] = useState(false);
@@ -57,22 +58,25 @@ const AdminLogin = () =>
   {
     if (checkCookie("PHPADMINSESSID"))
       Navigate("./home");
+    
     document.title = 'Login';
+
     if (window.innerHeight > 430)
-      $(`.${ styles.resize }`).addClass('h-100');
+      resize.current.classList.add('h-100');
+    
     window.addEventListener('resize', () =>
     {
       if (window.innerHeight > 430)
-        $(`.${ styles.resize }`).addClass('h-100');
+        resize.current.classList.add('h-100');
       else
-        $(`.${ styles.resize }`).removeClass('h-100');
+        resize.current.classList.remove('h-100');
     });
-  }, []);
+  },[]);
 
   return (
     <>
       <div className={ `${ styles.background }` }></div>
-      <div className={ `container-fluid d-flex justify-content-center align-items-center ${ styles.resize }` }>
+      <div className={ `container-fluid d-flex justify-content-center align-items-center` } ref={ resize }>
         <form onSubmit={ formSubmit } className={ `${ styles.form } bg-light d-flex flex-column align-items-center justify-content-around fs-5` }>
           <div className="border-bottom border-dark w-100 d-flex flex-column align-items-center mb-5">
             <h1 className={ `my-3 mx-5 ${ styles.title }` }>Welcome Admin!</h1>

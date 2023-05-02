@@ -1,15 +1,17 @@
 import styles from './Recovery.module.css';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { AiOutlineCloseCircle } from 'react-icons/ai';
 import { domain } from '../../../tools/domain';
-import $ from 'jquery';
 
 
 function AdminRecovery()
 {
   const Navigate = useNavigate();
+
+  const checkUsername = useRef(null);
+  const changingPassword = useRef(null);
 
   // Validate username
   const [username, setUsername] = useState("");
@@ -36,8 +38,8 @@ function AdminRecovery()
           if (res.data)
           {
             setIsWrong(false);
-            $(`.${ styles.checkUsername }`).css("display", "none");
-            $(`.${ styles.newPassword }`).css("display", "flex");
+            checkUsername.current.style.display = "none";
+            changingPassword.current.style.display = "flex";
           }
           else
           {
@@ -79,22 +81,33 @@ function AdminRecovery()
   useEffect(() =>
   {
     document.title = 'Password recovery';
+
     if (window.innerHeight > 330)
-      $(`.${ styles.resize }`).addClass('h-100');
+    {
+      checkUsername.current.classList.add('h-100');
+      changingPassword.current.classList.add('h-100');
+    }
+    
     window.addEventListener('resize', () =>
     {
       if (window.innerHeight > 330)
-        $(`.${ styles.resize }`).addClass('h-100');
+      {
+        checkUsername.current.classList.add('h-100');
+        changingPassword.current.classList.add('h-100');
+      }
       else
-        $(`.${ styles.resize }`).removeClass('h-100');
+      {
+        checkUsername.current.classList.remove('h-100');
+        changingPassword.current.classList.remove('h-100');
+      }
     });
-  });
+  },[]);
 
   return (
     <>
       <div className={ `${ styles.background }` }></div>
       {/* Validate username first */ }
-      <div className={ `container-fluid align-items-center justify-content-center ${ styles.resize } ${ styles.checkUsername }` }>
+      <div className={ `container align-items-center justify-content-center ${ styles.checkUsername }` } ref={ checkUsername }>
         <form onSubmit={ usernameValidation } className={ `${ styles.form } bg-light d-flex flex-column align-items-center justify-content-around fs-5` }>
           <div className="border-bottom border-dark w-100 d-flex flex-column align-items-center mb-5">
             <h1 className={ `my-3 mx-5 ${ styles.title }` }>Password recovery</h1>
@@ -144,7 +157,7 @@ function AdminRecovery()
         </form>
       </div>
       {/* Changing password */ }
-      <div className={ `container align-items-center justify-content-center ${ styles.resize } ${ styles.newPassword }` }>
+      <div className={ `container align-items-center justify-content-center ${ styles.newPassword }` } ref={ changingPassword }>
         <form onSubmit={ changePassword } className={ `${ styles.form } bg-light d-flex flex-column align-items-center justify-content-around fs-5` }>
           <div className="border-bottom border-dark w-100 d-flex flex-column align-items-center mb-5">
             <h1 className={ `my-3 mx-5 ${ styles.title }` }>Password recovery</h1>
