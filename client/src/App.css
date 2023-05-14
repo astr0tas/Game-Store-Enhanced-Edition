@@ -5,3 +5,13 @@
     height: 100dvh;
     width: 100dvw;
 }
+
+::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #7a7a7a;
+    border-radius: 5px;
+}

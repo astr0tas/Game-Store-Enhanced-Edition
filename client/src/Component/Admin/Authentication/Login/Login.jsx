@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { AiOutlineCloseCircle } from 'react-icons/ai';
 import { checkCookie } from '../../../tools/cookie';
 import { domain } from '../../../tools/domain';
+import React from 'react';
 
 const AdminLogin = () =>
 {
@@ -40,6 +41,7 @@ const AdminLogin = () =>
       axios.post(`http://${ domain }/admin/login`, formData, { withCredentials: true })
         .then(res =>
         {
+          console.log(res);
           if (res.data)
           {
             setIsWrong(false);
@@ -58,20 +60,23 @@ const AdminLogin = () =>
   {
     if (checkCookie("PHPADMINSESSID"))
       Navigate("./home");
-    
+
     document.title = 'Login';
 
     if (window.innerHeight > 430)
-      resize.current.classList.add('h-100');
-    
+      if (resize.current !== null && resize.current !== undefined)
+        resize.current.classList.add('h-100');
+
     window.addEventListener('resize', () =>
     {
       if (window.innerHeight > 430)
-        resize.current.classList.add('h-100');
-      else
-        resize.current.classList.remove('h-100');
+        if (resize.current !== null && resize.current !== undefined)
+          resize.current.classList.add('h-100');
+        else
+          if (resize.current !== null && resize.current !== undefined)
+            resize.current.classList.remove('h-100');
     });
-  },[]);
+  }, []);
 
   return (
     <>

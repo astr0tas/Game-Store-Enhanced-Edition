@@ -1,12 +1,12 @@
 import { useNavigate, useParams } from 'react-router-dom';
-import styles from '../../css/Admin/cusdetail.module.css';
+import styles from './CustomerDetail.module.css';
 import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import $ from 'jquery';
 import { BiTrash } from 'react-icons/bi';
 import ReactDOM from 'react-dom/client';
-import { checkCookie } from '../tools/cookie';
-import { domain } from '../tools/domain';
+import { checkCookie } from '../../../tools/cookie';
+import { domain } from '../../../tools/domain';
 
 const History = (props) =>
 {
@@ -22,7 +22,7 @@ const History = (props) =>
 }
 
 
-export default function CusDetail()
+export default function CustomerDetail()
 {
     const id = useParams().id;
     const render = useRef(false);
@@ -174,7 +174,8 @@ export default function CusDetail()
                     <button className={ `mx-3 ${ styles.back }` }><a href="../customerList">Back</a></button>
                 </div>
                 <div className={ `d-flex align-items-center justify-content-around w-100` } style={ { height: "40%" } }>
-                    <img className={ `${ styles.img }` } src={ require('../../img/defaultavt.jpg') } alt='avatar' />
+                    {/* <img className={ `${ styles.img }` } src={ require('../../img/defaultavt.jpg') } alt='avatar' /> */ }
+                    <img className={ `${ styles.img }` } src="" alt='avatar' />
                     <div className={ `w-50 h-100 d-flex flex-column justify-content-center ${ styles.info }` }>
                         <p>Name: &nbsp;{ customer.name }</p>
                         <p>Email: &nbsp;

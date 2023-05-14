@@ -38,8 +38,10 @@ function AdminRecovery()
           if (res.data)
           {
             setIsWrong(false);
-            checkUsername.current.style.display = "none";
-            changingPassword.current.style.display = "flex";
+            if (checkUsername.current !== null && checkUsername.current !== undefined)
+              checkUsername.current.style.display = "none";
+            if (changingPassword.current !== null && changingPassword.current !== undefined)
+              changingPassword.current.style.display = "flex";
           }
           else
           {
@@ -84,24 +86,30 @@ function AdminRecovery()
 
     if (window.innerHeight > 330)
     {
-      checkUsername.current.classList.add('h-100');
-      changingPassword.current.classList.add('h-100');
+      if (checkUsername.current !== null && checkUsername.current !== undefined)
+        checkUsername.current.classList.add('h-100');
+      if (changingPassword.current !== null && changingPassword.current !== undefined)
+        changingPassword.current.classList.add('h-100');
     }
-    
+
     window.addEventListener('resize', () =>
     {
       if (window.innerHeight > 330)
       {
-        checkUsername.current.classList.add('h-100');
-        changingPassword.current.classList.add('h-100');
+        if (checkUsername.current !== null && checkUsername.current !== undefined)
+          checkUsername.current.classList.add('h-100');
+        if (changingPassword.current !== null && changingPassword.current !== undefined)
+          changingPassword.current.classList.add('h-100');
       }
       else
       {
-        checkUsername.current.classList.remove('h-100');
-        changingPassword.current.classList.remove('h-100');
+        if (checkUsername.current !== null && checkUsername.current !== undefined)
+          checkUsername.current.classList.remove('h-100');
+        if (changingPassword.current !== null && changingPassword.current !== undefined)
+          changingPassword.current.classList.remove('h-100');
       }
     });
-  },[]);
+  }, []);
 
   return (
     <>

@@ -22,8 +22,10 @@ import AdminRecovery from './Component/Admin/Authentication/Recovery/Recovery';
 // Admin navbar
 import AdminMenu from './Component/Admin/Menu/menu';
 
-import CusDetail from './Component/Admin/cusdetail';
-import CusList from './Component/Admin/cuslist';
+// Customer pages
+import CustomerList from './Component/Admin/Customer/List/CustomerList';
+import CustomerDetail from './Component/Admin/Customer/Detail/CustomerDetail';
+
 import AdminHome from './Component/Admin/Home/Home.jsx';
 import GameList from './Component/Admin/gamelist';
 import { AddGame, EditGame } from './Component/Admin/add_edit_game';
@@ -32,6 +34,7 @@ import AdminInfo from './Component/Admin/personalInfo';
 
 function App()
 {
+
   return (
     <div className="App">
       <BrowserRouter>
@@ -58,17 +61,19 @@ function App()
             <Route path="recovery" element={ <AdminRecovery /> } />
             {/* Main pages */ }
             <Route element={ <AdminMenu /> }>
-              <Route path='myself' element={ <AdminInfo /> } />
+              <Route path='profile' element={ <AdminInfo /> } />
               <Route path="home" element={ <AdminHome /> } />
+              {/* Customer pages */ }
               <Route>
-                <Route path="customerlist" element={ <CusList /> } />
-                <Route path="customerlist/:id" element={ <CusDetail /> } />
+                <Route path="customer-list" element={ <CustomerList /> } />
+                <Route path="customer-list/:id" element={ <CustomerDetail /> } />
               </Route>
+              {/* Game pages */ }
               <Route>
-                <Route path="gamelist" element={ <GameList /> } />
-                <Route path="gamelist/:id" element={ <GameDetail /> } />
-                <Route path="gamelist/:id/edit" element={ <EditGame /> } />
-                <Route path="addgame" element={ <AddGame /> } />
+                <Route path="game-list" element={ <GameList /> } />
+                <Route path="game-list/:id" element={ <GameDetail /> } />
+                <Route path="game-list/:id/edit" element={ <EditGame /> } />
+                <Route path="add-game" element={ <AddGame /> } />
               </Route>
             </Route>
           </Route>

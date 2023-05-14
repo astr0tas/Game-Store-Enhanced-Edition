@@ -28,9 +28,8 @@ const BestSeller = (props) =>
 }
 
 
-export default function AdminHome()
+const AdminHome = () =>
 {
-
       // const effectRan = useRef(false);
       // const Navigate = useNavigate();
 
@@ -74,19 +73,6 @@ export default function AdminHome()
       // }, []);
 
       return (
-            // <div className='d-flex flex-column justify-content-center align-items-center h-100 w-100 admin-home'>
-            //       <div className='board'>
-            //             <div className="d-flex align-items-center justify-content-center best_sellers">
-            //                   <h2 className='d-flex align-items-center' style={ { color: "red" } }><TbFlame />Best sellers<TbFlame /></h2>
-            //             </div>
-            //             <div className="best-sellers">
-            //                   <div className="group">
-            //                   </div>
-            //                   <div className="group">
-            //                   </div>
-            //             </div>
-            //       </div>
-            // </div>
             <div className='w-100 h-100 d-flex flex-column'>
                   <div className='w-100 d-flex align-items-center justify-content-center'>
                         <div className={ `d-flex align-items-center justify-content-center ${ styles.title }` }>
@@ -102,3 +88,5 @@ export default function AdminHome()
             </div>
       )
 }
+
+export default AdminHome;

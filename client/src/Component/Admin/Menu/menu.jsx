@@ -10,13 +10,12 @@ import { checkCookie } from '../../tools/cookie';
 import { Outlet, useNavigate } from 'react-router-dom';
 
 
-function AdminMenu()
+const AdminMenu = () =>
 {
   const Navigate = useNavigate();
   const navbar = useRef(null);
   const tabs = useRef(null);
   const navToggler = useRef(null);
-
 
   const [showSidebar, setShowSidebar] = useState(true);
 
@@ -25,13 +24,17 @@ function AdminMenu()
     // Show or collapse the side menu
     if (showSidebar)
     {
-      navbar.current.style.width = '0';
-      tabs.current.style.opacity = '0';
+      if (navbar.current !== null && navbar.current !== undefined)
+        navbar.current.style.width = '0';
+      if (tabs.current !== null && tabs.current !== undefined)
+        tabs.current.style.opacity = '0';
     }
     else
     {
-      navbar.current.style.width = '160px';
-      tabs.current.style.opacity = '1';
+      if (navbar.current !== null && navbar.current !== undefined)
+        navbar.current.style.width = '160px';
+      if (tabs.current !== null && tabs.current !== undefined)
+        tabs.current.style.opacity = '1';
     }
     setShowSidebar(!showSidebar);
   };
@@ -52,8 +55,10 @@ function AdminMenu()
     // This function is use to ensure the collapsed side menu will be expanded when the browser's width > 768px.
     if (window.innerWidth > 768)
     {
-      navbar.current.style.width = '160px';
-      tabs.current.style.opacity = '1';
+      if (navbar.current !== null && navbar.current !== undefined)
+        navbar.current.style.width = '160px';
+      if (tabs.current !== null && tabs.current !== undefined)
+        tabs.current.style.opacity = '1';
       setShowSidebar(true);
     }
   }
@@ -62,7 +67,7 @@ function AdminMenu()
   {
     if (!checkCookie("PHPADMINSESSID"))
       Navigate("/admin");
-    
+
     trackWidth();
 
     document.addEventListener('mousedown', function (event)
@@ -70,7 +75,10 @@ function AdminMenu()
       // This event listener is used to close the side menu when the user clicked something outside of it.
 
       // Check if clicked element is inside the side menu or the toggle button
-      if (!navbar.current.contains(event.target) && !navToggler.current.contains(event.target))
+      if (navbar.current !== null && navbar.current !== undefined
+        && !navbar.current.contains(event.target) && !navToggler.current.contains(event.target)
+        && navToggler.current !== null && navToggler.current !== undefined
+        && tabs.current !== null && tabs.current !== undefined)
       {
         if (showSidebar && window.innerWidth <= 768)
         {
@@ -82,7 +90,7 @@ function AdminMenu()
     });
 
     window.addEventListener('resize', trackWidth);
-  },[]);
+  }, []);
 
   return (
     <div className='w-100 h-100' style={ { backgroundColor: '#B9FDFD' } }>
@@ -90,19 +98,19 @@ function AdminMenu()
       <div className={ `h-100 d-flex flex-column position-fixed ${ styles.navbar }` } style={ { backgroundColor: '#E6E6E6' } } ref={ navbar }>
         <div className={ `w-100 ${ styles.dummy }` } style={ { minHeight: '50px' } }></div>
         <div className={ `flex-grow-1 d-flex flex-column overflow-auto ${ styles.tabs } mt-md-3` } ref={ tabs }>
-          <div className={ `${ styles.hover } mb-3 d-flex align-items-center justify-content-center` }>
+          <div className={ `${ styles.hover } mb-3 d-flex align-items-center justify-content-center` } onClick={ () => { Navigate("./profile"); } }>
             <span className={ `d-flex align-items-center justify-content-center p-0` } style={ { fontSize: '3.5rem', whiteSpace: 'nowrap', color: '#1c60c7' } }><VscAccount /></span>
           </div>
-          <div className={ `${ styles.hover } mb-3 d-flex align-items-center` }>
+          <div className={ `${ styles.hover } mb-3 d-flex align-items-center` } onClick={ () => { Navigate("./home"); } }>
             <span className={ `d-flex align-items-center p-0 ms-2` } style={ { fontSize: '1.5rem', whiteSpace: 'nowrap', color: '#1c60c7' } }><FontAwesomeIcon icon={ faHouse } className={ `me-1` } />Home</span>
           </div>
-          <div className={ `${ styles.hover } mb-3 d-flex align-items-center` }>
+          <div className={ `${ styles.hover } mb-3 d-flex align-items-center` } onClick={ () => { Navigate("./customer-list"); } }>
             <span className={ `d-flex align-items-center p-0 ms-2` } style={ { fontSize: '1.5rem', whiteSpace: 'nowrap', color: '#1c60c7' } }><FontAwesomeIcon icon={ faUser } className={ `me-1` } />Customers</span>
           </div>
-          <div className={ `${ styles.hover } mb-3 d-flex align-items-center` }>
+          <div className={ `${ styles.hover } mb-3 d-flex align-items-center` } onClick={ () => { Navigate("./game-list"); } }>
             <span className={ `d-flex align-items-center p-0 ms-2` } style={ { fontSize: '1.5rem', whiteSpace: 'nowrap', color: '#1c60c7' } }><FontAwesomeIcon icon={ faGamepad } className={ `me-1` } />Games</span>
           </div>
-          <div className={ `${ styles.hover } mb-3 d-flex align-items-center` }>
+          <div className={ `${ styles.hover } mb-3 d-flex align-items-center` } onClick={ () => { Navigate("./statistic"); } }>
             <span className={ `d-flex align-items-center p-0 ms-2` } style={ { fontSize: '1.5rem', whiteSpace: 'nowrap', color: '#1c60c7' } }><FontAwesomeIcon icon={ faCalculator } className={ `me-1` } />Statistics</span>
           </div>
           <div className={ `${ styles.hover } mt-auto d-flex align-items-center` } onClick={ () =>
