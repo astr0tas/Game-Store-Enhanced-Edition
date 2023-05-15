@@ -51,10 +51,24 @@
     border-bottom: 2px solid black;
     border-left: 2px solid black;
     border-right: 2px solid black;
+    height: 100%;
 }
 
 .title>h2 {
     margin-bottom: 0;
+}
+
+.checkbox {
+    width: 1.5rem;
+    height: 1.5rem;
+    margin-top: auto;
+    margin-bottom: auto;
+    display: none;
+}
+
+.detail:hover,
+.checkbox {
+    cursor: pointer;
 }
 
 @media only screen and (min-width:762px) {

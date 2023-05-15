@@ -17,6 +17,7 @@ class AdminModel
             }
       }
 
+      /*Authentication*/
       public function login($username, $password)
       {
             $sql = "select * from admin where username='$username' and userpassword='$password'";
@@ -44,6 +45,8 @@ class AdminModel
             $sql = "update admin set userpassword='$password' where username='$username'";
             $this->db->query($sql);
       }
+
+      /**/
 
       public function myself()
       {

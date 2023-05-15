@@ -17,7 +17,7 @@ class CustomerModel
             }
       }
 
-      public function getList()
+      public function getList() // Get all customers in the database
       {
             $sql = 'SELECT id,name,email,phone,total_spending from customer';
             $result = $this->db->query($sql);
@@ -30,7 +30,7 @@ class CustomerModel
             return $arr;
       }
 
-      public function find($data)
+      public function find($data) // Get all customers that matched the search bar
       {
             $arr = [];
             $sql = "SELECT id,name,email,phone,total_spending from customer where name like '%$data%'";
@@ -62,11 +62,13 @@ class CustomerModel
             return $arr;
       }
 
-      public function delete($data)
+      public function delete($array)
       {
-            $sql = "DELETE FROM customer WHERE id='$data'";
-            $result = $this->db->query($sql);
-            return $result;
+            $sql = "";
+            foreach ($array as $elem) {
+                  $sql.="delete from customer where id='$elem'; ";
+            }
+            return $this->db->multi_query($sql);
       }
 
       public function detail($data)

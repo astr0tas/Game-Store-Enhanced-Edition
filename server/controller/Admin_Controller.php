@@ -17,7 +17,7 @@ class AdminController
             $this->admin_model = new AdminModel();
       }
 
-      /*Admin authentication*/
+      /*Authentication*/
       public function login() // Check if username and password found in db, if found start a session or else return false
       {
             $username = $_POST['username'];
@@ -32,7 +32,7 @@ class AdminController
 
       public function recovery() // Check if the username exists
       {
-            $username = $_POST['username'];
+            $username = $_GET['username'];
             $arr = $this->admin_model->recovery($username);
             echo json_encode($arr ? true : false);
       }
@@ -50,9 +50,9 @@ class AdminController
             echo json_encode(endAdminSession($_COOKIE['PHPADMINSESSID']));
       }
 
-      /**/
+      /*Customer*/
 
-      public function getCustomerList()
+      public function getCustomerList() // Get all customers in the database
       {
             $arr = $this->customer_model->getList();
             echo json_encode($arr);
@@ -67,10 +67,12 @@ class AdminController
 
       public function deleteCustomer()
       {
-            $data = $_POST["id"];
+            $data = explode(',', $_POST["IDs"]);
             $result = $this->customer_model->delete($data);
             echo json_encode(array("message" => $result ? "success" : "failed"));
       }
+
+      /**/
 
       public function customerDetail()
       {

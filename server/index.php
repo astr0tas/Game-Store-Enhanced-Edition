@@ -39,29 +39,30 @@
       $router->post("/product", "CustomerController@product");
 
       ################################## Admin routes ##################################
-      /*Admin authentication*/
+      /*Authentication*/
       $router->post("/admin/login", "AdminController@login");
-      $router->post("/admin/recovery", "AdminController@recovery");
+      $router->get("/admin/recovery", "AdminController@recovery");
       $router->post("/admin/newPassword", "AdminController@newPassword");
 
-      /*Admin info*/
+      /*Info*/
 
-      /*Admin home*/
+      /*Home*/
 
-      /*Admin customer*/
-
-      /*Admin game*/
-
-      /*Admin statistic*/
+      /*Customer*/
       $router->get("/admin/customer/getList", "AdminController@getCustomerList");
+      $router->post("/admin/customer/find", "AdminController@findCustomer");
+      $router->post("/admin/customer/delete", "AdminController@deleteCustomer");
+
+      /*Game*/
+
+      /*Statistic*/
+
       $router->get("/admin/game/list", "AdminController@getGameList");
       $router->get("/admin/game/categories", "AdminController@getCategories");
       $router->get("/admin/getBestSeller", "AdminController@getBestSeller");
       $router->get("/admin/logout", "AdminController@logout");
       $router->get("/admin/myself", "AdminController@myself");
       $router->post("/admin/myself/edit", "AdminController@updateMySelf");
-      $router->post("/admin/customer/find", "AdminController@findCustomer");
-      $router->post("/admin/customer/delete", "AdminController@deleteCustomer");
       $router->post("/admin/customer/detail", "AdminController@customerDetail");
       $router->post("/admin/customer/detail/history", "AdminController@customerHistory");
       $router->post("/admin/customer/detail/edit", "AdminController@editCustomer");
