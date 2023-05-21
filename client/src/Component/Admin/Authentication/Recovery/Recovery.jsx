@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react';
 import { AiOutlineCloseCircle } from 'react-icons/ai';
 import { domain } from '../../../tools/domain';
+import { isRefValid } from '../../../tools/refChecker';
 
 
 function AdminRecovery()
@@ -38,9 +39,9 @@ function AdminRecovery()
           if (res.data)
           {
             setIsWrong(false);
-            if (checkUsername.current !== null && checkUsername.current !== undefined)
+            if (isRefValid(checkUsername))
               checkUsername.current.style.display = "none";
-            if (changingPassword.current !== null && changingPassword.current !== undefined)
+            if (isRefValid(changingPassword))
               changingPassword.current.style.display = "flex";
           }
           else
@@ -86,9 +87,9 @@ function AdminRecovery()
 
     if (window.innerHeight > 330)
     {
-      if (checkUsername.current !== null && checkUsername.current !== undefined)
+      if (isRefValid(checkUsername))
         checkUsername.current.classList.add('h-100');
-      if (changingPassword.current !== null && changingPassword.current !== undefined)
+      if (isRefValid(changingPassword))
         changingPassword.current.classList.add('h-100');
     }
 
@@ -96,16 +97,16 @@ function AdminRecovery()
     {
       if (window.innerHeight > 330)
       {
-        if (checkUsername.current !== null && checkUsername.current !== undefined)
+        if (isRefValid(checkUsername))
           checkUsername.current.classList.add('h-100');
-        if (changingPassword.current !== null && changingPassword.current !== undefined)
+        if (isRefValid(changingPassword))
           changingPassword.current.classList.add('h-100');
       }
       else
       {
-        if (checkUsername.current !== null && checkUsername.current !== undefined)
+        if (isRefValid(checkUsername))
           checkUsername.current.classList.remove('h-100');
-        if (changingPassword.current !== null && changingPassword.current !== undefined)
+        if (isRefValid(changingPassword))
           changingPassword.current.classList.remove('h-100');
       }
     });

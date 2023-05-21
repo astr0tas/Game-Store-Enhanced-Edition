@@ -5,6 +5,7 @@ import styles from './CustomerList.module.css';
 import ReactDOM from 'react-dom/client';
 import { useNavigate } from 'react-router-dom';
 import { domain } from '../../../tools/domain';
+import { isRefValid,isRefNotValid } from '../../../tools/refChecker';
 
 const Customer = (props) =>
 {
@@ -12,7 +13,7 @@ const Customer = (props) =>
     return (
         <tr className={ `${ styles.detail }` } onClick={ () =>
         {
-            if (props.refCheckboxes.current[props.i] !== null && props.refCheckboxes.current[props.i] !== undefined && props.refCheckboxes.current[props.i].style.display !== "block")
+            if (isRefValid(props.refCheckboxes,props.i) && props.refCheckboxes.current[props.i].style.display !== "block")
                 props.Navigate(`./${ props.id }`);
         } }>
             <td className='col-1 text-center'>
@@ -51,7 +52,7 @@ export default function CustomerList()
 
     useEffect(() =>
     {
-        if ((target.current === null || target.current === undefined) && tableBody.current !== null && tableBody.current !== undefined)
+        if (isRefNotValid(target) && isRefValid(tableBody))
             target.current = ReactDOM.createRoot(tableBody.current);
 
         axios.get(`http://${ domain }/admin/customer/getList`)
@@ -63,7 +64,7 @@ export default function CustomerList()
                 const temp = [];
                 for (let i = 0; i < res.data.length; i++)
                     temp.push(<Customer Navigate={ Navigate } refCheckboxes={ checkboxes } refNumbers={ numbers } key={ i } i={ i } name={ res.data[i].name } email={ res.data[i].email } phone={ res.data[i].phone } spending={ res.data[i].total_spending } id={ res.data[i].id } />);
-                if (target.current !== null && target.current !== undefined)
+                if (isRefValid(target))
                     target.current.render(<>{ temp }</>);
             })
             .catch(error => console.log(error));
@@ -77,7 +78,7 @@ export default function CustomerList()
         timerId = setTimeout(() =>
         {
             const formData = new FormData();
-            formData.append("data", (search.current !== null && search.current !== undefined) ? search.current.value : "");
+            formData.append("data", isRefValid(search) ? search.current.value : "");
             axios.post(`http://${ domain }/admin/customer/find`, formData)
                 .then(res =>
                 {
@@ -87,7 +88,7 @@ export default function CustomerList()
                     const temp = [];
                     for (let i = 0; i < res.data.length; i++)
                         temp.push(<Customer Navigate={ Navigate } key={ i } i={ i } refNumbers={ numbers } refCheckboxes={ checkboxes } name={ res.data[i].name } email={ res.data[i].email } phone={ res.data[i].phone } spending={ res.data[i].total_spending } id={ res.data[i].id } />);
-                    if (target.current !== null && target.current !== undefined)
+                    if (isRefValid(target))
                         target.current.render(<>{ temp }</>);
                 })
                 .catch(error => console.log(error));
@@ -96,46 +97,46 @@ export default function CustomerList()
 
     const toggleDelete = () =>
     {
-        if (cancel.current !== null && cancel.current !== undefined)
+        if (isRefValid(cancel))
         {
             if (cancel.current.style.display === "" || cancel.current.style.display === "none")
             {
                 cancel.current.style.display = "block";
-                if (confirm.current !== null && confirm.current !== undefined)
+                if (isRefValid(confirm))
                     confirm.current.style.display = "block";
-                if (deleteButton.current !== null && deleteButton.current !== undefined)
+                if (isRefValid(deleteButton))
                     deleteButton.current.style.display = "none";
-                if (selectAll.current !== null && selectAll.current !== undefined)
+                if (isRefValid(selectAll))
                     selectAll.current.style.display = "block";
-                if (numberTag.current !== null && numberTag.current !== undefined)
+                if (isRefValid(numberTag))
                     numberTag.current.style.display = "none";
                 for (let i = 0; i < checkboxes.current.length; i++)
                 {
-                    if (checkboxes.current[i] !== null && checkboxes.current[i] !== undefined)
+                    if (isRefValid(checkboxes,i))
                         checkboxes.current[i].style.display = "block";
-                    if (numbers.current[i] !== null && numbers.current[i] !== undefined)
+                    if (isRefValid(numbers, i))
                         numbers.current[i].style.display = "none";
                 }
             }
             else
             {
                 cancel.current.style.display = "none";
-                if (deleteButton.current !== null && deleteButton.current !== undefined)
+                if (isRefValid(deleteButton))
                     deleteButton.current.style.display = "block";
-                if (confirm.current !== null && confirm.current !== undefined)
+                if (isRefValid(confirm))
                     confirm.current.style.display = "none";
-                if (selectAll.current !== null && selectAll.current !== undefined)
+                if (isRefValid(selectAll))
                     selectAll.current.style.display = "none";
-                if (numberTag.current !== null && numberTag.current !== undefined)
+                if (isRefValid(numberTag))
                     numberTag.current.style.display = "block";
                 for (let i = 0; i < checkboxes.current.length; i++)
                 {
-                    if (checkboxes.current[i] !== null && checkboxes.current[i] !== undefined)
+                    if (isRefValid(checkboxes, i))
                     {
                         checkboxes.current[i].style.display = "none";
                         checkboxes.current[i].checked = false;
                     }
-                    if (numbers.current[i] !== null && numbers.current[i] !== undefined)
+                    if (isRefValid(numbers, i))
                         numbers.current[i].style.display = "block";
                 }
             }
@@ -147,7 +148,7 @@ export default function CustomerList()
         const temp = [];
 
         for (let i = 0; i < checkboxes.current.length; i++)
-            if (checkboxes.current[i] !== null && checkboxes.current[i] !== undefined && checkboxes.current[i].checked === true)
+            if (isRefValid(checkboxes, i) && checkboxes.current[i].checked === true)
                 temp.push(checkboxes.current[i].value);
 
         const formData = new FormData();
@@ -166,7 +167,7 @@ export default function CustomerList()
     {
         for (let i = 0; i < checkboxes.current.length; i++)
         {
-            if (checkboxes.current[i] !== null && checkboxes.current[i] !== undefined)
+            if (isRefValid(checkboxes, i))
                 checkboxes.current[i].checked = selectAll.current.checked;
         }
     }

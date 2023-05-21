@@ -6,6 +6,7 @@ import { AiOutlineCloseCircle } from 'react-icons/ai';
 import { checkCookie } from '../../../tools/cookie';
 import { domain } from '../../../tools/domain';
 import React from 'react';
+import { isRefValid } from '../../../tools/refChecker';
 
 const AdminLogin = () =>
 {
@@ -64,16 +65,16 @@ const AdminLogin = () =>
     document.title = 'Login';
 
     if (window.innerHeight > 430)
-      if (resize.current !== null && resize.current !== undefined)
+      if (isRefValid(resize))
         resize.current.classList.add('h-100');
 
     window.addEventListener('resize', () =>
     {
       if (window.innerHeight > 430)
-        if (resize.current !== null && resize.current !== undefined)
+        if (isRefValid(resize))
           resize.current.classList.add('h-100');
         else
-          if (resize.current !== null && resize.current !== undefined)
+          if (isRefValid(resize))
             resize.current.classList.remove('h-100');
     });
   }, []);
