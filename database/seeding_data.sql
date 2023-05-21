@@ -267,7 +267,7 @@ DirectX: Version 12
 Storage: 85 GB available space
 Additional Notes: SSD, 1080p/60 fps, High Quality Settings', load_file(concat(@picture_path,'/hogwart legacy/hl-1.jpg')), load_file(concat(@picture_path,'/hogwart legacy/hl-2.jpg')), load_file(concat(@picture_path,'/hogwart legacy/hl-3.jpg')), load_file(concat(@picture_path,'/hogwart legacy/hl-4.jpg')));
 
-insert into game values('GAME09','Destiny 2', 10, 0, 'Dive into the world of Destiny 2 to explore the mysteries of the solar system and experience responsive first-person shooter combat. Unlock powerful elemental abilities and collect unique gear to customize your Guardian\'s look and playstyle. Enjoy Destiny 2’s cinematic story, challenging co-op missions, and a variety of PvP modes alone or with friends. Download for free today and write your legend in the stars.
+insert into game values('GAME09','Destiny 2', 9.99, 0, 'Dive into the world of Destiny 2 to explore the mysteries of the solar system and experience responsive first-person shooter combat. Unlock powerful elemental abilities and collect unique gear to customize your Guardian\'s look and playstyle. Enjoy Destiny 2’s cinematic story, challenging co-op missions, and a variety of PvP modes alone or with friends. Download for free today and write your legend in the stars.
 An Immersive Story
 You are a Guardian, defender of the Last City of humanity in a solar system under siege by infamous villains. Look to the stars and stand against the darkness. Your legend begins now.
 Guardian Classes

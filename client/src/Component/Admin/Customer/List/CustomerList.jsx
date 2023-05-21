@@ -5,7 +5,7 @@ import styles from './CustomerList.module.css';
 import ReactDOM from 'react-dom/client';
 import { useNavigate } from 'react-router-dom';
 import { domain } from '../../../tools/domain';
-import { isRefValid,isRefNotValid } from '../../../tools/refChecker';
+import { isRefValid, isRefNotValid } from '../../../tools/refChecker';
 
 const Customer = (props) =>
 {
@@ -13,7 +13,7 @@ const Customer = (props) =>
     return (
         <tr className={ `${ styles.detail }` } onClick={ () =>
         {
-            if (isRefValid(props.refCheckboxes,props.i) && props.refCheckboxes.current[props.i].style.display !== "block")
+            if (isRefValid(props.refCheckboxes, props.i) && props.refCheckboxes.current[props.i].style.display !== "block")
                 props.Navigate(`./${ props.id }`);
         } }>
             <td className='col-1 text-center'>
@@ -46,7 +46,8 @@ export default function CustomerList()
     const checkboxes = useRef([]);
     const numbers = useRef([]);
 
-
+    const noCustomerSelected = useRef(null);
+    const confirmation = useRef(null);
 
     const Navigate = useNavigate();
 
@@ -112,7 +113,7 @@ export default function CustomerList()
                     numberTag.current.style.display = "none";
                 for (let i = 0; i < checkboxes.current.length; i++)
                 {
-                    if (isRefValid(checkboxes,i))
+                    if (isRefValid(checkboxes, i))
                         checkboxes.current[i].style.display = "block";
                     if (isRefValid(numbers, i))
                         numbers.current[i].style.display = "none";
@@ -143,10 +144,31 @@ export default function CustomerList()
         }
     }
 
+    const preProcess = () =>
+    {
+        let isEmpty = true;
+        for (let i = 0; i < checkboxes.current.length; i++)
+        {
+            if (isRefValid(checkboxes, i) && checkboxes.current[i].checked === true)
+            {
+                isEmpty = false;
+                break;
+            }
+        }
+
+        if (isEmpty)
+        {
+            if (isRefValid(noCustomerSelected)) noCustomerSelected.current.style.display = "flex";
+        }
+        else
+        {
+            if (isRefValid(confirmation)) confirmation.current.style.display = "flex";
+        }
+    }
+
     const deleteCustomer = () =>
     {
         const temp = [];
-
         for (let i = 0; i < checkboxes.current.length; i++)
             if (isRefValid(checkboxes, i) && checkboxes.current[i].checked === true)
                 temp.push(checkboxes.current[i].value);
@@ -166,14 +188,33 @@ export default function CustomerList()
     const selectAllCheckboxes = () =>
     {
         for (let i = 0; i < checkboxes.current.length; i++)
-        {
             if (isRefValid(checkboxes, i))
                 checkboxes.current[i].checked = selectAll.current.checked;
-        }
     }
 
     return (
         <div className='w-100 h-100 d-flex flex-column align-items-center'>
+            <div className={ `${ styles.pop_up } flex-column align-items-center justify-content-around` } ref={ noCustomerSelected }>
+                <h2 className={ `${ styles.pop_up_message }` }>No customer selected!</h2>
+                <button className={ `${ styles.blueButton }` } onClick={ () =>
+                {
+                    if (isRefValid(noCustomerSelected)) noCustomerSelected.current.style.display = "none";
+                } }>BACK</button>
+            </div>
+            <div className={ `${ styles.pop_up } flex-column align-items-center justify-content-around` } ref={ confirmation }>
+                <h2 className={ `${ styles.pop_up_message }` }>Do you want to delete the selected customer(s)?</h2>
+                <div className='d-flex align-items-center'>
+                    <button className={ `${ styles.blueButton } me-4` } onClick={ () =>
+                    {
+                        if (isRefValid(confirmation)) confirmation.current.style.display = "none";
+                    } }>NO</button>
+                    <button className={ `${ styles.redButton } ms-4` } onClick={ () =>
+                    {
+                        deleteCustomer();
+                        if (isRefValid(confirmation)) confirmation.current.style.display = "none";
+                    } }>YES</button>
+                </div>
+            </div>
             <div className={ `d-flex flex-column align-items-center justify-content-center w-100 ${ styles.titleBoard }` }>
                 <div className={ `d-flex align-items-center justify-content-center ${ styles.title }` }>
                     <h2 className='d-flex align-items-center' style={ { color: "red" } }>Customers</h2>
@@ -204,9 +245,9 @@ export default function CustomerList()
                 </table>
             </div >
             <div className='w-100 d-flex justify-content-center align-items-center mb-3' style={ { height: "100px" } }>
-                <button className={ `${ styles.delete } mx-3` } onClick={ toggleDelete } ref={ deleteButton }>Delete user</button>
+                <button className={ `${ styles.delete } mx-3` } onClick={ toggleDelete } ref={ deleteButton }>Delete customer</button>
                 <button className={ `${ styles.cancel } mx-3` } onClick={ toggleDelete } ref={ cancel }>Cancel</button>
-                <button className={ `${ styles.delete } mx-3` } value="Confirm" onClick={ deleteCustomer } ref={ confirm }>Confirm</button>
+                <button className={ `${ styles.delete } mx-3` } value="Confirm" onClick={ preProcess } ref={ confirm }>Confirm</button>
             </div>
         </div >
     )

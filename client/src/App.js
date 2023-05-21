@@ -1,6 +1,7 @@
 import './App.css';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
+/* Customer pages */
 import Login from './Component/Customer/Login';
 import Signup from './Component/Customer/Signup';
 import ForgotPassword from './Component/Customer/ForgotPassword';
@@ -14,7 +15,7 @@ import CGameDetail from './Component/Customer/cgamedetail'
 import { Cart } from './Component/Customer/cart';
 import { Product } from './Component/Customer/product';
 
-// Admin pages
+/* Admin pages */
 // Login pages
 import AdminLogin from './Component/Admin/Authentication/Login/Login.jsx';
 import AdminRecovery from './Component/Admin/Authentication/Recovery/Recovery';
@@ -22,15 +23,23 @@ import AdminRecovery from './Component/Admin/Authentication/Recovery/Recovery';
 // Admin navbar
 import AdminMenu from './Component/Admin/Menu/menu';
 
-// Customer pages
+// Admin Personal Info
+import AdminInfo from './Component/Admin/personalInfo';
+
+// Admin Home
+import AdminHome from './Component/Admin/Home/Home.jsx';
+
+// Admin Customers
 import CustomerList from './Component/Admin/Customer/List/CustomerList';
 import CustomerDetail from './Component/Admin/Customer/Detail/CustomerDetail';
 
-import AdminHome from './Component/Admin/Home/Home.jsx';
-import GameList from './Component/Admin/gamelist';
-import { AddGame, EditGame } from './Component/Admin/add_edit_game';
+// Admin Games
+import GameList from './Component/Admin/Game/List/GameList';
+
 import GameDetail from './Component/Admin/gamedetail';
-import AdminInfo from './Component/Admin/personalInfo';
+import { AddGame, EditGame } from './Component/Admin/add_edit_game';
+
+// Admin Statistics
 
 function App()
 {
@@ -61,20 +70,23 @@ function App()
             <Route path="recovery" element={ <AdminRecovery /> } />
             {/* Main pages */ }
             <Route element={ <AdminMenu /> }>
+              {/* Personal Info */}
               <Route path='profile' element={ <AdminInfo /> } />
+              {/* Home */ }
               <Route path="home" element={ <AdminHome /> } />
-              {/* Customer pages */ }
+              {/* Customers */ }
               <Route>
                 <Route path="customer-list" element={ <CustomerList /> } />
                 <Route path="customer-list/:id" element={ <CustomerDetail /> } />
               </Route>
-              {/* Game pages */ }
+              {/* Games */ }
               <Route>
                 <Route path="game-list" element={ <GameList /> } />
                 <Route path="game-list/:id" element={ <GameDetail /> } />
-                <Route path="game-list/:id/edit" element={ <EditGame /> } />
+                <Route path="game-list/:id/update" element={ <EditGame /> } />
                 <Route path="add-game" element={ <AddGame /> } />
               </Route>
+              {/* Statistics */}
             </Route>
           </Route>
         </Routes>

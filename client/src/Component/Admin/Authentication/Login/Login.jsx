@@ -77,7 +77,7 @@ const AdminLogin = () =>
           if (isRefValid(resize))
             resize.current.classList.remove('h-100');
     });
-  }, []);
+  }, [Navigate]);
 
   return (
     <>

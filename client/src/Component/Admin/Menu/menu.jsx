@@ -89,7 +89,7 @@ const AdminMenu = () =>
     });
 
     window.addEventListener('resize', trackWidth);
-  }, []);
+  }, [Navigate,showSidebar]);
 
   return (
     <div className='w-100 h-100' style={ { backgroundColor: '#B9FDFD' } }>
