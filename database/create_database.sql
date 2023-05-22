@@ -15,10 +15,10 @@ create table game(
     ratings float check(ratings>=0 and ratings<=5),
     spec_minimum text,
     spec_recommended text,
-    picture_1 mediumblob,
-    picture_2 mediumblob,
-    picture_3 mediumblob,
-    picture_4 mediumblob
+    picture_1 text,
+    picture_2 text,
+    picture_3 text,
+    picture_4 text
 );
 
 create table activation_code(
@@ -44,7 +44,7 @@ create table customer(
     membership_discount float default 0 check(0<=membership_discount and membership_discount<=5),
     username varchar(20) unique not null,
     userpassword varchar(20) not null,
-    image text
+    image text not null
 );
 
 create table admin(
