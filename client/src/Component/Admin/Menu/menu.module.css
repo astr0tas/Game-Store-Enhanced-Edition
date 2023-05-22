@@ -47,7 +47,7 @@
     background-color: #a0a0a0;
 }
 
-@media only screen and (min-width:769px) {
+@media only screen and (min-width:768px) {
     .page {
         height: 100%;
         width: calc(100% - 160px);

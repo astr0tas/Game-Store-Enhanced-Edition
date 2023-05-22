@@ -19,7 +19,7 @@ class GameModel
 
       public function getList()
       {
-            $sql = "SELECT name,id,price,discount,ratings,count(activation_code.game_id) as solds from game join activation_code on game_id=id where status='used' group by name,id,price,discount,ratings order by name";
+            $sql = "SELECT name,id,price,discount,ratings from game order by name";
             $result = $this->db->query($sql);
 
             $arr = [];
@@ -29,17 +29,11 @@ class GameModel
                   }
             }
             return $arr;
-      }
-
-      public function delete($data)
-      {
-            $sql = "DELETE FROM game WHERE id='$data'";
-            return $this->db->query($sql);
       }
 
       public function find($data)
       {
-            $sql = "SELECT name,id,price,discount,ratings,count(activation_code.game_id) as solds from game join activation_code on game_id=id where status='used' and name like '%$data%' group by name,id,price,discount,ratings order by name";
+            $sql = "SELECT name,id,price,discount,ratings from game where name like '%$data%' order by name";
             $result = $this->db->query($sql);
             $arr = [];
             if ($result->num_rows > 0) {
@@ -48,6 +42,40 @@ class GameModel
                   }
             }
             return $arr;
+      }
+
+      public function getGameSales($id)
+      {
+            $sql = "SELECT count(activation_code.game_id) as solds from activation_code where status='used' and game_id='$id'";
+            $result = $this->db->query($sql);
+            if ($result->num_rows > 0) {
+                  $row = $result->fetch_assoc();
+                  return $row;
+            }
+            return null;
+      }
+
+      public function getGameCategory($id)
+      {
+            $sql = "SELECT category_type from belongs_to where game_id='$id'";
+            $result = $this->db->query($sql);
+
+            $arr = [];
+            if ($result->num_rows > 0) {
+                  while ($row = $result->fetch_assoc()) {
+                        $arr[] = $row;
+                  }
+            }
+            return $arr;
+      }
+
+      public function delete($array)
+      {
+            $sql = "";
+            foreach ($array as $elem) {
+                  $sql .= "delete from game where id='$elem'; ";
+            }
+            return $this->db->multi_query($sql);
       }
 
       public function create($name, $price, $discount, $description, $minSpec, $maxSpec, $pic1, $pic2, $pic3, $pic4)
@@ -117,20 +145,6 @@ class GameModel
                   return $row;
             }
             return null;
-      }
-
-      public function getGameCategory($id)
-      {
-            $sql = "SELECT category_type from belongs_to where game_id='$id'";
-            $result = $this->db->query($sql);
-
-            $arr = [];
-            if ($result->num_rows > 0) {
-                  while ($row = $result->fetch_assoc()) {
-                        $arr[] = $row;
-                  }
-            }
-            return $arr;
       }
 
       public function getAllInfo($id)

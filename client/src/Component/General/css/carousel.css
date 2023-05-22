@@ -1,0 +1,10 @@
+.carousel-item {
+      transition: transform 0.5s ease-in-out !important;
+      width: 100%;
+      height: 100%;
+}
+
+.carousel-inner {
+      width: 100%;
+      height: 100%;
+}

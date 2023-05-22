@@ -17,7 +17,7 @@ class CustomerModel
             }
       }
 
-      public function getList() // Get all customers in the database
+      public function getList()
       {
             $sql = 'SELECT id,name,email,phone,total_spending from customer';
             $result = $this->db->query($sql);
@@ -30,7 +30,7 @@ class CustomerModel
             return $arr;
       }
 
-      public function find($data) // Get all customers that matched the search bar
+      public function find($data)
       {
             $arr = [];
             $sql = "SELECT id,name,email,phone,total_spending from customer where name like '%$data%'";
@@ -71,19 +71,19 @@ class CustomerModel
             return $this->db->multi_query($sql);
       }
 
-      public function detail($data)
+      public function detail($id)
       {
-            $sql = "SELECT id,name,email,phone,total_spending, membership_rank, membership_discount from customer where id= '$data'";
+            $sql = "SELECT id,name,email,phone,total_spending, membership_rank, membership_discount from customer where id= '$id'";
             $result = $this->db->query($sql);
             if ($result->num_rows > 0) {
                   return $result->fetch_assoc();
             }
       }
 
-      public function history($data)
+      public function history($id)
       {
             $sql = "select name, code, date, price, method from purchase_history 
-            join purchase_history_description on description_id = purchase_history_description.id and customer_id='$data'
+            join purchase_history_description on description_id = purchase_history_description.id and customer_id='$id'
             join game on game_id = game.id order by date desc,name asc";
             $result = $this->db->query($sql);
             $arr = [];
@@ -95,7 +95,7 @@ class CustomerModel
             return $arr;
       }
 
-      public function edit($id, $rank, $discount, $email, $phone)
+      public function update($id, $rank, $discount, $email, $phone)
       {
             $sql = "";
             if ($phone === "null")
@@ -108,18 +108,6 @@ class CustomerModel
             where id='$id'";
             return $this->db->query($sql);
       }
-
-      //   public function update($id, $data) {
-      //     $name = $data['name'];
-      //     $email = $data['email'];
-      //     $sql = "UPDATE users SET name = '$name', email = '$email' WHERE id = $id";
-      //     $this->db->query($sql);
-      //   }
-
-      //   public function delete($id) {
-      //     $sql = "DELETE FROM users WHERE id = $id";
-      //     $this->db->query($sql);
-      //   }
 
       public function __destruct()
       {

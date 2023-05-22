@@ -8,6 +8,7 @@ import { domain } from '../../../tools/domain';
 import { isRefValid, isRefNotValid } from '../../../tools/refChecker';
 import { CiDiscount1 } from 'react-icons/ci';
 import { AiFillStar } from 'react-icons/ai';
+import '../../../General/css/scroll.css';
 
 
 const Game = (props) =>
@@ -105,6 +106,8 @@ export default function GameList()
 
       useEffect(() =>
       {
+            document.title = 'Game list';
+
             if (isRefNotValid(target) && isRefValid(tableBody))
                   target.current = ReactDOM.createRoot(tableBody.current);
 
@@ -280,7 +283,7 @@ export default function GameList()
                               <BsSearch id='scope' className={ `${ styles.search_icon }` } />
                         </div>
                   </div>
-                  <div className={ `flex-grow-1 w-100 overflow-auto mt-3 px-md-2` }>
+                  <div className={ `flex-grow-1 w-100 overflow-auto mt-3 px-md-2 hideBrowserScrollbar` }>
                         <table className="table table-hover" style={ { borderCollapse: 'separate' } }>
                               <thead style={ { position: "sticky", top: "0", backgroundColor: "#BFBFBF" } }>
                                     <tr>
@@ -303,7 +306,7 @@ export default function GameList()
                   </div >
                   <div className='w-100 d-flex justify-content-center align-items-center mb-3' style={ { height: "100px" } }>
                         <button className={ `${ styles.delete } mx-3` } onClick={ toggleDelete } ref={ deleteButton }>Delete game</button>
-                        <button className={ `${ styles.blueButton } mx-3` } onClick={ toggleDelete } ref={ addButton }>Add game</button>
+                        <button className={ `${ styles.blueButton } mx-3` } onClick={ () => { Navigate('./add'); } } ref={ addButton }>Add game</button>
                         <button className={ `${ styles.cancel } mx-3` } onClick={ toggleDelete } ref={ cancel }>Cancel</button>
                         <button className={ `${ styles.delete } mx-3` } value="Confirm" onClick={ preProcess } ref={ confirm }>Confirm</button>
                   </div>

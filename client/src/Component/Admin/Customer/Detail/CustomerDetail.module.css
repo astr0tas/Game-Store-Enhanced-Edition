@@ -1,14 +1,5 @@
-.detail_board {
-    background-color: #E6E6E6;
-    border-radius: 10px;
-    height: 98%;
-    width: 98%;
-    display: flex;
-    flex-direction: column;
-}
-
 .trash {
-    font-size: 30px;
+    font-size: 2rem;
     color: red;
 }
 
@@ -21,21 +12,10 @@
 }
 
 .back {
-    border-radius: 20px;
+    border-radius: 10px;
     background-color: #C0C0C0;
-    width: 80px;
-    height: 40px;
-    font-size: 20px;
+    font-size: 1rem;
     align-items: center;
-}
-
-.back>* {
-    text-decoration: none;
-    color: black;
-}
-
-.back>*:hover {
-    color: black;
 }
 
 .back:active {
@@ -43,37 +23,13 @@
 }
 
 .img {
-    width: 30%;
-    height: 90%;
+    width: 80%;
+    height: 50%;
+    max-width: 250px;
+    min-height: 200px;
     background-color: #FAFAFA;
     border: 1px solid black;
     border-radius: 20px;
-}
-
-.info>* {
-    font-size: 30px;
-}
-
-.edit {
-    width: 100px;
-    height: 50px;
-    background-color: #00B3EC;
-    color: white;
-    border-radius: 20px;
-    border: 1px solid black;
-    text-align: center;
-}
-
-.history {
-    width: 300px;
-    height: 50px;
-    background-color: #00B3EC;
-    color: white;
-    border-radius: 20px;
-    border: 1px solid black;
-    text-align: center;
-    font-size: 30px;
-    margin-left: 5%;
 }
 
 .edit:active,
@@ -84,160 +40,126 @@
     background-color: #61c4e2;
 }
 
-.head {
-    font-size: 20px;
-}
-
-.update {
-    display: none;
-}
-
-.cancel {
-    background-color: red;
-    color: white;
-    border-radius: 20px;
-    border: 1px solid black;
-    text-align: center;
-    width: 120px;
-}
-
 .cancel:active,
 .delete_cancel:active {
     color: rgb(248, 112, 112);
 }
 
+.cancel {
+    background-color: red;
+    color: white;
+    border-radius: 10px;
+    border: 1px solid black;
+    text-align: center;
+    font-size: 1rem;
+}
+
 .confirm {
     background-color: #00B3EC;
     color: white;
-    border-radius: 20px;
+    border-radius: 10px;
     border: 1px solid black;
     text-align: center;
-    width: 120px;
+    font-size: 1rem;
 }
 
-.table_body {
-    height: 85%;
+.info {
+    width: 100%;
+}
+
+.update {
+    display: none;
+    font-size: 1rem;
+    max-width: 40%;
+}
+
+.buttons {
+    display: none;
+    font-size: 1rem;
+}
+
+.edit {
+    background-color: #00B3EC;
+    color: white;
+    border-radius: 10px;
+    border: 1px solid black;
+    text-align: center;
+    font-size: 1rem;
+    min-width: 50px;
+}
+
+.history {
+    background-color: #00B3EC;
+    color: white;
+    border-radius: 10px;
+    border: 1px solid black;
+    text-align: center;
+    font-size: 1rem;
 }
 
 .pop_up {
     background-color: white;
-    width: 600px;
+    width: 80%;
     text-align: center;
-    height: 250px;
-    border: 1px solid black;
+    height: 40%;
+    border: 2px solid black;
     border-radius: 20px;
+    display: flex;
+    top: 20%;
+    max-width: 500px;
+    max-height: 200px;
     display: none;
 }
 
-.pop_up_1,
-.pop_up_2 {
-    background-color: white;
-    width: 600px;
-    text-align: center;
-    height: 250px;
-    border: 1px solid black;
-    border-radius: 20px;
-    display: none;
-}
-
-.OK {
-    background-color: #00B3EC;
-    color: white;
-    border: 1px solid black;
-    border-radius: 10px;
-    width: 100px;
-    height: 50px;
-    font-size: 30px;
-}
-
-.delete_pop_up {
-    background-color: white;
-    width: 500px;
-    text-align: center;
-    height: 200px;
-    border: 1px solid black;
-    border-radius: 20px;
-    display: none;
-}
-
-.delete_cancel {
+.redButton {
     background-color: red;
     color: white;
-    border-radius: 20px;
+    border-radius: 10px;
     border: 1px solid black;
     text-align: center;
-    width: 100px;
-    height: 50px;
-    font-size: 20px;
+    font-size: 1rem;
 }
 
-.delete_confirm {
+.blueButton {
     background-color: #00B3EC;
     color: white;
-    border-radius: 20px;
+    border-radius: 10px;
     border: 1px solid black;
     text-align: center;
-    width: 100px;
-    height: 50px;
-    font-size: 20px;
+    font-size: 1rem;
 }
 
-@media only screen and ((max-height:1000px) or (max-width:1280px)) {
-    .info>* {
-        font-size: 20px;
-    }
-
-    .history {
-        width: 250px;
-        height: 40px;
-        font-size: 20px;
-    }
-
-    .table_body {
-        height: 75%;
-    }
-
-    .head {
-        font-size: 16px;
-    }
-
-    .table_head {
-        margin-top: 0 !important;
-    }
-
-    .table_body {
-        height: 65%;
-    }
+.table {
+    display: none;
 }
 
-@media only screen and ((max-height:700px)) {
-    .info>* {
-        font-size: 15px;
+@media only screen and (min-width:768px) {
+
+    .back,
+    .buttons,
+    .cancel,
+    .confirm,
+    .history,
+    .edit,
+    .delete_cancel,
+    .delete_confirm {
+        font-size: 1.2rem;
     }
 
-    .history {
-        width: 200px;
-        height: 30px;
-        font-size: 15px;
+    .info {
+        width: 40%;
     }
 
-    .table_body {
-        height: 75%;
+    .update {
+        max-width: initial;
     }
 
-    .head {
-        font-size: 15px;
-    }
-
-    .table_head {
-        margin-top: 0 !important;
-    }
-
-    .table_body {
-        height: 65%;
-    }
-
-    .history_section {
-        margin-top: 15px;
+    .img {
+        width: 30%;
+        height: 100%;
+        min-width: 350px;
+        max-width: 500px;
+        min-height: 250px;
+        max-height: 400px;
     }
 }

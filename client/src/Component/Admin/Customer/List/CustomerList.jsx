@@ -6,6 +6,7 @@ import ReactDOM from 'react-dom/client';
 import { useNavigate } from 'react-router-dom';
 import { domain } from '../../../tools/domain';
 import { isRefValid, isRefNotValid } from '../../../tools/refChecker';
+import '../../../General/css/scroll.css';
 
 const Customer = (props) =>
 {
@@ -53,6 +54,8 @@ export default function CustomerList()
 
     useEffect(() =>
     {
+        document.title = 'Customer list';
+
         if (isRefNotValid(target) && isRefValid(tableBody))
             target.current = ReactDOM.createRoot(tableBody.current);
 
@@ -224,7 +227,7 @@ export default function CustomerList()
                     <BsSearch id='scope' className={ `${ styles.search_icon }` } />
                 </div>
             </div>
-            <div className={ `flex-grow-1 w-100 overflow-auto mt-3 px-md-2` }>
+            <div className={ `flex-grow-1 w-100 overflow-auto mt-3 px-md-2 hideBrowserScrollbar` }>
                 <table className="table table-hover" style={ { borderCollapse: 'separate' } }>
                     <thead style={ { position: "sticky", top: "0", backgroundColor: "#BFBFBF" } }>
                         <tr>

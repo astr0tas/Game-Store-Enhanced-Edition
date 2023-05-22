@@ -84,7 +84,7 @@ function App()
                 <Route path="game-list" element={ <GameList /> } />
                 <Route path="game-list/:id" element={ <GameDetail /> } />
                 <Route path="game-list/:id/update" element={ <EditGame /> } />
-                <Route path="add-game" element={ <AddGame /> } />
+                <Route path="game-list/add" element={ <AddGame /> } />
               </Route>
               {/* Statistics */}
             </Route>

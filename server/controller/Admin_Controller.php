@@ -17,7 +17,7 @@ class AdminController
             $this->admin_model = new AdminModel();
       }
 
-      /*Authentication*/
+      /* Authentication */
       public function login() // Check if username and password found in db, if found start a session or else return false
       {
             $username = $_POST['username'];
@@ -32,7 +32,7 @@ class AdminController
 
       public function recovery() // Check if the username exists
       {
-            $username = $_GET['username'];
+            $username = $_POST['username'];
             $arr = $this->admin_model->recovery($username);
             echo json_encode($arr ? true : false);
       }
@@ -47,12 +47,13 @@ class AdminController
 
       public function logout()
       {
-            echo json_encode(endAdminSession($_COOKIE['PHPADMINSESSID']));
+            endAdminSession($_COOKIE['PHPADMINSESSID']);
+            json_encode(array("message" => "success"));
       }
 
-      /*Customer*/
+      /* Customer */
 
-      public function getCustomerList() // Get all customers in the database
+      public function getCustomerList()
       {
             $arr = $this->customer_model->getList();
             echo json_encode($arr);
@@ -72,32 +73,32 @@ class AdminController
             echo json_encode(array("message" => $result ? "success" : "failed"));
       }
 
-      /**/
-
       public function customerDetail()
       {
-            $data = $_POST["data"];
-            $arr = $this->customer_model->detail($data);
+            $id = $_POST["id"];
+            $arr = $this->customer_model->detail($id);
             echo json_encode($arr);
       }
 
       public function customerHistory()
       {
-            $data = $_POST["data"];
-            $arr = $this->customer_model->history($data);
+            $id = $_POST["id"];
+            $arr = $this->customer_model->history($id);
             echo json_encode($arr);
       }
 
-      public function editCustomer()
+      public function updateCustomer()
       {
             $id = $_POST["id"];
             $rank = $_POST["rank"];
             $discount = $_POST["discount"];
             $email = $_POST["email"];
             $phone = $_POST["phone"];
-            $result = $this->customer_model->edit($id, $rank, $discount, $email, $phone);
+            $result = $this->customer_model->update($id, $rank, $discount, $email, $phone);
             echo json_encode(array("message" => $result ? "success" : "failed"));
       }
+
+      /* Game */
 
       public function getGameList()
       {
@@ -105,19 +106,34 @@ class AdminController
             echo json_encode($arr);
       }
 
+      public function findGame()
+      {
+            $data = $_POST["name"];
+            $arr = $this->game_model->find($data);
+            echo json_encode($arr);
+      }
+
+      public function getGameSales()
+      {
+            $id = $_POST['id'];
+            $arr = $this->game_model->getGameSales($id);
+            echo json_encode($arr);
+      }
+
+      public function getGameCategory()
+      {
+            $result = $this->game_model->getGameCategory($_POST['id']);
+            echo json_encode($result);
+      }
+
       public function deleteGame()
       {
-            $data = $_POST["id"];
+            $data = explode(',', $_POST["IDs"]);
             $result = $this->game_model->delete($data);
             echo json_encode(array("message" => $result ? "success" : "failed"));
       }
 
-      public function findGame()
-      {
-            $data = $_POST["data"];
-            $arr = $this->game_model->find($data);
-            echo json_encode($arr);
-      }
+      /* */
 
       public function getCategories()
       {
@@ -207,12 +223,6 @@ class AdminController
       public function updateGetGameDetail()
       {
             $result = $this->game_model->updateGetGameDetail($_POST['id']);
-            echo json_encode($result);
-      }
-
-      public function getGameCategory()
-      {
-            $result = $this->game_model->getGameCategory($_POST['id']);
             echo json_encode($result);
       }
 

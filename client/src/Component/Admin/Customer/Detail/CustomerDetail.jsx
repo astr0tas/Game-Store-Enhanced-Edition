@@ -2,21 +2,21 @@ import { useNavigate, useParams } from 'react-router-dom';
 import styles from './CustomerDetail.module.css';
 import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
-import $ from 'jquery';
 import { BiTrash } from 'react-icons/bi';
 import ReactDOM from 'react-dom/client';
-import { checkCookie } from '../../../tools/cookie';
 import { domain } from '../../../tools/domain';
+import { isRefValid, isRefNotValid } from '../../../tools/refChecker';
+import '../../../General/css/scroll.css';
 
 const History = (props) =>
 {
     return (
         <tr>
-            <td className='col-3'>{ props.name }</td>
-            <td className='col-3'>{ props.code }    </td>
-            <td className='col-2'>{ props.date }</td>
-            <td className='col-2'>${ props.price }</td>
-            <td className='col-2'>{ props.method }</td>
+            <td className='col-3 text-center'>{ props.name }</td>
+            <td className='col-3 text-center'>{ props.code }</td>
+            <td className='col-2 text-center'>{ props.date }</td>
+            <td className='col-2 text-center'>${ props.price }</td>
+            <td className='col-2 text-center'>{ props.method }</td>
         </tr>
     );
 }
@@ -25,94 +25,192 @@ const History = (props) =>
 export default function CustomerDetail()
 {
     const id = useParams().id;
-    const render = useRef(false);
     const [customer, setCustomer] = useState({ name: "N/A", email: "N/A", phone: "N/A", spending: "N/A", rank: "N/A", discount: "N/A" });
+    const [renderTrigger, setRenderTrigger] = useState(true);
     const Navigate = useNavigate();
+
+    const select_menu = useRef(null);
+    const rank = useRef(null);
+    const discount = useRef(null);
+    const discount_input = useRef(null);
+    const customer_email = useRef(null);
+    const customer_email_input = useRef(null);
+    const customer_phone = useRef(null);
+    const customer_phone_input = useRef(null);
+    const edit = useRef(null);
+    const update = useRef(null);
+    const history = useRef(null);
+
+    const bigDiv = useRef(null);
+    const div1Height = useRef(null);
+    const div2Height = useRef(null);
+    const buttonHeight = useRef(null);
+
+    const delete_pop_up = useRef(null);
+    const pop_up = useRef(null);
+    const pop_up_1 = useRef(null);
+    const pop_up_2 = useRef(null);
+    const pop_up_3 = useRef(null);
+
+    const target = useRef(null);
+
+    const calculateRemainHeight = () =>
+    {
+        if (isRefValid(bigDiv) && isRefValid(div1Height) && isRefValid(div2Height) && isRefValid(buttonHeight))
+        {
+            const height = bigDiv.current.offsetHeight - div1Height.current.offsetHeight - buttonHeight.current.offsetHeight - 50;
+            div2Height.current.style.height = `calc(${ height }px)`;
+        }
+    }
 
     useEffect(() =>
     {
-        if (!checkCookie("PHPADMINSESSID"))
-            Navigate("/admin");
+        const formData = new FormData();
+        formData.append("id", id);
+        axios.post(`http://${ domain }/admin/customer/detail`, formData)
+            .then(res =>
+            {
+                document.title = `Customer ${ res.data.name }`;
 
-        if (!render.current)
-        {
-            $("#customer").css("color", "white");
-            $("#customer").css("background-color", "#00B3EC");
+                setCustomer({
+                    name: res.data.name,
+                    email: res.data.email,
+                    phone: res.data.phone === null ? 'N/A' : res.data.phone,
+                    spending: res.data.total_spending,
+                    rank: res.data.membership_rank,
+                    discount: res.data.membership_discount
+                });
+                if (isRefValid(select_menu))
+                    select_menu.current.value = res.data.membership_rank;
+                if (isRefValid(discount_input))
+                    discount_input.current.value = res.data.membership_discount;
+            })
 
-            const formData = new FormData();
-            formData.append("data", id);
-            axios.post(`http://${ domain }/admin/customer/detail`, formData)
-                .then(res =>
-                {
-                    setCustomer({
-                        name: res.data.name,
-                        email: res.data.email,
-                        phone: res.data.phone === null ? customer.phone : res.data.phone,
-                        spending: res.data.total_spending,
-                        rank: res.data.membership_rank,
-                        discount: res.data.membership_discount
-                    });
-                    $(".select_menu").val(res.data.membership_rank);
-                    $(".discount_input").val(res.data.membership_discount);
-                })
-            render.current = true;
-        }
-    });
+        calculateRemainHeight();
+
+        window.addEventListener('resize', calculateRemainHeight);
+
+    }, [renderTrigger, id]);
 
     const getHistory = () =>
     {
         const formData = new FormData();
-        formData.append("data", id);
+        formData.append("id", id);
         axios.post(`http://${ domain }/admin/customer/detail/history`, formData)
             .then(res =>
             {
+                if (res.data.length !== 0)
+                    if (isRefValid(div2Height)) div2Height.current.style.display = "block";
+
                 let temp = [];
-                const root = ReactDOM.createRoot(document.getElementById('history'));
                 for (let i = 0; i < res.data.length; i++)
                     temp.push(<History key={ i } name={ res.data[i].name } code={ res.data[i].code } date={ res.data[i].date } price={ res.data[i].price } method={ res.data[i].method } />);
-                root.render(<>{ temp }</>);
+
+                if (isRefNotValid(target))
+                    target.current = ReactDOM.createRoot(history.current);
+                target.current.render(<>{ temp }</>);
             })
             .catch(error => console.log(error));
     }
 
     const selectHandler = (event) =>
     {
-        if (event.target.value === "None")
-            $(`.discount_input`).val(0).prop('disabled', true);
-        else if (event.target.value === "Silver")
-            $(`.discount_input`).val(1).prop('disabled', true);
-        else if (event.target.value === "Gold")
-            $(`.discount_input`).val(2).prop('disabled', true);
-        else if (event.target.value === "Diamond")
-            $(`.discount_input`).val(3).prop('disabled', true);
-        else
-            $(`.discount_input`).prop('disabled', false).val('');
+        if (isRefValid(discount_input))
+        {
+            if (event.target.value === "None")
+            {
+                discount_input.current.value = 0;
+                discount_input.current.disabled = true;
+            }
+            else if (event.target.value === "Silver")
+            {
+                discount_input.current.value = 1;
+                discount_input.current.disabled = true;
+            }
+            else if (event.target.value === "Gold")
+            {
+                discount_input.current.value = 2;
+                discount_input.current.disabled = true;
+            }
+            else if (event.target.value === "Diamond")
+            {
+                discount_input.current.value = 3;
+                discount_input.current.disabled = true;
+            }
+            else
+            {
+                discount_input.current.value = "";
+                discount_input.current.disabled = false;
+            }
+        }
     }
 
     const changeInfo = () =>
     {
-        $(".rank").css("display", "none");
-        $(".discount").css("display", "none");
-        $(".customer_email").css("display", "none");
-        $(".customer_phone").css("display", "none");
-        $(`.${ styles.edit }`).css("display", "none");
-        $(`.${ styles.update }`).css("display", "inline-block");
-        $(".select_menu").val(customer.rank);
-        $(`.discount_input`).val(customer.discount);
-        $('.customer_email_input').val(customer.email);
-        $('.customer_phone_input').val(customer.phone === "N/A" ? "" : customer.phone);
-        if ($(".select_menu").val() === "Special")
-            $(`.discount_input`).prop('disabled', false).val(customer.discount);
+        if (isRefValid(rank))
+            rank.current.style.display = "none";
+        if (isRefValid(discount))
+            discount.current.style.display = "none";
+        if (isRefValid(customer_email))
+            customer_email.current.style.display = "none";
+        if (isRefValid(customer_phone))
+            customer_phone.current.style.display = "none";
+        if (isRefValid(edit))
+            edit.current.style.display = "none";
+        if (isRefValid(update))
+            update.current.style.display = "flex";
+        if (isRefValid(select_menu))
+        {
+            select_menu.current.style.display = "inline";
+            select_menu.current.value = customer.rank;
+        }
+        if (isRefValid(discount_input))
+        {
+            discount_input.current.style.display = "inline";
+            discount_input.current.value = customer.discount;
+        }
+        if (isRefValid(customer_email_input))
+        {
+            customer_email_input.current.style.display = "inline";
+            customer_email_input.current.value = customer.email;
+        }
+        if (isRefValid(customer_phone_input))
+        {
+            customer_phone_input.current.style.display = "inline";
+            customer_phone_input.current.value = customer.phone === "N/A" ? "" : customer.phone;
+        }
+        if (isRefValid(select_menu) && select_menu.current.value === "Special")
+        {
+            if (isRefValid(discount_input))
+            {
+                discount_input.current.disabled = false;
+                discount_input.current.value = customer.discount;
+            }
+        }
     }
 
     const cancelUpdate = () =>
     {
-        $(".rank").css("display", "inline");
-        $(".discount").css("display", "inline");
-        $(".customer_email").css("display", "inline");
-        $(".customer_phone").css("display", "inline");
-        $(`.${ styles.edit }`).css("display", "inline-block");
-        $(`.${ styles.update }`).css("display", "none");
+        if (isRefValid(rank))
+            rank.current.style.display = "inline";
+        if (isRefValid(discount))
+            discount.current.style.display = "inline";
+        if (isRefValid(customer_email))
+            customer_email.current.style.display = "inline";
+        if (isRefValid(customer_phone))
+            customer_phone.current.style.display = "inline";
+        if (isRefValid(edit))
+            edit.current.style.display = "inline-block";
+        if (isRefValid(update))
+            update.current.style.display = "none";
+        if (isRefValid(discount_input))
+            discount_input.current.style.display = "none";
+        if (isRefValid(customer_email_input))
+            customer_email_input.current.style.display = "none";
+        if (isRefValid(customer_phone_input))
+            customer_phone_input.current.style.display = "none";
+        if (isRefValid(select_menu))
+            select_menu.current.style.display = "none";
     }
 
     function containsAlphabets(str)
@@ -124,33 +222,39 @@ export default function CustomerDetail()
 
     const confirmChange = () =>
     {
-        if ($(".customer_email_input").val() === "")
-            $(`.${ styles.pop_up_1 }`).css("display", "flex");
-        else if (containsAlphabets($(".customer_phone_input").val()))
-            $(`.${ styles.pop_up_2 }`).css("display", "flex");
-        else if ($(`.select_menu`).val() === "Special" && ($(`.discount_input`).val() > 5 || $(`.discount_input`).val() < 0))
-            $(`.${ styles.pop_up }`).css("display", "flex");
+        if (isRefValid(customer_email_input) && customer_email_input.current.value === "")
+        {
+            if (isRefValid(pop_up_1)) pop_up_1.current.style.display = "flex";
+        }
+        else if (isRefValid(customer_phone_input) && containsAlphabets(customer_phone_input.current.value))
+        {
+            if (isRefValid(pop_up_2)) pop_up_2.current.style.display = "flex";
+        }
+        else if (isRefValid(select_menu) && select_menu.current.value === "Special" && isRefValid(discount_input) && (discount_input.current.value > 5 || discount_input.current.value < 0))
+        {
+            if (isRefValid(pop_up)) pop_up.current.style.display = "flex";
+        }
+        else if (isRefValid(select_menu) && select_menu.current.value === "Special" && isRefValid(discount_input) && discount_input.current.value === "")
+        {
+            if (isRefValid(pop_up_3)) pop_up_3.current.style.display = "flex";
+        }
         else
         {
             const formData = new FormData();
             formData.append("id", id);
-            formData.append("rank", $(`.select_menu`).val());
-            formData.append("discount", $(`.discount_input`).val());
-            formData.append("email", $(`.customer_email_input`).val());
-            formData.append("phone", $(`.customer_phone_input`).val() === "" ? null : $(`.customer_phone_input`).val());
-            axios.post(`http://${ domain }/admin/customer/detail/edit`, formData)
+            formData.append("rank", select_menu.current.value);
+            formData.append("discount", discount_input.current.value);
+            formData.append("email", customer_email_input.current.value);
+            formData.append("phone", customer_phone_input.current.value === "" ? null : customer_phone_input.current.value);
+            axios.post(`http://${ domain }/admin/customer/detail/update`, formData)
                 .then(res =>
                 {
                     console.log(res);
+                    cancelUpdate();
+                    setRenderTrigger(!renderTrigger);
                 })
                 .catch(error => { console.log(error); })
-            window.location.reload();
         }
-    }
-
-    const question = () =>
-    {
-        $(`.${ styles.delete_pop_up }`).css("display", "flex");
     }
 
     const deleteCustomer = () =>
@@ -161,107 +265,110 @@ export default function CustomerDetail()
             .then(res =>
             {
                 console.log(res);
-                Navigate("../customerList");
+                Navigate(-1);
             })
             .catch(error => console.log(error));
     }
 
     return (
-        <div className="d-flex flex-column align-items-center justify-content-center w-100 h-100">
-            <div className={ `${ styles.detail_board }` }>
-                <div className="d-flex align-items-center justify-content-between w-100" style={ { height: "50px" } }>
-                    <BiTrash className={ `mx-3 ${ styles.trash }` } onClick={ question } />
-                    <button className={ `mx-3 ${ styles.back }` }><a href="../customerList">Back</a></button>
-                </div>
-                <div className={ `d-flex align-items-center justify-content-around w-100` } style={ { height: "40%" } }>
-                    {/* <img className={ `${ styles.img }` } src={ require('../../img/defaultavt.jpg') } alt='avatar' /> */ }
-                    <img className={ `${ styles.img }` } src="" alt='avatar' />
-                    <div className={ `w-50 h-100 d-flex flex-column justify-content-center ${ styles.info }` }>
-                        <p>Name: &nbsp;{ customer.name }</p>
-                        <p>Email: &nbsp;
-                            <span className="customer_email">{ customer.email }</span>
-                            <input type="text" className={ `${ styles.update } customer_email_input` }></input>
-                        </p>
-                        <p>Phone number: &nbsp;
-                            <span className="customer_phone">{ customer.phone }</span>
-                            <input type="text" className={ `${ styles.update } customer_phone_input` } maxLength='10'></input>
-                        </p>
-                        <p>Total spending: &nbsp;${ customer.spending }</p>
-                        <p>
+        <div className="d-flex flex-column align-items-center w-100 h-100">
+            <div className="d-flex align-items-center w-100 mt-2" style={ { height: "50px" } }>
+                <BiTrash className={ `ms-auto ms-md-3 me-md-0 me-3 ${ styles.trash }` } onClick={ () => { if (isRefValid(delete_pop_up)) delete_pop_up.current.style.display = "flex"; } } />
+                <button className={ `ms-md-auto me-md-3 me-auto ms-3 ${ styles.back }` } onClick={ () => { Navigate(-1); } }>Back</button>
+            </div>
+            <div className={ `flex-grow-1 w-100 mt-3 overflow-auto hideBrowserScrollbar` } ref={ bigDiv }>
+                <div className={ `d-flex flex-column flex-md-row align-items-center justify-content-md-around align-items-md-start w-100` } ref={ div1Height }>
+                    <img className={ `${ styles.img }` } src="https://images.pexels.com/photos/842711/pexels-photo-842711.jpeg?cs=srgb&dl=pexels-christian-heitz-842711.jpg&fm=jpg" alt='avatar' />
+                    <div className={ `d-flex flex-column justify-content-center align-items-center ${ styles.info } mt-2 mt-md-0` }>
+                        <div style={ { marginBottom: '16px' } }>Name: &nbsp;{ customer.name }</div>
+                        <div className='text-center' style={ { marginBottom: '16px' } }>Email: &nbsp;
+                            <span ref={ customer_email }>{ customer.email }</span>
+                            <input type="text" className={ `${ styles.update } ` } ref={ customer_email_input }></input>
+                        </div>
+                        <div className='text-center' style={ { marginBottom: '16px' } }>Phone number: &nbsp;
+                            <span ref={ customer_phone }>{ customer.phone }</span>
+                            <input type="text" className={ `${ styles.update } ` } ref={ customer_phone_input } maxLength='10'></input>
+                        </div>
+                        <div className='text-center' style={ { marginBottom: '16px' } }>Total spending: &nbsp;${ customer.spending }</div>
+                        <div className='text-center' style={ { marginBottom: '16px' } }>
                             Membership rank: &nbsp;
-                            <span className="rank">{ customer.rank }</span>
-                            <select className={ `${ styles.update } select_menu` } onChange={ selectHandler }>
+                            <span ref={ rank }>{ customer.rank }</span>
+                            <select className={ `${ styles.update }` } onChange={ selectHandler } ref={ select_menu }>
                                 <option value="None">None</option>
                                 <option value="Silver">Silver</option>
                                 <option value="Gold">Gold</option>
                                 <option value="Diamond">Diamond</option>
                                 <option value="Special">Special</option>
                             </select>
-                        </p>
-                        <p>
+                        </div>
+                        <div className='text-center' style={ { marginBottom: '16px' } }>
                             Membership discount: &nbsp;
-                            <span className="discount">{ customer.discount }%</span>
-                            <input type="number" className={ `${ styles.update } discount_input` } disabled></input>
-                        </p>
-                        <button className={ `${ styles.edit }` } onClick={ changeInfo }>Edit</button>
-                        <div className={ `${ styles.update }` }>
-                            <button className={ `${ styles.cancel } ` } onClick={ cancelUpdate }>Cancel</button>
-                            <button className={ `${ styles.confirm } mx-3` } onClick={ confirmChange }>Confirm</button>
+                            <span ref={ discount }>{ customer.discount }%</span>
+                            <input type="number" className={ `${ styles.update }` } disabled ref={ discount_input }></input>
+                        </div>
+                        <button className={ `${ styles.edit }` } onClick={ changeInfo } ref={ edit }>Edit</button>
+                        <div className={ `${ styles.buttons } w-100 align-items-center justify-content-center` } ref={ update }>
+                            <button className={ `${ styles.cancel } d-block` } onClick={ cancelUpdate }>Cancel</button>
+                            <button className={ `${ styles.confirm } mx-3 d-block` } onClick={ confirmChange }>Confirm</button>
                         </div>
                     </div>
                 </div>
-                <div className={ `w-100 h-50 ${ styles.history_section }` }>
-                    <button className={ `${ styles.history }` } onClick={ getHistory }>Get history purchases</button>
-                    <table className={ `table table-hover mx-auto mt-3 mb-0 ${ styles.table_head }` } style={ { width: '90%' } }>
-                        <thead>
-                            <tr style={ { borderBottom: "2px solid black" } }>
-                                <th scope="col" className={ `col-3 ${ styles.head }` }>Game name</th>
-                                <th scope="col" className={ `col-3 ${ styles.head }` }>Code</th>
-                                <th scope="col" className={ `col-2 ${ styles.head }` }>Date</th>
-                                <th scope="col" className={ `col-2 ${ styles.head }` }>Price</th>
-                                <th scope="col" className={ `col-2 ${ styles.head }` }>Method</th>
+                <button className={ `${ styles.history } ms-4 mt-2` } onClick={ getHistory } ref={ buttonHeight }>Get history purchases</button>
+                <div className={ `w-100 mt-2 overflow-auto ${ styles.table }` } ref={ div2Height } style={ { minHeight: '250px' } }>
+                    <table className={ `table table-hover mx-auto mt-2 mb-0 w-100` }>
+                        <thead style={ { position: "sticky", top: '0', backgroundColor: "#BFBFBF" } }>
+                            <tr>
+                                <th scope="col" className={ `col-3 text-center` }>Game name</th>
+                                <th scope="col" className={ `col-3 text-center` }>Code</th>
+                                <th scope="col" className={ `col-2 text-center` }>Date</th>
+                                <th scope="col" className={ `col-2 text-center` }>Price</th>
+                                <th scope="col" className={ `col-2 text-center` }>Method</th>
                             </tr>
                         </thead>
+                        <tbody ref={ history }>
+                        </tbody>
                     </table>
-                    <div className={ `mt-2 overflow-auto mx-auto ${ styles.table_body }` } style={ { width: '90%' } }>
-                        <table className="table table-hover mx-auto my-0 w-100 h-100">
-                            <tbody id='history'>
-                            </tbody>
-                        </table>
-                    </div>
                 </div>
             </div>
-            <div className={ `position-absolute flex-column align-items-center justify-content-around ${ styles.pop_up }` }>
+            <div className={ `position-absolute flex-column align-items-center justify-content-around ${ styles.pop_up }` } ref={ pop_up }>
                 <h3>Discount value should be greater or equal to 0% and less than or equal to 5% only!</h3>
-                <button className={ `${ styles.OK }` } onClick={ () =>
+                <button className={ `${ styles.blueButton }` } onClick={ () =>
                 {
-                    $(`.${ styles.pop_up }`).css("display", "none");
+                    if (isRefValid(pop_up)) pop_up.current.style.display = "none";
                 } }>OKAY</button>
             </div>
-            <div className={ `position-absolute flex-column align-items-center justify-content-around ${ styles.pop_up_1 }` }>
+            <div className={ `position-absolute flex-column align-items-center justify-content-around ${ styles.pop_up }` } ref={ pop_up_1 }>
                 <h3>Customer email can not be empty!</h3>
-                <button className={ `${ styles.OK }` } onClick={ () =>
+                <button className={ `${ styles.blueButton }` } onClick={ () =>
                 {
-                    $(`.${ styles.pop_up_1 }`).css("display", "none");
+                    if (isRefValid(pop_up_1)) pop_up_1.current.style.display = "none";
                 } }>OKAY</button>
             </div>
-            <div className={ `position-absolute flex-column align-items-center justify-content-around ${ styles.pop_up_2 }` }>
+            <div className={ `position-absolute flex-column align-items-center justify-content-around ${ styles.pop_up }` } ref={ pop_up_2 }>
                 <h3>Customer phone number can not contain alphabetical characters!</h3>
-                <button className={ `${ styles.OK }` } onClick={ () =>
+                <button className={ `${ styles.blueButton }` } onClick={ () =>
                 {
-                    $(`.${ styles.pop_up_2 }`).css("display", "none");
+                    if (isRefValid(pop_up_2)) pop_up_2.current.style.display = "none";
                 } }>OKAY</button>
             </div>
-            <div className={ `position-absolute flex-column align-items-center justify-content-around ${ styles.delete_pop_up }` }>
-                <h3>Do you really want to delete this customer's information?</h3>
-                <div>
-                    <button className={ `${ styles.delete_cancel } mx-3` } onClick={ () =>
+            <div className={ `position-absolute flex-column align-items-center justify-content-around ${ styles.pop_up }` } ref={ pop_up_3 }>
+                <h3>Discount value can not be empty!</h3>
+                <button className={ `${ styles.blueButton }` } onClick={ () =>
+                {
+                    if (isRefValid(pop_up_3)) pop_up_3.current.style.display = "none";
+                } }>OKAY</button>
+            </div>
+            <div className={ `position-absolute flex-column align-items-center justify-content-around ${ styles.pop_up }` } ref={ delete_pop_up }>
+                <h3 className='mx-2'>Do you really want to delete this customer?</h3>
+                <div className='d-flex flex-row align-items-center justify-content-center'>
+                    <button className={ `${ styles.blueButton } mx-3` } onClick={ () =>
                     {
-                        $(`.${ styles.delete_pop_up }`).css("display", "none");
+                        if (isRefValid(delete_pop_up)) delete_pop_up.current.style.display = "none";
                     } }>Cancel</button>
-                    <button className={ `${ styles.delete_confirm } mx-3` } onClick={ () =>
+                    <button className={ `${ styles.redButton } mx-3` } onClick={ () =>
                     {
-                        $(`.${ styles.delete_pop_up }`).css("display", "none"); deleteCustomer();
+                        if (isRefValid(delete_pop_up)) delete_pop_up.current.style.display = "none";
+                        deleteCustomer();
                     } }>Confirm</button>
                 </div>
             </div>

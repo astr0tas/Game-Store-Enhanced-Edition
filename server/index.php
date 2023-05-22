@@ -39,43 +39,46 @@
       $router->post("/product", "CustomerController@product");
 
       ################################## Admin routes ##################################
-      /*Authentication*/
+      /* Authentication */
       $router->post("/admin/login", "AdminController@login");
-      $router->get("/admin/recovery", "AdminController@recovery");
+      $router->post("/admin/recovery", "AdminController@recovery");
       $router->post("/admin/newPassword", "AdminController@newPassword");
+      $router->get("/admin/logout", "AdminController@logout");
 
-      /*Info*/
+      /* Info */
 
-      /*Home*/
+      /* Home */
 
-      /*Customer*/
+      /* Customer */
       $router->get("/admin/customer/getList", "AdminController@getCustomerList");
       $router->post("/admin/customer/find", "AdminController@findCustomer");
       $router->post("/admin/customer/delete", "AdminController@deleteCustomer");
-
-      /*Game*/
-
-      /*Statistic*/
-
-      $router->get("/admin/game/list", "AdminController@getGameList");
-      $router->get("/admin/game/categories", "AdminController@getCategories");
-      $router->get("/admin/getBestSeller", "AdminController@getBestSeller");
-      $router->get("/admin/logout", "AdminController@logout");
-      $router->get("/admin/myself", "AdminController@myself");
-      $router->post("/admin/myself/edit", "AdminController@updateMySelf");
       $router->post("/admin/customer/detail", "AdminController@customerDetail");
       $router->post("/admin/customer/detail/history", "AdminController@customerHistory");
-      $router->post("/admin/customer/detail/edit", "AdminController@editCustomer");
-      $router->post("/admin/game/delete", "AdminController@deleteGame");
+      $router->post("/admin/customer/detail/update", "AdminController@updateCustomer");
+
+      /* Game */
+      $router->get("/admin/game/getList", "AdminController@getGameList");
       $router->post("/admin/game/find", "AdminController@findGame");
+      $router->post("/admin/game/getSales","AdminController@getGameSales");
+      $router->post("/admin/game/gameCategory", "AdminController@getGameCategory");
+      $router->post("/admin/game/delete", "AdminController@deleteGame");
+
+      $router->get("/admin/game/categories", "AdminController@getCategories");
       $router->post("/admin/game/create", "AdminController@createGame");
       $router->post("/admin/game/addCode", "AdminController@addCode");
       $router->post("/admin/game/addTag", "AdminController@addTag");
       $router->post("/admin/game/update/info", "AdminController@updateGetGameDetail");
-      $router->post("/admin/game/category", "AdminController@getGameCategory");
       $router->post("/admin/game/update", "AdminController@updateGame");
       $router->post("/admin/game/detail", "AdminController@getGameDetail");
       $router->post("/admin/game/detail/status", "AdminController@getGameStatus");
+
+      /* Statistic */
+
+      // Scrap
+      $router->get("/admin/getBestSeller", "AdminController@getBestSeller");
+      $router->get("/admin/myself", "AdminController@myself");
+      $router->post("/admin/myself/edit", "AdminController@updateMySelf");
 
       // Run router
       $router->run();

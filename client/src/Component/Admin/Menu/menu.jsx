@@ -9,6 +9,7 @@ import { faBars, faHouse, faUser, faGamepad, faCalculator, faRightFromBracket } 
 import { checkCookie } from '../../tools/cookie';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { isRefValid } from '../../tools/refChecker';
+import '../../General/css/scroll.css';
 
 
 const AdminMenu = () =>
@@ -54,7 +55,7 @@ const AdminMenu = () =>
   const trackWidth = () =>
   {
     // This function is use to ensure the collapsed side menu will be expanded when the browser's width > 768px.
-    if (window.innerWidth > 768)
+    if (window.innerWidth >= 768)
     {
       if (isRefValid(navbar))
         navbar.current.style.width = '160px';
@@ -79,7 +80,7 @@ const AdminMenu = () =>
       if (isRefValid(navbar) && isRefValid(tabs) && isRefValid(navToggler)
         && !navbar.current.contains(event.target) && !navToggler.current.contains(event.target))
       {
-        if (showSidebar && window.innerWidth <= 768)
+        if (showSidebar && window.innerWidth < 768)
         {
           navbar.current.style.width = '0';
           tabs.current.style.opacity = '0';
@@ -89,14 +90,14 @@ const AdminMenu = () =>
     });
 
     window.addEventListener('resize', trackWidth);
-  }, [Navigate,showSidebar]);
+  }, [Navigate, showSidebar]);
 
   return (
     <div className='w-100 h-100' style={ { backgroundColor: '#B9FDFD' } }>
       <button className={ `${ styles.navToggler } position-fixed` } onClick={ handleToggleSidebar }><FontAwesomeIcon icon={ faBars } style={ { color: "#000000", fontSize: '2rem' } } ref={ navToggler } /></button>
       <div className={ `h-100 d-flex flex-column position-fixed ${ styles.navbar }` } style={ { backgroundColor: '#E6E6E6' } } ref={ navbar }>
         <div className={ `w-100 ${ styles.dummy }` } style={ { minHeight: '50px' } }></div>
-        <div className={ `flex-grow-1 d-flex flex-column overflow-auto ${ styles.tabs } mt-md-3` } ref={ tabs }>
+        <div className={ `flex-grow-1 d-flex flex-column overflow-auto ${ styles.tabs } mt-md-3 hideBrowserScrollbar` } ref={ tabs }>
           <div className={ `${ styles.hover } mb-3 d-flex align-items-center justify-content-center` } onClick={ () => { Navigate("./profile"); } }>
             <span className={ `d-flex align-items-center justify-content-center p-0` } style={ { fontSize: '3.5rem', whiteSpace: 'nowrap', color: '#1c60c7' } }><VscAccount /></span>
           </div>
