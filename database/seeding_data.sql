@@ -51,10 +51,6 @@ insert into category values('Arcade & Rhythm'),
 ('Sports Sim'),
 ('Team Sports');
 
--- set @game_picture_path:='F:/nam 3/web/btl/LTW_222/database/Pictures';
--- set @game_picture_path:='E:\\Projects\\Webs\\model\\data\\games';
--- set @game_picture_path:='E:\\Projects\\Game_Store\\database\\Pictures';
-
 -- add games section
 insert into game values('GAME01','Elden Ring',59.99,0,'THE NEW FANTASY ACTION RPG.
 Rise, Tarnished, and be guided by grace to brandish the power of the Elden Ring and become an Elden Lord in the Lands Between.
