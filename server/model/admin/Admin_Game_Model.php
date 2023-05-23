@@ -78,6 +78,28 @@ class GameModel
             return $this->db->multi_query($sql);
       }
 
+      public function getAllInfo($id)
+      {
+            $sql = "SELECT * from game where id='$id' order by name";
+            $result = $this->db->query($sql);
+            if ($result->num_rows > 0) {
+                  $row = $result->fetch_assoc();
+                  return $row;
+            }
+            return null;
+      }
+
+      public function getGameStatus($id)
+      {
+            $sql = "select * from activation_code where game_id='$id' and status='available' limit 1";
+            $result = $this->db->query($sql);
+            $arr = [];
+            if ($result->num_rows) {
+                  return true;
+            }
+            return false;
+      }
+
       public function create($name, $price, $discount, $description, $minSpec, $maxSpec, $pic1, $pic2, $pic3, $pic4)
       {
             $stmt = $this->db->prepare("CALL addGame(?, ?, ?, ?, ?, ?, ?, ?, ?, ?,@id)");
@@ -147,21 +169,6 @@ class GameModel
             return null;
       }
 
-      public function getAllInfo($id)
-      {
-            $sql = "SELECT name,id,price,discount,ratings,description,spec_minimum,spec_recommended,picture_1,picture_2,picture_3,picture_4,count(activation_code.game_id) as solds from game join activation_code on game_id=id where status='used' and id='$id' group by name,id,price,discount,ratings order by name";
-            $result = $this->db->query($sql);
-            if ($result->num_rows > 0) {
-                  $row = $result->fetch_assoc();
-                  $row['picture_1'] = unpack('c*', $row['picture_1']);
-                  $row['picture_2'] = unpack('c*', $row['picture_2']);
-                  $row['picture_3'] = unpack('c*', $row['picture_3']);
-                  $row['picture_4'] = unpack('c*', $row['picture_4']);
-                  return $row;
-            }
-            return null;
-      }
-
       public function getBestSeller()
       {
             $sql = "SELECT id,name,discount,picture_1, price,count(*) as total_sale from game join activation_code on game.id=activation_code.game_id where status=\"used\"  group by name order by total_sale desc,name limit 5";
@@ -172,18 +179,6 @@ class GameModel
                         $row['picture_1'] = unpack('c*', $row['picture_1']);
                         $arr[] = $row;
                   }
-            }
-            return $arr;
-      }
-
-      public function getGameStatus($id)
-      {
-            $sql = "select * from activation_code where game_id='$id' and status='available' limit 1";
-            $result = $this->db->query($sql);
-            $arr = [];
-            if ($result->num_rows > 0) {
-                  $row = $result->fetch_assoc();
-                  $arr[] = $row;
             }
             return $arr;
       }

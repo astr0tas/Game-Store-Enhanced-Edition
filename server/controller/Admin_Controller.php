@@ -133,6 +133,20 @@ class AdminController
             echo json_encode(array("message" => $result ? "success" : "failed"));
       }
 
+      public function getGameDetail()
+      {
+            $id = $_POST['id'];
+            $arr = $this->game_model->getAllInfo($id);
+            echo json_encode($arr);
+      }
+
+      public function getGameStatus()
+      {
+            $id = $_POST['id'];
+            $arr = $this->game_model->getGameStatus($id);
+            echo json_encode($arr);
+      }
+
       /* */
 
       public function getCategories()
@@ -291,23 +305,9 @@ class AdminController
             if (isset($_FILES["recSpec"])) unlink($_FILES["recSpec"]["tmp_name"]);
       }
 
-      public function getGameDetail()
-      {
-            $id = $_POST['id'];
-            $arr = $this->game_model->getAllInfo($id);
-            echo json_encode($arr);
-      }
-
       public function getBestSeller()
       {
             $arr = $this->game_model->getBestSeller();
-            echo json_encode($arr);
-      }
-
-      public function getGameStatus()
-      {
-            $id = $_POST['id'];
-            $arr = $this->game_model->getGameStatus($id);
             echo json_encode($arr);
       }
 

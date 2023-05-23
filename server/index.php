@@ -63,6 +63,8 @@
       $router->post("/admin/game/getSales","AdminController@getGameSales");
       $router->post("/admin/game/gameCategory", "AdminController@getGameCategory");
       $router->post("/admin/game/delete", "AdminController@deleteGame");
+      $router->post("/admin/game/detail", "AdminController@getGameDetail");
+      $router->post("/admin/game/status", "AdminController@getGameStatus");
 
       $router->get("/admin/game/categories", "AdminController@getCategories");
       $router->post("/admin/game/create", "AdminController@createGame");
@@ -70,8 +72,6 @@
       $router->post("/admin/game/addTag", "AdminController@addTag");
       $router->post("/admin/game/update/info", "AdminController@updateGetGameDetail");
       $router->post("/admin/game/update", "AdminController@updateGame");
-      $router->post("/admin/game/detail", "AdminController@getGameDetail");
-      $router->post("/admin/game/detail/status", "AdminController@getGameStatus");
 
       /* Statistic */
 

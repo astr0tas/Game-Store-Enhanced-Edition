@@ -51,6 +51,7 @@ export default function CustomerDetail()
     const pop_up_1 = useRef(null);
     const pop_up_2 = useRef(null);
     const pop_up_3 = useRef(null);
+    const update_pop_up = useRef(null);
 
     const target = useRef(null);
 
@@ -70,7 +71,7 @@ export default function CustomerDetail()
         axios.post(`http://${ domain }/admin/customer/detail`, formData)
             .then(res =>
             {
-                document.title = `Customer ${ res.data.name }`;
+                document.title = `${ res.data.name }`;
 
                 setCustomer({
                     name: res.data.name,
@@ -272,11 +273,11 @@ export default function CustomerDetail()
 
     return (
         <div className="d-flex flex-column align-items-center w-100 h-100">
-            <div className="d-flex align-items-center w-100 mt-2" style={ { height: "50px" } }>
+            <div className="d-flex align-items-center w-100" style={ { height: "50px" } }>
                 <BiTrash className={ `ms-auto ms-md-3 me-md-0 me-3 ${ styles.trash }` } onClick={ () => { if (isRefValid(delete_pop_up)) delete_pop_up.current.style.display = "flex"; } } />
                 <button className={ `ms-md-auto me-md-3 me-auto ms-3 ${ styles.back }` } onClick={ () => { Navigate(-1); } }>Back</button>
             </div>
-            <div className={ `flex-grow-1 w-100 mt-3 overflow-auto hideBrowserScrollbar` } ref={ bigDiv }>
+            <div className={ `flex-grow-1 w-100 mt-3 overflow-auto hideBrowserScrollbar mb-3` } ref={ bigDiv }>
                 <div className={ `d-flex flex-column flex-md-row align-items-center justify-content-md-around align-items-md-start w-100` } ref={ div1Height }>
                     <img className={ `${ styles.img }` } src="https://images.pexels.com/photos/842711/pexels-photo-842711.jpeg?cs=srgb&dl=pexels-christian-heitz-842711.jpg&fm=jpg" alt='avatar' />
                     <div className={ `d-flex flex-column justify-content-center align-items-center ${ styles.info } mt-2 mt-md-0` }>
@@ -309,7 +310,7 @@ export default function CustomerDetail()
                         <button className={ `${ styles.edit }` } onClick={ changeInfo } ref={ edit }>Edit</button>
                         <div className={ `${ styles.buttons } w-100 align-items-center justify-content-center` } ref={ update }>
                             <button className={ `${ styles.cancel } d-block` } onClick={ cancelUpdate }>Cancel</button>
-                            <button className={ `${ styles.confirm } mx-3 d-block` } onClick={ confirmChange }>Confirm</button>
+                            <button className={ `${ styles.confirm } mx-3 d-block` } onClick={ () => { if (isRefValid(update_pop_up)) update_pop_up.current.style.display = "flex"; } }>Confirm</button>
                         </div>
                     </div>
                 </div>
@@ -369,6 +370,20 @@ export default function CustomerDetail()
                     {
                         if (isRefValid(delete_pop_up)) delete_pop_up.current.style.display = "none";
                         deleteCustomer();
+                    } }>Confirm</button>
+                </div>
+            </div>
+            <div className={ `position-absolute flex-column align-items-center justify-content-around ${ styles.pop_up }` } ref={ update_pop_up }>
+                <h3 className='mx-2'>Do you really want to update this customer info?</h3>
+                <div className='d-flex flex-row align-items-center justify-content-center'>
+                    <button className={ `${ styles.redButton } mx-3` } onClick={ () =>
+                    {
+                        if (isRefValid(update_pop_up)) update_pop_up.current.style.display = "none";
+                    } }>Cancel</button>
+                    <button className={ `${ styles.blueButton } mx-3` } onClick={ () =>
+                    {
+                        if (isRefValid(update_pop_up)) update_pop_up.current.style.display = "none";
+                        confirmChange();
                     } }>Confirm</button>
                 </div>
             </div>

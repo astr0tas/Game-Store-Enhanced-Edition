@@ -21,7 +21,7 @@ function FormattedText({ text })
 
       // Render the formatted text as HTML
       return (
-            <div dangerouslySetInnerHTML={ { __html: formattedText } }></div>
+            <p dangerouslySetInnerHTML={ { __html: formattedText } }></p>
       );
 }
 

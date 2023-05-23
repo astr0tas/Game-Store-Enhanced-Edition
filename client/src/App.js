@@ -35,8 +35,8 @@ import CustomerDetail from './Component/Admin/Customer/Detail/CustomerDetail';
 
 // Admin Games
 import GameList from './Component/Admin/Game/List/GameList';
+import AdminGameDetail from './Component/Admin/Game/Detail/GameDetail';
 
-import GameDetail from './Component/Admin/gamedetail';
 import { AddGame, EditGame } from './Component/Admin/add_edit_game';
 
 // Admin Statistics
@@ -70,7 +70,7 @@ function App()
             <Route path="recovery" element={ <AdminRecovery /> } />
             {/* Main pages */ }
             <Route element={ <AdminMenu /> }>
-              {/* Personal Info */}
+              {/* Personal Info */ }
               <Route path='profile' element={ <AdminInfo /> } />
               {/* Home */ }
               <Route path="home" element={ <AdminHome /> } />
@@ -82,11 +82,11 @@ function App()
               {/* Games */ }
               <Route>
                 <Route path="game-list" element={ <GameList /> } />
-                <Route path="game-list/:id" element={ <GameDetail /> } />
+                <Route path="game-list/:id" element={ <AdminGameDetail /> } />
                 <Route path="game-list/:id/update" element={ <EditGame /> } />
                 <Route path="game-list/add" element={ <AddGame /> } />
               </Route>
-              {/* Statistics */}
+              {/* Statistics */ }
             </Route>
           </Route>
         </Routes>

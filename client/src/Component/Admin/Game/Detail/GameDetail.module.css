@@ -1,0 +1,109 @@
+.trash {
+      font-size: 2rem;
+      color: red;
+}
+
+.trash:hover {
+      cursor: pointer;
+}
+
+.trash:active {
+      color: rgb(248, 112, 112);
+}
+
+.back {
+      border-radius: 10px;
+      background-color: #C0C0C0;
+      font-size: 1rem;
+      align-items: center;
+}
+
+.back:active {
+      background-color: #8a8a8a;
+}
+
+.edit {
+      border-radius: 10px;
+      background-color: #00B3EC;
+      font-size: 1rem;
+      align-items: center;
+      color: white;
+}
+
+.edit:active {
+      background-color: #61c4e2;
+}
+
+.sections {
+      width: 100%;
+}
+
+.text_align {
+      text-align: center;
+}
+
+.img {
+      background-color: #FAFAFA;
+      border: 1px solid black;
+      border-radius: 10px;
+      object-fit: cover;
+}
+
+.pop_up {
+      background-color: white;
+      width: 80%;
+      text-align: center;
+      height: 40%;
+      border: 2px solid black;
+      border-radius: 20px;
+      display: flex;
+      top: 20%;
+      max-width: 500px;
+      max-height: 200px;
+      display: none;
+}
+
+.redButton {
+      background-color: red;
+      color: white;
+      border-radius: 10px;
+      border: 1px solid black;
+      text-align: center;
+      font-size: 1rem;
+}
+
+.blueButton {
+      background-color: #00B3EC;
+      color: white;
+      border-radius: 10px;
+      border: 1px solid black;
+      text-align: center;
+      font-size: 1rem;
+}
+
+@media only screen and (min-width:768px) {
+
+      .back,
+      .buttons,
+      .cancel,
+      .confirm,
+      .history,
+      .edit,
+      .delete_cancel,
+      .delete_confirm {
+            font-size: 1.2rem;
+      }
+
+      .text_align {
+            text-align: start;
+      }
+
+      .infoZone {
+            height: 60%;
+            min-height: 500px;
+      }
+
+      .sections {
+            width: 50%;
+      }
+}
