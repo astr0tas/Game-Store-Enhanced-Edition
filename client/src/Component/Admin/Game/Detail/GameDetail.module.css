@@ -47,8 +47,8 @@
       border: 1px solid black;
       border-radius: 10px;
       object-fit: fill;
-      min-height: 200px;
-      max-height: 200px;
+      min-height: 300px;
+      max-height: 300px;
 }
 
 .pop_up {
@@ -83,7 +83,21 @@
       font-size: 1rem;
 }
 
+@media only screen and (max-width:350px) {
+      .img {
+            min-height: 200px;
+            max-height: 200px;
+      }
+}
+
 @media only screen and (min-width:768px) {
+      .img {
+            min-height: 350px;
+            max-height: 350px;
+      }
+}
+
+@media only screen and (min-width:992px) {
 
       .back,
       .buttons,
@@ -108,16 +122,11 @@
       .sections {
             width: 50%;
       }
-
-      .img {
-            min-height: 300px;
-            max-height: 300px;
-      }
 }
 
-@media only screen and (min-width:1200px) {
+@media only screen and (min-width:1400px) {
       .img {
-            min-height: 400px;
-            max-height: 400px;
+            min-height: 500px;
+            max-height: 500px;
       }
 }

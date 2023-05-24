@@ -102,17 +102,17 @@ export default function AdminGameDetail()
       return (
             <div className="w-100 h-100 d-flex flex-column align-items-center justify-content-center">
                   <div className="d-flex align-items-center w-100" style={ { minHeight: "50px" } }>
-                        <BiTrash className={ `ms-auto ms-md-3 me-md-0 me-3 ${ styles.trash }` } onClick={ () => { if (isRefValid(delete_pop_up)) delete_pop_up.current.style.display = "flex"; } } />
-                        <div className='ms-md-auto me-md-3 me-auto ms-'>
+                        <BiTrash className={ `ms-auto ms-lg-3 me-lg-0 me-3 ${ styles.trash }` } onClick={ () => { if (isRefValid(delete_pop_up)) delete_pop_up.current.style.display = "flex"; } } />
+                        <div className='ms-lg-auto me-lg-3 me-auto ms-'>
                               <button className={ `me-2 ${ styles.edit }` } onClick={ () => { Navigate("./update"); } }>Edit</button>
                               <button className={ `ms-2 ${ styles.back }` } onClick={ () => { Navigate(-1); } }>Back</button>
                         </div>
                   </div>
                   <div className={ `w-100 overflow-auto hideBrowserScrollbar d-flex flex-column flex-grow-1 mb-3` }>
-                        <div className={ `d-md-flex w-100` }>
+                        <div className={ `d-lg-flex w-100` }>
                               <div className={ `d-flex flex-column ${ styles.sections } align-self-center` }>
                                     <h1 className='text-center'>{ game.name }</h1>
-                                    <Carousel className={ `flex-grow-1 align-self-center` } style={ { width: '95%' } }>
+                                    <Carousel className={ `flex-grow-1 align-self-center` } style={ { width: '90%' } }>
                                           <Carousel.Item>
                                                 <img
                                                       className={ `d-block w-100 ${ styles.img }` }
@@ -143,14 +143,14 @@ export default function AdminGameDetail()
                                           </Carousel.Item>
                                     </Carousel>
                               </div>
-                              <div className={ `${ styles.sections } ms-md-5 mt-2 mt-md-0 d-flex flex-column align-items-center align-items-md-start align-self-center` }>
-                                    <div className={ `d-flex align-items-center my-md-3` }>
+                              <div className={ `${ styles.sections } ms-lg-5 mt-2 mt-lg-0 d-flex flex-column align-items-center align-items-lg-start align-self-center` }>
+                                    <div className={ `d-flex align-items-center my-lg-3` }>
                                           <h4>Status:&nbsp;&nbsp;</h4>
                                           <h4 style={ {
                                                 color: status.color
                                           } }>{ status.str }</h4>
                                     </div>
-                                    <div className={ `d-flex align-items-center ${ styles.tags } my-md-3 w-100 justify-content-center justify-content-md-start` }>
+                                    <div className={ `d-flex align-items-center ${ styles.tags } my-lg-3 w-100 justify-content-center justify-content-lg-start` }>
                                           <h4>Category:&nbsp;&nbsp;</h4>
                                           <div className='overflow-auto hideBrowserScrollbar'>
                                                 <h4 style={ {
@@ -158,7 +158,7 @@ export default function AdminGameDetail()
                                                 } }>{ category }</h4>
                                           </div>
                                     </div>
-                                    <div className='d-flex align-items-center my-md-3'>
+                                    <div className='d-flex align-items-center my-lg-3'>
                                           <h4>Price:&nbsp;&nbsp;${ game.discount === '0' && game.price }{ game.discount !== '0' && ((parseFloat(game.price) + 0.01) * (100 - parseFloat(game.discount)) / 100).toFixed(2) - 0.01 }&nbsp;&nbsp;&nbsp;</h4>
                                           { parseFloat(game.discount) !== 0 && <CiDiscount1 style={ {
                                                 fontSize: '1.5rem',
@@ -167,8 +167,8 @@ export default function AdminGameDetail()
                                           } } /> }
                                           { parseFloat(game.discount) !== 0 && <h4 style={ { color: 'red' } }>{ game.discount }%</h4> }
                                     </div>
-                                    <h4 className='my-md-3'>Rating:&nbsp;&nbsp;<AiFillStar style={ { color: "yellow", fontSize: "25px" } } />&nbsp;{ game.rating }</h4>
-                                    <h4 className='my-md-3'>Sold:&nbsp;&nbsp;{ solds }</h4>
+                                    <h4 className='my-lg-3'>Rating:&nbsp;&nbsp;<AiFillStar style={ { color: "yellow", fontSize: "25px" } } />&nbsp;{ game.rating }</h4>
+                                    <h4 className='my-lg-3'>Sold:&nbsp;&nbsp;{ solds }</h4>
                               </div>
                         </div>
                         <div className={ `mt-5 container-fluid flex-grow-1` }>
@@ -176,7 +176,7 @@ export default function AdminGameDetail()
                                     <h5 className={ `${ styles.text_align }` } style={ { fontWeight: 'bold' } }>Description</h5>
                                     <p style={ { textAlign: 'justify', textJustify: 'inter-word' } }>{ game.description }</p>
                                     <h3 className="text-center" style={ { fontWeight: 'bold' } }>System requirements</h3>
-                                    <div className='d-flex flex-column flex-md-row justify-content-md-around'>
+                                    <div className='d-flex flex-column flex-lg-row justify-content-lg-around'>
                                           <div>
                                                 <h5 className={ `${ styles.text_align }` } style={ { fontWeight: 'bold' } }>Miniumum</h5>
                                                 <FormattedText text={ game.spec_min } />
