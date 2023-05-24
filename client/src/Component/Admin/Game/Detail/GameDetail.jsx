@@ -112,31 +112,31 @@ export default function AdminGameDetail()
                         <div className={ `d-md-flex w-100` }>
                               <div className={ `d-flex flex-column ${ styles.sections } align-self-center` }>
                                     <h1 className='text-center'>{ game.name }</h1>
-                                    <Carousel className={ `flex-grow-1 align-self-center` } style={ { width: '90%' } }>
+                                    <Carousel className={ `flex-grow-1 align-self-center` } style={ { width: '95%' } }>
                                           <Carousel.Item>
                                                 <img
-                                                      className={ `d-block w-100 h-100 ${ styles.img }` }
+                                                      className={ `d-block w-100 ${ styles.img }` }
                                                       src={ game.image1url }
                                                       alt="First"
                                                 />
                                           </Carousel.Item>
                                           <Carousel.Item>
                                                 <img
-                                                      className={ `d-block w-100 h-100 ${ styles.img }` }
+                                                      className={ `d-block w-100 ${ styles.img }` }
                                                       src={ game.image2url }
                                                       alt="Second"
                                                 />
                                           </Carousel.Item>
                                           <Carousel.Item>
                                                 <img
-                                                      className={ `d-block w-100 h-100 ${ styles.img }` }
+                                                      className={ `d-block w-100 ${ styles.img }` }
                                                       src={ game.image3url }
                                                       alt="Third"
                                                 />
                                           </Carousel.Item>
                                           <Carousel.Item>
                                                 <img
-                                                      className={ `d-block w-100 h-100 ${ styles.img }` }
+                                                      className={ `d-block w-100 ${ styles.img }` }
                                                       src={ game.image4url }
                                                       alt="Fourth"
                                                 />

@@ -46,7 +46,9 @@
       background-color: #FAFAFA;
       border: 1px solid black;
       border-radius: 10px;
-      object-fit: cover;
+      object-fit: fill;
+      min-height: 200px;
+      max-height: 200px;
 }
 
 .pop_up {
@@ -105,5 +107,17 @@
 
       .sections {
             width: 50%;
+      }
+
+      .img {
+            min-height: 300px;
+            max-height: 300px;
+      }
+}
+
+@media only screen and (min-width:1200px) {
+      .img {
+            min-height: 400px;
+            max-height: 400px;
       }
 }
