@@ -76,29 +76,6 @@
       height: 50%;
 }
 
-.pop_up {
-      background-color: white;
-      width: 80%;
-      text-align: center;
-      height: 40%;
-      border: 2px solid black;
-      border-radius: 20px;
-      display: flex;
-      top: 20%;
-      max-width: 500px;
-      max-height: 200px;
-      display: none;
-}
-
-.blueButton {
-      background-color: #00B3EC;
-      color: white;
-      border-radius: 10px;
-      border: 1px solid black;
-      text-align: center;
-      font-size: 1rem;
-}
-
 @media only screen and (max-width:320px) {
       .browse {
             font-size: 0.8rem;
