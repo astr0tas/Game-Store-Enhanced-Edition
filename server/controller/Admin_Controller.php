@@ -233,11 +233,6 @@ class AdminController
 
 
       /* */
-      public function updateGetGameDetail()
-      {
-            $result = $this->game_model->updateGetGameDetail($_POST['id']);
-            echo json_encode($result);
-      }
 
       public function updateGame()
       {
@@ -303,13 +298,7 @@ class AdminController
             if (isset($_FILES["minSpec"])) unlink($_FILES["minSpec"]["tmp_name"]);
             if (isset($_FILES["recSpec"])) unlink($_FILES["recSpec"]["tmp_name"]);
       }
-
-      public function getBestSeller()
-      {
-            $arr = $this->game_model->getBestSeller();
-            echo json_encode($arr);
-      }
-
+      
       public function myself()
       {
             echo json_encode($this->admin_model->myself());

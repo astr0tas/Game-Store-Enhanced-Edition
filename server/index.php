@@ -70,13 +70,11 @@
       $router->post("/admin/game/addCode", "AdminController@addCode");
       $router->post("/admin/game/addTag", "AdminController@addTag");
       
-      $router->post("/admin/game/update/info", "AdminController@updateGetGameDetail");
       $router->post("/admin/game/update", "AdminController@updateGame");
 
       /* Statistic */
 
       // Scrap
-      $router->get("/admin/getBestSeller", "AdminController@getBestSeller");
       $router->get("/admin/myself", "AdminController@myself");
       $router->post("/admin/myself/edit", "AdminController@updateMySelf");
 

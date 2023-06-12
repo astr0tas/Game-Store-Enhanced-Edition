@@ -80,7 +80,7 @@ class GameModel
 
       public function getAllInfo($id)
       {
-            $sql = "SELECT * from game where id='$id' order by name";
+            $sql = "SELECT * from game where id='$id'";
             $result = $this->db->query($sql);
             if ($result->num_rows > 0) {
                   $row = $result->fetch_assoc();
@@ -151,36 +151,6 @@ class GameModel
             $stmt = $this->db->prepare("CALL updateGame(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
             $stmt->bind_param("sssssssssss", $id, $name, $price, $discount, $description, $minSpec, $maxSpec, $pic1, $pic2, $pic3, $pic4);
             return $stmt->execute();
-      }
-
-      public function updateGetGameDetail($id)
-      {
-            $sql = "SELECT name,price,discount,description,spec_minimum,spec_recommended,picture_1,picture_2,picture_3,picture_4 from game where game.id='$id'";
-            $result = $this->db->query($sql);
-
-            if ($result->num_rows > 0) {
-                  $row = $result->fetch_assoc();
-                  $row['picture_1'] = unpack('c*', $row['picture_1']);
-                  $row['picture_2'] = unpack('c*', $row['picture_2']);
-                  $row['picture_3'] = unpack('c*', $row['picture_3']);
-                  $row['picture_4'] = unpack('c*', $row['picture_4']);
-                  return $row;
-            }
-            return null;
-      }
-
-      public function getBestSeller()
-      {
-            $sql = "SELECT id,name,discount,picture_1, price,count(*) as total_sale from game join activation_code on game.id=activation_code.game_id where status=\"used\"  group by name order by total_sale desc,name limit 5";
-            $result = $this->db->query($sql);
-            $arr = [];
-            if ($result->num_rows > 0) {
-                  while ($row = $result->fetch_assoc()) {
-                        $row['picture_1'] = unpack('c*', $row['picture_1']);
-                        $arr[] = $row;
-                  }
-            }
-            return $arr;
       }
 
       public function __destruct()

@@ -105,7 +105,7 @@ export default function AdminGameDetail()
                   <div className="d-flex align-items-center w-100" style={ { minHeight: "50px" } }>
                         <BiTrash className={ `ms-auto ms-lg-3 me-lg-0 me-3 ${ styles.trash }` } onClick={ () => { if (isRefValid(delete_pop_up)) delete_pop_up.current.style.display = "flex"; } } />
                         <div className='ms-lg-auto me-lg-3 me-auto ms-'>
-                              <button className={ `me-2 ${ styles.edit }` } onClick={ () => { Navigate("./update"); } }>Edit</button>
+                              <button className={ `me-2 ${ styles.edit }` } onClick={ () => { Navigate("./edit"); } }>Edit</button>
                               <button className={ `ms-2 ${ styles.back }` } onClick={ () => { Navigate(-1); } }>Back</button>
                         </div>
                   </div>

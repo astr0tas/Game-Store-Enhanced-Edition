@@ -39,7 +39,7 @@ const Line = (props) =>
                         temp.push(<Category length={ props.data.length } key={ i } category={ props.data[i].type } setRemovedTag={ props.setRemovedTag } setTag={ props.setTag } checkbox={ props.checkbox } index={ props.elementPerLine * props.i + i } />);
             }
             root.current.render(<>{ temp }</>);
-      }, []);
+      });
 
       return (
             <div className='row mx-auto' ref={ target } style={ { width: '95%' } }>
@@ -47,7 +47,7 @@ const Line = (props) =>
       )
 }
 
-export const AddGame = () =>
+const AddGame = () =>
 {
       document.title = "Add a game";
 
@@ -381,3 +381,5 @@ export const AddGame = () =>
             </div >
       );
 }
+
+export default AddGame;
