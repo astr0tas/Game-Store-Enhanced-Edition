@@ -58,8 +58,8 @@ const Game = (props) =>
                   <td className='col-3 text-center'>{ props.name }</td>
                   <td className='col-2 text-center'>
                         <div className='w-100 d-flex align-items-center justify-content-center'>
-                              <p style={ { marginBottom: '0' } }>${ props.discount === '0' && props.price }{ props.discount !== '0' && ((parseFloat(props.price) + 0.01) * (100 - parseFloat(props.discount)) / 100).toFixed(2) - 0.01 }</p>
-                              { props.discount !== '0'
+                              <p style={ { marginBottom: '0' } }>{ props.price === null && 'N/A' }{ props.price !== null && '$' }{ props.discount === '0' && props.price }{ props.discount !== null && props.discount !== '0' && ((parseFloat(props.price) + 0.01) * (100 - parseFloat(props.discount)) / 100).toFixed(2) - 0.01 }</p>
+                              { props.discount !== null && props.discount !== '0'
                                     && <div className='d-flex align-items-center ms-2'>
                                           <p style={ { marginBottom: '4px' } }>
                                                 <CiDiscount1 style={ { fontSize: '1.2rem', color: 'red' } } />
@@ -119,7 +119,7 @@ export default function GameList()
 
                         const temp = [];
                         for (let i = 0; i < res.data.length; i++)
-                              temp.push(<Game Navigate={ Navigate } refCheckboxes={ checkboxes } refNumbers={ numbers } key={ i } i={ i } name={ res.data[i].name } price={ res.data[i].price } ratings={ res.data[i].ratings } discount={ res.data[i].discount } id={ res.data[i].id } />);
+                              temp.push(<Game Navigate={ Navigate } refCheckboxes={ checkboxes } refNumbers={ numbers } key={ i } i={ i } name={ res.data[i].name } price={ res.data[i].price === null ? null : res.data[i].price } ratings={ res.data[i].ratings } discount={ res.data[i].discount } id={ res.data[i].id } />);
                         if (isRefValid(target))
                               target.current.render(<>{ temp }</>);
                   })

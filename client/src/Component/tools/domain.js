@@ -1,1 +1,1 @@
-export const domain = "192.168.1.111"; // Change this for testing purposes
+export const domain = "localhost"; // Change this for testing purposes

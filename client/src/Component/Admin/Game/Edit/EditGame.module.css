@@ -1,0 +1,93 @@
+.title {
+      background-color: white;
+      border-bottom-right-radius: 20px;
+      border-bottom-left-radius: 20px;
+      width: 70%;
+      max-width: 200px;
+      border-bottom: 2px solid black;
+      border-left: 2px solid black;
+      border-right: 2px solid black;
+      height: 100%;
+}
+
+.image_block {
+      width: 100%;
+}
+
+.images {
+      width: 90%;
+      max-width: 400px;
+      max-height: 300px;
+}
+
+.name {
+      font-size: 1.1rem;
+      font-weight: bold;
+      padding-left: 5px;
+}
+
+.browse {
+      font-size: 1rem;
+      border: 1px solid black;
+      border-radius: 5px;
+      background-color: white;
+      padding: 2px;
+}
+
+.browse:hover {
+      cursor: pointer;
+}
+
+.browse:active {
+      background-color: rgb(200, 200, 200);
+}
+
+.cancel {
+      background-color: red;
+      color: white;
+      border-radius: 10px;
+}
+
+.cancel:active {
+      background-color: rgb(255, 105, 105);
+}
+
+.confirm,
+.choose_categories {
+      background-color: #00c3ff;
+      color: white;
+      border-radius: 10px;
+}
+
+.confirm:active,
+.choose_categories:active {
+      background-color: #73deff;
+}
+
+.categories {
+      background-color: #dadada;
+      border-radius: 20px;
+      border: 1px solid black;
+      display: none;
+      max-width: 700px;
+      max-height: 400px;
+      width: 90%;
+      height: 50%;
+}
+
+@media only screen and (max-width:320px) {
+      .browse {
+            font-size: 0.8rem;
+      }
+}
+
+@media only screen and (min-width:768px) {
+      .name {
+            font-size: 1.5rem;
+      }
+
+      .cancel,
+      .confirm {
+            font-size: 1.2rem;
+      }
+}

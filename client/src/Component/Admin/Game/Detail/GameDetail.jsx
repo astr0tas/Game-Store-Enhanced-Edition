@@ -46,7 +46,6 @@ export default function AdminGameDetail()
                   .then(res =>
                   {
                         document.title = res.data.name;
-
                         SetGame({
 
                               name: res.data.name,
@@ -56,10 +55,10 @@ export default function AdminGameDetail()
                               rating: res.data.ratings,
                               spec_min: res.data.spec_minimum,
                               spec_max: res.data.spec_recommended,
-                              image1url: `http://${ domain }/model/data/games/${ res.data.picture_1 }`,
-                              image2url: `http://${ domain }/model/data/games/${ res.data.picture_2 }`,
-                              image3url: `http://${ domain }/model/data/games/${ res.data.picture_3 }`,
-                              image4url: `http://${ domain }/model/data/games/${ res.data.picture_4 }`
+                              image1url: res.data.picture_1 === null ? null : `http://${ domain }/model/data/games/${ res.data.picture_1 }`,
+                              image2url: res.data.picture_2 === null ? null : `http://${ domain }/model/data/games/${ res.data.picture_2 }`,
+                              image3url: res.data.picture_3 === null ? null : `http://${ domain }/model/data/games/${ res.data.picture_3 }`,
+                              image4url: res.data.picture_4 === null ? null : `http://${ domain }/model/data/games/${ res.data.picture_4 }`
                         });
                   }).catch(error => { console.log(error); })
             axios.post(`http://${ domain }/admin/game/getSales`, formData)
@@ -70,11 +69,13 @@ export default function AdminGameDetail()
             axios.post(`http://${ domain }/admin/game/gameCategory`, formData)
                   .then(res =>
                   {
-                        console.log(res);
-                        let temp = res.data[0].category_type;
-                        for (let i = 1; i < res.data.length - 1; i++)
-                              temp += ', ' + res.data[i].category_type;
-                        setCategory(temp);
+                        if (res.data.length)
+                        {
+                              let temp = res.data[0].category_type;
+                              for (let i = 1; i < res.data.length - 1; i++)
+                                    temp += ', ' + res.data[i].category_type;
+                              setCategory(temp);
+                        }
                   }).catch(error => { console.log(error); })
             axios.post(`http://${ domain }/admin/game/status`, formData)
                   .then(res =>
@@ -159,13 +160,13 @@ export default function AdminGameDetail()
                                           </div>
                                     </div>
                                     <div className='d-flex align-items-center my-lg-3'>
-                                          <h4>Price:&nbsp;&nbsp;${ game.discount === '0' && game.price }{ game.discount !== '0' && ((parseFloat(game.price) + 0.01) * (100 - parseFloat(game.discount)) / 100).toFixed(2) - 0.01 }&nbsp;&nbsp;&nbsp;</h4>
-                                          { parseFloat(game.discount) !== 0 && <CiDiscount1 style={ {
+                                          <h4>Price:&nbsp;&nbsp;{ !game.price && 'N/A' }{ game.price && '$' }{ game.discount === '0' && game.price }{ game.discount !== '0' && game.discount !== null && ((parseFloat(game.price) + 0.01) * (100 - parseFloat(game.discount)) / 100).toFixed(2) - 0.01 }&nbsp;&nbsp;&nbsp;</h4>
+                                          { game.discount !== null && parseFloat(game.discount) !== 0 && <CiDiscount1 style={ {
                                                 fontSize: '1.5rem',
                                                 color: 'red',
                                                 marginBottom: '12px'
                                           } } /> }
-                                          { parseFloat(game.discount) !== 0 && <h4 style={ { color: 'red' } }>{ game.discount }%</h4> }
+                                          { game.discount !== null && parseFloat(game.discount) !== 0 && <h4 style={ { color: 'red' } }>{ game.discount }%</h4> }
                                     </div>
                                     <h4 className='my-lg-3'>Rating:&nbsp;&nbsp;<AiFillStar style={ { color: "yellow", fontSize: "25px" } } />&nbsp;{ game.rating }</h4>
                                     <h4 className='my-lg-3'>Sold:&nbsp;&nbsp;{ solds }</h4>

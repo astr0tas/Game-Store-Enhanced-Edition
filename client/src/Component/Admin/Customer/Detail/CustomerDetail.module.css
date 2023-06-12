@@ -36,7 +36,8 @@
 .history:active,
 .confirm:active,
 .OK:active,
-.delete_confirm:active {
+.delete_confirm:active,
+.blueButton:active {
     background-color: #61c4e2;
 }
 

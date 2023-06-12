@@ -100,6 +100,19 @@ class GameModel
             return false;
       }
 
+      public function getCategories()
+      {
+            $sql = "SELECT * from category";
+            $result = $this->db->query($sql);
+            $arr = [];
+            if ($result->num_rows > 0) {
+                  while ($row = $result->fetch_assoc()) {
+                        $arr[] = $row;
+                  }
+            }
+            return $arr;
+      }
+
       public function create($name, $price, $discount, $description, $minSpec, $maxSpec, $pic1, $pic2, $pic3, $pic4)
       {
             $stmt = $this->db->prepare("CALL addGame(?, ?, ?, ?, ?, ?, ?, ?, ?, ?,@id)");
@@ -110,13 +123,6 @@ class GameModel
             $row = $result->fetch_assoc();
             $id = $row['id'];
             return $id;
-      }
-
-      public function update($id, $name, $price, $discount, $description, $minSpec, $maxSpec, $pic1, $pic2, $pic3, $pic4)
-      {
-            $stmt = $this->db->prepare("CALL updateGame(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-            $stmt->bind_param("sssssssssss", $id, $name, $price, $discount, $description, $minSpec, $maxSpec, $pic1, $pic2, $pic3, $pic4);
-            return $stmt->execute();
       }
 
       public function addTag($id, $tag)
@@ -140,17 +146,11 @@ class GameModel
             return $this->db->multi_query($sql);
       }
 
-      public function getCategories()
+      public function update($id, $name, $price, $discount, $description, $minSpec, $maxSpec, $pic1, $pic2, $pic3, $pic4)
       {
-            $sql = "SELECT * from category";
-            $result = $this->db->query($sql);
-            $arr = [];
-            if ($result->num_rows > 0) {
-                  while ($row = $result->fetch_assoc()) {
-                        $arr[] = $row;
-                  }
-            }
-            return $arr;
+            $stmt = $this->db->prepare("CALL updateGame(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            $stmt->bind_param("sssssssssss", $id, $name, $price, $discount, $description, $minSpec, $maxSpec, $pic1, $pic2, $pic3, $pic4);
+            return $stmt->execute();
       }
 
       public function updateGetGameDetail($id)
