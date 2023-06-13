@@ -75,6 +75,9 @@ CREATE PROCEDURE updateGame(
 )
 BEGIN
 	update game set game.name=name,game.price=price,game.discount=discount where game.id=id;
+    if price is null then
+		update game set game.status=false where game.id=id;
+    end if;
     if description is not null then
 		update game set game.description=description where game.id=id;
     end if;

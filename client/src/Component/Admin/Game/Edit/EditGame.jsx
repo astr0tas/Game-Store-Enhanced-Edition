@@ -98,8 +98,6 @@ const EditGame = () =>
       const priceRef = useRef(null);
       const discountRef = useRef(null);
 
-      const [render, setRender] = useState(false);
-
       useEffect(() =>
       {
             const formData = new FormData();
@@ -149,7 +147,7 @@ const EditGame = () =>
                               setOldTag(oldTags);
                         }
                   }).catch(error => { console.log(error); })
-      }, [render,id]);
+      }, [id]);
 
       const removeTag = () =>
       {
@@ -257,7 +255,7 @@ const EditGame = () =>
                   console.log(Response);
             }).catch(error => { console.log(error); });
 
-            setRender(!render);
+            Navigate(-1);
       }
 
       const stopChoosing = () =>
