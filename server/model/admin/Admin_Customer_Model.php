@@ -73,7 +73,7 @@ class CustomerModel
 
       public function detail($id)
       {
-            $sql = "SELECT id,name,email,phone,total_spending, membership_rank, membership_discount from customer where id= '$id'";
+            $sql = "SELECT id,name,email,phone,total_spending, membership_rank, membership_discount,image from customer where id= '$id'";
             $result = $this->db->query($sql);
             if ($result->num_rows > 0) {
                   return $result->fetch_assoc();

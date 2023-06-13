@@ -46,6 +46,8 @@
       $router->get("/admin/logout", "AdminController@logout");
 
       /* Info */
+      $router->get("/admin/info", "AdminController@personalInfo");
+      $router->post("/admin/info/edit", "AdminController@updatePersonalInfo");
 
       /* Home */
 
@@ -69,14 +71,9 @@
       $router->post("/admin/game/create", "AdminController@createGame");
       $router->post("/admin/game/addCode", "AdminController@addCode");
       $router->post("/admin/game/addTag", "AdminController@addTag");
-      
       $router->post("/admin/game/update", "AdminController@updateGame");
 
       /* Statistic */
-
-      // Scrap
-      $router->get("/admin/myself", "AdminController@myself");
-      $router->post("/admin/myself/edit", "AdminController@updateMySelf");
 
       // Run router
       $router->run();

@@ -71,7 +71,6 @@
 .update {
     display: none;
     font-size: 1rem;
-    max-width: 40%;
 }
 
 .buttons {
@@ -149,10 +148,6 @@
 
     .info {
         width: 40%;
-    }
-
-    .update {
-        max-width: initial;
     }
 
     .img {

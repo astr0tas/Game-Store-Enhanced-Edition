@@ -146,10 +146,10 @@ class GameModel
             return $this->db->multi_query($sql);
       }
 
-      public function update($id, $name, $price, $discount, $description, $minSpec, $maxSpec, $pic1, $pic2, $pic3, $pic4)
+      public function update($id,$name, $price, $discount, $description, $minSpec, $recSpec, $picture1, $picture2, $picture3, $picture4)
       {
             $stmt = $this->db->prepare("CALL updateGame(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-            $stmt->bind_param("sssssssssss", $id, $name, $price, $discount, $description, $minSpec, $maxSpec, $pic1, $pic2, $pic3, $pic4);
+            $stmt->bind_param("sssssssssss", $id, $name, $price, $discount, $description, $minSpec, $recSpec, $picture1, $picture2, $picture3, $picture4);
             return $stmt->execute();
       }
 

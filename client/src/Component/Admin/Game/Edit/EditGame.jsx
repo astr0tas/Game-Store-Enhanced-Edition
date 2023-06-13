@@ -16,6 +16,12 @@ const Category = (props) =>
                   props.setTag(prevTags => [...prevTags, event.target.value]);
       }
 
+      useEffect(() =>
+      {
+            if (props.tag.includes(props.category) && isRefValid(props.checkbox, props.index))
+                  props.checkbox.current[props.index].checked = true;
+      })
+
       return (
             <div className={ `d-flex align-items-center col-${ 12 / props.length } mb-3` }>
                   <input style={ { minWidth: '1.2rem', minHeight: '1.2rem' } } type="checkbox" ref={ el => (props.checkbox.current[props.index] = el) } value={ props.category } onChange={ change }></input>
@@ -36,7 +42,7 @@ const Line = (props) =>
             for (let i = 0; i < props.data.length; i++)
             {
                   if (props.data[i] !== undefined)
-                        temp.push(<Category length={ props.data.length } key={ i } category={ props.data[i].type } setRemovedTag={ props.setRemovedTag } setTag={ props.setTag } checkbox={ props.checkbox } index={ props.elementPerLine * props.i + i } />);
+                        temp.push(<Category tag={ props.tag } length={ props.data.length } key={ i } category={ props.data[i].type } setRemovedTag={ props.setRemovedTag } setTag={ props.setTag } checkbox={ props.checkbox } index={ props.elementPerLine * props.i + i } />);
             }
             root.current.render(<>{ temp }</>);
       });
@@ -52,7 +58,7 @@ const EditGame = () =>
       document.title = `Edit game`;
 
       const id = useParams().id;
-      let timer1, timer2, timer3;
+      let timer;
 
       const [pic1, setPic1] = useState("");
       const [pic2, setPic2] = useState("");
@@ -69,8 +75,6 @@ const EditGame = () =>
       const [discount, setDiscount] = useState(null);
 
       const [oldName, setOldName] = useState(null);
-      const [oldPrice, setOldPrice] = useState(null);
-      const [oldDiscount, setOldDiscount] = useState(null);
       const [oldTag, setOldTag] = useState([]);
 
       const [tag, setTag] = useState([]);
@@ -94,6 +98,8 @@ const EditGame = () =>
       const priceRef = useRef(null);
       const discountRef = useRef(null);
 
+      const [render, setRender] = useState(false);
+
       useEffect(() =>
       {
             const formData = new FormData();
@@ -106,12 +112,10 @@ const EditGame = () =>
                         if (isRefValid(nameRef))
                               nameRef.current.value = res.data.name;
 
-                        setOldPrice(res.data.price);
                         setPrice(res.data.price);
                         if (isRefValid(priceRef))
                               priceRef.current.value = res.data.price;
 
-                        setOldDiscount(res.data.discount);
                         setDiscount(res.data.discount);
                         if (isRefValid(discountRef))
                               discountRef.current.value = res.data.discount;
@@ -145,7 +149,7 @@ const EditGame = () =>
                               setOldTag(oldTags);
                         }
                   }).catch(error => { console.log(error); })
-      }, []);
+      }, [render,id]);
 
       const removeTag = () =>
       {
@@ -163,14 +167,26 @@ const EditGame = () =>
             e.preventDefault();
             if (e.target.files.length === 0)
             {
-                  if (number === 1)
-                        setPic1(oldPic1);
-                  else if (number === 2)
-                        setPic2(oldPic2);
-                  else if (number === 3)
-                        setPic3(oldPic3);
+                  if (number === 1 && isRefValid(img1))
+                  {
+                        img1.current.src = oldPic1;
+                        setPic1(null);
+                  }
+                  else if (number === 2 && isRefValid(img2))
+                  {
+                        img2.current.src = oldPic2;
+                        setPic2(null);
+                  }
+                  else if (number === 3 && isRefValid(img3))
+                  {
+                        img3.current.src = oldPic3;
+                        setPic3(null);
+                  }
                   else
-                        setPic4(oldPic4);
+                  {
+                        img4.current.src = oldPic4;
+                        setPic4(null);
+                  }
             }
             else
             {
@@ -201,42 +217,47 @@ const EditGame = () =>
             }
       }
 
-      const updateGame = (event) =>
+      const updateGame = async (event) =>
       {
             event.preventDefault();
 
             removeTag();
-            console.log(tag);
-            // const formData = new FormData();
-            // formData.append("picture1", pic1);
-            // formData.append("picture2", pic2);
-            // formData.append("picture3", pic3);
-            // formData.append("picture4", pic4);
-            // formData.append("price", price);
-            // formData.append("discount", discount);
-            // formData.append("description", description);
-            // formData.append("minSpec", minSpec);
-            // formData.append("recSpec", recSpec);
-            // formData.append("name", name);
-            // axios.post(`http://${ domain }/admin/game/create`, formData).then(res =>
-            // {
-            //       const formData1 = new FormData();
-            //       formData1.append("codes", codes);
-            //       formData1.append("id", res.data);
-            //       axios.post(`http://${ domain }/admin/game/addCode`, formData1).then(Response =>
-            //       {
-            //             console.log(Response);
-            //       }).catch(error => { console.log(error); })
 
-            //       const formData2 = new FormData();
-            //       formData2.append("tag", tag);
-            //       formData2.append("id", res.data);
-            //       axios.post(`http://${ domain }/admin/game/addTag`, formData2).then(Response =>
-            //       {
-            //             console.log(Response);
-            //       }).catch(error => { console.log(error); })
-            // }).catch(error => { console.log(error); })
-            // Navigate(-1);
+            const formData = new FormData();
+            formData.append("picture1", pic1);
+            formData.append("picture2", pic2);
+            formData.append("picture3", pic3);
+            formData.append("picture4", pic4);
+            formData.append("price", price);
+            formData.append("discount", discount);
+            formData.append("description", description);
+            formData.append("minSpec", minSpec);
+            formData.append("recSpec", recSpec);
+            formData.append("name", name);
+            formData.append("id", id);
+            await axios.post(`http://${ domain }/admin/game/update`, formData)
+                  .then(res =>
+                  {
+                        console.log(res);
+                  }).catch(err => console.log(err));
+
+            const formData1 = new FormData();
+            formData1.append("codes", codes);
+            formData1.append("id", id);
+            await axios.post(`http://${ domain }/admin/game/addCode`, formData1).then(Response =>
+            {
+                  console.log(Response);
+            }).catch(error => { console.log(error); });
+
+            const formData2 = new FormData();
+            formData2.append("tag", tag);
+            formData2.append("id", id);
+            await axios.post(`http://${ domain }/admin/game/addTag`, formData2).then(Response =>
+            {
+                  console.log(Response);
+            }).catch(error => { console.log(error); });
+
+            setRender(!render);
       }
 
       const stopChoosing = () =>
@@ -275,13 +296,13 @@ const EditGame = () =>
                   for (let i = 0; i < totalLines; i += 1)
                   {
                         if (elementPerLine === 1)
-                              temp.push(<Line key={ i } elementPerLine={ elementPerLine } i={ i } data={ [res.data[i]] } checkbox={ checkbox } setTag={ setTag } setRemovedTag={ setRemovedTag } />);
+                              temp.push(<Line key={ i } elementPerLine={ elementPerLine } i={ i } data={ [res.data[i]] } checkbox={ checkbox } tag={ tag } setTag={ setTag } setRemovedTag={ setRemovedTag } />);
                         else if (elementPerLine === 2)
-                              temp.push(<Line key={ i } elementPerLine={ elementPerLine } i={ i } data={ [res.data[i * 2], res.data[i * 2 + 1]] } checkbox={ checkbox } setTag={ setTag } setRemovedTag={ setRemovedTag } />);
+                              temp.push(<Line key={ i } elementPerLine={ elementPerLine } i={ i } data={ [res.data[i * 2], res.data[i * 2 + 1]] } checkbox={ checkbox } tag={ tag } setTag={ setTag } setRemovedTag={ setRemovedTag } />);
                         else if (elementPerLine === 3)
-                              temp.push(<Line key={ i } elementPerLine={ elementPerLine } i={ i } data={ [res.data[i * 3], res.data[i * 3 + 1], res.data[i * 3 + 2]] } checkbox={ checkbox } setTag={ setTag } setRemovedTag={ setRemovedTag } />);
+                              temp.push(<Line key={ i } elementPerLine={ elementPerLine } i={ i } data={ [res.data[i * 3], res.data[i * 3 + 1], res.data[i * 3 + 2]] } checkbox={ checkbox } tag={ tag } setTag={ setTag } setRemovedTag={ setRemovedTag } />);
                         else
-                              temp.push(<Line key={ i } elementPerLine={ elementPerLine } i={ i } data={ [res.data[i * 4], res.data[i * 4 + 1], res.data[i * 4 + 2], res.data[i * 4 + 3]] } checkbox={ checkbox } setTag={ setTag } setRemovedTag={ setRemovedTag } />);
+                              temp.push(<Line key={ i } elementPerLine={ elementPerLine } i={ i } data={ [res.data[i * 4], res.data[i * 4 + 1], res.data[i * 4 + 2], res.data[i * 4 + 3]] } checkbox={ checkbox } tag={ tag } setTag={ setTag } setRemovedTag={ setRemovedTag } />);
                   }
                   root.current.render(<>{ temp }</>);
             }).catch(error => { console.log(error); })
@@ -308,12 +329,12 @@ const EditGame = () =>
                               {
                                     if (e.target.value !== "")
                                     {
-                                          clearTimeout(timer1);
                                           setName(e.target.value);
+                                          clearTimeout(timer);
                                     }
                                     else
                                     {
-                                          timer1 = setTimeout(() =>
+                                          timer = setTimeout(() =>
                                           {
                                                 setName(oldName);
                                                 if (isRefValid(nameRef))
@@ -375,19 +396,9 @@ const EditGame = () =>
                                     <input type="number" placeholder='Enter a price' ref={ priceRef } onChange={ (e) =>
                                     {
                                           if (e.target.value !== "")
-                                          {
-                                                clearTimeout(timer2);
                                                 setPrice(e.target.value);
-                                          }
                                           else
-                                          {
-                                                timer2 = setTimeout(() =>
-                                                {
-                                                      setPrice(oldPrice);
-                                                      if (isRefValid(priceRef))
-                                                            priceRef.current.value = oldPrice;
-                                                }, 2000);
-                                          }
+                                                setPrice(null);
                                     } }></input>
                               </div>
                               <div className="d-flex align-items-center mb-3 mb-lg-0 text-center" >
@@ -397,19 +408,9 @@ const EditGame = () =>
                                     {
                                           console.log(e.target.value);
                                           if (e.target.value !== "")
-                                          {
-                                                clearTimeout(timer3);
                                                 setDiscount(e.target.value);
-                                          }
                                           else
-                                          {
-                                                timer3 = setTimeout(() =>
-                                                {
-                                                      setDiscount(oldDiscount);
-                                                      if (isRefValid(discountRef))
-                                                            discountRef.current.value = oldDiscount;
-                                                }, 2000);
-                                          }
+                                                setDiscount(null);
                                     } }></input>
                               </div>
                               <div className="d-flex align-items-center mb-3 mb-lg-0 text-center">

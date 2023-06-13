@@ -25,7 +25,7 @@ const History = (props) =>
 export default function CustomerDetail()
 {
     const id = useParams().id;
-    const [customer, setCustomer] = useState({ name: "N/A", email: "N/A", phone: "N/A", spending: "N/A", rank: "N/A", discount: "N/A" });
+    const [customer, setCustomer] = useState({ name: "N/A", email: "N/A", phone: "N/A", spending: "N/A", rank: "N/A", discount: "N/A", image: "N/A" });
     const [renderTrigger, setRenderTrigger] = useState(true);
     const Navigate = useNavigate();
 
@@ -71,15 +71,15 @@ export default function CustomerDetail()
         axios.post(`http://${ domain }/admin/customer/detail`, formData)
             .then(res =>
             {
-                document.title = `${ res.data.name }`;
-
+                document.title = `Customer ${ res.data.name }`;
                 setCustomer({
                     name: res.data.name,
                     email: res.data.email,
                     phone: res.data.phone === null ? 'N/A' : res.data.phone,
                     spending: res.data.total_spending,
                     rank: res.data.membership_rank,
-                    discount: res.data.membership_discount
+                    discount: res.data.membership_discount,
+                    image: res.data.image === null ? "https://media.istockphoto.com/id/1016744004/vector/profile-placeholder-image-gray-silhouette-no-photo.jpg?s=612x612&w=0&k=20&c=mB6A9idhtEtsFXphs1WVwW_iPBt37S2kJp6VpPhFeoA=" : res.data.image
                 });
                 if (isRefValid(select_menu))
                     select_menu.current.value = res.data.membership_rank;
@@ -278,9 +278,9 @@ export default function CustomerDetail()
                 <button className={ `ms-md-auto me-md-3 me-auto ms-3 ${ styles.back }` } onClick={ () => { Navigate(-1); } }>Back</button>
             </div>
             <div className={ `flex-grow-1 w-100 mt-3 overflow-auto hideBrowserScrollbar mb-3` } ref={ bigDiv }>
-                <div className={ `d-flex flex-column flex-md-row align-items-center justify-content-md-around align-items-md-start w-100` } ref={ div1Height }>
-                    <img className={ `${ styles.img }` } src="https://images.pexels.com/photos/842711/pexels-photo-842711.jpeg?cs=srgb&dl=pexels-christian-heitz-842711.jpg&fm=jpg" alt='avatar' />
-                    <div className={ `d-flex flex-column justify-content-center align-items-center ${ styles.info } mt-2 mt-md-0` }>
+                <div className={ `d-flex flex-column flex-md-row align-items-center justify-content-md-between align-items-md-start w-100` } ref={ div1Height }>
+                    <img className={ `${ styles.img } ms-md-5` } src={ customer.image } alt='avatar' />
+                    <div className={ `d-flex flex-column justify-content-center align-items-center ${ styles.info } mt-2 mt-md-0 me-xxl-5` }>
                         <div style={ { marginBottom: '16px' } }>Name: &nbsp;{ customer.name }</div>
                         <div className='text-center' style={ { marginBottom: '16px' } }>Email: &nbsp;
                             <span ref={ customer_email }>{ customer.email }</span>
@@ -314,7 +314,7 @@ export default function CustomerDetail()
                         </div>
                     </div>
                 </div>
-                <button className={ `${ styles.history } ms-4 mt-2` } onClick={ getHistory } ref={ buttonHeight }>Get history purchases</button>
+                <button className={ `${ styles.history } ms-md-5 ms-4 mt-2` } onClick={ getHistory } ref={ buttonHeight }>Get history purchases</button>
                 <div className={ `w-100 mt-2 overflow-auto ${ styles.table }` } ref={ div2Height } style={ { minHeight: '250px' } }>
                     <table className={ `table table-hover mx-auto mt-2 mb-0 w-100` }>
                         <thead style={ { position: "sticky", top: '0', backgroundColor: "#BFBFBF" } }>

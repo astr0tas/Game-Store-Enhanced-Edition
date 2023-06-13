@@ -46,15 +46,11 @@ class AdminModel
             $this->db->query($sql);
       }
 
-      /**/
+      /* Personal infomation */
 
-      public function myself()
+      public function personalInfo($id)
       {
-            ini_set('session.use_cookies', 0);
-            session_id($_COOKIE['PHPADMINSESSID']);
-            session_start();
-            $id = $_SESSION['id'];
-            $sql = "select name,email,phone,address,username from admin where id='$id'";
+            $sql = "select name,email,phone,address,username,image from admin where id='$id'";
             $result = $this->db->query($sql);
             if ($result->num_rows > 0) {
                   $row = $result->fetch_assoc();
@@ -63,20 +59,10 @@ class AdminModel
             return null;
       }
 
-      public function updateMySelf($name, $email, $phone, $password, $address)
+      public function updatePersonalInfo($id,$name, $email, $phone, $address, $password, $image)
       {
-            ini_set('session.use_cookies', 0);
-            session_id($_COOKIE['PHPADMINSESSID']);
-            session_start();
-            $id = $_SESSION['id'];
-            $address = $address === "null" ? null : $address;
-            if ($password === "null") {
-                  $stmt = $this->db->prepare("update admin set name='$name',email='$email',phone='$phone',address=? where id='$id'");
-                  $stmt->bind_param("s", $address);
-            } else {
-                  $stmt = $this->db->prepare("update admin set name='$name',email='$email',userpassword='$password',phone='$phone',address=? where id='$id'");
-                  $stmt->bind_param("s", $address);
-            }
+            $stmt = $this->db->prepare("CALL updateAdminInfo(?, ?, ?, ?, ?, ?, ?)");
+            $stmt->bind_param("sssssss", $id,$name, $email, $phone, $address, $password, $image);
             return $stmt->execute();
       }
 

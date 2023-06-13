@@ -2,10 +2,12 @@ import React from 'react';
 
 function FormattedText({ text })
 {
-      // Make sure the text is not undefined
-      if (!text)
+      // Make sure the text is not undefined or empty
+      if (text === null || text === "")
       {
-            return null;
+            return (
+                  <p>N/A</p>
+            );
       }
 
       // Define an array of strings to split the text at

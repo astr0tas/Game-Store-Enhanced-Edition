@@ -24,7 +24,7 @@ import AdminRecovery from './Component/Admin/Authentication/Recovery/Recovery';
 import AdminMenu from './Component/Admin/Menu/menu';
 
 // Admin Personal Info
-import AdminInfo from './Component/Admin/personalInfo';
+import AdminPersonalInfo from './Component/Admin/PersonalInfomation/PersonalInfomation';
 
 // Admin Home
 import AdminHome from './Component/Admin/Home/Home.jsx';
@@ -36,8 +36,8 @@ import CustomerDetail from './Component/Admin/Customer/Detail/CustomerDetail';
 // Admin Games
 import GameList from './Component/Admin/Game/List/GameList';
 import AdminGameDetail from './Component/Admin/Game/Detail/GameDetail';
-import  AddGame  from './Component/Admin/Game/Add/AddGame';
-import  EditGame from './Component/Admin/Game/Edit/EditGame';
+import AddGame from './Component/Admin/Game/Add/AddGame';
+import EditGame from './Component/Admin/Game/Edit/EditGame';
 
 // Admin Statistics
 
@@ -71,7 +71,7 @@ function App()
             {/* Main pages */ }
             <Route element={ <AdminMenu /> }>
               {/* Personal Info */ }
-              <Route path='profile' element={ <AdminInfo /> } />
+              <Route path='profile' element={ <AdminPersonalInfo /> } />
               {/* Home */ }
               <Route path="home" element={ <AdminHome /> } />
               {/* Customers */ }

@@ -175,7 +175,7 @@ export default function AdminGameDetail()
                         <div className={ `mt-5 container-fluid flex-grow-1` }>
                               <div className="row justify-content-center align-items-center g-2">
                                     <h5 className={ `${ styles.text_align }` } style={ { fontWeight: 'bold' } }>Description</h5>
-                                    <p style={ { textAlign: 'justify', textJustify: 'inter-word' } }>{ game.description }</p>
+                                    <p style={ { textAlign: 'justify', textJustify: 'inter-word' } }>{ (game.description === null || game.description === "") && 'N/A' }{ game.description !== null && game.description !== "" && game.description }</p>
                                     <h3 className="text-center" style={ { fontWeight: 'bold' } }>System requirements</h3>
                                     <div className='d-flex flex-column flex-lg-row justify-content-lg-around'>
                                           <div>

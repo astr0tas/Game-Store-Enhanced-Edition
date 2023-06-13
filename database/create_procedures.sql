@@ -54,37 +54,71 @@ BEGIN
 END $$
 DELIMITER ;
 
--- DROP PROCEDURE IF EXISTS updateGame;
--- DELIMITER $$
--- CREATE PROCEDURE updateGame(
--- 	in id varchar(10),
--- 	in name varchar(100),
---     in price float,
---     in discount float,
---     in description text,
---     in spec_minimum text,
---     in spec_recommended text,
---     in picture_1 text,
---     in picture_2 text,
---     in picture_3 text,
---     in picture_4 text
--- )
--- BEGIN
--- 	update game set game.name=name,game.price=price,game.discount=discount,game.description=description,game.spec_minimum=spec_minimum,game.spec_recommended=spec_recommended where game.id=id;
---     if picture_1 is not null then
--- 		update game set game.picture_1=picture_1 where game.id=id;
---     end if;
---     if picture_2 is not null then
--- 		update game set game.picture_2=picture_2 where game.id=id;
---     end if;
---     if picture_3 is not null then
--- 		update game set game.picture_3=picture_3 where game.id=id;
---     end if;
---     if picture_4 is not null then
--- 		update game set game.picture_4=picture_4 where game.id=id;
---     end if;
--- END $$
--- DELIMITER ;
+DROP PROCEDURE IF EXISTS updateGame;
+DELIMITER $$
+CREATE PROCEDURE updateGame(
+	in id varchar(10),
+	in name varchar(100),
+    in price float,
+    in discount float,
+    in description text,
+    in spec_minimum text,
+    in spec_recommended text,
+    in picture_1 text,
+    in picture_2 text,
+    in picture_3 text,
+    in picture_4 text
+)
+BEGIN
+	update game set game.name=name,game.price=price,game.discount=discount where game.id=id;
+    if description is not null then
+		update game set game.description=description where game.id=id;
+    end if;
+    if spec_minimum is not null then
+		update game set game.spec_minimum=spec_minimum where game.id=id;
+    end if;
+    if spec_recommended is not null then
+		update game set game.spec_recommended=spec_recommended where game.id=id;
+    end if;
+    if picture_1 is not null then
+		update game set game.picture_1=picture_1 where game.id=id;
+    end if;
+    if picture_2 is not null then
+		update game set game.picture_2=picture_2 where game.id=id;
+    end if;
+    if picture_3 is not null then
+		update game set game.picture_3=picture_3 where game.id=id;
+    end if;
+    if picture_4 is not null then
+		update game set game.picture_4=picture_4 where game.id=id;
+    end if;
+END $$
+DELIMITER ;
+
+DROP PROCEDURE IF EXISTS updateAdminInfo;
+DELIMITER $$
+CREATE PROCEDURE updateAdminInfo(
+	in id varchar(10),
+	in name varchar(100),
+    in email varchar(20),
+    in phone varchar(10),
+    in address varchar(150),
+    in userpassword varchar(20),
+	in image text
+)
+BEGIN
+	update admin set admin.name=name where admin.id=id;
+    update admin set admin.email=email where admin.id=id;
+    update admin set admin.phone=phone where admin.id=id;
+    update admin set admin.address=address where admin.id=id;
+    if userpassword is not null then
+		update admin set admin.userpassword=userpassword where admin.id=id;
+    end if;
+    if image is not null then
+		update admin set admin.image=image where admin.id=id;
+    end if;
+END $$
+DELIMITER ;
 
 -- DROP PROCEDURE IF EXISTS addCustomer;
 -- DELIMITER $$
