@@ -1,0 +1,42 @@
+.background {
+      background-image: url("https://st3.depositphotos.com/1340907/14598/v/600/depositphotos_145989281-stock-illustration-pixel-game-background.jpg");
+      background-repeat: no-repeat;
+      background-size: cover;
+      z-index: -5;
+      opacity: 0.5;
+      position: fixed;
+      height: 100%;
+      width: 100%;
+}
+
+.form {
+      border: 2px solid black;
+      border-radius: 20px;
+      min-width: 250px;
+}
+
+.p {
+      font-size: 1rem;
+      color: red;
+}
+
+@media only screen and (max-width:330px) {
+      .p {
+            font-size: 0.8rem;
+            color: red;
+      }
+
+      .font {
+            font-size: 1rem;
+      }
+
+      .title {
+            font-size: 1.3rem;
+      }
+}
+
+@media only screen and (min-width:768px) {
+      .form {
+            min-width: 350px;
+      }
+}

@@ -14,12 +14,7 @@ class CustomerController
             $this->customer_model = new CustomerSelfModel();
       }
 
-      public function getBestSeller()
-      {
-            $arr = $this->game_model->getBestSeller();
-            echo json_encode($arr);
-      }
-
+      /* Authentication */
       public function login()
       {
             $username = $_POST['username'];
@@ -33,12 +28,8 @@ class CustomerController
 
       public function logout()
       {
-            foreach ($_COOKIE as $name => $value) {
-                  if ($name === "PHPSESSID") {
-                        echo json_encode(kill($value));
-                        break;
-                  }
-            }
+            endSession($_COOKIE['PHPSESSID']);
+            json_encode(array("message" => "success"));
       }
 
       public function recovery()
@@ -62,8 +53,22 @@ class CustomerController
             $email = $_POST['email'];
             $username = $_POST['username'];
             $password = $_POST['password'];
-            $phone = $_POST['phone'];
+            $phone = $_POST['phone']==='null'?null:$_POST['phone'];
             echo json_encode($this->customer_model->signUp($name, $email, $username, $password, $phone));
+      }
+
+      /* Home */
+
+      /* Game List */
+
+      /* Wish List */
+
+      /* Shopping cart */
+
+      public function getBestSeller()
+      {
+            $arr = $this->game_model->getBestSeller();
+            echo json_encode($arr);
       }
 
       public function myself()

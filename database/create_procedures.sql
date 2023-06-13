@@ -120,35 +120,37 @@ BEGIN
 END $$
 DELIMITER ;
 
--- DROP PROCEDURE IF EXISTS addCustomer;
--- DELIMITER $$
--- CREATE PROCEDURE addCustomer(
--- 	in name varchar(100),
---     in email varchar(50),
---     in phone varchar(10),
---     in username varchar(20),
---     in userpassword varchar(20),
---     out usedEmail varchar(50),
---     out usedUsername varchar(20)
--- )
--- BEGIN
--- 	declare numberOfCusomer int;
--- 	if email in (select customer.email from customer) then
--- 		set usedEmail:=email;		
---     end if;
---     if username in (select customer.username from customer) then
--- 		set usedUsername:=username;		
---     end if;
---     if usedEmail is null and usedUsername is null then
--- 		select count(id) into numberOfCusomer from customer;
---         if numberOfCusomer<10 then
--- 			insert into customer values(concat("CUSTOMER0",numberOfCusomer+1),name,email,phone,0.0,'None',0,username,userpassword);
--- 		else
--- 			insert into customer values(concat("CUSTOMER",numberOfCusomer+1),name,email,phone,0.0,'None',0,username,userpassword);
---         end if;
---     end if;
--- END $$
--- DELIMITER ;
+DROP PROCEDURE IF EXISTS addCustomer;
+DELIMITER $$
+CREATE PROCEDURE addCustomer(
+	in name varchar(100),
+    in email varchar(50),
+    in phone varchar(10),
+    in username varchar(20),
+    in userpassword varchar(20),
+    out usedEmail varchar(50),
+    out usedUsername varchar(20)
+)
+BEGIN
+	declare numberOfCusomer int;
+    set usedEmail:=null;
+    set usedUsername:=null;
+	if email in (select customer.email from customer) then
+		set usedEmail:=email;		
+    end if;
+    if username in (select customer.username from customer) then
+		set usedUsername:=username;		
+    end if;
+    if usedEmail is null and usedUsername is null then
+        select cast(substring(customer.id,9) as unsigned) as value into numberOfCusomer from customer order by customer.id desc limit 1;
+		if numberOfCusomer<10 then
+			insert into customer values(concat("CUSTOMER0",numberOfCusomer+1),name,email,phone,0.0,'None',0,username,userpassword,null);
+		else
+			insert into customer values(concat("CUSTOMER",numberOfCusomer+1),name,email,phone,0.0,'None',0,username,userpassword,null);
+    end if;
+    end if;
+END $$
+DELIMITER ;
 
 -- DROP PROCEDURE IF EXISTS generate_random_string;
 -- DELIMITER $$

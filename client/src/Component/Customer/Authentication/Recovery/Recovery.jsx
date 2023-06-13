@@ -7,7 +7,7 @@ import { domain } from '../../../tools/domain';
 import { isRefValid } from '../../../tools/refChecker';
 
 
-function AdminRecovery()
+function CustomerRecovery()
 {
   const Navigate = useNavigate();
 
@@ -33,7 +33,7 @@ function AdminRecovery()
       const formData = new FormData();
       formData.append("username", username);
 
-      axios.post(`http://${ domain }/admin/recovery`, formData)
+      axios.post(`http://${ domain }/recovery`, formData)
         .then(res =>
         {
           if (res.data)
@@ -71,11 +71,11 @@ function AdminRecovery()
       const formData = new FormData();
       formData.append("username", username);
       formData.append("password", password);
-      axios.post(`http://${ domain }/admin/newPassword`, formData)
+      axios.post(`http://${ domain }/newPassword`, formData)
         .then(res =>
         {
           console.log(res);
-          Navigate("/admin");
+          Navigate("/");
         })
         .catch(error => console.log(error));
     }
@@ -84,40 +84,14 @@ function AdminRecovery()
   useEffect(() =>
   {
     document.title = 'Password recovery';
-
-    if (window.innerHeight > 330)
-    {
-      if (isRefValid(checkUsername))
-        checkUsername.current.classList.add('h-100');
-      if (isRefValid(changingPassword))
-        changingPassword.current.classList.add('h-100');
-    }
-
-    window.addEventListener('resize', () =>
-    {
-      if (window.innerHeight > 330)
-      {
-        if (isRefValid(checkUsername))
-          checkUsername.current.classList.add('h-100');
-        if (isRefValid(changingPassword))
-          changingPassword.current.classList.add('h-100');
-      }
-      else
-      {
-        if (isRefValid(checkUsername))
-          checkUsername.current.classList.remove('h-100');
-        if (isRefValid(changingPassword))
-          changingPassword.current.classList.remove('h-100');
-      }
-    });
   }, []);
 
   return (
     <>
       <div className={ `${ styles.background }` }></div>
       {/* Validate username first */ }
-      <div className={ `container align-items-center justify-content-center ${ styles.checkUsername }` } ref={ checkUsername }>
-        <form onSubmit={ usernameValidation } className={ `${ styles.form } bg-light d-flex flex-column align-items-center justify-content-around fs-5` }>
+      <div className={ `container-fluid  ${ styles.checkUsername } h-100` } ref={ checkUsername }>
+        <form onSubmit={ usernameValidation } className={ `${ styles.form } bg-light d-flex flex-column align-items-center justify-content-around fs-5 my-auto mx-auto` }>
           <div className="border-bottom border-dark w-100 d-flex flex-column align-items-center mb-5">
             <h1 className={ `my-3 mx-5 ${ styles.title }` }>Password recovery</h1>
           </div>
@@ -160,14 +134,14 @@ function AdminRecovery()
           <input type="submit" className={ `btn btn-primary btn-block mb-4 ${ styles.font }` } value="Continue" />
           <div className="row mb-4">
             <div className="col">
-              <span>Go back to <a href="/admin" className={ `text-decoration-none ${ styles.font }` }>login</a></span>
+              <span className={ `${ styles.font }` }>Go back to <a href="/" className={ `text-decoration-none` }>login</a></span>
             </div>
           </div>
         </form>
       </div>
       {/* Changing password */ }
-      <div className={ `container align-items-center justify-content-center ${ styles.newPassword }` } ref={ changingPassword }>
-        <form onSubmit={ changePassword } className={ `${ styles.form } bg-light d-flex flex-column align-items-center justify-content-around fs-5` }>
+      <div className={ `container-fluid ${ styles.newPassword } h-100` } ref={ changingPassword }>
+        <form onSubmit={ changePassword } className={ `${ styles.form } bg-light d-flex flex-column align-items-center justify-content-around fs-5 my-auto mx-auto` }>
           <div className="border-bottom border-dark w-100 d-flex flex-column align-items-center mb-5">
             <h1 className={ `my-3 mx-5 ${ styles.title }` }>Password recovery</h1>
           </div>
@@ -204,7 +178,7 @@ function AdminRecovery()
           <input type="submit" className={ `btn btn-primary btn-block mb-4 ${ styles.font }` } value="Finish" />
           <div className="row mb-4">
             <div className="col">
-              <span className={ `${ styles.font }` }>Go back to <a href="/admin" className={ `text-decoration-none` }>login</a></span>
+              <span className={ `${ styles.font }` }>Go back to <a href="/" className={ `text-decoration-none` }>login</a></span>
             </div>
           </div>
         </form>
@@ -213,4 +187,4 @@ function AdminRecovery()
   );
 }
 
-export default AdminRecovery;
+export default CustomerRecovery;

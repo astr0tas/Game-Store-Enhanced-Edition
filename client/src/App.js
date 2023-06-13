@@ -2,11 +2,24 @@ import './App.css';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 /* Customer pages */
-import Login from './Component/Customer/Login';
-import Signup from './Component/Customer/Signup';
-import ForgotPassword from './Component/Customer/ForgotPassword';
-import CreateNewPassWord from './Component/Customer/CreateNewPassword';
-import CustomerMenu from './Component/Customer/menu';
+// Authentication pages
+import CustomerLogin from './Component/Customer/Authentication/Login/Login';
+import CustomerRecovery from './Component/Customer/Authentication/Recovery/Recovery';
+import CustomerSignUp from './Component/Customer/Authentication/SignUp/SignUp';
+
+// Customer navbar
+import CustomerMenu from './Component/Customer/Menu/menu';
+
+// Customer Personal Info
+
+// Customer Home
+
+// Customer Game List
+
+// Customer Wish List
+
+// Customer Shopping Cart
+
 import CusPersonalInfo from './Component/Customer/personalInfo';
 import CustomerHome from './Component/Customer/home';
 import CustomerWishlist from './Component/Customer/wishlist';
@@ -16,7 +29,7 @@ import { Cart } from './Component/Customer/cart';
 import { Product } from './Component/Customer/product';
 
 /* Admin pages */
-// Login pages
+// Authentication pages
 import AdminLogin from './Component/Admin/Authentication/Login/Login.jsx';
 import AdminRecovery from './Component/Admin/Authentication/Recovery/Recovery';
 
@@ -49,11 +62,22 @@ function App()
       <BrowserRouter>
         <Routes>
           <Route path="/">
-            <Route index element={ <Login /> } />
-            <Route path="sign_up" element={ <Signup /> } />
-            <Route path="forgot_password" element={ <ForgotPassword /> } />
-            <Route path="create_new_password" element={ <CreateNewPassWord /> } />
+            {/* Authentication pages */ }
+            <Route index element={ <CustomerLogin /> } />
+            <Route path="recovery" element={ <CustomerRecovery /> } />
+            <Route path="signUp" element={ <CustomerSignUp /> } />
+            {/* Main pages */ }
             <Route element={ <CustomerMenu /> }>
+              {/* Personal Info */ }
+
+              {/* Home */ }
+
+              {/* Game List */ }
+
+              {/* Wish List */ }
+
+              {/* Shopping Cart */ }
+
               <Route path="myself" element={ <CusPersonalInfo /> } />
               <Route path="home" element={ <CustomerHome /> } />
               <Route path="allgames" element={ <CustomerGame /> } />

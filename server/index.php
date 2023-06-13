@@ -11,6 +11,20 @@
 
 
       ################################## Customer routes ##################################
+      /* Authentication */
+      $router->post("/login", "CustomerController@login");
+      $router->post("/recovery", "CustomerController@recovery");
+      $router->post("/newPassword", "CustomerController@newPassword");
+      $router->post("/signUp", "CustomerController@signUp");
+
+      /* Home */
+
+      /* Game List */
+
+      /* Wish List */
+
+      /* Shopping cart */
+
       $router->get("/getBestSeller", "CustomerController@getBestSeller");
       $router->get("/logout", "CustomerController@logout");
       $router->get("/myself", "CustomerController@myself");
@@ -18,10 +32,6 @@
       $router->get("/getCart", "CustomerController@getCart");
 
       $router->post("/myself/edit", "CustomerController@updateMySelf");
-      $router->post("/login", "CustomerController@login");
-      $router->post("/recovery", "CustomerController@recovery");
-      $router->post("/new_password", "CustomerController@newPassword");
-      $router->post("/sign_up", "CustomerController@signUp");
       $router->post("/addWishlist", "CustomerController@addWishlist");
       $router->post("/removeWishlis", "CustomerController@removeWishlis");
       $router->post("/gameStatus", "CustomerController@gameStatus");

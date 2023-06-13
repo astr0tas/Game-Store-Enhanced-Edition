@@ -17,6 +17,8 @@ class CustomerSelfModel
             }
       }
 
+      /* Authentication */
+
       public function login($username, $password)
       {
             $sql = "select * from customer where username='$username' and userpassword='$password'";
@@ -47,7 +49,6 @@ class CustomerSelfModel
 
       public function signUp($name, $email, $username, $password, $phone)
       {
-            if ($phone === "null") $phone = null;
             $stmt = $this->db->prepare("call addCustomer(?,?,?,?,?,@usedEmail,@usedUsername)");
             $stmt->bind_param("sssss", $name, $email, $phone, $username, $password);
             $stmt->execute();
@@ -56,6 +57,8 @@ class CustomerSelfModel
             $row = $result->fetch_assoc();
             return $row;
       }
+
+      /* Personal Infomation */
 
       public function myself()
       {

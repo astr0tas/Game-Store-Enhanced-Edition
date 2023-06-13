@@ -1,24 +1,14 @@
       <?php
       function startSession($id)
       {
+            // Set the session cookie's attributes: expires - path - domain - secure - httpOnly
+            session_set_cookie_params(3 * 24 * 60 * 60, "/", null, false, false);
             // Start session
             session_start();
-            // Set session variables for this $id
-            // if (!isset($_SESSION[$id])) {
-            //       $_SESSION[$id] = array();
-            // }
-            // $_SESSION[$id]['user_id'] = $id;
             $_SESSION['id'] = $id;
-
-            // Get the session cookie
-            $session_name = session_name();
-            $session_id = session_id();
-
-            // Return session data to the client
-            echo json_encode(array("name" => $session_name, "value" => $session_id));
       }
 
-      function kill($id) // Destroy a specific session
+      function endSession($id) // Destroy a specific session
       {
             session_id($id);
             session_start();
