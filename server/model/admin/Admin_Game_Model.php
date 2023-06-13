@@ -19,7 +19,7 @@ class GameModel
 
       public function getList()
       {
-            $sql = "SELECT name,id,price,discount,ratings from game order by name";
+            $sql = "SELECT name,id,price,discount,ratings,status from game order by name";
             $result = $this->db->query($sql);
 
             $arr = [];
@@ -74,6 +74,24 @@ class GameModel
             $sql = "";
             foreach ($array as $elem) {
                   $sql .= "delete from game where id='$elem'; ";
+            }
+            return $this->db->multi_query($sql);
+      }
+
+      public function deactivate($array)
+      {
+            $sql = "";
+            foreach ($array as $elem) {
+                  $sql .= "update game set status=false where id='$elem'; ";
+            }
+            return $this->db->multi_query($sql);
+      }
+
+      public function activate($array)
+      {
+            $sql = "";
+            foreach ($array as $elem) {
+                  $sql .= "update game set status=true where id='$elem'; ";
             }
             return $this->db->multi_query($sql);
       }

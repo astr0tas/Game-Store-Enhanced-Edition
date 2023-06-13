@@ -38,6 +38,34 @@
       display: none;
 }
 
+.activate {
+      background-color: #159a00;
+      font-size: 1rem;
+      color: white;
+      border: 1px solid black;
+      border-radius: 10px;
+      height: 40px;
+      min-width: 70px;
+}
+
+.activate:active {
+      background-color: #5ccc4a;
+}
+
+.deactivate {
+      background-color: #666666;
+      font-size: 1rem;
+      color: white;
+      border: 1px solid black;
+      border-radius: 10px;
+      height: 40px;
+      min-width: 70px;
+}
+
+.deactivate:active {
+      background-color: #a9a9a9;
+}
+
 .cancel {
       background-color: #00B3EC;
       font-size: 1rem;
@@ -66,11 +94,11 @@
       border: 1px solid black;
       border-radius: 10px;
       height: 40px;
-      width: 70px;
+      min-width: 70px;
 }
 
 .blueButton:active,
-.cancel:active {
+.cancel:active{
       background-color: #74c5dd;
 }
 
@@ -105,7 +133,7 @@
 
 .pop_up {
       width: 80%;
-      max-width: 400px;
+      max-width: 500px;
       height: 50%;
       max-height: 250px;
       position: absolute;
@@ -124,7 +152,10 @@
       .search,
       .delete,
       .cancel,
-      .blueButton {
+      .blueButton,
+      .activate,
+      .deactivate,
+      .redButton {
             font-size: 1.3rem;
       }
 

@@ -11,6 +11,9 @@ import { domain } from '../../../tools/domain';
 import '../../../General/css/carousel.css';
 import '../../../General/css/scroll.css';
 import { isRefValid } from '../../../tools/refChecker';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPowerOff } from '@fortawesome/free-solid-svg-icons';
+
 
 
 export default function AdminGameDetail()
@@ -31,11 +34,15 @@ export default function AdminGameDetail()
       });
       const [solds, setSolds] = useState("N/A");
       const [status, setStatus] = useState({ str: "N/A", color: "N/A" });
+      const [sellStatus, setSellStatus] = useState({ str: "N/A", color: "N/A" });
       const [category, setCategory] = useState("N/A");
+      const [render, setRender] = useState(false);
 
       const Navigate = useNavigate();
 
       const delete_pop_up = useRef(null);
+      const deactivate_pop_up = useRef(null);
+      const activate_pop_up = useRef(null);
 
       useEffect(() =>
       {
@@ -46,6 +53,7 @@ export default function AdminGameDetail()
                   .then(res =>
                   {
                         document.title = res.data.name;
+                        console.log(res);
                         SetGame({
 
                               name: res.data.name,
@@ -60,6 +68,10 @@ export default function AdminGameDetail()
                               image3url: res.data.picture_3 === null ? null : `http://${ domain }/model/data/games/${ res.data.picture_3 }`,
                               image4url: res.data.picture_4 === null ? null : `http://${ domain }/model/data/games/${ res.data.picture_4 }`
                         });
+                        if (res.data.status === '1')
+                              setSellStatus({ str: "Active", color: "#128400" });
+                        else
+                              setSellStatus({ str: "Disabled", color: "red" });
                   }).catch(error => { console.log(error); })
             axios.post(`http://${ domain }/admin/game/getSales`, formData)
                   .then(res =>
@@ -85,12 +97,12 @@ export default function AdminGameDetail()
                         else
                               setStatus({ str: "Out of stock", color: "red" });
                   }).catch(error => { console.log(error); })
-      }, [id]);
+      }, [render, id]);
 
       const deleteGame = () =>
       {
             const formData = new FormData();
-            formData.append("id", id);
+            formData.append("IDs", id);
             axios.post(`http://${ domain }/admin/game/delete`, formData)
                   .then(res =>
                   {
@@ -100,10 +112,52 @@ export default function AdminGameDetail()
                   .catch(error => console.log(error));
       }
 
+      const handleActivation = () =>
+      {
+            if (sellStatus.str === 'Active')
+            {
+                  if (isRefValid(deactivate_pop_up)) deactivate_pop_up.current.style.display = "flex";
+            }
+            else
+            {
+                  if (isRefValid(activate_pop_up)) activate_pop_up.current.style.display = "flex";
+            }
+
+      }
+
+      const activateGame = () =>
+      {
+            const formData = new FormData();
+            formData.append("IDs", id);
+            axios.post(`http://${ domain }/admin/game/activate`, formData)
+                  .then(res =>
+                  {
+                        console.log(res);
+                        setRender(!render);
+                  })
+                  .catch(error => console.log(error));
+      }
+
+      const deactivateGame = () =>
+      {
+            const formData = new FormData();
+            formData.append("IDs", id);
+            axios.post(`http://${ domain }/admin/game/deactivate`, formData)
+                  .then(res =>
+                  {
+                        console.log(res);
+                        setRender(!render);
+                  })
+                  .catch(error => console.log(error));
+      }
+
       return (
             <div className="w-100 h-100 d-flex flex-column align-items-center justify-content-center">
                   <div className="d-flex align-items-center w-100" style={ { minHeight: "50px" } }>
-                        <BiTrash className={ `ms-auto ms-lg-3 me-lg-0 me-3 ${ styles.trash }` } onClick={ () => { if (isRefValid(delete_pop_up)) delete_pop_up.current.style.display = "flex"; } } />
+                        <div className='ms-auto ms-lg-3 me-lg-0 me-3 d-flex align-items-center'>
+                              <BiTrash className={ `${ styles.trash }` } onClick={ () => { if (isRefValid(delete_pop_up)) delete_pop_up.current.style.display = "flex"; } } />
+                              <FontAwesomeIcon icon={ faPowerOff } className={ `ms-3 ${ styles.trash }` } onClick={ handleActivation } style={ { color: sellStatus.str === 'Active' ? 'red' : '#128400', fontSize: '1.8rem' } } />
+                        </div>
                         <div className='ms-lg-auto me-lg-3 me-auto ms-'>
                               <button className={ `me-2 ${ styles.edit }` } onClick={ () => { Navigate("./edit"); } }>Edit</button>
                               <button className={ `ms-2 ${ styles.back }` } onClick={ () => { Navigate(-1); } }>Back</button>
@@ -145,6 +199,12 @@ export default function AdminGameDetail()
                                     </Carousel>
                               </div>
                               <div className={ `${ styles.sections } ms-lg-5 mt-2 mt-lg-0 d-flex flex-column align-items-center align-items-lg-start align-self-center` }>
+                                    <div className={ `d-flex align-items-center my-lg-3` }>
+                                          <h4>Selling status:&nbsp;&nbsp;</h4>
+                                          <h4 style={ {
+                                                color: sellStatus.color
+                                          } }>{ sellStatus.str }</h4>
+                                    </div>
                                     <div className={ `d-flex align-items-center my-lg-3` }>
                                           <h4>Status:&nbsp;&nbsp;</h4>
                                           <h4 style={ {
@@ -201,6 +261,34 @@ export default function AdminGameDetail()
                               {
                                     if (isRefValid(delete_pop_up)) delete_pop_up.current.style.display = "none";
                                     deleteGame();
+                              } }>Confirm</button>
+                        </div>
+                  </div>
+                  <div className={ `position-absolute flex-column align-items-center justify-content-around ${ styles.pop_up }` } ref={ deactivate_pop_up }>
+                        <h3 className='mx-2'>Do you really want to deactivate this game?</h3>
+                        <div className='d-flex flex-row align-items-center justify-content-center'>
+                              <button className={ `${ styles.blueButton } mx-3` } onClick={ () =>
+                              {
+                                    if (isRefValid(deactivate_pop_up)) deactivate_pop_up.current.style.display = "none";
+                              } }>Cancel</button>
+                              <button className={ `${ styles.redButton } mx-3` } onClick={ () =>
+                              {
+                                    if (isRefValid(deactivate_pop_up)) deactivate_pop_up.current.style.display = "none";
+                                    deactivateGame();
+                              } }>Confirm</button>
+                        </div>
+                  </div>
+                  <div className={ `position-absolute flex-column align-items-center justify-content-around ${ styles.pop_up }` } ref={ activate_pop_up }>
+                        <h3 className='mx-2'>Do you really want to activate this game?</h3>
+                        <div className='d-flex flex-row align-items-center justify-content-center'>
+                              <button className={ `${ styles.redButton } mx-3` } onClick={ () =>
+                              {
+                                    if (isRefValid(activate_pop_up)) activate_pop_up.current.style.display = "none";
+                              } }>Cancel</button>
+                              <button className={ `${ styles.blueButton } mx-3` } onClick={ () =>
+                              {
+                                    if (isRefValid(activate_pop_up)) activate_pop_up.current.style.display = "none";
+                                    activateGame();
                               } }>Confirm</button>
                         </div>
                   </div>

@@ -70,7 +70,7 @@ export default function CustomerSignUp()
       return (
             <>
                   <div className={ `${ styles.background }` }></div>
-                  <div className={ `container-fluid d-flex` }>
+                  <div className={ `container-fluid d-flex h-100` }>
                         <form onSubmit={ formSubmit } className={ `${ styles.form } bg-light d-flex flex-column align-items-center justify-content-around fs-5 my-auto mx-auto` }>
                               <div className="border-bottom border-dark w-100 d-flex flex-column align-items-center mb-2">
                                     <h1 className={ `my-3 mx-5 ${ styles.title }` }>Sign up</h1>

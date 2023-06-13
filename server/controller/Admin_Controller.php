@@ -18,7 +18,7 @@ class AdminController
       }
 
       /* Personal infomation */
-      
+
       public function personalInfo()
       {
             ini_set('session.use_cookies', 0);
@@ -30,8 +30,7 @@ class AdminController
 
       public function updatePersonalInfo()
       {
-            if($_POST['name']==="null" || $email = $_POST['email']==="null" ||  $_POST['phone']==="null")
-            {
+            if ($_POST['name'] === "null" || $email = $_POST['email'] === "null" ||  $_POST['phone'] === "null") {
                   echo json_encode(array("message" => "failed"));
                   return;
             }
@@ -43,23 +42,23 @@ class AdminController
             $name = $_POST['name'];
             $email = $_POST['email'];
             $phone = $_POST['phone'];
-            $address = $_POST['address']==="null"?null:$_POST['address'];
-            $password=$_POST['password']==="null"?null:$_POST['password'];
+            $address = $_POST['address'] === "null" ? null : $_POST['address'];
+            $password = $_POST['password'] === "null" ? null : $_POST['password'];
 
-            $image=null;
-            $path=dirname(__FILE__);
-            $path=dirname($path);
+            $image = null;
+            $path = dirname(__FILE__);
+            $path = dirname($path);
             $path = str_replace("\\", "/", $path);
-            $path.="/model/data/admins/$id";
+            $path .= "/model/data/admins/$id";
             if (!is_dir($path)) {
                   mkdir($path, 0777);
                   chmod($path, 0777);
             }
             if (isset($_FILES["image"])) {
-                  $image=$id.'/'.$_FILES["image"]['name'];
-                  move_uploaded_file($_FILES["image"]["tmp_name"], $path.'/'.$_FILES["image"]['name']);
+                  $image = $id . '/' . $_FILES["image"]['name'];
+                  move_uploaded_file($_FILES["image"]["tmp_name"], $path . '/' . $_FILES["image"]['name']);
             }
-            $result = $this->admin_model->updatePersonalInfo($id,$name, $email, $phone, $address, $password, $image);
+            $result = $this->admin_model->updatePersonalInfo($id, $name, $email, $phone, $address, $password, $image);
             echo json_encode(array("message" => $result ? "success" : "failed"));
       }
 
@@ -179,6 +178,20 @@ class AdminController
             echo json_encode(array("message" => $result ? "success" : "failed"));
       }
 
+      public function deactivateGame()
+      {
+            $data = explode(',', $_POST["IDs"]);
+            $result = $this->game_model->deactivate($data);
+            echo json_encode(array("message" => $result ? "success" : "failed"));
+      }
+
+      public function activateGame()
+      {
+            $data = explode(',', $_POST["IDs"]);
+            $result = $this->game_model->activate($data);
+            echo json_encode(array("message" => $result ? "success" : "failed"));
+      }
+
       public function getGameDetail()
       {
             $id = $_POST['id'];
@@ -209,31 +222,31 @@ class AdminController
             $picture2 = null;
             $picture3 = null;
             $picture4 = null;
-            $path=dirname(__FILE__);
-            $path=dirname($path);
+            $path = dirname(__FILE__);
+            $path = dirname($path);
             $path = str_replace("\\", "/", $path);
-            $path.="/model/data/games/$name";
+            $path .= "/model/data/games/$name";
             if (!is_dir($path)) {
                   mkdir($path, 0777);
                   chmod($path, 0777);
             }
             if (isset($_FILES["picture1"])) {
-                  $picture1=$name.'/'.$_FILES["picture1"]['name'];
-                  move_uploaded_file($_FILES["picture1"]["tmp_name"], $path.'/'.$_FILES["picture1"]['name']);
+                  $picture1 = $name . '/' . $_FILES["picture1"]['name'];
+                  move_uploaded_file($_FILES["picture1"]["tmp_name"], $path . '/' . $_FILES["picture1"]['name']);
             }
             if (isset($_FILES["picture2"])) {
-                  $picture2=$name.'/'.$_FILES["picture2"]['name'];
-                  move_uploaded_file($_FILES["picture2"]["tmp_name"], $path.'/'.$_FILES["picture2"]['name']);
+                  $picture2 = $name . '/' . $_FILES["picture2"]['name'];
+                  move_uploaded_file($_FILES["picture2"]["tmp_name"], $path . '/' . $_FILES["picture2"]['name']);
             }
             if (isset($_FILES["picture3"])) {
-                  $picture3=$name.'/'.$_FILES["picture3"]['name'];
-                  move_uploaded_file($_FILES["picture3"]["tmp_name"], $path.'/'.$_FILES["picture3"]['name']);
+                  $picture3 = $name . '/' . $_FILES["picture3"]['name'];
+                  move_uploaded_file($_FILES["picture3"]["tmp_name"], $path . '/' . $_FILES["picture3"]['name']);
             }
             if (isset($_FILES["picture4"])) {
-                  $picture4=$name.'/'.$_FILES["picture4"]['name'];
-                  move_uploaded_file($_FILES["picture4"]["tmp_name"], $path.'/'.$_FILES["picture4"]['name']);
+                  $picture4 = $name . '/' . $_FILES["picture4"]['name'];
+                  move_uploaded_file($_FILES["picture4"]["tmp_name"], $path . '/' . $_FILES["picture4"]['name']);
             }
-            
+
             $description = null;
             $minSpec = null;
             $recSpec = null;
@@ -279,7 +292,7 @@ class AdminController
 
       public function updateGame()
       {
-            $id=$_POST['id'];
+            $id = $_POST['id'];
             $name = $_POST['name'];
             $price = $_POST['price'] === "null" ? null : floatval($_POST['price']);
             $discount = $_POST['discount'] === "null" ? null : floatval($_POST['discount']);
@@ -288,28 +301,28 @@ class AdminController
             $picture2 = null;
             $picture3 = null;
             $picture4 = null;
-            $path=dirname(__FILE__);
-            $path=dirname($path);
+            $path = dirname(__FILE__);
+            $path = dirname($path);
             $path = str_replace("\\", "/", $path);
-            $path.="/model/data/games/$name";
+            $path .= "/model/data/games/$name";
 
             if (isset($_FILES["picture1"])) {
-                  $picture1=$name.'/'.$_FILES["picture1"]['name'];
-                  move_uploaded_file($_FILES["picture1"]["tmp_name"], $path.'/'.$_FILES["picture1"]['name']);
+                  $picture1 = $name . '/' . $_FILES["picture1"]['name'];
+                  move_uploaded_file($_FILES["picture1"]["tmp_name"], $path . '/' . $_FILES["picture1"]['name']);
             }
             if (isset($_FILES["picture2"])) {
-                  $picture2=$name.'/'.$_FILES["picture2"]['name'];
-                  move_uploaded_file($_FILES["picture2"]["tmp_name"], $path.'/'.$_FILES["picture2"]['name']);
+                  $picture2 = $name . '/' . $_FILES["picture2"]['name'];
+                  move_uploaded_file($_FILES["picture2"]["tmp_name"], $path . '/' . $_FILES["picture2"]['name']);
             }
             if (isset($_FILES["picture3"])) {
-                  $picture3=$name.'/'.$_FILES["picture3"]['name'];
-                  move_uploaded_file($_FILES["picture3"]["tmp_name"], $path.'/'.$_FILES["picture3"]['name']);
+                  $picture3 = $name . '/' . $_FILES["picture3"]['name'];
+                  move_uploaded_file($_FILES["picture3"]["tmp_name"], $path . '/' . $_FILES["picture3"]['name']);
             }
             if (isset($_FILES["picture4"])) {
-                  $picture4=$name.'/'.$_FILES["picture4"]['name'];
-                  move_uploaded_file($_FILES["picture4"]["tmp_name"], $path.'/'.$_FILES["picture4"]['name']);
+                  $picture4 = $name . '/' . $_FILES["picture4"]['name'];
+                  move_uploaded_file($_FILES["picture4"]["tmp_name"], $path . '/' . $_FILES["picture4"]['name']);
             }
-            
+
             $description = null;
             $minSpec = null;
             $recSpec = null;
@@ -326,7 +339,7 @@ class AdminController
                   $recSpec = file_get_contents($_FILES["recSpec"]["tmp_name"]);
             }
 
-            $result = $this->game_model->update($id,$name, $price, $discount, $description, $minSpec, $recSpec, $picture1, $picture2, $picture3, $picture4);
+            $result = $this->game_model->update($id, $name, $price, $discount, $description, $minSpec, $recSpec, $picture1, $picture2, $picture3, $picture4);
             echo json_encode($result);
 
             if (isset($_FILES["description"])) unlink($_FILES["description"]["tmp_name"]);

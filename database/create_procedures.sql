@@ -3,16 +3,16 @@ use game_store;
 DROP PROCEDURE IF EXISTS addGame;
 DELIMITER $$
 CREATE PROCEDURE addGame(
-	in name varchar(100),
-    in price float,
-    in discount float,
-    in description text,
-    in spec_minimum text,
-    in spec_recommended text,
-    in picture_1 text,
-    in picture_2 text,
-    in picture_3 text,
-    in picture_4 text,
+	in Inname varchar(100),
+    in Inprice float,
+    in Indiscount float,
+    in Indescription text,
+    in Inspec_minimum text,
+    in Inspec_recommended text,
+    in Inpicture_1 text,
+    in Inpicture_2 text,
+    in Inpicture_3 text,
+    in Inpicture_4 text,
     out id varchar(10)
 )
 BEGIN
@@ -23,7 +23,11 @@ BEGIN
     else
 		set id:=concat("GAME",counter+1);
     end if;
-    insert into game values(id,name,price,discount,description,0,spec_minimum,spec_recommended,picture_1,picture_2,picture_3,picture_4);
+    if Inprice is not null then
+		insert into game(id,name,price,discount,description,ratings,spec_minimum,spec_recommended,picture_1,picture_2,picture_3,picture_4) values(id,Inname,Inprice,Indiscount,Indescription,0,Inspec_minimum,Inspec_recommended,Inpicture_1,Inpicture_2,Inpicture_3,Inpicture_4);
+	else
+		insert into game(id,name,price,discount,description,ratings,spec_minimum,spec_recommended,picture_1,picture_2,picture_3,picture_4,status) values(id,Inname,null,Indiscount,Indescription,0,Inspec_minimum,Inspec_recommended,Inpicture_1,Inpicture_2,Inpicture_3,Inpicture_4,false);
+    end if;
     select @id;
 END $$
 DELIMITER ;

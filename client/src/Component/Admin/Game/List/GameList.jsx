@@ -55,7 +55,7 @@ const Game = (props) =>
                               <input ref={ el => (props.refCheckboxes.current[props.i] = el) } type='checkbox' className={ `${ styles.checkbox }` } value={ props.id }></input>
                         </div>
                   </td>
-                  <td className='col-3 text-center'>{ props.name }</td>
+                  <td className='col-2 text-center'>{ props.name }</td>
                   <td className='col-2 text-center'>
                         <div className='w-100 d-flex align-items-center justify-content-center'>
                               <p style={ { marginBottom: '0' } }>{ props.price === null && 'N/A' }{ props.price !== null && '$' }{ props.discount === '0' && props.price }{ props.discount !== null && props.discount !== '0' && ((parseFloat(props.price) + 0.01) * (100 - parseFloat(props.discount)) / 100).toFixed(2) - 0.01 }</p>
@@ -77,7 +77,8 @@ const Game = (props) =>
                               <AiFillStar style={ { fontSize: '1rem', color: 'yellow' } } />{ props.ratings }
                         </div>
                   </td>
-                  <td className='col-2 text-center'>{ solds }</td>
+                  <td className='col-1 text-center'>{ solds }</td>
+                  <td className='col-2 text-center' style={ { color: props.status === '1' ? '#128400' : 'red' } }>{ props.status === '1' ? 'Active' : 'Disabled' }</td>
             </tr>
       );
 }
@@ -85,12 +86,15 @@ const Game = (props) =>
 export default function GameList()
 {
       const [renderTrigger, setRenderTrigger] = useState(true);
+      const [mode, setMode] = useState(null);
 
       const cancel = useRef(null);
       const deleteButton = useRef(null);
       const addButton = useRef(null);
       const confirm = useRef(null);
       const search = useRef(null);
+      const activateButton = useRef(null);
+      const deactivateButton = useRef(null);
 
       const tableBody = useRef(null);
       const target = useRef(null);
@@ -100,7 +104,9 @@ export default function GameList()
       const numbers = useRef([]);
 
       const noGameSelected = useRef(null);
-      const confirmation = useRef(null);
+      const delete_confirmation = useRef(null);
+      const deactivate_confirmation = useRef(null);
+      const activate_confirmation = useRef(null);
 
       const Navigate = useNavigate();
 
@@ -119,7 +125,7 @@ export default function GameList()
 
                         const temp = [];
                         for (let i = 0; i < res.data.length; i++)
-                              temp.push(<Game Navigate={ Navigate } refCheckboxes={ checkboxes } refNumbers={ numbers } key={ i } i={ i } name={ res.data[i].name } price={ res.data[i].price === null ? null : res.data[i].price } ratings={ res.data[i].ratings } discount={ res.data[i].discount } id={ res.data[i].id } />);
+                              temp.push(<Game status={ res.data[i].status } Navigate={ Navigate } refCheckboxes={ checkboxes } refNumbers={ numbers } key={ i } i={ i } name={ res.data[i].name } price={ res.data[i].price === null ? null : res.data[i].price } ratings={ res.data[i].ratings } discount={ res.data[i].discount } id={ res.data[i].id } />);
                         if (isRefValid(target))
                               target.current.render(<>{ temp }</>);
                   })
@@ -151,17 +157,28 @@ export default function GameList()
             }, 500);
       }
 
-      const toggleDelete = () =>
+      const toggleCheckboxes = (localMode) =>
       {
+            if (isRefValid(selectAll)) selectAll.current.checked = false;
             if (isRefValid(cancel))
             {
                   if (cancel.current.style.display === "" || cancel.current.style.display === "none")
                   {
                         cancel.current.style.display = "block";
+                        if (localMode === 0)
+                              cancel.current.style.backgroundColor = "red";
                         if (isRefValid(confirm))
+                        {
                               confirm.current.style.display = "block";
+                              if (localMode === 0)
+                                    confirm.current.style.backgroundColor = "#00B3EC";
+                        }
                         if (isRefValid(deleteButton))
                               deleteButton.current.style.display = "none";
+                        if (isRefValid(activateButton))
+                              activateButton.current.style.display = "none";
+                        if (isRefValid(deactivateButton))
+                              deactivateButton.current.style.display = "none";
                         if (isRefValid(addButton))
                               addButton.current.style.display = "none";
                         if (isRefValid(selectAll))
@@ -179,12 +196,20 @@ export default function GameList()
                   else
                   {
                         cancel.current.style.display = "none";
+                        cancel.current.style.backgroundColor = "";
+                        if (isRefValid(confirm))
+                        {
+                              confirm.current.style.display = "none";
+                              confirm.current.style.backgroundColor = "";
+                        }
                         if (isRefValid(deleteButton))
                               deleteButton.current.style.display = "block";
+                        if (isRefValid(activateButton))
+                              activateButton.current.style.display = "block";
+                        if (isRefValid(deactivateButton))
+                              deactivateButton.current.style.display = "block";
                         if (isRefValid(addButton))
                               addButton.current.style.display = "block";
-                        if (isRefValid(confirm))
-                              confirm.current.style.display = "none";
                         if (isRefValid(selectAll))
                               selectAll.current.style.display = "none";
                         if (isRefValid(numberTag))
@@ -221,7 +246,9 @@ export default function GameList()
             }
             else
             {
-                  if (isRefValid(confirmation)) confirmation.current.style.display = "flex";
+                  if (isRefValid(delete_confirmation) && mode === 2) delete_confirmation.current.style.display = "flex";
+                  else if (isRefValid(deactivate_confirmation) && mode === 1) deactivate_confirmation.current.style.display = "flex";
+                  else if (isRefValid(activate_confirmation) && mode === 0) activate_confirmation.current.style.display = "flex";
             }
       }
 
@@ -238,7 +265,45 @@ export default function GameList()
                   .then(res =>
                   {
                         console.log(res);
-                        toggleDelete();
+                        toggleCheckboxes();
+                        setRenderTrigger(!renderTrigger);
+                  })
+                  .catch(error => console.log(error));
+      }
+
+      const activateGame = () =>
+      {
+            const temp = [];
+            for (let i = 0; i < checkboxes.current.length; i++)
+                  if (isRefValid(checkboxes, i) && checkboxes.current[i].checked === true)
+                        temp.push(checkboxes.current[i].value);
+
+            const formData = new FormData();
+            formData.append("IDs", temp);
+            axios.post(`http://${ domain }/admin/game/activate`, formData)
+                  .then(res =>
+                  {
+                        console.log(res);
+                        toggleCheckboxes();
+                        setRenderTrigger(!renderTrigger);
+                  })
+                  .catch(error => console.log(error));
+      }
+
+      const deactivateGame = () =>
+      {
+            const temp = [];
+            for (let i = 0; i < checkboxes.current.length; i++)
+                  if (isRefValid(checkboxes, i) && checkboxes.current[i].checked === true)
+                        temp.push(checkboxes.current[i].value);
+
+            const formData = new FormData();
+            formData.append("IDs", temp);
+            axios.post(`http://${ domain }/admin/game/deactivate`, formData)
+                  .then(res =>
+                  {
+                        console.log(res);
+                        toggleCheckboxes();
                         setRenderTrigger(!renderTrigger);
                   })
                   .catch(error => console.log(error));
@@ -260,17 +325,45 @@ export default function GameList()
                               if (isRefValid(noGameSelected)) noGameSelected.current.style.display = "none";
                         } }>BACK</button>
                   </div>
-                  <div className={ `${ styles.pop_up } flex-column align-items-center justify-content-around` } ref={ confirmation }>
+                  <div className={ `${ styles.pop_up } flex-column align-items-center justify-content-around` } ref={ delete_confirmation }>
                         <h2 className={ `${ styles.pop_up_message }` }>Do you want to delete the selected game(s)?</h2>
                         <div className='d-flex align-items-center'>
                               <button className={ `${ styles.blueButton } me-4` } onClick={ () =>
                               {
-                                    if (isRefValid(confirmation)) confirmation.current.style.display = "none";
+                                    if (isRefValid(delete_confirmation)) delete_confirmation.current.style.display = "none";
                               } }>NO</button>
                               <button className={ `${ styles.redButton } ms-4` } onClick={ () =>
                               {
                                     deleteGame();
-                                    if (isRefValid(confirmation)) confirmation.current.style.display = "none";
+                                    if (isRefValid(delete_confirmation)) delete_confirmation.current.style.display = "none";
+                              } }>YES</button>
+                        </div>
+                  </div>
+                  <div className={ `${ styles.pop_up } flex-column align-items-center justify-content-around` } ref={ deactivate_confirmation }>
+                        <h2 className={ `${ styles.pop_up_message }` }>Do you want to deactivate the selected game(s)?</h2>
+                        <div className='d-flex align-items-center'>
+                              <button className={ `${ styles.blueButton } me-4` } onClick={ () =>
+                              {
+                                    if (isRefValid(deactivate_confirmation)) deactivate_confirmation.current.style.display = "none";
+                              } }>NO</button>
+                              <button className={ `${ styles.redButton } ms-4` } onClick={ () =>
+                              {
+                                    deactivateGame();
+                                    if (isRefValid(deactivate_confirmation)) deactivate_confirmation.current.style.display = "none";
+                              } }>YES</button>
+                        </div>
+                  </div>
+                  <div className={ `${ styles.pop_up } flex-column align-items-center justify-content-around` } ref={ activate_confirmation }>
+                        <h2 className={ `${ styles.pop_up_message }` }>Do you want to activate the selected game(s)?</h2>
+                        <div className='d-flex align-items-center'>
+                              <button className={ `${ styles.redButton } me-4` } onClick={ () =>
+                              {
+                                    if (isRefValid(activate_confirmation)) activate_confirmation.current.style.display = "none";
+                              } }>NO</button>
+                              <button className={ `${ styles.blueButton } ms-4` } onClick={ () =>
+                              {
+                                    activateGame();
+                                    if (isRefValid(activate_confirmation)) activate_confirmation.current.style.display = "none";
                               } }>YES</button>
                         </div>
                   </div>
@@ -293,11 +386,12 @@ export default function GameList()
                                                       <input ref={ selectAll } type='checkbox' className={ `${ styles.checkbox }` } onChange={ selectAllCheckboxes }></input>
                                                 </div>
                                           </th>
-                                          <th scope="col" className='col-3 text-center'>Name</th>
+                                          <th scope="col" className='col-2 text-center'>Name</th>
                                           <th scope="col" className='col-2 text-center'>Price</th>
                                           <th scope="col" className='col-2 text-center'>Category</th>
                                           <th scope="col" className='col-2 text-center'>Ratings</th>
-                                          <th scope="col" className='col-2 text-center'>Solds</th>
+                                          <th scope="col" className='col-1 text-center'>Solds</th>
+                                          <th scope="col" className='col-2 text-center'>Selling status</th>
                                     </tr>
                               </thead>
                               <tbody ref={ tableBody }>
@@ -305,10 +399,12 @@ export default function GameList()
                         </table>
                   </div >
                   <div className='w-100 d-flex justify-content-center align-items-center mb-3' style={ { height: "100px" } }>
-                        <button className={ `${ styles.delete } mx-3` } onClick={ toggleDelete } ref={ deleteButton }>Delete game</button>
+                        <button className={ `${ styles.activate } mx-3` } onClick={ () => { setMode(0); toggleCheckboxes(0); } } ref={ activateButton }>Activate game</button>
+                        <button className={ `${ styles.deactivate } mx-3` } onClick={ () => { setMode(1); toggleCheckboxes(1); } } ref={ deactivateButton }>Deactivate game</button>
+                        <button className={ `${ styles.delete } mx-3` } onClick={ () => { setMode(2); toggleCheckboxes(2); } } ref={ deleteButton }>Delete game</button>
                         <button className={ `${ styles.blueButton } mx-3` } onClick={ () => { Navigate('./add'); } } ref={ addButton }>Add game</button>
-                        <button className={ `${ styles.cancel } mx-3` } onClick={ toggleDelete } ref={ cancel }>Cancel</button>
-                        <button className={ `${ styles.delete } mx-3` } value="Confirm" onClick={ preProcess } ref={ confirm }>Confirm</button>
+                        <button className={ `${ styles.cancel } mx-3` } onClick={ () => { setMode(null); toggleCheckboxes(null); } } ref={ cancel }>Cancel</button>
+                        <button className={ `${ styles.delete } mx-3` } onClick={ preProcess } ref={ confirm }>Confirm</button>
                   </div>
             </div >
       )

@@ -75,6 +75,8 @@
       $router->post("/admin/game/getSales","AdminController@getGameSales");
       $router->post("/admin/game/gameCategory", "AdminController@getGameCategory");
       $router->post("/admin/game/delete", "AdminController@deleteGame");
+      $router->post("/admin/game/deactivate", "AdminController@deactivateGame");
+      $router->post("/admin/game/activate", "AdminController@activateGame");
       $router->post("/admin/game/detail", "AdminController@getGameDetail");
       $router->post("/admin/game/status", "AdminController@getGameStatus");
       $router->get("/admin/game/categories", "AdminController@getCategories");
