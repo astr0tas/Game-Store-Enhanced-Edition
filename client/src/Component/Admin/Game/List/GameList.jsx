@@ -166,12 +166,18 @@ export default function GameList()
                   {
                         cancel.current.style.display = "block";
                         if (localMode === 0)
-                              cancel.current.style.backgroundColor = "red";
+                        {
+                              cancel.current.classList.remove(`${ styles.cancel }`);
+                              cancel.current.classList.add(`${ styles.redButton }`);
+                        }
                         if (isRefValid(confirm))
                         {
                               confirm.current.style.display = "block";
                               if (localMode === 0)
-                                    confirm.current.style.backgroundColor = "#00B3EC";
+                              {
+                                    confirm.current.classList.remove(`${ styles.delete }`);
+                                    confirm.current.classList.add(`${ styles.blueButton }`);
+                              }
                         }
                         if (isRefValid(deleteButton))
                               deleteButton.current.style.display = "none";
@@ -196,11 +202,15 @@ export default function GameList()
                   else
                   {
                         cancel.current.style.display = "none";
-                        cancel.current.style.backgroundColor = "";
+                        if (cancel.current.classList.contains(`${ styles.redButton }`))
+                              cancel.current.classList.remove(`${ styles.redButton }`);
+                        cancel.current.classList.add(`${ styles.cancel }`);
                         if (isRefValid(confirm))
                         {
                               confirm.current.style.display = "none";
-                              confirm.current.style.backgroundColor = "";
+                              if (confirm.current.classList.contains(`${ styles.blueButton }`))
+                                    confirm.current.classList.remove(`${ styles.blueButton }`);
+                              confirm.current.classList.add(`${ styles.delete }`);
                         }
                         if (isRefValid(deleteButton))
                               deleteButton.current.style.display = "block";
@@ -398,11 +408,15 @@ export default function GameList()
                               </tbody>
                         </table>
                   </div >
-                  <div className='w-100 d-flex justify-content-center align-items-center mb-3' style={ { height: "100px" } }>
-                        <button className={ `${ styles.activate } mx-3` } onClick={ () => { setMode(0); toggleCheckboxes(0); } } ref={ activateButton }>Activate game</button>
-                        <button className={ `${ styles.deactivate } mx-3` } onClick={ () => { setMode(1); toggleCheckboxes(1); } } ref={ deactivateButton }>Deactivate game</button>
-                        <button className={ `${ styles.delete } mx-3` } onClick={ () => { setMode(2); toggleCheckboxes(2); } } ref={ deleteButton }>Delete game</button>
-                        <button className={ `${ styles.blueButton } mx-3` } onClick={ () => { Navigate('./add'); } } ref={ addButton }>Add game</button>
+                  <div className='w-100 d-flex flex-column flex-md-row justify-content-center align-items-center mt-3 mb-3'>
+                        <div className='d-flex align-items-center mb-md-0 mb-2'>
+                              <button className={ `${ styles.activate } mx-md-3 mx-1` } onClick={ () => { setMode(0); toggleCheckboxes(0); } } ref={ activateButton }>Activate game</button>
+                              <button className={ `${ styles.deactivate } mx-md-3 mx-1` } onClick={ () => { setMode(1); toggleCheckboxes(1); } } ref={ deactivateButton }>Deactivate game</button>
+                        </div>
+                        <div className='d-flex align-items-center'>
+                              <button className={ `${ styles.delete } mx-md-3 mx-1` } onClick={ () => { setMode(2); toggleCheckboxes(2); } } ref={ deleteButton }>Delete game</button>
+                              <button className={ `${ styles.blueButton } mx-md-3 mx-1` } onClick={ () => { Navigate('./add'); } } ref={ addButton }>Add game</button>
+                        </div>
                         <button className={ `${ styles.cancel } mx-3` } onClick={ () => { setMode(null); toggleCheckboxes(null); } } ref={ cancel }>Cancel</button>
                         <button className={ `${ styles.delete } mx-3` } onClick={ preProcess } ref={ confirm }>Confirm</button>
                   </div>

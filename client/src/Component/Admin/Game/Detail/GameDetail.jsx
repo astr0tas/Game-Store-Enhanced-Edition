@@ -156,7 +156,7 @@ export default function AdminGameDetail()
                   <div className="d-flex align-items-center w-100" style={ { minHeight: "50px" } }>
                         <div className='ms-auto ms-lg-3 me-lg-0 me-3 d-flex align-items-center'>
                               <BiTrash className={ `${ styles.trash }` } onClick={ () => { if (isRefValid(delete_pop_up)) delete_pop_up.current.style.display = "flex"; } } />
-                              <FontAwesomeIcon icon={ faPowerOff } className={ `ms-3 ${ styles.trash }` } onClick={ handleActivation } style={ { color: sellStatus.str === 'Active' ? 'red' : '#128400', fontSize: '1.8rem' } } />
+                              <FontAwesomeIcon icon={ faPowerOff } className={ `ms-3 ${ styles.trash } ${ sellStatus.str === 'Active' ? styles.red_power : styles.green_power }` } onClick={ handleActivation } />
                         </div>
                         <div className='ms-lg-auto me-lg-3 me-auto ms-'>
                               <button className={ `me-2 ${ styles.edit }` } onClick={ () => { Navigate("./edit"); } }>Edit</button>
