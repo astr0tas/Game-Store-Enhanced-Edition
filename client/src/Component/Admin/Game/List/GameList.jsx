@@ -417,8 +417,10 @@ export default function GameList()
                               <button className={ `${ styles.delete } mx-md-3 mx-1` } onClick={ () => { setMode(2); toggleCheckboxes(2); } } ref={ deleteButton }>Delete game</button>
                               <button className={ `${ styles.blueButton } mx-md-3 mx-1` } onClick={ () => { Navigate('./add'); } } ref={ addButton }>Add game</button>
                         </div>
-                        <button className={ `${ styles.cancel } mx-3` } onClick={ () => { setMode(null); toggleCheckboxes(null); } } ref={ cancel }>Cancel</button>
-                        <button className={ `${ styles.delete } mx-3` } onClick={ preProcess } ref={ confirm }>Confirm</button>
+                        <div className='d-flex align-items-center'>
+                              <button className={ `${ styles.cancel } mx-3` } onClick={ () => { setMode(null); toggleCheckboxes(null); } } ref={ cancel }>Cancel</button>
+                              <button className={ `${ styles.delete } mx-3` } onClick={ preProcess } ref={ confirm }>Confirm</button>
+                        </div>
                   </div>
             </div >
       )

@@ -262,9 +262,9 @@ const EditGame = () =>
       {
             for (let i = 0; i < checkbox.current.length; i++)
             {
-                  if (oldTag.includes(checkbox.current[i].value))
+                  if (isRefValid(checkbox, i) && oldTag.includes(checkbox.current[i].value))
                         checkbox.current[i].checked = true;
-                  else
+                  else if (isRefValid(checkbox, i))
                         checkbox.current[i].checked = false;
             }
             if (isRefValid(choose_categories)) choose_categories.current.style.display = "none";
@@ -404,7 +404,6 @@ const EditGame = () =>
                                     &nbsp;&nbsp;
                                     <input type="number" ref={ discountRef } onChange={ (e) =>
                                     {
-                                          console.log(e.target.value);
                                           if (e.target.value !== "")
                                                 setDiscount(e.target.value);
                                           else
