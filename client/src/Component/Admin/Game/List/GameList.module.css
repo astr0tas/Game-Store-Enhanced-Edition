@@ -163,10 +163,6 @@
             padding-left: 30px;
       }
 
-      .titleBoard {
-            height: 50px;
-      }
-
       .searchEngine {
             position: absolute;
             align-self: flex-end;
@@ -177,10 +173,6 @@
       .searchEngine {
             position: static;
             align-self: center;
-      }
-
-      .titleBoard {
-            height: auto;
       }
 }
 

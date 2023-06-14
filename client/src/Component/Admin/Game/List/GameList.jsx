@@ -377,7 +377,7 @@ export default function GameList()
                               } }>YES</button>
                         </div>
                   </div>
-                  <div className={ `d-flex flex-column align-items-center justify-content-center w-100 ${ styles.titleBoard }` }>
+                  <div className={ `d-flex flex-column align-items-center justify-content-center w-100` }>
                         <div className={ `d-flex align-items-center justify-content-center ${ styles.title }` }>
                               <h2 className='d-flex align-items-center' style={ { color: "red" } }>Games</h2>
                         </div>

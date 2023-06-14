@@ -251,7 +251,7 @@ const AddGame = () =>
                               <button className={ `mx-3 ${ styles.confirm }` } onClick={ () => { if (isRefValid(choose_categories)) choose_categories.current.style.display = "none"; } }>Confirm</button>
                         </div>
                   </div>
-                  <div className={ `d-flex flex-column align-items-center justify-content-center w-100 ${ styles.titleBoard } mb-2` }>
+                  <div className={ `d-flex flex-column align-items-center justify-content-center w-100 mb-2` }>
                         <div className={ `d-flex align-items-center justify-content-center ${ styles.title }` }>
                               <h2 className='d-flex align-items-center' style={ { color: "red" } }>Add a game</h2>
                         </div>

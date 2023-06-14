@@ -13,6 +13,7 @@ import CustomerMenu from './Component/Customer/Menu/menu';
 // Customer Personal Info
 
 // Customer Home
+import CustomerHome from './Component/Customer/Home/Home';
 
 // Customer Game List
 
@@ -21,7 +22,6 @@ import CustomerMenu from './Component/Customer/Menu/menu';
 // Customer Shopping Cart
 
 import CusPersonalInfo from './Component/Customer/personalInfo';
-import CustomerHome from './Component/Customer/home';
 import CustomerWishlist from './Component/Customer/wishlist';
 import CustomerGame from './Component/Customer/all_game';
 import CGameDetail from './Component/Customer/cgamedetail'
@@ -71,7 +71,8 @@ function App()
               {/* Personal Info */ }
 
               {/* Home */ }
-
+              <Route path="home" element={ <CustomerHome /> } />
+              
               {/* Game List */ }
 
               {/* Wish List */ }
