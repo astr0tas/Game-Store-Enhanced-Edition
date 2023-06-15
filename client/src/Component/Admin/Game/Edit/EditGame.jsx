@@ -105,8 +105,6 @@ const EditGame = () =>
 
       useEffect(() =>
       {
-            console.log("render");
-
             const formData = new FormData();
             formData.append("id", id);
             axios.post(`http://${ domain }/admin/game/detail`, formData)
