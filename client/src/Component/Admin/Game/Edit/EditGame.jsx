@@ -98,8 +98,15 @@ const EditGame = () =>
       const priceRef = useRef(null);
       const discountRef = useRef(null);
 
+      const [render, setRender] = useState(false);
+      const breakpoint = useRef(0);
+
+      const Navigate = useNavigate();
+
       useEffect(() =>
       {
+            console.log("render");
+
             const formData = new FormData();
             formData.append("id", id);
             axios.post(`http://${ domain }/admin/game/detail`, formData)
@@ -130,7 +137,8 @@ const EditGame = () =>
                         setOldPic4(res.data.picture_4 === null ? "" : `http://${ domain }/model/data/games/${ res.data.picture_4 }`);
                         setPic4(res.data.picture_4 === null ? "" : `http://${ domain }/model/data/games/${ res.data.picture_4 }`);
                   })
-                  .catch(err => { console.log(err); })
+                  .catch(err => { console.log(err); });
+
             axios.post(`http://${ domain }/admin/game/gameCategory`, formData)
                   .then(res =>
                   {
@@ -146,8 +154,69 @@ const EditGame = () =>
                               setTag(tags);
                               setOldTag(oldTags);
                         }
-                  }).catch(error => { console.log(error); })
-      }, [id]);
+                  }).catch(error => { console.log(error); });
+
+            const handleResize = () =>
+            {
+                  if (window.innerWidth < 375 && breakpoint.current !== 1)
+                  {
+                        breakpoint.current = 1;
+                        setRender(!render);
+                  }
+                  else if (window.innerWidth < 992 && window.innerWidth >= 375 && breakpoint.current !== 2)
+                  {
+                        breakpoint.current = 2;
+                        setRender(!render);
+                  }
+                  else if (window.innerWidth < 2400 && window.innerWidth >= 992 && breakpoint.current !== 3)
+                  {
+                        breakpoint.current = 3;
+                        setRender(!render);
+                  }
+                  else if (window.innerWidth >= 2400 && breakpoint.current !== 4)
+                  {
+                        breakpoint.current = 4;
+                        setRender(!render);
+                  }
+            }
+
+            window.addEventListener('resize', handleResize);
+
+            if (isRefNotValid(root) && isRefValid(renderTarget))
+                  root.current = ReactDOM.createRoot(renderTarget.current);
+            let elementPerLine;
+            if (window.innerWidth < 375)
+                  elementPerLine = 1;
+            else if (window.innerWidth < 992)
+                  elementPerLine = 2;
+            else if (window.innerWidth < 2400)
+                  elementPerLine = 3;
+            else
+                  elementPerLine = 4;
+            axios.get(`http://${ domain }/admin/game/categories`).then(res =>
+            {
+                  const totalLines = Math.ceil(res.data.length / elementPerLine);
+                  const temp = [];
+                  for (let i = 0; i < totalLines; i += 1)
+                  {
+                        if (elementPerLine === 1)
+                              temp.push(<Line key={ i } elementPerLine={ elementPerLine } i={ i } data={ [res.data[i]] } checkbox={ checkbox } tag={ tag } setTag={ setTag } setRemovedTag={ setRemovedTag } />);
+                        else if (elementPerLine === 2)
+                              temp.push(<Line key={ i } elementPerLine={ elementPerLine } i={ i } data={ [res.data[i * 2], res.data[i * 2 + 1]] } checkbox={ checkbox } tag={ tag } setTag={ setTag } setRemovedTag={ setRemovedTag } />);
+                        else if (elementPerLine === 3)
+                              temp.push(<Line key={ i } elementPerLine={ elementPerLine } i={ i } data={ [res.data[i * 3], res.data[i * 3 + 1], res.data[i * 3 + 2]] } checkbox={ checkbox } tag={ tag } setTag={ setTag } setRemovedTag={ setRemovedTag } />);
+                        else
+                              temp.push(<Line key={ i } elementPerLine={ elementPerLine } i={ i } data={ [res.data[i * 4], res.data[i * 4 + 1], res.data[i * 4 + 2], res.data[i * 4 + 3]] } checkbox={ checkbox } tag={ tag } setTag={ setTag } setRemovedTag={ setRemovedTag } />);
+                  }
+                  root.current.render(<>{ temp }</>);
+            }).catch(error => { console.log(error); });
+
+            return () =>
+            {
+                  window.removeEventListener('resize', handleResize);
+            }
+            // eslint-disable-next-line react-hooks/exhaustive-deps
+      }, [render, id]);
 
       const removeTag = () =>
       {
@@ -157,8 +226,6 @@ const EditGame = () =>
                   tag.splice(index, 1);
             }
       };
-
-      const Navigate = useNavigate();
 
       const loadPicture = (e, number) =>
       {
@@ -272,40 +339,6 @@ const EditGame = () =>
             setRemovedTag([]);
       }
 
-      const chooseCategories = () =>
-      {
-            if (isRefNotValid(root) && isRefValid(renderTarget))
-                  root.current = ReactDOM.createRoot(renderTarget.current);
-            if (isRefValid(choose_categories))
-                  choose_categories.current.style.display = "flex";
-            let elementPerLine;
-            if (window.innerWidth < 375)
-                  elementPerLine = 1;
-            else if (window.innerWidth < 996)
-                  elementPerLine = 2;
-            else if (window.innerWidth <= 1920)
-                  elementPerLine = 3;
-            else
-                  elementPerLine = 4;
-            axios.get(`http://${ domain }/admin/game/categories`).then(res =>
-            {
-                  const totalLines = Math.ceil(res.data.length / elementPerLine);
-                  const temp = [];
-                  for (let i = 0; i < totalLines; i += 1)
-                  {
-                        if (elementPerLine === 1)
-                              temp.push(<Line key={ i } elementPerLine={ elementPerLine } i={ i } data={ [res.data[i]] } checkbox={ checkbox } tag={ tag } setTag={ setTag } setRemovedTag={ setRemovedTag } />);
-                        else if (elementPerLine === 2)
-                              temp.push(<Line key={ i } elementPerLine={ elementPerLine } i={ i } data={ [res.data[i * 2], res.data[i * 2 + 1]] } checkbox={ checkbox } tag={ tag } setTag={ setTag } setRemovedTag={ setRemovedTag } />);
-                        else if (elementPerLine === 3)
-                              temp.push(<Line key={ i } elementPerLine={ elementPerLine } i={ i } data={ [res.data[i * 3], res.data[i * 3 + 1], res.data[i * 3 + 2]] } checkbox={ checkbox } tag={ tag } setTag={ setTag } setRemovedTag={ setRemovedTag } />);
-                        else
-                              temp.push(<Line key={ i } elementPerLine={ elementPerLine } i={ i } data={ [res.data[i * 4], res.data[i * 4 + 1], res.data[i * 4 + 2], res.data[i * 4 + 3]] } checkbox={ checkbox } tag={ tag } setTag={ setTag } setRemovedTag={ setRemovedTag } />);
-                  }
-                  root.current.render(<>{ temp }</>);
-            }).catch(error => { console.log(error); })
-      }
-
       return (
             <div className='w-100 h-100 d-flex flex-column align-items-center justify-content-center'>
                   <div className={ `${ styles.categories } position-absolute flex-column align-items-center` } ref={ choose_categories }>
@@ -413,7 +446,11 @@ const EditGame = () =>
                               <div className="d-flex align-items-center mb-3 mb-lg-0 text-center">
                                     <p className={ `mb-0` }>Tag</p>
                                     &nbsp;&nbsp;
-                                    <button className={ `btn btn-sm btn-primary` } onClick={ chooseCategories }>Browse</button>
+                                    <button className={ `btn btn-sm btn-primary` } onClick={ () =>
+                                    {
+                                          if (isRefValid(choose_categories))
+                                                choose_categories.current.style.display = "flex";
+                                    } }>Browse</button>
                               </div>
                         </div>
                         <div className={ `d-flex flex-column flex-lg-row align-items-center align-items-lg-start justify-content-lg-around w-100 mt-lg-3 mb-lg-3` }>

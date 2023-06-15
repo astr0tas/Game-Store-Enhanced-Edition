@@ -31,8 +31,8 @@
       border-radius: 20px;
       border: 1px solid black;
       display: none;
-      max-width: 800px;
-      max-height: 400px;
+      max-width: 500px;
+      max-height: 250px;
       width: 90%;
       height: 50%;
 }
@@ -40,5 +40,19 @@
 @media only screen and (min-width:768px) {
       .name {
             font-size: 1.5rem;
+      }
+}
+
+@media only screen and (min-width:992px) {
+      .categories {
+            max-width: 600px;
+            max-height: 300px;
+      }
+}
+
+@media only screen and (min-width:1400px) {
+      .categories {
+            max-width: 700px;
+            max-height: 350px;
       }
 }

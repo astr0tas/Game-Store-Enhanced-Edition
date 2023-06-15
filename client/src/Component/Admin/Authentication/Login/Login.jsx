@@ -42,7 +42,6 @@ const AdminLogin = () =>
       axios.post(`http://${ domain }/admin/login`, formData, { withCredentials: true })
         .then(res =>
         {
-          console.log(res);
           if (res.data)
           {
             setIsWrong(false);

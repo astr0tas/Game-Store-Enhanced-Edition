@@ -77,6 +77,9 @@ const AddGame = () =>
       const checkbox = useRef([]);
       const popUp = useRef(null);
 
+      const [render, setRender] = useState(false);
+      const breakpoint = useRef(0);
+
       const removeTag = () =>
       {
             for (let i = 0; i < removedTag.length; i++)
@@ -200,18 +203,42 @@ const AddGame = () =>
             setRemovedTag([]);
       }
 
-      const chooseCategories = () =>
+      useEffect(() =>
       {
+            const handleResize = () =>
+            {
+                  if (window.innerWidth < 375 && breakpoint.current !== 1)
+                  {
+                        breakpoint.current = 1;
+                        setRender(!render);
+                  }
+                  else if (window.innerWidth < 992 && window.innerWidth >= 375 && breakpoint.current !== 2)
+                  {
+                        breakpoint.current = 2;
+                        setRender(!render);
+                  }
+                  else if (window.innerWidth < 2400 && window.innerWidth >= 992 && breakpoint.current !== 3)
+                  {
+                        breakpoint.current = 3;
+                        setRender(!render);
+                  }
+                  else if (window.innerWidth >= 2400 && breakpoint.current !== 4)
+                  {
+                        breakpoint.current = 4;
+                        setRender(!render);
+                  }
+            }
+
+            window.addEventListener('resize', handleResize);
+
             if (isRefNotValid(root) && isRefValid(renderTarget))
                   root.current = ReactDOM.createRoot(renderTarget.current);
-            if (isRefValid(choose_categories))
-                  choose_categories.current.style.display = "flex";
             let elementPerLine;
             if (window.innerWidth < 375)
                   elementPerLine = 1;
-            else if (window.innerWidth < 996)
+            else if (window.innerWidth < 992)
                   elementPerLine = 2;
-            else if (window.innerWidth <= 1920)
+            else if (window.innerWidth < 2400)
                   elementPerLine = 3;
             else
                   elementPerLine = 4;
@@ -231,8 +258,13 @@ const AddGame = () =>
                               temp.push(<Line key={ i } elementPerLine={ elementPerLine } i={ i } data={ [res.data[i * 4], res.data[i * 4 + 1], res.data[i * 4 + 2], res.data[i * 4 + 3]] } checkbox={ checkbox } setTag={ setTag } setRemovedTag={ setRemovedTag } />);
                   }
                   root.current.render(<>{ temp }</>);
-            }).catch(error => { console.log(error); })
-      }
+            }).catch(error => { console.log(error); });
+
+            return () =>
+            {
+                  window.removeEventListener('resize', handleResize);
+            }
+      }, [render]);
 
       return (
             <div className='w-100 h-100 d-flex flex-column align-items-center justify-content-center'>
@@ -329,7 +361,11 @@ const AddGame = () =>
                               <div className="d-flex align-items-center mb-3 mb-lg-0 text-center">
                                     <p className={ `mb-0` }>Tag</p>
                                     &nbsp;&nbsp;
-                                    <button className={ `${ styles.choose_categories } btn btn-primary btn-sm` } onClick={ chooseCategories }>Browse</button>
+                                    <button className={ `${ styles.choose_categories } btn btn-primary btn-sm` } onClick={ () =>
+                                    {
+                                          if (isRefValid(choose_categories))
+                                                choose_categories.current.style.display = "flex";
+                                    } }>Browse</button>
                               </div>
                         </div>
                         <div className={ `d-flex flex-column flex-lg-row align-items-center align-items-lg-start justify-content-lg-around w-100 mt-lg-3 mb-lg-3` }>

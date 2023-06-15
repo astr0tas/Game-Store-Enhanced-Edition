@@ -83,7 +83,7 @@ const Game = (props) =>
 
       return (
             <div className={ `col-${ 12 / props.numOfElem } h-100` }>
-                  <div className='card border border-dark mx-auto h-100' style={ { width: '90%' } }>
+                  <div className='card border border-dark mx-auto h-100' style={ { width: '90%', maxWidth: '300px' } }>
                         <img className='card-img-top' style={ { height: '60%' } } alt='' src={ props.img === null ? 'https://upload.wikimedia.org/wikipedia/commons/7/71/Nothing_whitespace_blank.png' : `http://${ domain }/model/data/games/${ props.img }` }></img>
                         <div className='card-body d-flex flex-column'>
                               <div className='d-flex align-items-center justify-content-center'>
@@ -136,7 +136,7 @@ const Group = (props) =>
 
 const CustomerpropsList = () =>
 {
-      document.title = "propss";
+      document.title = "Games";
 
       const div = useRef(null);
       const target = useRef(null);
@@ -155,32 +155,35 @@ const CustomerpropsList = () =>
             }, 1000);
       }
 
-      window.addEventListener('resize', () =>
-      {
-            if (window.innerWidth < 576 && lastBreakpoint.current !== 1)
-            {
-                  setRender(!render);
-                  lastBreakpoint.current = 1;
-            }
-            else if (window.innerWidth < 768 && window.innerWidth >= 576 && lastBreakpoint.current !== 2)
-            {
-                  setRender(!render);
-                  lastBreakpoint.current = 2;
-            }
-            else if (window.innerWidth < 1920 && window.innerWidth >= 768 && lastBreakpoint.current !== 3)
-            {
-                  setRender(!render);
-                  lastBreakpoint.current = 3;
-            }
-            else if (window.innerWidth >= 1920 && lastBreakpoint.current !== 4)
-            {
-                  setRender(!render);
-                  lastBreakpoint.current = 4;
-            }
-      })
 
       useEffect(() =>
       {
+            const handleResize = () =>
+            {
+                  if (window.innerWidth < 576 && lastBreakpoint.current !== 1)
+                  {
+                        lastBreakpoint.current = 1;
+                        setRender(!render);
+                  }
+                  else if (window.innerWidth < 992 && window.innerWidth >= 576 && lastBreakpoint.current !== 2)
+                  {
+                        lastBreakpoint.current = 2;
+                        setRender(!render);
+                  }
+                  else if (window.innerWidth < 1920 && window.innerWidth >= 992 && lastBreakpoint.current !== 3)
+                  {
+                        lastBreakpoint.current = 3;
+                        setRender(!render);
+                  }
+                  else if (window.innerWidth >= 1920 && lastBreakpoint.current !== 4)
+                  {
+                        lastBreakpoint.current = 4;
+                        setRender(!render);
+                  }
+            }
+
+            window.addEventListener('resize', handleResize);
+
             if (isRefNotValid(target) && isRefValid(div))
                   target.current = ReactDOM.createRoot(div.current);
 
@@ -193,7 +196,7 @@ const CustomerpropsList = () =>
                         let numOfElem;
                         if (window.innerWidth < 576)
                               numOfElem = 1;
-                        else if (window.innerWidth < 768)
+                        else if (window.innerWidth < 992)
                               numOfElem = 2;
                         else if (window.innerWidth < 1920)
                               numOfElem = 3;
@@ -214,6 +217,11 @@ const CustomerpropsList = () =>
                         target.current.render(<>{ temp }</>)
                   })
                   .catch(err => console.log(err));
+
+            return () =>
+            {
+                  window.removeEventListener('resize', handleResize);
+            };
       }, [render]);
 
       return (
@@ -227,7 +235,7 @@ const CustomerpropsList = () =>
                               <input placeholder='Find game' className={ `ps-4 ${ styles.searchInput }` } onChange={ searchprops } ref={ searchValue }></input>
                         </div>
                   </div>
-                  <div className='flex-grow-1 overflow-auto container-fluid mt-4 mb-2' ref={ div }>
+                  <div className='flex-grow-1 overflow-auto container-fluid mt-4 mb-4' ref={ div }>
                   </div>
             </div>
       )
