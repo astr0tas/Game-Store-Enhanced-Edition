@@ -63,28 +63,7 @@
       max-width: 500px;
       max-height: 200px;
       display: none;
-}
-
-.redButton {
-      background-color: red;
-      color: white;
-      border-radius: 10px;
-      border: 1px solid black;
-      text-align: center;
-      font-size: 1rem;
-}
-
-.blueButton {
-      background-color: #00B3EC;
-      color: white;
-      border-radius: 10px;
-      border: 1px solid black;
-      text-align: center;
-      font-size: 1rem;
-}
-
-.blueButton:active {
-      background-color: #66c5e2;
+      z-index: 10;
 }
 
 .red_power {
@@ -92,8 +71,7 @@
       font-size: 1.8rem;
 }
 
-.red_power:active,
-.redButton:active {
+.red_power:active {
       color: rgb(248, 113, 113);
 }
 
@@ -121,25 +99,8 @@
 }
 
 @media only screen and (min-width:992px) {
-
-      .back,
-      .buttons,
-      .cancel,
-      .confirm,
-      .history,
-      .edit,
-      .delete_cancel,
-      .delete_confirm {
-            font-size: 1.2rem;
-      }
-
       .text_align {
             text-align: start;
-      }
-
-      .infoZone {
-            height: 60%;
-            min-height: 500px;
       }
 
       .sections {

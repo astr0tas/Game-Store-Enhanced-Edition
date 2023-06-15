@@ -138,7 +138,7 @@ export default function CusPersonalInfo()
                     <button className={ `mx-3 ${ styles.back }` } onClick={ goBack }>Back</button>
                 </div>
                 <div className={ `d-flex flex-column flex-md-row align-items-center justify-content-around w-100 ${ styles.info_board }` }>
-                    <img className={ `${ styles.img }` } src={ require('../../img/defaultavt.jpg') } alt='avatar' />
+                    <img className={ `${ styles.img }` } src='' alt='avatar' />
                     <div className={ `d-flex flex-column justify-content-center ${ styles.info }` }>
                         <p>Name: &nbsp;
                             <span className="diplayPart">{ customer.name }</span>

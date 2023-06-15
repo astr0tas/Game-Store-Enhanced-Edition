@@ -164,19 +164,19 @@ export default function GameList()
             {
                   if (cancel.current.style.display === "" || cancel.current.style.display === "none")
                   {
-                        cancel.current.style.display = "block";
+                        cancel.current.style.setProperty('display', "block", 'important');
                         if (localMode === 0)
                         {
-                              cancel.current.classList.remove(`${ styles.cancel }`);
-                              cancel.current.classList.add(`${ styles.redButton }`);
+                              cancel.current.classList.remove(`btn-primary`);
+                              cancel.current.classList.add(`btn-danger`);
                         }
                         if (isRefValid(confirm))
                         {
-                              confirm.current.style.display = "block";
+                              confirm.current.style.setProperty('display', "block", 'important');
                               if (localMode === 0)
                               {
-                                    confirm.current.classList.remove(`${ styles.delete }`);
-                                    confirm.current.classList.add(`${ styles.blueButton }`);
+                                    confirm.current.classList.remove(`btn-danger`);
+                                    confirm.current.classList.add(`btn-primary`);
                               }
                         }
                         if (isRefValid(deleteButton))
@@ -201,16 +201,20 @@ export default function GameList()
                   }
                   else
                   {
-                        cancel.current.style.display = "none";
-                        if (cancel.current.classList.contains(`${ styles.redButton }`))
-                              cancel.current.classList.remove(`${ styles.redButton }`);
-                        cancel.current.classList.add(`${ styles.cancel }`);
+                        cancel.current.style.setProperty('display', "none", 'important');
+                        if (cancel.current.classList.contains(`btn-danger`))
+                        {
+                              cancel.current.classList.remove(`btn-danger`);
+                              cancel.current.classList.add(`btn-primary`);
+                        }
                         if (isRefValid(confirm))
                         {
-                              confirm.current.style.display = "none";
-                              if (confirm.current.classList.contains(`${ styles.blueButton }`))
-                                    confirm.current.classList.remove(`${ styles.blueButton }`);
-                              confirm.current.classList.add(`${ styles.delete }`);
+                              confirm.current.style.setProperty('display', "none", 'important');
+                              if (confirm.current.classList.contains(`btn-primary`))
+                              {
+                                    confirm.current.classList.remove(`btn-primary`);
+                                    confirm.current.classList.add(`btn-danger`);
+                              }
                         }
                         if (isRefValid(deleteButton))
                               deleteButton.current.style.display = "block";
@@ -330,7 +334,7 @@ export default function GameList()
             <div className='w-100 h-100 d-flex flex-column align-items-center'>
                   <div className={ `${ styles.pop_up } flex-column align-items-center justify-content-around` } ref={ noGameSelected }>
                         <h2 className={ `${ styles.pop_up_message }` }>No game selected!</h2>
-                        <button className={ `${ styles.blueButton }` } onClick={ () =>
+                        <button className={ `btn btn-primary` } onClick={ () =>
                         {
                               if (isRefValid(noGameSelected)) noGameSelected.current.style.display = "none";
                         } }>BACK</button>
@@ -338,11 +342,11 @@ export default function GameList()
                   <div className={ `${ styles.pop_up } flex-column align-items-center justify-content-around` } ref={ delete_confirmation }>
                         <h2 className={ `${ styles.pop_up_message }` }>Do you want to delete the selected game(s)?</h2>
                         <div className='d-flex align-items-center'>
-                              <button className={ `${ styles.blueButton } me-4` } onClick={ () =>
+                              <button className={ `btn btn-primary me-4` } onClick={ () =>
                               {
                                     if (isRefValid(delete_confirmation)) delete_confirmation.current.style.display = "none";
                               } }>NO</button>
-                              <button className={ `${ styles.redButton } ms-4` } onClick={ () =>
+                              <button className={ `btn btn-danger ms-4` } onClick={ () =>
                               {
                                     deleteGame();
                                     if (isRefValid(delete_confirmation)) delete_confirmation.current.style.display = "none";
@@ -352,11 +356,11 @@ export default function GameList()
                   <div className={ `${ styles.pop_up } flex-column align-items-center justify-content-around` } ref={ deactivate_confirmation }>
                         <h2 className={ `${ styles.pop_up_message }` }>Do you want to deactivate the selected game(s)?</h2>
                         <div className='d-flex align-items-center'>
-                              <button className={ `${ styles.blueButton } me-4` } onClick={ () =>
+                              <button className={ `btn btn-primary me-4` } onClick={ () =>
                               {
                                     if (isRefValid(deactivate_confirmation)) deactivate_confirmation.current.style.display = "none";
                               } }>NO</button>
-                              <button className={ `${ styles.redButton } ms-4` } onClick={ () =>
+                              <button className={ `btn btn-danger ms-4` } onClick={ () =>
                               {
                                     deactivateGame();
                                     if (isRefValid(deactivate_confirmation)) deactivate_confirmation.current.style.display = "none";
@@ -366,11 +370,11 @@ export default function GameList()
                   <div className={ `${ styles.pop_up } flex-column align-items-center justify-content-around` } ref={ activate_confirmation }>
                         <h2 className={ `${ styles.pop_up_message }` }>Do you want to activate the selected game(s)?</h2>
                         <div className='d-flex align-items-center'>
-                              <button className={ `${ styles.redButton } me-4` } onClick={ () =>
+                              <button className={ `btn btn-danger me-4` } onClick={ () =>
                               {
                                     if (isRefValid(activate_confirmation)) activate_confirmation.current.style.display = "none";
                               } }>NO</button>
-                              <button className={ `${ styles.blueButton } ms-4` } onClick={ () =>
+                              <button className={ `btn btn-primary ms-4` } onClick={ () =>
                               {
                                     activateGame();
                                     if (isRefValid(activate_confirmation)) activate_confirmation.current.style.display = "none";
@@ -410,16 +414,16 @@ export default function GameList()
                   </div >
                   <div className='w-100 d-flex flex-column flex-md-row justify-content-center align-items-center mt-3 mb-3'>
                         <div className='d-flex align-items-center mb-md-0 mb-2'>
-                              <button className={ `${ styles.activate } mx-md-3 mx-1` } onClick={ () => { setMode(0); toggleCheckboxes(0); } } ref={ activateButton }>Activate game</button>
-                              <button className={ `${ styles.deactivate } mx-md-3 mx-1` } onClick={ () => { setMode(1); toggleCheckboxes(1); } } ref={ deactivateButton }>Deactivate game</button>
+                              <button className={ `btn btn-success mx-md-3 mx-1` } onClick={ () => { setMode(0); toggleCheckboxes(0); } } ref={ activateButton }>Activate game</button>
+                              <button className={ `btn btn-secondary mx-md-3 mx-1` } onClick={ () => { setMode(1); toggleCheckboxes(1); } } ref={ deactivateButton }>Deactivate game</button>
                         </div>
                         <div className='d-flex align-items-center'>
-                              <button className={ `${ styles.delete } mx-md-3 mx-1` } onClick={ () => { setMode(2); toggleCheckboxes(2); } } ref={ deleteButton }>Delete game</button>
-                              <button className={ `${ styles.blueButton } mx-md-3 mx-1` } onClick={ () => { Navigate('./add'); } } ref={ addButton }>Add game</button>
+                              <button className={ `btn btn-danger mx-md-3 mx-1` } onClick={ () => { setMode(2); toggleCheckboxes(2); } } ref={ deleteButton }>Delete game</button>
+                              <button className={ `btn btn-primary mx-md-3 mx-1` } onClick={ () => { Navigate('./add'); } } ref={ addButton }>Add game</button>
                         </div>
                         <div className='d-flex align-items-center'>
-                              <button className={ `${ styles.cancel } mx-3` } onClick={ () => { setMode(null); toggleCheckboxes(null); } } ref={ cancel }>Cancel</button>
-                              <button className={ `${ styles.delete } mx-3` } onClick={ preProcess } ref={ confirm }>Confirm</button>
+                              <button className={ `btn btn-primary mx-3 ${ styles.confirmation }` } onClick={ () => { setMode(null); toggleCheckboxes(null); } } ref={ cancel }>Cancel</button>
+                              <button className={ `btn btn-danger mx-3 ${ styles.confirmation }` } onClick={ preProcess } ref={ confirm }>Confirm</button>
                         </div>
                   </div>
             </div >

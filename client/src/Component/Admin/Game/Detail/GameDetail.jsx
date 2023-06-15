@@ -159,8 +159,8 @@ export default function AdminGameDetail()
                               <FontAwesomeIcon icon={ faPowerOff } className={ `ms-3 ${ styles.trash } ${ sellStatus.str === 'Active' ? styles.red_power : styles.green_power }` } onClick={ handleActivation } />
                         </div>
                         <div className='ms-lg-auto me-lg-3 me-auto ms-'>
-                              <button className={ `me-2 ${ styles.edit }` } onClick={ () => { Navigate("./edit"); } }>Edit</button>
-                              <button className={ `ms-2 ${ styles.back }` } onClick={ () => { Navigate(-1); } }>Back</button>
+                              <button className={ `me-2 btn btn-sm btn-primary` } onClick={ () => { Navigate("./edit"); } }>Edit</button>
+                              <button className={ `ms-2 btn btn-sm btn-secondary` } onClick={ () => { Navigate(-1); } }>Back</button>
                         </div>
                   </div>
                   <div className={ `w-100 overflow-auto hideBrowserScrollbar d-flex flex-column flex-grow-1 mb-3` }>
@@ -232,7 +232,7 @@ export default function AdminGameDetail()
                                     <h4 className='my-lg-3'>Sold:&nbsp;&nbsp;{ solds }</h4>
                               </div>
                         </div>
-                        <div className={ `mt-5 container-fluid flex-grow-1` }>
+                        <div className={ `mt-3 container-fluid flex-grow-1` }>
                               <div className="row justify-content-center align-items-center g-2">
                                     <h5 className={ `${ styles.text_align }` } style={ { fontWeight: 'bold' } }>Description</h5>
                                     <p style={ { textAlign: 'justify', textJustify: 'inter-word' } }>{ (game.description === null || game.description === "") && 'N/A' }{ game.description !== null && game.description !== "" && game.description }</p>
@@ -253,11 +253,11 @@ export default function AdminGameDetail()
                   <div className={ `position-absolute flex-column align-items-center justify-content-around ${ styles.pop_up }` } ref={ delete_pop_up }>
                         <h3 className='mx-2'>Do you really want to delete this game?</h3>
                         <div className='d-flex flex-row align-items-center justify-content-center'>
-                              <button className={ `${ styles.blueButton } mx-3` } onClick={ () =>
+                              <button className={ `btn btn-primary mx-3` } onClick={ () =>
                               {
                                     if (isRefValid(delete_pop_up)) delete_pop_up.current.style.display = "none";
                               } }>Cancel</button>
-                              <button className={ `${ styles.redButton } mx-3` } onClick={ () =>
+                              <button className={ `btn btn-danger mx-3` } onClick={ () =>
                               {
                                     if (isRefValid(delete_pop_up)) delete_pop_up.current.style.display = "none";
                                     deleteGame();
@@ -267,11 +267,11 @@ export default function AdminGameDetail()
                   <div className={ `position-absolute flex-column align-items-center justify-content-around ${ styles.pop_up }` } ref={ deactivate_pop_up }>
                         <h3 className='mx-2'>Do you really want to deactivate this game?</h3>
                         <div className='d-flex flex-row align-items-center justify-content-center'>
-                              <button className={ `${ styles.blueButton } mx-3` } onClick={ () =>
+                              <button className={ `btn btn-primary mx-3` } onClick={ () =>
                               {
                                     if (isRefValid(deactivate_pop_up)) deactivate_pop_up.current.style.display = "none";
                               } }>Cancel</button>
-                              <button className={ `${ styles.redButton } mx-3` } onClick={ () =>
+                              <button className={ `btn btn-danger mx-3` } onClick={ () =>
                               {
                                     if (isRefValid(deactivate_pop_up)) deactivate_pop_up.current.style.display = "none";
                                     deactivateGame();
@@ -281,11 +281,11 @@ export default function AdminGameDetail()
                   <div className={ `position-absolute flex-column align-items-center justify-content-around ${ styles.pop_up }` } ref={ activate_pop_up }>
                         <h3 className='mx-2'>Do you really want to activate this game?</h3>
                         <div className='d-flex flex-row align-items-center justify-content-center'>
-                              <button className={ `${ styles.redButton } mx-3` } onClick={ () =>
+                              <button className={ `btn btn-danger mx-3` } onClick={ () =>
                               {
                                     if (isRefValid(activate_pop_up)) activate_pop_up.current.style.display = "none";
                               } }>Cancel</button>
-                              <button className={ `${ styles.blueButton } mx-3` } onClick={ () =>
+                              <button className={ `btn btn-primary mx-3` } onClick={ () =>
                               {
                                     if (isRefValid(activate_pop_up)) activate_pop_up.current.style.display = "none";
                                     activateGame();

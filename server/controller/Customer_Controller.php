@@ -60,10 +60,81 @@ class CustomerController
       /* Home */
 
       /* Game List */
+      public function getGames()
+      {
+            $name=$_POST['name']==='null'?null:$_POST['name'];
+            if($name)
+                  $result = $this->game_model->getGames($name);
+            else
+                  $result = $this->game_model->getGames();
+            echo json_encode($result);
+      }
 
       /* Wish List */
+      public function isAddedToWishlist()
+      {
+            session_id($_COOKIE['PHPSESSID']);
+            session_start();
+            $id = $_SESSION['id'];
+            $game_id = $_POST['id'];
+            $result = $this->game_model->isAddedToWishlist($id, $game_id);
+            echo json_encode($result ? true : false);
+      }
+
+      public function addToWishlist()
+      {
+            session_id($_COOKIE['PHPSESSID']);
+            session_start();
+            $id = $_SESSION['id'];
+            $game_id = $_POST['id'];
+            $result = $this->game_model->addToWishlist($id, $game_id);
+            echo json_encode(array("message" => $result ? "success" : "failed"));
+      }
+
+      public function removeFromWishlist()
+      {
+            session_id($_COOKIE['PHPSESSID']);
+            session_start();
+            $id = $_SESSION['id'];
+            $game_id = $_POST['id'];
+            $result = $this->game_model->removeFromWishlist($id, $game_id);
+            echo json_encode(array("message" => $result ? "success" : "failed"));
+      }
 
       /* Shopping cart */
+      public function isAddedToCart()
+      {
+            session_id($_COOKIE['PHPSESSID']);
+            session_start();
+            $id = $_SESSION['id'];
+            $game_id = $_POST['id'];
+            $result = $this->game_model->isAddedToCart($id, $game_id);
+            echo json_encode($result ? true : false);
+      }
+
+      public function addToCart()
+      {
+            session_id($_COOKIE['PHPSESSID']);
+            session_start();
+            $id = $_SESSION['id'];
+            $game_id = $_POST['id'];
+            $result = $this->game_model->addToCart($id, $game_id);
+            echo json_encode(array("message" => $result ? "success" : "failed"));
+      }
+
+      public function removeFromCart()
+      {
+            session_id($_COOKIE['PHPSESSID']);
+            session_start();
+            $id = $_SESSION['id'];
+            $game_id = $_POST['id'];
+            $result = $this->game_model->removeFromCart($id, $game_id);
+            echo json_encode(array("message" => $result ? "success" : "failed"));
+      }
+
+
+
+
 
       public function getBestSeller()
       {
@@ -91,20 +162,6 @@ class CustomerController
             echo json_encode(array("message" => $result ? "success" : "failed"));
       }
 
-      public function addWishlist()
-      {
-            $game_id = $_POST['game_id'];
-            $result = $this->game_model->addWishlist($game_id);
-            echo json_encode(array("message" => $result ? "success" : "failed"));
-      }
-
-      public function removeWishlis()
-      {
-            $game_id = $_POST['game_id'];
-            $result = $this->game_model->removeWishlist($game_id);
-            echo json_encode(array("message" => $result ? "success" : "failed"));
-      }
-
       public function gameStatus()
       {
             $id = $_POST['id'];
@@ -112,56 +169,11 @@ class CustomerController
             echo json_encode($arr ? true : false);
       }
 
-      public function addCart()
-      {
-            $game_id = $_POST['game_id'];
-            $result = $this->game_model->addCart($game_id);
-            echo json_encode(array("message" => $result ? "success" : "failed"));
-      }
-
-      public function removeCart()
-      {
-            $game_id = $_POST['game_id'];
-            $result = $this->game_model->removeCart($game_id);
-            echo json_encode(array("message" => $result ? "success" : "failed"));
-      }
-
-      public function getAllGames()
-      {
-            $limit = $_POST['limit'];
-            $offset = $_POST['offset'];
-            $result = $this->game_model->getAllGames($limit, $offset);
-            echo json_encode($result);
-      }
-
       public function getWishlist()
       {
             $limit = $_POST['limit'];
             $offset = $_POST['offset'];
             $result = $this->game_model->getWishlist($limit, $offset);
-            echo json_encode($result);
-      }
-
-      public function isAddedToWishlist()
-      {
-            $game_id = $_POST['id'];
-            $result = $this->game_model->isAddedToWishlist($game_id);
-            echo json_encode($result ? true : false);
-      }
-
-      public function isAddedToCart()
-      {
-            $game_id = $_POST['id'];
-            $result = $this->game_model->isAddedToCart($game_id);
-            echo json_encode($result ? true : false);
-      }
-
-      public function findGame()
-      {
-            $name = $_POST['name'];
-            $limit = $_POST['limit'];
-            $offset = $_POST['offset'];
-            $result = $this->game_model->findGame($name, $limit, $offset);
             echo json_encode($result);
       }
 

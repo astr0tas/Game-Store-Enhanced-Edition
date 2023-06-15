@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from 'react-router-dom';
+import {  useParams } from 'react-router-dom';
 import styles from './PersonalInfomation.module.css';
 import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
@@ -15,7 +15,6 @@ export default function AdminPersonalInfo()
       const [image, setImage] = useState(null);
 
       const [renderTrigger, setRenderTrigger] = useState(true);
-      const Navigate = useNavigate();
 
       const profileImg = useRef(null);
       const admin_email = useRef(null);
@@ -211,14 +210,11 @@ export default function AdminPersonalInfo()
 
       return (
             <div className="d-flex flex-column align-items-center w-100 h-100">
-                  <div className="d-flex align-items-center w-100" style={ { height: "50px" } }>
-                        <button className={ `ms-auto me-3 ${ styles.back }` } onClick={ () => { Navigate(-1); } }>Back</button>
-                  </div>
                   <div className={ `flex-grow-1 d-flex w-100 mt-3 overflow-auto hideBrowserScrollbar mb-3` } ref={ bigDiv }>
                         <div className={ `d-flex flex-column flex-md-row align-items-center justify-content-md-around justify-content-xxl-center align-items-md-start w-100 my-auto` } ref={ div1Height }>
                               <div className={ `d-flex flex-column ${ styles.containDiv }` }>
                                     <img className={ `${ styles.img } w-100 h-100` } ref={ profileImg } alt='avatar' />
-                                    <label className={ `${ styles.browse } mt-3 mx-auto` } ref={ image_input }>
+                                    <label className={ `btn btn-sm btn-light border border-dark mt-3 mx-auto ${styles.browse}` } ref={ image_input }>
                                           <input type='file' className='d-none' onChange={ e =>
                                           {
                                                 if (e.target.files.length === 0)
@@ -270,38 +266,38 @@ export default function AdminPersonalInfo()
                                     <div className={ `${ styles.update } text-center w-100` } ref={ admin_repassword_input } style={ { marginBottom: '16px' } }>Re-enter password: &nbsp;
                                           <input type="password" value={ repass } onChange={ e => setRepass(e.target.value) }></input>
                                     </div>
-                                    <button className={ `${ styles.edit }` } onClick={ changeInfo } ref={ edit }>Edit</button>
+                                    <button className={ ` btn btn-sm btn-primary` } onClick={ changeInfo } ref={ edit }>Edit</button>
                                     <div className={ `${ styles.buttons } w-100 align-items-center justify-content-center` } ref={ update }>
-                                          <button className={ `${ styles.cancel } d-block` } onClick={ cancelUpdate }>Cancel</button>
-                                          <button className={ `${ styles.confirm } mx-3 d-block` } onClick={ () => { if (isRefValid(update_pop_up)) update_pop_up.current.style.display = "flex"; } }>Confirm</button>
+                                          <button className={ `btn btn-sm btn-danger d-block` } onClick={ cancelUpdate }>Cancel</button>
+                                          <button className={ `btn btn-sm btn-primary mx-3 d-block` } onClick={ () => { if (isRefValid(update_pop_up)) update_pop_up.current.style.display = "flex"; } }>Confirm</button>
                                     </div>
                               </div>
                         </div>
                   </div>
                   <div className={ `position-absolute flex-column align-items-center justify-content-around ${ styles.pop_up }` } ref={ pop_up_1 }>
                         <h3>Your email can not be empty!</h3>
-                        <button className={ `${ styles.blueButton }` } onClick={ () =>
+                        <button className={ `btn btn-primary` } onClick={ () =>
                         {
                               if (isRefValid(pop_up_1)) pop_up_1.current.style.display = "none";
                         } }>OKAY</button>
                   </div>
                   <div className={ `position-absolute flex-column align-items-center justify-content-around ${ styles.pop_up }` } ref={ pop_up }>
                         <h3>Your phone number can not be empty!</h3>
-                        <button className={ `${ styles.blueButton }` } onClick={ () =>
+                        <button className={ `btn btn-primary` } onClick={ () =>
                         {
                               if (isRefValid(pop_up)) pop_up.current.style.display = "none";
                         } }>OKAY</button>
                   </div>
                   <div className={ `position-absolute flex-column align-items-center justify-content-around ${ styles.pop_up }` } ref={ pop_up_3 }>
                         <h3>Your passwords are not matched!</h3>
-                        <button className={ `${ styles.blueButton }` } onClick={ () =>
+                        <button className={ `btn btn-primary` } onClick={ () =>
                         {
                               if (isRefValid(pop_up_3)) pop_up_3.current.style.display = "none";
                         } }>OKAY</button>
                   </div>
                   <div className={ `position-absolute flex-column align-items-center justify-content-around ${ styles.pop_up }` } ref={ pop_up_2 }>
                         <h3>Your phone number can not contain alphabetical characters!</h3>
-                        <button className={ `${ styles.blueButton }` } onClick={ () =>
+                        <button className={ `btn btn-primary` } onClick={ () =>
                         {
                               if (isRefValid(pop_up_2)) pop_up_2.current.style.display = "none";
                         } }>OKAY</button>
@@ -309,11 +305,11 @@ export default function AdminPersonalInfo()
                   <div className={ `position-absolute flex-column align-items-center justify-content-around ${ styles.pop_up }` } ref={ update_pop_up }>
                         <h3 className='mx-2'>Do you really want to update this your info?</h3>
                         <div className='d-flex flex-row align-items-center justify-content-center'>
-                              <button className={ `${ styles.redButton } mx-3` } onClick={ () =>
+                              <button className={ `btn btn-danger mx-3` } onClick={ () =>
                               {
                                     if (isRefValid(update_pop_up)) update_pop_up.current.style.display = "none";
                               } }>Cancel</button>
-                              <button className={ `${ styles.blueButton } mx-3` } onClick={ () =>
+                              <button className={ `btn btn-primary mx-3` } onClick={ () =>
                               {
                                     if (isRefValid(update_pop_up)) update_pop_up.current.style.display = "none";
                                     confirmChange();

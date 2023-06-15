@@ -312,8 +312,8 @@ const EditGame = () =>
                         <h1>Choose categories</h1>
                         <div className={ `w-100 flex-grow-1 mb-2 overflow-auto` } ref={ renderTarget }></div>
                         <div className='mt-auto mb-3'>
-                              <button className={ `mx-3 ${ styles.cancel }` } onClick={ stopChoosing }>Cancel</button>
-                              <button className={ `mx-3 ${ styles.confirm }` } onClick={ () => { if (isRefValid(choose_categories)) choose_categories.current.style.display = "none"; } }>Confirm</button>
+                              <button className={ `mx-3 btn btn-danger btn-sm` } onClick={ stopChoosing }>Cancel</button>
+                              <button className={ `mx-3 btn btn-primary btn-sm` } onClick={ () => { if (isRefValid(choose_categories)) choose_categories.current.style.display = "none"; } }>Confirm</button>
                         </div>
                   </div>
                   <div className={ `d-flex flex-column align-items-center justify-content-center w-100 ${ styles.titleBoard } mb-2` }>
@@ -346,7 +346,7 @@ const EditGame = () =>
                                     <div className={ `d-flex flex-column justify-content-center align-items-center ${ styles.image_block }` }>
                                           <img ref={ img1 } alt="" className={ `${ styles.images }` } src={ pic1 }></img>
                                           <div className='d-flex align-items-center'>
-                                                <label className={ `${ styles.browse }  mt-3 mb-3` }>
+                                                <label className={ `btn btn-light btn-sm border border-dark  mt-3 mb-3` }>
                                                       <input type='file' className={ `d-none` } onChange={ (e) => { loadPicture(e, 1) } } accept=".jpg,.jpeg,.png"></input>
                                                       Choose file
                                                 </label>
@@ -356,7 +356,7 @@ const EditGame = () =>
                                     <div className={ `d-flex flex-column justify-content-center align-items-center ${ styles.image_block }` }>
                                           <img ref={ img2 } alt="" className={ `${ styles.images }` } src={ pic2 }></img>
                                           <div className='d-flex align-items-center'>
-                                                <label className={ `${ styles.browse }  mt-3 mb-3` }>
+                                                <label className={ `btn btn-light btn-sm border border-dark  mt-3 mb-3` }>
                                                       <input type='file' className={ `d-none` } onChange={ (e) => { loadPicture(e, 2) } } accept=".jpg,.jpeg,.png"></input>
                                                       Choose file
                                                 </label>
@@ -368,7 +368,7 @@ const EditGame = () =>
                                     <div className={ `d-flex flex-column justify-content-center align-items-center ${ styles.image_block }` }>
                                           <img ref={ img3 } alt="" className={ `${ styles.images }` } src={ pic3 }></img>
                                           <div className='d-flex align-items-center'>
-                                                <label className={ `${ styles.browse }  mt-3 mb-3` }>
+                                                <label className={ `btn btn-light btn-sm border border-dark  mt-3 mb-3` }>
                                                       <input type='file' className={ `d-none` } onChange={ (e) => { loadPicture(e, 3) } } accept=".jpg,.jpeg,.png"></input>
                                                       Choose file
                                                 </label>
@@ -378,7 +378,7 @@ const EditGame = () =>
                                     <div className={ `d-flex flex-column justify-content-center align-items-center ${ styles.image_block }` }>
                                           <img ref={ img4 } alt="" className={ `${ styles.images }` } src={ pic4 }></img>
                                           <div className='d-flex align-items-center'>
-                                                <label className={ `${ styles.browse }  mt-3 mb-3` }>
+                                                <label className={ `btn btn-light btn-sm border border-dark  mt-3 mb-3` }>
                                                       <input type='file' className={ `d-none` } onChange={ (e) => { loadPicture(e, 4) } } accept=".jpg,.jpeg,.png"></input>
                                                       Choose file
                                                 </label>
@@ -413,7 +413,7 @@ const EditGame = () =>
                               <div className="d-flex align-items-center mb-3 mb-lg-0 text-center">
                                     <p className={ `mb-0` }>Tag</p>
                                     &nbsp;&nbsp;
-                                    <button className={ `${ styles.choose_categories }` } onClick={ chooseCategories }>Browse</button>
+                                    <button className={ `btn btn-sm btn-primary` } onClick={ chooseCategories }>Browse</button>
                               </div>
                         </div>
                         <div className={ `d-flex flex-column flex-lg-row align-items-center align-items-lg-start justify-content-lg-around w-100 mt-lg-3 mb-lg-3` }>
@@ -421,7 +421,7 @@ const EditGame = () =>
                                     {/* The format of the file content should be <code1>, <code2>, <code3>, ... */ }
                                     <p className={ `mb-0` }>Codes</p>
                                     &nbsp;&nbsp;
-                                    <label className={ `${ styles.browse }` }>
+                                    <label className={ `btn btn-light btn-sm border border-dark` }>
                                           <input type='file' className={ `d-none` } accept=".txt" onChange={ (e) => { setCodes(e.target.files[0]); } }></input>
                                           Choose file
                                     </label>
@@ -430,7 +430,7 @@ const EditGame = () =>
                               <div className="d-flex align-items-center mb-3 mb-lg-0 text-center">
                                     <p className={ `mb-0` }>Description</p>
                                     &nbsp;&nbsp;
-                                    <label className={ `${ styles.browse }` }>
+                                    <label className={ `btn btn-light btn-sm border border-dark` }>
                                           <input type='file' className={ `d-none` } accept=".txt" onChange={ (e) => { setDescription(e.target.files[0]); } }></input>
                                           Choose file
                                     </label>
@@ -441,7 +441,7 @@ const EditGame = () =>
                               <div className="d-flex align-items-center mb-3 mb-lg-0 text-center">
                                     <p className={ `mb-0` }>Minimum system requirement</p>
                                     &nbsp;&nbsp;
-                                    <label className={ `${ styles.browse }` }>
+                                    <label className={ `btn btn-light btn-sm border border-dark` }>
                                           <input type='file' className={ `d-none` } accept=".txt" onChange={ (e) => { setMinSpec(e.target.files[0]); } }></input>
                                           Choose file
                                     </label>
@@ -450,7 +450,7 @@ const EditGame = () =>
                               <div className="d-flex align-items-center mb-3 mb-lg-0 text-center">
                                     <p className={ `mb-0` }>Recommended system requirement</p>
                                     &nbsp;&nbsp;
-                                    <label className={ `${ styles.browse }` }>
+                                    <label className={ `btn btn-light btn-sm border border-dark` }>
                                           <input type='file' className={ `d-none` } accept=".txt" onChange={ (e) => { setRecSpec(e.target.files[0]); } }></input>
                                           Choose file
                                     </label>
@@ -458,8 +458,8 @@ const EditGame = () =>
                               </div>
                         </div>
                         <div className={ `d-flex align-items-center justify-content-center mt-auto mb-1` }>
-                              <button type='button' className={ `${ styles.cancel } me-3` } onClick={ () => { Navigate(-1); } }>Cancel</button>
-                              <button type="button" className={ `${ styles.confirm } ms-3` } onClick={ updateGame }>Confirm</button>
+                              <button type='button' className={ ` me-3 btn btn-danger` } onClick={ () => { Navigate(-1); } }>Cancel</button>
+                              <button type="button" className={ `btn btn-primary ms-3` } onClick={ updateGame }>Confirm</button>
                         </div>
                   </div>
             </div >

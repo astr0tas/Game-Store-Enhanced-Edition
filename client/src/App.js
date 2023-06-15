@@ -16,6 +16,7 @@ import CustomerMenu from './Component/Customer/Menu/menu';
 import CustomerHome from './Component/Customer/Home/Home';
 
 // Customer Game List
+import CustomerGameList from './Component/Customer/Games/List/GameList';
 
 // Customer Wish List
 
@@ -23,8 +24,6 @@ import CustomerHome from './Component/Customer/Home/Home';
 
 import CusPersonalInfo from './Component/Customer/personalInfo';
 import CustomerWishlist from './Component/Customer/wishlist';
-import CustomerGame from './Component/Customer/all_game';
-import CGameDetail from './Component/Customer/cgamedetail'
 import { Cart } from './Component/Customer/cart';
 import { Product } from './Component/Customer/product';
 
@@ -72,8 +71,10 @@ function App()
 
               {/* Home */ }
               <Route path="home" element={ <CustomerHome /> } />
-              
+
               {/* Game List */ }
+              <Route path="games" element={ <CustomerGameList /> } />
+              <Route path="games/:id" />
 
               {/* Wish List */ }
 
@@ -81,8 +82,6 @@ function App()
 
               <Route path="myself" element={ <CusPersonalInfo /> } />
               <Route path="home" element={ <CustomerHome /> } />
-              <Route path="allgames" element={ <CustomerGame /> } />
-              <Route path="allgames/:id" element={ <CGameDetail /> } />
               <Route path="wishlist" element={ <CustomerWishlist /> } />
               <Route path="cart" element={ <Cart /> } />
               <Route path="product" element={ <Product /> } />

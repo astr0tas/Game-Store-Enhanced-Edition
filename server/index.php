@@ -20,10 +20,18 @@
       /* Home */
 
       /* Game List */
+      $router->post("/getGames", "CustomerController@getGames");
 
       /* Wish List */
+      $router->post("/isAddedToWishlist", "CustomerController@isAddedToWishlist");
+      $router->post("/addToWishlist", "CustomerController@addToWishlist");
+      $router->post("/removeFromWishlist", "CustomerController@removeFromWishlist");
 
       /* Shopping cart */
+      $router->post("/isAddedToCart", "CustomerController@isAddedToCart");
+      $router->post("/addToCart", "CustomerController@addToCart");
+      $router->post("/removeFromCart", "CustomerController@removeFromCart");
+
 
       $router->get("/getBestSeller", "CustomerController@getBestSeller");
       $router->get("/logout", "CustomerController@logout");
@@ -32,16 +40,8 @@
       $router->get("/getCart", "CustomerController@getCart");
 
       $router->post("/myself/edit", "CustomerController@updateMySelf");
-      $router->post("/addWishlist", "CustomerController@addWishlist");
-      $router->post("/removeWishlis", "CustomerController@removeWishlis");
       $router->post("/gameStatus", "CustomerController@gameStatus");
-      $router->post("/addCart", "CustomerController@addCart");
-      $router->post("/removeCart", "CustomerController@removeCart");
-      $router->post("/getAllGames", "CustomerController@getAllGames");
       $router->post("/getWishlist", "CustomerController@getWishlist");
-      $router->post("/isAddedToCart", "CustomerController@isAddedToCart");
-      $router->post("/isAddedToWishlist", "CustomerController@isAddedToWishlist");
-      $router->post("/findGame", "CustomerController@findGame");
       $router->post("/findWishlist", "CustomerController@findWishlist");
       $router->post("/displayCart", "CustomerController@displayCart");
       $router->post("/getCategory", "CustomerController@getCategory");

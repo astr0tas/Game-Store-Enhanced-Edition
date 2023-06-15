@@ -105,9 +105,9 @@ export default function CustomerList()
         {
             if (cancel.current.style.display === "" || cancel.current.style.display === "none")
             {
-                cancel.current.style.display = "block";
+                cancel.current.style.setProperty('display', 'block', 'important');
                 if (isRefValid(confirm))
-                    confirm.current.style.display = "block";
+                    confirm.current.style.setProperty('display', 'block', 'important');
                 if (isRefValid(deleteButton))
                     deleteButton.current.style.display = "none";
                 if (isRefValid(selectAll))
@@ -124,11 +124,11 @@ export default function CustomerList()
             }
             else
             {
-                cancel.current.style.display = "none";
+                cancel.current.style.setProperty('display', 'none');
+                if (isRefValid(confirm))
+                    confirm.current.style.setProperty('display', 'none');
                 if (isRefValid(deleteButton))
                     deleteButton.current.style.display = "block";
-                if (isRefValid(confirm))
-                    confirm.current.style.display = "none";
                 if (isRefValid(selectAll))
                     selectAll.current.style.display = "none";
                 if (isRefValid(numberTag))
@@ -199,7 +199,7 @@ export default function CustomerList()
         <div className='w-100 h-100 d-flex flex-column align-items-center'>
             <div className={ `${ styles.pop_up } flex-column align-items-center justify-content-around` } ref={ noCustomerSelected }>
                 <h2 className={ `${ styles.pop_up_message }` }>No customer selected!</h2>
-                <button className={ `${ styles.blueButton }` } onClick={ () =>
+                <button className={ `btn btn-primary` } onClick={ () =>
                 {
                     if (isRefValid(noCustomerSelected)) noCustomerSelected.current.style.display = "none";
                 } }>BACK</button>
@@ -207,11 +207,11 @@ export default function CustomerList()
             <div className={ `${ styles.pop_up } flex-column align-items-center justify-content-around` } ref={ confirmation }>
                 <h2 className={ `${ styles.pop_up_message }` }>Do you want to delete the selected customer(s)?</h2>
                 <div className='d-flex align-items-center'>
-                    <button className={ `${ styles.blueButton } me-4` } onClick={ () =>
+                    <button className={ `btn btn-primary me-4` } onClick={ () =>
                     {
                         if (isRefValid(confirmation)) confirmation.current.style.display = "none";
                     } }>NO</button>
-                    <button className={ `${ styles.redButton } ms-4` } onClick={ () =>
+                    <button className={ `btn btn-danger ms-4` } onClick={ () =>
                     {
                         deleteCustomer();
                         if (isRefValid(confirmation)) confirmation.current.style.display = "none";
@@ -247,10 +247,10 @@ export default function CustomerList()
                     </tbody>
                 </table>
             </div >
-            <div className='w-100 d-flex justify-content-center align-items-center mb-3' style={ { height: "100px" } }>
-                <button className={ `${ styles.delete } mx-3` } onClick={ toggleDelete } ref={ deleteButton }>Delete customer</button>
-                <button className={ `${ styles.cancel } mx-3` } onClick={ toggleDelete } ref={ cancel }>Cancel</button>
-                <button className={ `${ styles.delete } mx-3` } value="Confirm" onClick={ preProcess } ref={ confirm }>Confirm</button>
+            <div className='w-100 d-flex justify-content-center align-items-center mb-3 mt-3'>
+                <button className={ `${ styles.delete } btn btn-danger mx-3` } onClick={ toggleDelete } ref={ deleteButton }>Delete customer</button>
+                <button className={ `${ styles.cancel } btn btn-primary mx-3` } onClick={ toggleDelete } ref={ cancel }>Cancel</button>
+                <button className={ `${ styles.delete } btn btn-danger mx-3` } value="Confirm" onClick={ preProcess } ref={ confirm }>Confirm</button>
             </div>
         </div >
     )

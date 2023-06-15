@@ -19,59 +19,9 @@
     max-width: 250px;
 }
 
-.delete {
-    background-color: red;
-    font-size: 1rem;
-    color: white;
-    border: 1px solid black;
-    border-radius: 10px;
-    height: 40px;
-    min-width: 70px;
-}
-
-.delete:active,
-.redButton:active {
-    background-color: rgb(247, 143, 143);
-}
-
-.delete:last-child {
-    display: none;
-}
-
+.delete:last-child,
 .cancel {
-    background-color: #00B3EC;
-    font-size: 1rem;
-    color: white;
-    border: 1px solid black;
-    border-radius: 10px;
-    height: 40px;
-    display: none;
-    min-width: 70px;
-}
-
-.blueButton {
-    background-color: #00B3EC;
-    font-size: 1rem;
-    color: white;
-    border: 1px solid black;
-    border-radius: 10px;
-    height: 40px;
-    min-width: 70px;
-}
-
-.redButton {
-    background-color: red;
-    font-size: 1rem;
-    color: white;
-    border: 1px solid black;
-    border-radius: 10px;
-    height: 40px;
-    width: 70px;
-}
-
-.blueButton:active,
-.cancel:active {
-    background-color: #74c5dd;
+    display: none !important;
 }
 
 .title {
@@ -121,10 +71,7 @@
 @media only screen and (min-width:768px) {
 
     .search_icon,
-    .search,
-    .delete,
-    .cancel,
-    .blueButton {
+    .search {
         font-size: 1.3rem;
     }
 

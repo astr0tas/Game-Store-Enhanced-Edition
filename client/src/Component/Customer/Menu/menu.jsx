@@ -104,7 +104,7 @@ const CustomerMenu = () =>
           <div className={ `${ styles.hover } mb-3 d-flex align-items-center` } onClick={ () => { Navigate("./home"); } }>
             <span className={ `d-flex align-items-center p-0 ms-2` } style={ { fontSize: '1.5rem', whiteSpace: 'nowrap', color: '#1c60c7' } }><FontAwesomeIcon icon={ faHouse } className={ `me-1` } />Home</span>
           </div>
-          <div className={ `${ styles.hover } mb-3 d-flex align-items-center` } onClick={ () => { Navigate("./game-list"); } }>
+          <div className={ `${ styles.hover } mb-3 d-flex align-items-center` } onClick={ () => { Navigate("./games"); } }>
             <span className={ `d-flex align-items-center p-0 ms-2` } style={ { fontSize: '1.5rem', whiteSpace: 'nowrap', color: '#1c60c7' } }><FontAwesomeIcon icon={ faGamepad } className={ `me-1` } />Games</span>
           </div>
           <div className={ `${ styles.hover } mb-3 d-flex align-items-center` } onClick={ () => { Navigate("./wish-list"); } }>

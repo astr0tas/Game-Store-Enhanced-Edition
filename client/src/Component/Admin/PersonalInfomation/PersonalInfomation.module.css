@@ -1,19 +1,5 @@
 .browse {
-      font-size: 1rem;
-      border: 1px solid black;
-      border-radius: 5px;
-      background-color: white;
-      padding: 2px;
-      width: 90px;
       display: none;
-}
-
-.browse:hover {
-      cursor: pointer;
-}
-
-.browse:active {
-      background-color: rgb(200, 200, 200);
 }
 
 .trash {
@@ -29,17 +15,6 @@
       color: rgb(248, 112, 112);
 }
 
-.back {
-      border-radius: 10px;
-      background-color: #C0C0C0;
-      font-size: 1rem;
-      align-items: center;
-}
-
-.back:active {
-      background-color: #8a8a8a;
-}
-
 .containDiv {
       width: 80%;
       max-width: 400px;
@@ -49,38 +24,6 @@
       background-color: #FAFAFA;
       border: 1px solid black;
       border-radius: 20px;
-}
-
-.edit:active,
-.history:active,
-.confirm:active,
-.OK:active,
-.delete_confirm:active,
-.blueButton:active {
-      background-color: #61c4e2;
-}
-
-.cancel:active,
-.delete_cancel:active {
-      color: rgb(248, 112, 112);
-}
-
-.cancel {
-      background-color: red;
-      color: white;
-      border-radius: 10px;
-      border: 1px solid black;
-      text-align: center;
-      font-size: 1rem;
-}
-
-.confirm {
-      background-color: #00B3EC;
-      color: white;
-      border-radius: 10px;
-      border: 1px solid black;
-      text-align: center;
-      font-size: 1rem;
 }
 
 .info {
@@ -94,28 +37,7 @@
 
 .buttons {
       display: none;
-      font-size: 1rem;
 }
-
-.edit {
-      background-color: #00B3EC;
-      color: white;
-      border-radius: 10px;
-      border: 1px solid black;
-      text-align: center;
-      font-size: 1rem;
-      min-width: 50px;
-}
-
-.history {
-      background-color: #00B3EC;
-      color: white;
-      border-radius: 10px;
-      border: 1px solid black;
-      text-align: center;
-      font-size: 1rem;
-}
-
 .pop_up {
       background-color: white;
       width: 80%;
@@ -130,41 +52,7 @@
       display: none;
 }
 
-.redButton {
-      background-color: red;
-      color: white;
-      border-radius: 10px;
-      border: 1px solid black;
-      text-align: center;
-      font-size: 1rem;
-}
-
-.blueButton {
-      background-color: #00B3EC;
-      color: white;
-      border-radius: 10px;
-      border: 1px solid black;
-      text-align: center;
-      font-size: 1rem;
-}
-
-.table {
-      display: none;
-}
-
 @media only screen and (min-width:768px) {
-
-      .back,
-      .buttons,
-      .cancel,
-      .confirm,
-      .history,
-      .edit,
-      .delete_cancel,
-      .delete_confirm {
-            font-size: 1.2rem;
-      }
-
       .info {
             width: 40%;
       }
@@ -173,12 +61,5 @@
             width: 50%;
             max-width: 500px;
             min-width: 300px;
-      }
-}
-
-@media only screen and (max-width:320px) {
-      .browse {
-            font-size: 0.8rem;
-            width: 75px;
       }
 }

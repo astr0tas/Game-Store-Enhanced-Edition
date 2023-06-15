@@ -275,7 +275,7 @@ export default function CustomerDetail()
         <div className="d-flex flex-column align-items-center w-100 h-100">
             <div className="d-flex align-items-center w-100" style={ { height: "50px" } }>
                 <BiTrash className={ `ms-auto ms-md-3 me-md-0 me-3 ${ styles.trash }` } onClick={ () => { if (isRefValid(delete_pop_up)) delete_pop_up.current.style.display = "flex"; } } />
-                <button className={ `ms-md-auto me-md-3 me-auto ms-3 ${ styles.back }` } onClick={ () => { Navigate(-1); } }>Back</button>
+                <button className={ `ms-md-auto me-md-3 me-auto ms-3 btn btn-secondary btn-sm` } onClick={ () => { Navigate(-1); } }>Back</button>
             </div>
             <div className={ `flex-grow-1 w-100 mt-3 overflow-auto hideBrowserScrollbar mb-3` } ref={ bigDiv }>
                 <div className={ `d-flex flex-column flex-md-row align-items-center justify-content-md-between align-items-md-start w-100` } ref={ div1Height }>
@@ -307,14 +307,14 @@ export default function CustomerDetail()
                             <span ref={ discount }>{ customer.discount }%</span>
                             <input type="number" className={ `${ styles.update }` } disabled ref={ discount_input }></input>
                         </div>
-                        <button className={ `${ styles.edit }` } onClick={ changeInfo } ref={ edit }>Edit</button>
+                        <button className={ `btn btn-sm btn-primary` } onClick={ changeInfo } ref={ edit }>Edit</button>
                         <div className={ `${ styles.buttons } w-100 align-items-center justify-content-center` } ref={ update }>
-                            <button className={ `${ styles.cancel } d-block` } onClick={ cancelUpdate }>Cancel</button>
-                            <button className={ `${ styles.confirm } mx-3 d-block` } onClick={ () => { if (isRefValid(update_pop_up)) update_pop_up.current.style.display = "flex"; } }>Confirm</button>
+                            <button className={ `btn btn-sm btn-danger` } onClick={ cancelUpdate }>Cancel</button>
+                            <button className={ `btn btn-sm btn-primary mx-3` } onClick={ () => { if (isRefValid(update_pop_up)) update_pop_up.current.style.display = "flex"; } }>Confirm</button>
                         </div>
                     </div>
                 </div>
-                <button className={ `${ styles.history } ms-md-5 ms-4 mt-2` } onClick={ getHistory } ref={ buttonHeight }>Get history purchases</button>
+                <button className={ `btn btn-sm btn-primary ms-md-5 ms-4 mt-2` } onClick={ getHistory } ref={ buttonHeight }>Get history purchases</button>
                 <div className={ `w-100 mt-2 overflow-auto ${ styles.table }` } ref={ div2Height } style={ { minHeight: '250px' } }>
                     <table className={ `table table-hover mx-auto mt-2 mb-0 w-100` }>
                         <thead style={ { position: "sticky", top: '0', backgroundColor: "#BFBFBF" } }>
@@ -333,28 +333,28 @@ export default function CustomerDetail()
             </div>
             <div className={ `position-absolute flex-column align-items-center justify-content-around ${ styles.pop_up }` } ref={ pop_up }>
                 <h3>Discount value should be greater or equal to 0% and less than or equal to 5% only!</h3>
-                <button className={ `${ styles.blueButton }` } onClick={ () =>
+                <button className={ `btn btn-primary` } onClick={ () =>
                 {
                     if (isRefValid(pop_up)) pop_up.current.style.display = "none";
                 } }>OKAY</button>
             </div>
             <div className={ `position-absolute flex-column align-items-center justify-content-around ${ styles.pop_up }` } ref={ pop_up_1 }>
                 <h3>Customer email can not be empty!</h3>
-                <button className={ `${ styles.blueButton }` } onClick={ () =>
+                <button className={ `btn btn-primary` } onClick={ () =>
                 {
                     if (isRefValid(pop_up_1)) pop_up_1.current.style.display = "none";
                 } }>OKAY</button>
             </div>
             <div className={ `position-absolute flex-column align-items-center justify-content-around ${ styles.pop_up }` } ref={ pop_up_2 }>
                 <h3>Customer phone number can not contain alphabetical characters!</h3>
-                <button className={ `${ styles.blueButton }` } onClick={ () =>
+                <button className={ `btn btn-primary` } onClick={ () =>
                 {
                     if (isRefValid(pop_up_2)) pop_up_2.current.style.display = "none";
                 } }>OKAY</button>
             </div>
             <div className={ `position-absolute flex-column align-items-center justify-content-around ${ styles.pop_up }` } ref={ pop_up_3 }>
                 <h3>Discount value can not be empty!</h3>
-                <button className={ `${ styles.blueButton }` } onClick={ () =>
+                <button className={ `btn btn-primary` } onClick={ () =>
                 {
                     if (isRefValid(pop_up_3)) pop_up_3.current.style.display = "none";
                 } }>OKAY</button>
@@ -362,11 +362,11 @@ export default function CustomerDetail()
             <div className={ `position-absolute flex-column align-items-center justify-content-around ${ styles.pop_up }` } ref={ delete_pop_up }>
                 <h3 className='mx-2'>Do you really want to delete this customer?</h3>
                 <div className='d-flex flex-row align-items-center justify-content-center'>
-                    <button className={ `${ styles.blueButton } mx-3` } onClick={ () =>
+                    <button className={ `btn btn-primary mx-3` } onClick={ () =>
                     {
                         if (isRefValid(delete_pop_up)) delete_pop_up.current.style.display = "none";
                     } }>Cancel</button>
-                    <button className={ `${ styles.redButton } mx-3` } onClick={ () =>
+                    <button className={ `btn btn-danger mx-3` } onClick={ () =>
                     {
                         if (isRefValid(delete_pop_up)) delete_pop_up.current.style.display = "none";
                         deleteCustomer();
@@ -376,11 +376,11 @@ export default function CustomerDetail()
             <div className={ `position-absolute flex-column align-items-center justify-content-around ${ styles.pop_up }` } ref={ update_pop_up }>
                 <h3 className='mx-2'>Do you really want to update this customer info?</h3>
                 <div className='d-flex flex-row align-items-center justify-content-center'>
-                    <button className={ `${ styles.redButton } mx-3` } onClick={ () =>
+                    <button className={ `btn btn-danger mx-3` } onClick={ () =>
                     {
                         if (isRefValid(update_pop_up)) update_pop_up.current.style.display = "none";
                     } }>Cancel</button>
-                    <button className={ `${ styles.blueButton } mx-3` } onClick={ () =>
+                    <button className={ `btn btn-primary mx-3` } onClick={ () =>
                     {
                         if (isRefValid(update_pop_up)) update_pop_up.current.style.display = "none";
                         confirmChange();
