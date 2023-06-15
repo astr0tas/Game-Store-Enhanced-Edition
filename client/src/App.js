@@ -19,12 +19,12 @@ import CustomerHome from './Component/Customer/Home/Home';
 import CustomerGameList from './Component/Customer/Games/List/GameList';
 
 // Customer Wish List
+import WishList from './Component/Customer/WishList/WishList';
 
 // Customer Shopping Cart
+import Cart from './Component/Customer/ShoppingCart/Cart';
 
 import CusPersonalInfo from './Component/Customer/personalInfo';
-import CustomerWishlist from './Component/Customer/wishlist';
-import { Cart } from './Component/Customer/cart';
 import { Product } from './Component/Customer/product';
 
 /* Admin pages */
@@ -77,13 +77,15 @@ function App()
               <Route path="games/:id" />
 
               {/* Wish List */ }
+              <Route path='wish-list' element={ <WishList /> } />
 
               {/* Shopping Cart */ }
+              <Route path='cart' element={ <Cart /> } />
+
+
+
 
               <Route path="myself" element={ <CusPersonalInfo /> } />
-              <Route path="home" element={ <CustomerHome /> } />
-              <Route path="wishlist" element={ <CustomerWishlist /> } />
-              <Route path="cart" element={ <Cart /> } />
               <Route path="product" element={ <Product /> } />
             </Route>
           </Route>
