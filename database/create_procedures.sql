@@ -24,9 +24,9 @@ BEGIN
 		set id:=concat("GAME",counter+1);
     end if;
     if Inprice is not null then
-		insert into game(id,name,price,discount,description,ratings,spec_minimum,spec_recommended,picture_1,picture_2,picture_3,picture_4) values(id,Inname,Inprice,Indiscount,Indescription,0,Inspec_minimum,Inspec_recommended,Inpicture_1,Inpicture_2,Inpicture_3,Inpicture_4);
+		insert into game(id,name,price,discount,description,spec_minimum,spec_recommended,picture_1,picture_2,picture_3,picture_4) values(id,Inname,Inprice,Indiscount,Indescription,Inspec_minimum,Inspec_recommended,Inpicture_1,Inpicture_2,Inpicture_3,Inpicture_4);
 	else
-		insert into game(id,name,price,discount,description,ratings,spec_minimum,spec_recommended,picture_1,picture_2,picture_3,picture_4,status) values(id,Inname,null,Indiscount,Indescription,0,Inspec_minimum,Inspec_recommended,Inpicture_1,Inpicture_2,Inpicture_3,Inpicture_4,false);
+		insert into game(id,name,price,discount,description,spec_minimum,spec_recommended,picture_1,picture_2,picture_3,picture_4,status) values(id,Inname,null,Indiscount,Indescription,Inspec_minimum,Inspec_recommended,Inpicture_1,Inpicture_2,Inpicture_3,Inpicture_4,false);
     end if;
     select @id;
 END $$
