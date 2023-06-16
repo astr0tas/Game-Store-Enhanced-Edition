@@ -1,0 +1,22 @@
+.reAdjustModel {
+      max-width: 400px !important;
+      left: initial !important;
+      height: 98vh !important;
+      height: 98dvh !important;
+      margin-top: 1vh !important;
+      margin-bottom: 1vh !important;
+      margin-top: 1dvh !important;
+      margin-bottom: 1dvh !important;
+      position: absolute !important;
+      padding-top: 25vh !important;
+      padding-top: 25dvh !important;
+      margin-left: auto !important;
+      margin-right: auto !important;
+}
+
+@media only screen and (min-width:768px) {
+      .reAdjustModel {
+            padding-top: 15vh !important;
+            padding-top: 15dvh !important;
+      }
+}

@@ -135,26 +135,13 @@ class CustomerGameModel
 
 
 
+
+      
+
+
       public function getBestSeller()
       {
             $sql = "SELECT id,name,discount,picture_1, price,count(*) as total_sale from game join activation_code on game.id=activation_code.game_id where status=\"used\"  group by name order by total_sale desc,name limit 5";
-            $result = $this->db->query($sql);
-            $arr = [];
-            if ($result->num_rows > 0) {
-                  while ($row = $result->fetch_assoc()) {
-                        $row['picture_1'] = unpack('c*', $row['picture_1']);
-                        $arr[] = $row;
-                  }
-            }
-            return $arr;
-      }
-
-      public function findWishlist($name, $limit, $offset)
-      {
-            session_id($_COOKIE['PHPSESSID']);
-            session_start();
-            $id = $_SESSION['id'];
-            $sql = "SELECT game.id,game.name,picture_1, price, discount from game join wishlist on wishlist.game_id=game.id where wishlist.customer_id='$id' and game.name like '%$name%' group by game.name order by game.name asc limit $limit offset $offset";
             $result = $this->db->query($sql);
             $arr = [];
             if ($result->num_rows > 0) {

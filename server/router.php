@@ -9,13 +9,11 @@
       private $routes = array();
       private $CustomerController;
       private $AdminController;
-      private $GeneralController;
 
       public function __construct()
       {
         $this->CustomerController = new CustomerController();
         $this->AdminController = new AdminController();
-        $this->GeneralController = new GeneralController();
       }
 
       public function get($path, $action)
@@ -47,10 +45,8 @@
           list($controller_name, $method_name) = explode('@', $action);
           if ($controller_name === "CustomerController")
             $this->CustomerController->$method_name();
-          else if ($controller_name === "AdminController")
-            $this->AdminController->$method_name();
           else
-            $this->GeneralController->$method_name();
+            $this->AdminController->$method_name();
         } else {
           header('HTTP/1.1 404 Not Found');
           echo '404 Not Found';

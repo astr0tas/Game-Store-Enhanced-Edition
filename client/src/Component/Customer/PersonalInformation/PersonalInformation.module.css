@@ -33,11 +33,6 @@
       display: none !important;
 }
 
-.popUp {
-      max-width: 400px !important;
-      left: initial !important;
-}
-
 @media only screen and (min-width:768px) {
       .info {
             width: 40%;

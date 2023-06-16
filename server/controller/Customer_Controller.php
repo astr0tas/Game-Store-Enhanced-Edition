@@ -214,19 +214,13 @@ class CustomerController
 
 
 
+
+      
+
       public function getBestSeller()
       {
             $arr = $this->game_model->getBestSeller();
             echo json_encode($arr);
-      }
-
-      public function findWishlist()
-      {
-            $name = $_POST['name'];
-            $limit = $_POST['limit'];
-            $offset = $_POST['offset'];
-            $result = $this->game_model->findWishlist($name, $limit, $offset);
-            echo json_encode($result);
       }
 
       public function getCart()

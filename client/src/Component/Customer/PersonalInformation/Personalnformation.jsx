@@ -7,6 +7,7 @@ import { isRefValid, isRefNotValid } from '../../tools/refChecker';
 import '../../General/css/scroll.css';
 import { AiOutlineCloseCircle } from 'react-icons/ai';
 import { Modal } from 'react-bootstrap';
+import '../../General/css/modal.css';
 
 const History = (props) =>
 {
@@ -302,7 +303,7 @@ export default function CustomerPersonalInfo()
                               </div>
                         </div>
                   </div>
-                  <Modal show={ showPopup } onHide={ () => { setShowPopup(false); } } className={ `${ styles.popUp } position-absolute` } centered container={ formRef.current }>
+                  <Modal show={ showPopup } onHide={ () => { setShowPopup(false); } } className={ `reAdjustModel` } container={ formRef.current }>
                         <Modal.Header closeButton className='border border-0'>
                         </Modal.Header>
                         <Modal.Body className='border border-0 d-flex justify-content-center'>
