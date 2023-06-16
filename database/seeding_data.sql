@@ -61,7 +61,7 @@ In addition to customizing the appearance of your character, you can freely comb
 • An Epic Drama Born from a Myth
 A multilayered story told in fragments. An epic drama in which the various thoughts of the characters intersect in the Lands Between.
 • Unique Online Play that Loosely Connects You to Others
-In addition to multiplayer, where you can directly connect with other players and travel together, the game supports a unique asynchronous online element that allows you to feel the presence of others.',0,'Requires a 64-bit processor and operating system
+In addition to multiplayer, where you can directly connect with other players and travel together, the game supports a unique asynchronous online element that allows you to feel the presence of others.','Requires a 64-bit processor and operating system
 OS: Windows 10
 Processor: INTEL CORE I5-8400 or AMD RYZEN 3 3300X
 Memory: 12 GB RAM
@@ -97,7 +97,7 @@ And the curtain rises on this story of daring rescue and grueling horror where l
 Featuring modernized gameplay, a reimagined storyline, and vividly detailed graphics,
 Resident Evil 4 marks the rebirth of an industry juggernaut.
 
-Relive the nightmare that revolutionized survival horror.',0,'Requires a 64-bit processor and operating system
+Relive the nightmare that revolutionized survival horror.','Requires a 64-bit processor and operating system
 OS: Windows 10 (64 bit)
 Processor: AMD Ryzen 3 1200 / Intel Core i5-7500
 Memory: 8 GB RAM
@@ -135,7 +135,7 @@ Controls Customization
 Play your way. With support for the DUALSHOCK®4 and DUALSENSE® wireless controllers, a wide range of other gamepads, and fully customizable bindings for mouse and keyboard, you have the power to fine-tune every action to match your playstyle.
 
 Ultra-wide Support
-Immerse yourself like never before. Journey through the Norse realms taking in breathtaking vistas in panoramic widescreen. With 21:9 ultra-widescreen support, God of War™ presents a cinema quality experience that further expands the original seamless theatrical vision.',0,'Requires a 64-bit processor and operating system
+Immerse yourself like never before. Journey through the Norse realms taking in breathtaking vistas in panoramic widescreen. With 21:9 ultra-widescreen support, God of War™ presents a cinema quality experience that further expands the original seamless theatrical vision.','Requires a 64-bit processor and operating system
 OS: Windows 10 64-bit
 Processor: Intel i5-2500k (4 core 3.3 GHz) or AMD Ryzen 3 1200 (4 core 3.1 GHz)
 Memory: 8 GB RAM
@@ -159,7 +159,7 @@ Now featuring additional Story Mode content and a fully-featured Photo Mode, Red
 
 With all new graphical and technical enhancements for deeper immersion, Red Dead Redemption 2 for PC takes full advantage of the power of the PC to bring every corner of this massive, rich and detailed world to life including increased draw distances; higher quality global illumination and ambient occlusion for improved day and night lighting; improved reflections and deeper, higher resolution shadows at all distances; tessellated tree textures and improved grass and fur textures for added realism in every plant and animal.
 
-Red Dead Redemption 2 for PC also offers HDR support, the ability to run high-end display setups with 4K resolution and beyond, multi-monitor configurations, widescreen configurations, faster frame rates and more.',0,'Requires a 64-bit processor and operating system
+Red Dead Redemption 2 for PC also offers HDR support, the ability to run high-end display setups with 4K resolution and beyond, multi-monitor configurations, widescreen configurations, faster frame rates and more.','Requires a 64-bit processor and operating system
 OS: Windows 10 - April 2018 Update (v1803)
 Processor: Intel® Core™ i7-4770K / AMD Ryzen 5 1500X
 Memory: 12 GB RAM
@@ -178,7 +178,7 @@ Sound Card: Direct X Compatible', 'Red Dead Redemption 2/RDR-pic1.jpg','Red Dead
 
 insert into game(id,name,price,discount,description,ratings,spec_minimum,spec_recommended,picture_1,picture_2,picture_3,picture_4) values('GAME05','The Last of Us™ Part I', 59.99, 0, 'Experience the emotional storytelling and unforgettable characters in The Last of Us™, winner of over 200 Game of the Year awards.
 
-In a ravaged civilization, where infected and hardened survivors run rampant, Joel, a weary protagonist, is hired to smuggle 14-year-old Ellie out of a military quarantine zone. However, what starts as a small job soon transforms into a brutal cross-country journey.',0, 'Requires a 64-bit processor and operating system
+In a ravaged civilization, where infected and hardened survivors run rampant, Joel, a weary protagonist, is hired to smuggle 14-year-old Ellie out of a military quarantine zone. However, what starts as a small job soon transforms into a brutal cross-country journey.', 'Requires a 64-bit processor and operating system
 OS: Windows 10 (Version 1909 or Newer)
 Processor: AMD Ryzen 5 1500X, Intel Core i7-4770K
 Memory: 16 GB RAM
@@ -199,7 +199,7 @@ Pick your faction and lead your forces to victory, by directing your armies in g
 
 Discover unparalleled levels of strategic choice as you step into the role of both Theatre Commander and Field Commander.
 
-As Theatre Commander, experience enthralling turn-based grand-strategy as you direct the deployment of forces, perform research and carefully consider how you disseminate your resources across the Western Front in a war won by inches. Alongside this, take up the mantle of Field Commander in dynamic real-time battles as you direct units to defeat your opponent, build trenches and perform direct assaults by sending your infantry over the top. Pick your battles and fight them your way to shape the course of history.', 4, 'Requires a 64-bit processor and operating system
+As Theatre Commander, experience enthralling turn-based grand-strategy as you direct the deployment of forces, perform research and carefully consider how you disseminate your resources across the Western Front in a war won by inches. Alongside this, take up the mantle of Field Commander in dynamic real-time battles as you direct units to defeat your opponent, build trenches and perform direct assaults by sending your infantry over the top. Pick your battles and fight them your way to shape the course of history.', 'Requires a 64-bit processor and operating system
 OS: Windows 10 64bit
 Processor: Intel i5-4590 / AMD FX-8350
 Memory: 8 GB RAM
@@ -229,7 +229,7 @@ The story lives and breathes through the world of Fallout 76, which brings to li
 A New American Dream
 Use the all-new Construction and Assembly Mobile Platform (C.A.M.P.) to build and craft anywhere in the world. Your C.A.M.P. will provide much-needed shelter, supplies, and safety. You can even set up shop to trade goods with other survivors.
 Fallout Worlds
-Play unique adventures in Appalachia with Fallout Worlds, which is an evolving set of features that give players the capability to play Fallout 76 in unique ways with customizable settings.', 3, 'Requires a 64-bit processor and operating system
+Play unique adventures in Appalachia with Fallout Worlds, which is an evolving set of features that give players the capability to play Fallout 76 in unique ways with customizable settings.', 'Requires a 64-bit processor and operating system
 OS: Windows 8.1/10 (64-bit versions)
 Processor: Intel Core i5-6600k 3.5 GHz /AMD Ryzen 3 1300X 3.5 GHz or equivalent
 Memory: 8 GB RAM
@@ -247,7 +247,7 @@ insert into game(id,name,price,discount,description,ratings,spec_minimum,spec_re
 
 
 
-Experience Hogwarts in the 1800s. Your character is a student who holds the key to an ancient secret that threatens to tear the wizarding world apart. Make allies, battle Dark wizards, and ultimately decide the fate of the wizarding world. Your legacy is what you make of it. Live the Unwritten.', 4.1, 'Requires a 64-bit processor and operating system
+Experience Hogwarts in the 1800s. Your character is a student who holds the key to an ancient secret that threatens to tear the wizarding world apart. Make allies, battle Dark wizards, and ultimately decide the fate of the wizarding world. Your legacy is what you make of it. Live the Unwritten.', 'Requires a 64-bit processor and operating system
 OS: 64-bit Windows 10
 Processor: Intel Core i5-6600 (3.3Ghz) or AMD Ryzen 5 1400 (3.2Ghz)
 Memory: 16 GB RAM
@@ -286,7 +286,7 @@ Exciting co-op adventures teeming await with rare and powerful rewards. Dive int
 Competitive Multiplayer
 Face off against other players in fast-paced free-for-all skirmishes, team arenas, and PvE/PvP hybrid competitions. Mark special competitions like Iron Banner on your calendar and collect limited-time rewards before they\'re gone.
 Exotic Weapons and Armor
-Thousands of weapons, millions of options. Discover new gear combinations and define your own personal style. The hunt for the perfect arsenal begins.', 4.5, 'Requires a 64-bit processor and operating system
+Thousands of weapons, millions of options. Discover new gear combinations and define your own personal style. The hunt for the perfect arsenal begins.', 'Requires a 64-bit processor and operating system
 OS: Windows® 7 / Windows® 8.1 / Windows® 10 64-bit (latest Service Pack)
 Processor: Intel® Core™ i3 3250 3.5 GHz or Intel Pentium G4560 3.5 GHz / AMD FX-4350 4.2 GHz
 Memory: 6 GB RAM
@@ -340,7 +340,7 @@ Control raging monsters using Wyvern Riding and dish out massive damage to your 
 
 
 Fend off hordes of monsters in The Rampage
-Protect Kamura Village from hordes of monsters in an all-new quest type! Prepare for monster hunting on a scale like never before!', 4.7, 'Requires a 64-bit processor and operating system
+Protect Kamura Village from hordes of monsters in an all-new quest type! Prepare for monster hunting on a scale like never before!',  'Requires a 64-bit processor and operating system
 OS: Windows 10 （64-bit）
 Processor: Intel® Core™ i3-4130 or Core™ i5-3470 or AMD FX™-6100
 Memory: 8 GB RAM
@@ -375,7 +375,7 @@ Pose as a student and infiltrate a famous academy for Astrals.
 
 After successfully transferring into the academy together with his sister Arihara Nanami, he settles into his new life there, meeting new friends like his classmates Mitsukasa Ayase and Nijouin Hazuki, and his upperclassman Shikibe Mayu, among others.
 
-Until an unfortunate accident leads to Mitsukasa Ayase finding out his true identity! And in that situation, he also learns that she has her own big secret...', 4.8, 'OS: Windows 7 or newer
+Until an unfortunate accident leads to Mitsukasa Ayase finding out his true identity! And in that situation, he also learns that she has her own big secret...','OS: Windows 7 or newer
 Processor: CPU 1.3GHz or more
 Memory: 2 GB RAM
 DirectX: Version 9.0c
@@ -387,7 +387,7 @@ From these new discoveries, "he" is born. An illegal experiment mixes thousands 
 Having only the memories of others, doubts about who he truly is start arising in his mind, until he gathers the courage to go out into the world in search of his true self.
 As he steps into the real world, he meets two girls, Kido Tsubasa and Ibaraki Rino.
 Both kind souls whose lives have been touched by unscrupulous BMI experiments, just like him.
-Learning to live together with their secrets, "he" and "they" will bring about big changes...', 3.8, 'OS: Windows 7 or newer
+Learning to live together with their secrets, "he" and "they" will bring about big changes...', 'OS: Windows 7 or newer
 Processor: 1.7 GHz or above
 Memory: 1 GB RAM
 Graphics: 1GB VRAM', 'OS: Windows 7 or newer
@@ -407,7 +407,7 @@ The PC version of Grand Theft Auto V and Grand Theft Auto Online features First 
 
 Grand Theft Auto V for PC also brings the debut of the Rockstar Editor, a powerful suite of creative tools to quickly and easily capture, edit and share game footage from within Grand Theft Auto V and Grand Theft Auto Online. The Rockstar Editor’s Director Mode allows players the ability to stage their own scenes using prominent story characters, pedestrians, and even animals to bring their vision to life. Along with advanced camera manipulation and editing effects including fast and slow motion, and an array of camera filters, players can add their own music using songs from GTAV radio stations, or dynamically control the intensity of the game’s score. Completed videos can be uploaded directly from the Rockstar Editor to YouTube and the Rockstar Games Social Club for easy sharing.
 
-Soundtrack artists The Alchemist and Oh No return as hosts of the new radio station, The Lab FM. The station features new and exclusive music from the production duo based on and inspired by the game’s original soundtrack. Collaborating guest artists include Earl Sweatshirt, Freddie Gibbs, Little Dragon, Killer Mike, Sam Herring from Future Islands, and more. Players can also discover Los Santos and Blaine County while enjoying their own music through Self Radio, a new radio station that will host player-created custom soundtracks.', 4, 'Requires a 64-bit processor and operating system
+Soundtrack artists The Alchemist and Oh No return as hosts of the new radio station, The Lab FM. The station features new and exclusive music from the production duo based on and inspired by the game’s original soundtrack. Collaborating guest artists include Earl Sweatshirt, Freddie Gibbs, Little Dragon, Killer Mike, Sam Herring from Future Islands, and more. Players can also discover Los Santos and Blaine County while enjoying their own music through Self Radio, a new radio station that will host player-created custom soundtracks.', 'Requires a 64-bit processor and operating system
 OS: Windows 10 64 Bit, Windows 8.1 64 Bit, Windows 8 64 Bit, Windows 7 64 Bit Service Pack 1
 Processor: Intel Core 2 Quad CPU Q6600 @ 2.40GHz (4 CPUs) / AMD Phenom 9850 Quad-Core Processor (4 CPUs) @ 2.5GHz
 Memory: 4 GB RAM
