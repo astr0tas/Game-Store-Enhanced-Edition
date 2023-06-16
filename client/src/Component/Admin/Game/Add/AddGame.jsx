@@ -370,7 +370,7 @@ const AddGame = () =>
                         </div>
                         <div className={ `d-flex flex-column flex-lg-row align-items-center align-items-lg-start justify-content-lg-around w-100 mt-lg-3 mb-lg-3` }>
                               <div className="d-flex align-items-center mb-3 mb-lg-0 text-center">
-                                    {/* The format of the file content should be <code1>, <code2>, <code3>, ... */ }
+                                    {/* The format of the file content should be <code1>, <code2>, <code3>, ... or <code1>,<code2>,<code3>,... */ }
                                     <p className={ `mb-0` }>Codes</p>
                                     &nbsp;&nbsp;
                                     <label className={ `btn btn-light btn-sm border border-dark` }>

@@ -1,5 +1,5 @@
 import {  useParams } from 'react-router-dom';
-import styles from './PersonalInfomation.module.css';
+import styles from './PersonalInformation.module.css';
 import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import { domain } from '../../tools/domain';
@@ -57,6 +57,7 @@ export default function AdminPersonalInfo()
             axios.get(`http://${ domain }/admin/info`, { withCredentials: true })
                   .then(res =>
                   {
+                        console.log(res);
                         document.title = `Admin ${ res.data.name }`;
                         setadmin({
                               name: res.data.name,
@@ -124,7 +125,7 @@ export default function AdminPersonalInfo()
             }
             if (isRefValid(image_input))
             {
-                  image_input.current.style.display = "inline";
+                  image_input.current.style.setProperty('display', 'inline', 'important');
                   setImage(null);
             }
       }
@@ -160,7 +161,7 @@ export default function AdminPersonalInfo()
             if (isRefValid(admin_address_input))
                   admin_address_input.current.style.display = "none";
             if (isRefValid(image_input))
-                  image_input.current.style.display = "none";
+                  image_input.current.style.setProperty('display','none','important');
       }
 
       function containsAlphabets(str)
@@ -213,12 +214,13 @@ export default function AdminPersonalInfo()
                   <div className={ `flex-grow-1 d-flex w-100 mt-3 overflow-auto hideBrowserScrollbar mb-3` } ref={ bigDiv }>
                         <div className={ `d-flex flex-column flex-md-row align-items-center justify-content-md-around justify-content-xxl-center align-items-md-start w-100 my-auto` } ref={ div1Height }>
                               <div className={ `d-flex flex-column ${ styles.containDiv }` }>
-                                    <img className={ `${ styles.img } w-100 h-100` } ref={ profileImg } alt='avatar' />
+                                    <img className={ `${ styles.img } mx-auto w-100` } ref={ profileImg } alt='avatar' />
                                     <label className={ `btn btn-sm btn-light border border-dark mt-3 mx-auto ${styles.browse}` } ref={ image_input }>
                                           <input type='file' className='d-none' onChange={ e =>
                                           {
                                                 if (e.target.files.length === 0)
                                                 {
+                                                      setImage(null);
                                                       if (isRefValid(profileImg))
                                                             profileImg.current.src = admin.image;
                                                 }

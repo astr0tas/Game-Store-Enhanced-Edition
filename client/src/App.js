@@ -11,21 +11,28 @@ import CustomerSignUp from './Component/Customer/Authentication/SignUp/SignUp';
 import CustomerMenu from './Component/Customer/Menu/menu';
 
 // Customer Personal Info
+import CustomerPersonalInfo from './Component/Customer/PersonalInformation/Personalnformation';
 
 // Customer Home
 import CustomerHome from './Component/Customer/Home/Home';
 
-// Customer Game List
+// Customer Games
 import CustomerGameList from './Component/Customer/Games/List/GameList';
+import CustomerGameDetail from './Component/Customer/Games/Detail/GameDetail';
 
-// Customer Wish List
-import WishList from './Component/Customer/WishList/WishList';
+// Customer Wishlist
+import CustomerWishList from './Component/Customer/WishList/WishList';
 
 // Customer Shopping Cart
 import Cart from './Component/Customer/ShoppingCart/Cart';
 
-import CusPersonalInfo from './Component/Customer/personalInfo';
+
+
+
 import { Product } from './Component/Customer/product';
+
+
+
 
 /* Admin pages */
 // Authentication pages
@@ -36,7 +43,7 @@ import AdminRecovery from './Component/Admin/Authentication/Recovery/Recovery';
 import AdminMenu from './Component/Admin/Menu/menu';
 
 // Admin Personal Info
-import AdminPersonalInfo from './Component/Admin/PersonalInfomation/PersonalInfomation';
+import AdminPersonalInfo from './Component/Admin/PersonalInformation/PersonalInformation';
 
 // Admin Home
 import AdminHome from './Component/Admin/Home/Home.jsx';
@@ -68,16 +75,17 @@ function App()
             {/* Main pages */ }
             <Route element={ <CustomerMenu /> }>
               {/* Personal Info */ }
+              <Route path="profile" element={ <CustomerPersonalInfo />}/>
 
               {/* Home */ }
               <Route path="home" element={ <CustomerHome /> } />
 
               {/* Game List */ }
               <Route path="games" element={ <CustomerGameList /> } />
-              <Route path="games/:id" />
+              <Route path="games/:id" element={ <CustomerGameDetail /> } />
 
               {/* Wish List */ }
-              <Route path='wish-list' element={ <WishList /> } />
+              <Route path='wish-list' element={ <CustomerWishList /> } />
 
               {/* Shopping Cart */ }
               <Route path='cart' element={ <Cart /> } />
@@ -85,7 +93,6 @@ function App()
 
 
 
-              <Route path="myself" element={ <CusPersonalInfo /> } />
               <Route path="product" element={ <Product /> } />
             </Route>
           </Route>

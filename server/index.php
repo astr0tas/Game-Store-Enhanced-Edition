@@ -16,11 +16,22 @@
       $router->post("/recovery", "CustomerController@recovery");
       $router->post("/newPassword", "CustomerController@newPassword");
       $router->post("/signUp", "CustomerController@signUp");
+      $router->get("/logout", "CustomerController@logout");
+
+      /* Info */
+      $router->get("/info", "CustomerController@getInfo");
+      $router->get("/info/history", "CustomerController@getHistory");
+      $router->post("/info/update", "CustomerController@updateInfo");
 
       /* Home */
 
-      /* Game List */
+      /* Games */
       $router->post("/getGames", "CustomerController@getGames");
+      $router->post("/game/status", "CustomerController@getGameStatus");
+      $router->post("/game/gameCategory", "CustomerController@getGameCategory");
+      $router->post("/game/detail", "CustomerController@getGameDetail");
+       $router->post("/getWishlist", "CustomerController@getWishlist");
+
 
       /* Wish List */
       $router->post("/isAddedToWishlist", "CustomerController@isAddedToWishlist");
@@ -33,18 +44,14 @@
       $router->post("/removeFromCart", "CustomerController@removeFromCart");
 
 
+
+
       $router->get("/getBestSeller", "CustomerController@getBestSeller");
-      $router->get("/logout", "CustomerController@logout");
-      $router->get("/myself", "CustomerController@myself");
-      $router->get("/myself/history", "CustomerController@myHistory");
       $router->get("/getCart", "CustomerController@getCart");
 
-      $router->post("/myself/edit", "CustomerController@updateMySelf");
-      $router->post("/gameStatus", "CustomerController@gameStatus");
       $router->post("/getWishlist", "CustomerController@getWishlist");
       $router->post("/findWishlist", "CustomerController@findWishlist");
       $router->post("/displayCart", "CustomerController@displayCart");
-      $router->post("/getCategory", "CustomerController@getCategory");
       $router->post("/buyGame", "CustomerController@buyGame");
       $router->post("/product", "CustomerController@product");
 

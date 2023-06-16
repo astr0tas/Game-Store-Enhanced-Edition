@@ -143,7 +143,7 @@ class AdminController
             echo json_encode(array("message" => $result ? "success" : "failed"));
       }
 
-      /* Game */
+      /* Games */
 
       public function getGameList()
       {
@@ -276,7 +276,8 @@ class AdminController
             $code = null;
             if (isset($_FILES["codes"])) {
                   move_uploaded_file($_FILES["codes"]["tmp_name"], $_FILES["codes"]["tmp_name"]);
-                  $code = explode(", ", file_get_contents($_FILES["codes"]["tmp_name"]));
+                  $code=str_replace([' ','\t','\n','\r'],'',file_get_contents($_FILES["codes"]["tmp_name"]));
+                  $code = explode(", ", $code);
             }
             $result = $this->game_model->addCode($_POST['id'], $code);
             echo json_encode(array("message" => $result ? "success" : "failed"));

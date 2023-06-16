@@ -9,6 +9,7 @@ import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 import { AiOutlineHeart } from 'react-icons/ai';
 import { BsCart } from 'react-icons/bs';
 import { CiDiscount1 } from 'react-icons/ci';
+import { FaGamepad } from 'react-icons/fa';
 
 const Game = (props) =>
 {
@@ -87,7 +88,7 @@ const Game = (props) =>
                         <img className='card-img-top' style={ { height: '60%' } } alt='' src={ props.img === null ? 'https://upload.wikimedia.org/wikipedia/commons/7/71/Nothing_whitespace_blank.png' : `http://${ domain }/model/data/games/${ props.img }` }></img>
                         <div className='card-body d-flex flex-column'>
                               <div className='d-flex align-items-center justify-content-center'>
-                                    <a href={ `./propss/${ props.id }` } className='btn btn-primary btn-lg'>
+                                    <a href={ `./games/${ props.id }` } className='btn btn-primary btn-lg'>
                                           { !props.price && 'N/A' }{ props.price && '$' }{ props.discount === '0' && props.price }{ props.discount !== '0' && props.discount !== null && ((parseFloat(props.price) + 0.01) * (100 - parseFloat(props.discount)) / 100).toFixed(2) - 0.01 }
                                     </a>
                                     { props.discount !== null && parseFloat(props.discount) !== 0 && <CiDiscount1 style={ {
@@ -134,7 +135,7 @@ const Group = (props) =>
       )
 }
 
-const CustomerpropsList = () =>
+const CustomerGameList = () =>
 {
       document.title = "Games";
 
@@ -146,7 +147,7 @@ const CustomerpropsList = () =>
       const [render, setRender] = useState(false);
 
       let timer;
-      const searchprops = () =>
+      const searchGame = () =>
       {
             clearTimeout(timer);
             timer = setTimeout(() =>
@@ -228,11 +229,14 @@ const CustomerpropsList = () =>
             <div className='w-100 h-100 d-flex flex-column'>
                   <div className={ `d-flex flex-column align-items-center justify-content-center w-100 mb-2` }>
                         <div className={ `d-flex align-items-center justify-content-center ${ styles.title }` }>
-                              <h2 className='d-flex align-items-center' style={ { color: "red" } }>Games</h2>
+                              <div style={ { color: "red", fontSize: '2rem' } } className='d-flex align-items-center'>
+                                    <FaGamepad className='mb-0' style={ { color: 'red' } } />&nbsp;
+                                    <h2 className='mb-0'>Games</h2>
+                              </div>
                         </div>
                         <div className='d-flex mx-auto mt-3'>
                               <FontAwesomeIcon icon={ faMagnifyingGlass } className={ `position-absolute ${ styles.search }` } />
-                              <input placeholder='Find game' className={ `ps-4 ${ styles.searchInput }` } onChange={ searchprops } ref={ searchValue }></input>
+                              <input placeholder='Find game' className={ `ps-4 ${ styles.searchInput }` } onChange={ searchGame } ref={ searchValue }></input>
                         </div>
                   </div>
                   <div className='flex-grow-1 overflow-auto container-fluid mt-4 mb-4' ref={ div }>
@@ -241,4 +245,4 @@ const CustomerpropsList = () =>
       )
 }
 
-export default CustomerpropsList;
+export default CustomerGameList;

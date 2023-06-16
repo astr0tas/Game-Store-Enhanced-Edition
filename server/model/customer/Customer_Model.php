@@ -60,23 +60,17 @@ class CustomerSelfModel
 
       /* Personal Infomation */
 
-      public function myself()
+      public function getInfo($id)
       {
-            session_id($_COOKIE['PHPSESSID']);
-            session_start();
-            $id = $_SESSION['id'];
-            $sql = "SELECT name,email,phone,total_spending,membership_rank,membership_discount,username from customer where id= '$id'";
+            $sql = "SELECT name,email,phone,total_spending,membership_rank,membership_discount,username,image from customer where id= '$id'";
             $result = $this->db->query($sql);
             if ($result->num_rows > 0) {
                   return $result->fetch_assoc();
             }
       }
 
-      public function myHistory()
+      public function getHistory($id)
       {
-            session_id($_COOKIE['PHPSESSID']);
-            session_start();
-            $id = $_SESSION['id'];
             $sql = "select name, code, date, price, method from purchase_history 
             join purchase_history_description on description_id = purchase_history_description.id and customer_id='$id'
             join game on game_id = game.id order by date desc,name asc";
@@ -90,24 +84,11 @@ class CustomerSelfModel
             return $arr;
       }
 
-      public function updateMySelf($name, $email, $phone, $password)
+      public function updateInfo($id, $name, $email, $phone, $password, $image)
       {
-            session_id($_COOKIE['PHPSESSID']);
-            session_start();
-            $id = $_SESSION['id'];
-            $sql = "";
-            if ($password === "null") {
-                  if ($phone === "null")
-                        $sql = "update customer set name='$name',email='$email',phone=null where id='$id'";
-                  else
-                        $sql = "update customer set name='$name',email='$email',phone='$phone' where id='$id'";
-            } else {
-                  if ($phone === "null")
-                        $sql = "update customer set name='$name',email='$email',phone=null,userpassword='$password' where id='$id'";
-                  else
-                        $sql = "update customer set name='$name',email='$email',phone='$phone',userpassword='$password' where id='$id'";
-            }
-            return $this->db->query($sql);
+            $stmt = $this->db->prepare("CALL updateCustomerInfo(?, ?, ?, ?, ?, ?)");
+            $stmt->bind_param("ssssss", $id,$name, $email, $phone, $password, $image);
+            return $stmt->execute();
       }
 
       public function __destruct()

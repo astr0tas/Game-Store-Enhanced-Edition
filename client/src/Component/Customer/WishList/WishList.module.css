@@ -1,0 +1,47 @@
+.title {
+      background-color: white;
+      border-bottom-right-radius: 20px;
+      border-bottom-left-radius: 20px;
+      width: 70%;
+      max-width: 250px;
+      border-bottom: 2px solid black;
+      border-left: 2px solid black;
+      border-right: 2px solid black;
+      height: 100%;
+}
+
+.search {
+      font-size: 1.2rem;
+      margin-top: 5px;
+      margin-left: 4px;
+}
+
+.wish {
+      color: red;
+}
+
+.icons:hover {
+      cursor: pointer;
+}
+
+.wish:active {
+      color: rgb(255, 100, 100);
+}
+
+.cart {
+      color: blue;
+}
+
+.cart:active {
+      color: rgb(100, 100, 255);
+}
+
+.uncart:active {
+      color: gray;
+}
+
+@media only screen and (min-width:768px) {
+      .searchInput {
+            font-size: 1.2rem;
+      }
+}

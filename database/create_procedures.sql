@@ -159,6 +159,29 @@ BEGIN
 END $$
 DELIMITER ;
 
+DROP PROCEDURE IF EXISTS updateCustomerInfo;
+DELIMITER $$
+CREATE PROCEDURE updateCustomerInfo(
+	in id varchar(10),
+	in name varchar(100),
+    in email varchar(20),
+    in phone varchar(10),
+    in userpassword varchar(20),
+	in image text
+)
+BEGIN
+	update customer set customer.name=name where customer.id=id;
+    update customer set customer.email=email where customer.id=id;
+    update customer set customer.phone=phone where customer.id=id;
+    if userpassword is not null then
+		update customer set customer.userpassword=userpassword where customer.id=id;
+    end if;
+    if image is not null then
+		update customer set customer.image=image where customer.id=id;
+    end if;
+END $$
+DELIMITER ;
+
 -- DROP PROCEDURE IF EXISTS generate_random_string;
 -- DELIMITER $$
 -- CREATE PROCEDURE generate_random_string(OUT random_string VARCHAR(10))

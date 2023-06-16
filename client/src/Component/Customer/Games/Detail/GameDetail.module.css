@@ -1,0 +1,87 @@
+.sections {
+      width: 100%;
+}
+
+.text_align {
+      text-align: center;
+}
+
+.img {
+      background-color: #FAFAFA;
+      border: 1px solid black;
+      border-radius: 10px;
+      object-fit: fill;
+      min-height: 300px;
+      max-height: 300px;
+}
+
+.pop_up {
+      background-color: white;
+      width: 80%;
+      text-align: center;
+      height: 40%;
+      border: 2px solid black;
+      border-radius: 20px;
+      display: flex;
+      top: 20%;
+      max-width: 500px;
+      max-height: 200px;
+      display: none;
+      z-index: 10;
+}
+
+.wish {
+      color: red;
+}
+
+.icons:hover {
+      cursor: pointer;
+}
+
+.wish:active {
+      color: rgb(255, 100, 100);
+}
+
+.cart {
+      color: blue;
+}
+
+.cart:active {
+      color: rgb(100, 100, 255);
+}
+
+.unwish:active,
+.uncart:active {
+      color: gray;
+}
+
+@media only screen and (max-width:350px) {
+      .img {
+            min-height: 200px;
+            max-height: 200px;
+      }
+}
+
+@media only screen and (min-width:768px) {
+      .img {
+            min-height: 350px;
+            max-height: 350px;
+      }
+}
+
+@media only screen and (min-width:992px) {
+      .text_align {
+            text-align: start;
+      }
+
+      .sections {
+            width: 50%;
+      }
+}
+
+@media only screen and (min-width:1400px) {
+      .img {
+            min-height: 500px;
+            max-height: 500px;
+      }
+}

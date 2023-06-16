@@ -58,11 +58,9 @@
     }
 
     .img {
-        width: 30%;
-        height: 100%;
-        min-width: 350px;
-        max-width: 500px;
-        min-height: 250px;
-        max-height: 400px;
+        width: 300px;
+        height: 300px;
+        max-width: initial;
+        min-height: auto;
     }
 }

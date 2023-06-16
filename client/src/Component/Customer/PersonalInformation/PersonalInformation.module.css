@@ -1,29 +1,15 @@
-.browse {
-      display: none;
-}
-
-.trash {
-      font-size: 2rem;
-      color: red;
-}
-
-.trash:hover {
-      cursor: pointer;
-}
-
-.trash:active {
-      color: rgb(248, 112, 112);
-}
-
-.containDiv {
+.imgContainer {
       width: 80%;
-      max-width: 400px;
+      height: 50%;
+      max-width: 250px;
+      min-height: 200px;
 }
 
 .img {
       background-color: #FAFAFA;
       border: 1px solid black;
       border-radius: 20px;
+      max-width: 400px;
 }
 
 .info {
@@ -38,6 +24,7 @@
 .buttons {
       display: none;
 }
+
 .pop_up {
       background-color: white;
       width: 80%;
@@ -52,14 +39,27 @@
       display: none;
 }
 
+.table {
+      display: none;
+}
+
+.browse {
+      display: none !important;
+}
+
 @media only screen and (min-width:768px) {
       .info {
             width: 40%;
       }
 
-      .containDiv {
-            width: 50%;
-            max-width: 500px;
+      .imgContainer {
+            width: 30%;
+            height: 100%;
             min-width: 300px;
+            min-height: 200px;
+      }
+
+      .img{
+            max-height:300px;
       }
 }

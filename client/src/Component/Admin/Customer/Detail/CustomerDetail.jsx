@@ -79,7 +79,7 @@ export default function CustomerDetail()
                     spending: res.data.total_spending,
                     rank: res.data.membership_rank,
                     discount: res.data.membership_discount,
-                    image: res.data.image === null ? "https://media.istockphoto.com/id/1016744004/vector/profile-placeholder-image-gray-silhouette-no-photo.jpg?s=612x612&w=0&k=20&c=mB6A9idhtEtsFXphs1WVwW_iPBt37S2kJp6VpPhFeoA=" : res.data.image
+                    image: res.data.image === null ? "https://media.istockphoto.com/id/1016744004/vector/profile-placeholder-image-gray-silhouette-no-photo.jpg?s=612x612&w=0&k=20&c=mB6A9idhtEtsFXphs1WVwW_iPBt37S2kJp6VpPhFeoA=" : `http://${ domain }/model/data/customers/${ res.data.image }`
                 });
                 if (isRefValid(select_menu))
                     select_menu.current.value = res.data.membership_rank;
@@ -316,7 +316,7 @@ export default function CustomerDetail()
                 </div>
                 <button className={ `btn btn-sm btn-primary ms-md-5 ms-4 mt-2` } onClick={ getHistory } ref={ buttonHeight }>Get history purchases</button>
                 <div className={ `w-100 mt-2 overflow-auto ${ styles.table }` } ref={ div2Height } style={ { minHeight: '250px' } }>
-                    <table className={ `table table-hover mx-auto mt-2 mb-0 w-100` }>
+                    <table className={ `table table-hover mx-auto mb-0 w-100` }>
                         <thead style={ { position: "sticky", top: '0', backgroundColor: "#BFBFBF" } }>
                             <tr>
                                 <th scope="col" className={ `col-3 text-center` }>Game name</th>

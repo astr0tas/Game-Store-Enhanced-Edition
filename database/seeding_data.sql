@@ -453,29 +453,29 @@ insert into activation_code values ('GAME11', 'Z2KI5Y03B491UB1F', 'available'), 
 
 
 -- add purchase_history
--- insert into purchase_history values('CUSTOMER01','GAME04','HVYD219XROCELSH3','QM3J7S7V48'),
--- ('CUSTOMER01','GAME01','SQT8CXG8VWKBP9Q1','6CFQYWLV5S'),
--- ('CUSTOMER01','GAME01','LV47LGEFPY2PXZ6F','7YZLO77T1M'),
--- ('CUSTOMER01','GAME01','KYZXNH7B95FTG5RC','5B4180VD4J'),
--- ('CUSTOMER01','GAME03','ZUGJX32CGJTLXVXH','IXQZCPG0A8'),
--- ('CUSTOMER01','GAME03','WVTKJKK8VL3ALFXO','YZV9DV5CKM'),
--- ('CUSTOMER01','GAME03','DP44F8XHCGEBQSNI','F6XN96I8KY'),
--- ('CUSTOMER01','GAME08','46QN0IRXT8NMS7U8','00FUSNNXUR'),
--- ('CUSTOMER01','GAME07','3KNE1VD7XWDDK46N','GSNZCXWTWC'),
--- ('CUSTOMER01','GAME05','SKFZA1NRWA0TKJ24','IW9MNCBZKR');
+insert into purchase_history values('CUSTOMER01','GAME04','HVYD219XROCELSH3','QM3J7S7V48'),
+('CUSTOMER01','GAME01','SQT8CXG8VWKBP9Q1','6CFQYWLV5S'),
+('CUSTOMER01','GAME01','LV47LGEFPY2PXZ6F','7YZLO77T1M'),
+('CUSTOMER01','GAME01','KYZXNH7B95FTG5RC','5B4180VD4J'),
+('CUSTOMER01','GAME03','ZUGJX32CGJTLXVXH','IXQZCPG0A8'),
+('CUSTOMER01','GAME03','WVTKJKK8VL3ALFXO','YZV9DV5CKM'),
+('CUSTOMER01','GAME03','DP44F8XHCGEBQSNI','F6XN96I8KY'),
+('CUSTOMER01','GAME08','46QN0IRXT8NMS7U8','00FUSNNXUR'),
+('CUSTOMER01','GAME07','3KNE1VD7XWDDK46N','GSNZCXWTWC'),
+('CUSTOMER01','GAME05','SKFZA1NRWA0TKJ24','IW9MNCBZKR');
 
 
 -- add purchase_history_description
--- insert into purchase_history_description values('QM3J7S7V48','Online banking','2023-04-17'),
--- ('6CFQYWLV5S','Online banking','2023-04-17'),
--- ('7YZLO77T1M','Online banking','2023-04-16'),
--- ('5B4180VD4J','Online banking','2023-04-15'),
--- ('IXQZCPG0A8','Online banking','2023-04-14'),
--- ('YZV9DV5CKM','Online banking','2023-04-13'),
--- ('F6XN96I8KY','Online banking','2023-04-17'),
--- ('00FUSNNXUR','Online banking','2023-04-15'),
--- ('GSNZCXWTWC','Online banking','2023-04-16'),
--- ('IW9MNCBZKR','Online banking','2023-04-13');
+insert into purchase_history_description values('QM3J7S7V48','Online banking','2023-04-17'),
+('6CFQYWLV5S','Online banking','2023-04-17'),
+('7YZLO77T1M','Online banking','2023-04-16'),
+('5B4180VD4J','Online banking','2023-04-15'),
+('IXQZCPG0A8','Online banking','2023-04-14'),
+('YZV9DV5CKM','Online banking','2023-04-13'),
+('F6XN96I8KY','Online banking','2023-04-17'),
+('00FUSNNXUR','Online banking','2023-04-15'),
+('GSNZCXWTWC','Online banking','2023-04-16'),
+('IW9MNCBZKR','Online banking','2023-04-13');
 
 
 -- select * from game;

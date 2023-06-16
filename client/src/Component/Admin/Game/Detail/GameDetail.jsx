@@ -213,7 +213,7 @@ export default function AdminGameDetail()
                                     </div>
                                     <div className={ `d-flex align-items-center ${ styles.tags } my-lg-3 w-100 justify-content-center justify-content-lg-start` }>
                                           <h4>Category:&nbsp;&nbsp;</h4>
-                                          <div className='overflow-auto hideBrowserScrollbar'>
+                                          <div className='overflow-auto'>
                                                 <h4 style={ {
                                                       whiteSpace: 'nowrap', height: '26px'
                                                 } }>{ category }</h4>

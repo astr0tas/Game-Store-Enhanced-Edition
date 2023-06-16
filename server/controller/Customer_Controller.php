@@ -57,9 +57,54 @@ class CustomerController
             echo json_encode($this->customer_model->signUp($name, $email, $username, $password, $phone));
       }
 
+      /* Info */
+      public function getInfo()
+      {
+            session_id($_COOKIE['PHPSESSID']);
+            session_start();
+            $id = $_SESSION['id'];
+            echo json_encode($this->customer_model->getInfo($id));
+      }
+
+      public function getHistory()
+      {
+            session_id($_COOKIE['PHPSESSID']);
+            session_start();
+            $id = $_SESSION['id'];
+            echo json_encode($this->customer_model->getHistory($id));
+      }
+
+      public function updateInfo()
+      {
+            session_id($_COOKIE['PHPSESSID']);
+            session_start();
+            $id = $_SESSION['id'];
+            
+            $name = $_POST['name'];
+            $email = $_POST['email'];
+            $phone = $_POST['phone']==='null'?null:$_POST['phone'];
+            $password = $_POST['password']==='null'?null:$_POST['password'];
+
+            $image = null;
+            $path = dirname(__FILE__);
+            $path = dirname($path);
+            $path = str_replace("\\", "/", $path);
+            $path .= "/model/data/customers/$id";
+            if (!is_dir($path)) {
+                  mkdir($path, 0777);
+                  chmod($path, 0777);
+            }
+            if (isset($_FILES["image"])) {
+                  $image = $id . '/' . $_FILES["image"]['name'];
+                  move_uploaded_file($_FILES["image"]["tmp_name"], $path . '/' . $_FILES["image"]['name']);
+            }
+            $result = $this->customer_model->updateInfo($id, $name, $email, $phone, $password, $image);
+            echo json_encode(array("message" => $result ? "success" : "failed"));
+      }
+
       /* Home */
 
-      /* Game List */
+      /* Games */
       public function getGames()
       {
             $name=$_POST['name']==='null'?null:$_POST['name'];
@@ -68,6 +113,27 @@ class CustomerController
             else
                   $result = $this->game_model->getGames();
             echo json_encode($result);
+      }
+
+      public function getGameCategory()
+      {
+            $id=$_POST['id'];
+            $result = $this->game_model->getGameCategory($id);
+            echo json_encode($result);
+      }
+
+      public function getGameStatus()
+      {
+            $id = $_POST['id'];
+            $arr = $this->game_model->getGameStatus($id);
+            echo json_encode($arr ? true : false);
+      }
+
+      public function getGameDetail()
+      {
+            $id = $_POST['id'];
+            $arr = $this->game_model->getAllInfo($id);
+            echo json_encode($arr);
       }
 
       /* Wish List */
@@ -99,6 +165,16 @@ class CustomerController
             $game_id = $_POST['id'];
             $result = $this->game_model->removeFromWishlist($id, $game_id);
             echo json_encode(array("message" => $result ? "success" : "failed"));
+      }
+
+      public function getWishlist()
+      {
+            session_id($_COOKIE['PHPSESSID']);
+            session_start();
+            $id = $_SESSION['id'];
+            $name=$_POST['name']==='null'?null:$_POST['name'];
+            $result = $this->game_model->getWishlist($id,$name);
+            echo json_encode($result);
       }
 
       /* Shopping cart */
@@ -136,45 +212,12 @@ class CustomerController
 
 
 
+
+
       public function getBestSeller()
       {
             $arr = $this->game_model->getBestSeller();
             echo json_encode($arr);
-      }
-
-      public function myself()
-      {
-            echo json_encode($this->customer_model->myself());
-      }
-
-      public function myHistory()
-      {
-            echo json_encode($this->customer_model->myHistory());
-      }
-
-      public function updateMySelf()
-      {
-            $name = $_POST['name'];
-            $email = $_POST['email'];
-            $phone = $_POST['phone'];
-            $password = $_POST['password'];
-            $result = $this->customer_model->updateMySelf($name, $email, $phone, $password);
-            echo json_encode(array("message" => $result ? "success" : "failed"));
-      }
-
-      public function gameStatus()
-      {
-            $id = $_POST['id'];
-            $arr = $this->game_model->gameStatus($id);
-            echo json_encode($arr ? true : false);
-      }
-
-      public function getWishlist()
-      {
-            $limit = $_POST['limit'];
-            $offset = $_POST['offset'];
-            $result = $this->game_model->getWishlist($limit, $offset);
-            echo json_encode($result);
       }
 
       public function findWishlist()
@@ -196,13 +239,6 @@ class CustomerController
       {
             $offset = $_POST['offset'];
             $result = $this->game_model->displayCart($offset);
-            echo json_encode($result);
-      }
-
-      public function getCategory()
-      {
-            $id=$_POST['id'];
-            $result = $this->game_model->getCategory($id);
             echo json_encode($result);
       }
 
