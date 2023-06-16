@@ -52,7 +52,7 @@ insert into category values('Arcade & Rhythm'),
 ('Team Sports');
 
 -- add games section
-insert into game(id,name,price,discount,description,ratings,spec_minimum,spec_recommended,picture_1,picture_2,picture_3,picture_4) values('GAME01','Elden Ring',59.99,0,'THE NEW FANTASY ACTION RPG.
+insert into game(id,name,price,discount,description,spec_minimum,spec_recommended,picture_1,picture_2,picture_3,picture_4) values('GAME01','Elden Ring',59.99,0,'THE NEW FANTASY ACTION RPG.
 Rise, Tarnished, and be guided by grace to brandish the power of the Elden Ring and become an Elden Lord in the Lands Between.
 • A Vast World Full of Excitement
 A vast world where open fields with a variety of situations and huge dungeons with complex and three-dimensional designs are seamlessly connected. As you explore, the joy of discovering unknown and overwhelming threats await you, leading to a high sense of accomplishment.
@@ -77,7 +77,7 @@ DirectX: Version 12
 Storage: 60 GB available space
 Sound Card: Windows Compatible Audio Device','Elden ring/Elden ring-1.jpg','Elden ring/Elden ring-2.jpg','Elden ring/Elden ring-3.jpg','Elden ring/Elden ring-4.jpg');
 
-insert into game(id,name,price,discount,description,ratings,spec_minimum,spec_recommended,picture_1,picture_2,picture_3,picture_4) values('GAME02','Resident Evil 4',59.99,0,'Survival is just the beginning.
+insert into game(id,name,price,discount,description,spec_minimum,spec_recommended,picture_1,picture_2,picture_3,picture_4) values('GAME02','Resident Evil 4',59.99,0,'Survival is just the beginning.
 
 Six years have passed since the biological disaster in Raccoon City.
 Agent Leon S. Kennedy, one of the survivors of the incident, has been sent to rescue the president\'s kidnapped daughter.
@@ -113,7 +113,7 @@ DirectX: Version 12
 Network: Broadband Internet connection
 Additional Notes: Estimated performance: 1080p/60fps ・Framerate might drop in graphics-intensive scenes. ・AMD Radeon RX 6700 XT or NVIDIA GeForce RTX 2070 required to support ray tracing.','Resident Evil 4/Resident_evil_4_pic1.jpg','Resident Evil 4/Resident_evil_4_pic2.jpeg','Resident Evil 4/Resident_evil_4_pic3.jpg','Resident Evil 4/Resident_evil_4_pic4.jpg');
 
-insert into game(id,name,price,discount,description,ratings,spec_minimum,spec_recommended,picture_1,picture_2,picture_3,picture_4) values('GAME03','God of War',49.99,40,'Enter the Norse realm
+insert into game(id,name,price,discount,description,spec_minimum,spec_recommended,picture_1,picture_2,picture_3,picture_4) values('GAME03','God of War',49.99,40,'Enter the Norse realm
 His vengeance against the Gods of Olympus years behind him, Kratos now lives as a man in the realm of Norse Gods and monsters. It is in this harsh, unforgiving world that he must fight to survive… and teach his son to do the same.
 
 Grasp a second chance
@@ -151,7 +151,7 @@ DirectX: Version 11
 Storage: 70 GB available space
 Additional Notes: DirectX feature level 11_1 required','God of war/gow_1.jpg','God of war/gow_2.jpg','God of war/gow_3.jpg','God of war/gow_4.jpg');
 
-insert into game(id,name,price,discount,description,ratings,spec_minimum,spec_recommended,picture_1,picture_2,picture_3,picture_4) values('GAME04','Red Dead Redemption 2', 42.62, 10, 'America, 1899.
+insert into game(id,name,price,discount,description, spec_minimum,spec_recommended,picture_1,picture_2,picture_3,picture_4) values('GAME04','Red Dead Redemption 2', 42.62, 10, 'America, 1899.
 
 Arthur Morgan and the Van der Linde gang are outlaws on the run. With federal agents and the best bounty hunters in the nation massing on their heels, the gang must rob, steal and fight their way across the rugged heartland of America in order to survive. As deepening internal divisions threaten to tear the gang apart, Arthur must make a choice between his own ideals and loyalty to the gang who raised him.
 
@@ -176,7 +176,7 @@ Storage: 150 GB available space
 Sound Card: Direct X Compatible', 'Red Dead Redemption 2/RDR-pic1.jpg','Red Dead Redemption 2/RDR-pic2.jpg', 'Red Dead Redemption 2/RDR-pic3.jpg', 'Red Dead Redemption 2/RDR-pic4.jpg'
 );
 
-insert into game(id,name,price,discount,description,ratings,spec_minimum,spec_recommended,picture_1,picture_2,picture_3,picture_4) values('GAME05','The Last of Us™ Part I', 59.99, 0, 'Experience the emotional storytelling and unforgettable characters in The Last of Us™, winner of over 200 Game of the Year awards.
+insert into game(id,name,price,discount,description,spec_minimum,spec_recommended,picture_1,picture_2,picture_3,picture_4) values('GAME05','The Last of Us™ Part I', 59.99, 0, 'Experience the emotional storytelling and unforgettable characters in The Last of Us™, winner of over 200 Game of the Year awards.
 
 In a ravaged civilization, where infected and hardened survivors run rampant, Joel, a weary protagonist, is hired to smuggle 14-year-old Ellie out of a military quarantine zone. However, what starts as a small job soon transforms into a brutal cross-country journey.', 'Requires a 64-bit processor and operating system
 OS: Windows 10 (Version 1909 or Newer)
@@ -193,7 +193,7 @@ Storage: 100 GB available space
 Additional Notes: SSD Recommended', 'The Last Of Us 1/tlou-1.jpg', 'The Last Of Us 1/tlou-2.jpg', 'The Last Of Us 1/tlou-3.jpg', 'The Last Of Us 1/tlou-4.jpg'
 );
 
-insert into game(id,name,price,discount,description,ratings,spec_minimum,spec_recommended,picture_1,picture_2,picture_3,picture_4) values('GAME06','The Great War: Western Front™', 19.99, 30, 'The Great War: Western Front is the definitive World War 1 strategy game from Petroglyph, the makers of Command & Conquer™ Remastered & Star Wars™: Empire at War. Play a deciding role in history with this real-time tactical experience as you take charge in the pivotal Western Front from 1914 to 1919.
+insert into game(id,name,price,discount,description,spec_minimum,spec_recommended,picture_1,picture_2,picture_3,picture_4) values('GAME06','The Great War: Western Front™', 19.99, 30, 'The Great War: Western Front is the definitive World War 1 strategy game from Petroglyph, the makers of Command & Conquer™ Remastered & Star Wars™: Empire at War. Play a deciding role in history with this real-time tactical experience as you take charge in the pivotal Western Front from 1914 to 1919.
 
 Pick your faction and lead your forces to victory, by directing your armies in gritty real-time battles and by guiding high-level decisions in turn-based strategic gameplay. Dig detailed trenches, research new technologies such as poison gas and tanks, and make decisions that will have a profound and lasting effect on your success. Think like a Commander to either relive history - or redefine it.
 
@@ -215,7 +215,7 @@ DirectX: Version 11
 Storage: 13 GB available space
 Additional Notes: SSD Recommended', 'The Great War Western Front/greatwar-1.jpg', 'The Great War Western Front/greatwar-2.jpg', 'The Great War Western Front/greatwar-3.jpg', 'The Great War Western Front/greatwar-4.jpg');
 
-insert into game(id,name,price,discount,description,ratings,spec_minimum,spec_recommended,picture_1,picture_2,picture_3,picture_4) values('GAME07','Fallout 76', 31.99,10, 'Bethesda Game Studios, the award-winning creators of Skyrim and Fallout 4, welcome you to Fallout 76. Twenty-five years after the bombs fell, you and your fellow Vault Dwellers—chosen from the nation’s best and brightest – emerge into post-nuclear America on Reclamation Day, 2102. Play solo or join together as you explore, quest, build, and triumph against the wasteland’s greatest threats. Explore a vast wasteland, devastated by nuclear war, in this open-world multiplayer addition to the Fallout story. Experience the largest, most dynamic world ever created in the legendary Fallout universe.
+insert into game(id,name,price,discount,description,spec_minimum,spec_recommended,picture_1,picture_2,picture_3,picture_4) values('GAME07','Fallout 76', 31.99,10, 'Bethesda Game Studios, the award-winning creators of Skyrim and Fallout 4, welcome you to Fallout 76. Twenty-five years after the bombs fell, you and your fellow Vault Dwellers—chosen from the nation’s best and brightest – emerge into post-nuclear America on Reclamation Day, 2102. Play solo or join together as you explore, quest, build, and triumph against the wasteland’s greatest threats. Explore a vast wasteland, devastated by nuclear war, in this open-world multiplayer addition to the Fallout story. Experience the largest, most dynamic world ever created in the legendary Fallout universe.
 
 The Mutation Invasion is here and mutations from Daily Ops\' missions have infected Public Events! Play a Mutated Public Event every hour for additional rewards and challenges, and jump back into Daily Ops to earn scaling rewards and experience a new variety of locations, enemies, and mutations.
 Immersive Questlines and Engaging Characters
@@ -243,7 +243,7 @@ Graphics: NVIDIA GTX 970 4GB /AMD R9 290X 4GB
 Network: Broadband Internet connection
 Storage: 80 GB available space', 'Fallout 76/Fallout 76-1.jpg',  'Fallout 76/Fallout 76-2.jpg',  'Fallout 76/Fallout 76-3.jpg',  'Fallout 76/Fallout 76-4.jpg');
 
-insert into game(id,name,price,discount,description,ratings,spec_minimum,spec_recommended,picture_1,picture_2,picture_3,picture_4) values('GAME08','Hogwarts Legacy', 49.99, 10, 'Hogwarts Legacy is an open-world action RPG set in the world first introduced in the Harry Potter books. Embark on a journey through familiar and new locations as you explore and discover magical beasts, customize your character and craft potions, master spell casting, upgrade talents and become the wizard you want to be.
+insert into game(id,name,price,discount,description,spec_minimum,spec_recommended,picture_1,picture_2,picture_3,picture_4) values('GAME08','Hogwarts Legacy', 49.99, 10, 'Hogwarts Legacy is an open-world action RPG set in the world first introduced in the Harry Potter books. Embark on a journey through familiar and new locations as you explore and discover magical beasts, customize your character and craft potions, master spell casting, upgrade talents and become the wizard you want to be.
 
 
 
@@ -263,7 +263,7 @@ DirectX: Version 12
 Storage: 85 GB available space
 Additional Notes: SSD, 1080p/60 fps, High Quality Settings', 'Hogwart Legacy/hl-1.jpg', 'Hogwart Legacy/hl-2.jpg', 'Hogwart Legacy/hl-3.jpg', 'Hogwart Legacy/hl-4.jpg');
 
-insert into game(id,name,price,discount,description,ratings,spec_minimum,spec_recommended,picture_1,picture_2,picture_3,picture_4) values('GAME09','Destiny 2', 9.99, 0, 'Dive into the world of Destiny 2 to explore the mysteries of the solar system and experience responsive first-person shooter combat. Unlock powerful elemental abilities and collect unique gear to customize your Guardian\'s look and playstyle. Enjoy Destiny 2’s cinematic story, challenging co-op missions, and a variety of PvP modes alone or with friends. Download for free today and write your legend in the stars.
+insert into game(id,name,price,discount,description,spec_minimum,spec_recommended,picture_1,picture_2,picture_3,picture_4) values('GAME09','Destiny 2', 9.99, 0, 'Dive into the world of Destiny 2 to explore the mysteries of the solar system and experience responsive first-person shooter combat. Unlock powerful elemental abilities and collect unique gear to customize your Guardian\'s look and playstyle. Enjoy Destiny 2’s cinematic story, challenging co-op missions, and a variety of PvP modes alone or with friends. Download for free today and write your legend in the stars.
 An Immersive Story
 You are a Guardian, defender of the Last City of humanity in a solar system under siege by infamous villains. Look to the stars and stand against the darkness. Your legend begins now.
 Guardian Classes
@@ -300,7 +300,7 @@ Graphics: NVIDIA® GeForce® GTX 970 4GB or GTX 1060 6GB / AMD R9 390 8GB Memory
 Network: Broadband Internet connection
 Storage: 105 GB available space', 'Destiny 2/Destiny 2-1.jpg', 'Destiny 2/Destiny 2-2.jpg', 'Destiny 2/Destiny 2-3.jpg', 'Destiny 2/Destiny 2-4.jpg');
 
-insert into game(id,name,price,discount,description,ratings,spec_minimum,spec_recommended,picture_1,picture_2,picture_3,picture_4) values('GAME10','MONSTER HUNTER RISE', 39.99, 20, 'Rise to the challenge and join the hunt! In Monster Hunter Rise, the latest installment in the award-winning and top-selling Monster Hunter series, you’ll become a hunter, explore brand new maps and use a variety of weapons to take down fearsome monsters as part of an all-new storyline. The PC release also comes packed with a number of additional visual and performance enhancing optimizations.
+insert into game(id,name,price,discount,description,spec_minimum,spec_recommended,picture_1,picture_2,picture_3,picture_4) values('GAME10','MONSTER HUNTER RISE', 39.99, 20, 'Rise to the challenge and join the hunt! In Monster Hunter Rise, the latest installment in the award-winning and top-selling Monster Hunter series, you’ll become a hunter, explore brand new maps and use a variety of weapons to take down fearsome monsters as part of an all-new storyline. The PC release also comes packed with a number of additional visual and performance enhancing optimizations.
 
 
 Ferocious monsters with unique ecologies
@@ -358,7 +358,7 @@ Network: Broadband Internet connection
 Storage: 36 GB available space
 Additional Notes: 1080p/30fps when graphics settings are set to "Average". System requirements subject to change during game development.', 'Monster Hunter Rise/Monster Hunter Rise-1.jpg', 'Monster Hunter Rise/Monster Hunter Rise-2.jpg', 'Monster Hunter Rise/Monster Hunter Rise-3.jpg', 'Monster Hunter Rise/Monster Hunter Rise-4.jpg');
 
-insert into game(id,name,price,discount,description,ratings,spec_minimum,spec_recommended,picture_1,picture_2,picture_3,picture_4) values('GAME11','Riddle Joker', 19.99, 10, 'Riddle Joker is a Japanese-style visual novel produced by Yuzusoft, a Japanese developer of romance VNs.
+insert into game(id,name,price,discount,description,spec_minimum,spec_recommended,picture_1,picture_2,picture_3,picture_4) values('GAME11','Riddle Joker', 19.99, 10, 'Riddle Joker is a Japanese-style visual novel produced by Yuzusoft, a Japanese developer of romance VNs.
 The game won numerous awards on the year of its release in Japan for its art, music, and characters.
 
 Story:
@@ -382,7 +382,7 @@ DirectX: Version 9.0c
 Storage: 8 GB available space', 'Processor: CPU 2.66GHz or more
 Memory: 4 GB RAM', 'Riddle Joker/rj-1.jpg', 'Riddle Joker/rj-2.jpg', 'Riddle Joker/rj-3.jpg', 'Riddle Joker/rj-4.jpg');
 
-insert into game(id,name,price,discount,description,ratings,spec_minimum,spec_recommended,picture_1,picture_2,picture_3,picture_4) values('GAME12','Parquet', 15.99, 0, 'In the near future, a technology called Brain-Machine Interface connects the brain and machines. This technology brings about a new paradigm and opens the gates to the digitization of human memory itself.
+insert into game(id,name,price,discount,description,spec_minimum,spec_recommended,picture_1,picture_2,picture_3,picture_4) values('GAME12','Parquet', 15.99, 0, 'In the near future, a technology called Brain-Machine Interface connects the brain and machines. This technology brings about a new paradigm and opens the gates to the digitization of human memory itself.
 From these new discoveries, "he" is born. An illegal experiment mixes thousands of memories into a single vessel, creating a wholly new being.
 Having only the memories of others, doubts about who he truly is start arising in his mind, until he gathers the courage to go out into the world in search of his true self.
 As he steps into the real world, he meets two girls, Kido Tsubasa and Ibaraki Rino.
@@ -395,7 +395,7 @@ Processor: 1.7 GHz or above
 Memory: 1 GB RAM
 Graphics: 1GB VRAM', 'Parquet/parquet-1.jpg', 'Parquet/parquet-2.jpg', 'Parquet/parquet-3.jpg', 'Parquet/parquet-4.jpg');
 
-insert into game(id,name,price,discount,description,ratings,spec_minimum,spec_recommended,picture_1,picture_2,picture_3,picture_4) values('GAME13','Grand Theft Auto V', 19.49, 10, 'When a young street hustler, a retired bank robber and a terrifying psychopath find themselves entangled with some of the most frightening and deranged elements of the criminal underworld, the U.S. government and the entertainment industry, they must pull off a series of dangerous heists to survive in a ruthless city in which they can trust nobody, least of all each other.
+insert into game(id,name,price,discount,description,spec_minimum,spec_recommended,picture_1,picture_2,picture_3,picture_4) values('GAME13','Grand Theft Auto V', 19.49, 10, 'When a young street hustler, a retired bank robber and a terrifying psychopath find themselves entangled with some of the most frightening and deranged elements of the criminal underworld, the U.S. government and the entertainment industry, they must pull off a series of dangerous heists to survive in a ruthless city in which they can trust nobody, least of all each other.
 
 Grand Theft Auto V for PC offers players the option to explore the award-winning world of Los Santos and Blaine County in resolutions of up to 4k and beyond, as well as the chance to experience the game running at 60 frames per second.
 
