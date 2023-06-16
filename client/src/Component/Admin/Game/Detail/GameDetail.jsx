@@ -3,7 +3,6 @@ import styles from './GameDetail.module.css';
 import { useState, useEffect, useRef, React } from 'react';
 import axios from 'axios';
 import { BiTrash } from 'react-icons/bi';
-import { AiFillStar } from 'react-icons/ai';
 import FormattedText from '../../../tools/formatText';
 import { Carousel } from "react-bootstrap";
 import { CiDiscount1 } from 'react-icons/ci';
@@ -228,7 +227,6 @@ export default function AdminGameDetail()
                                           } } /> }
                                           { game.discount !== null && parseFloat(game.discount) !== 0 && <h4 style={ { color: 'red' } }>{ game.discount }%</h4> }
                                     </div>
-                                    <h4 className='my-lg-3'>Rating:&nbsp;&nbsp;<AiFillStar style={ { color: "yellow", fontSize: "25px" } } />&nbsp;{ game.rating }</h4>
                                     <h4 className='my-lg-3'>Sold:&nbsp;&nbsp;{ solds }</h4>
                               </div>
                         </div>
