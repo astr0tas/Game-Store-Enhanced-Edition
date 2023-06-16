@@ -12,7 +12,6 @@ create table game(
     price float,
     discount float,
     description text,
-    ratings float default 0 check(ratings>=0 and ratings<=5),
     spec_minimum text,
     spec_recommended text,
     picture_1 text,
