@@ -68,7 +68,7 @@ create table wishlist(
 create table shopping_cart(
 	game_id varchar(100) references game(id) on delete cascade on update cascade,
     customer_id varchar(10) references customer(id) on delete cascade on update cascade,
-    amount int default 1 check(amount>=1), -- this attribute is not in use and should be deleted
+    amount int default 1 check(amount>=1),
     primary key(game_id,customer_id)
 );
 

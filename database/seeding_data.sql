@@ -476,8 +476,3 @@ insert into purchase_history_description values('QM3J7S7V48','Online banking','2
 ('00FUSNNXUR','Online banking','2023-04-15'),
 ('GSNZCXWTWC','Online banking','2023-04-16'),
 ('IW9MNCBZKR','Online banking','2023-04-13');
-
-
--- select * from game;
--- select * from game join activation_code on game.name=activation_code.game_name;
--- select name,picture_1,price,count(*) as total_sale from game join activation_code on game.name=activation_code.game_name where status='available' group by name order by total_sale desc,name limit 5;

@@ -25,26 +25,17 @@
       display: none;
 }
 
-.pop_up {
-      background-color: white;
-      width: 80%;
-      text-align: center;
-      height: 40%;
-      border: 2px solid black;
-      border-radius: 20px;
-      display: flex;
-      top: 20%;
-      max-width: 500px;
-      max-height: 200px;
-      display: none;
-}
-
 .table {
       display: none;
 }
 
 .browse {
       display: none !important;
+}
+
+.popUp {
+      max-width: 400px !important;
+      left: initial !important;
 }
 
 @media only screen and (min-width:768px) {
@@ -59,7 +50,7 @@
             min-height: 200px;
       }
 
-      .img{
-            max-height:300px;
+      .img {
+            max-height: 300px;
       }
 }

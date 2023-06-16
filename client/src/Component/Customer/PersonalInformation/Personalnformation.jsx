@@ -6,6 +6,7 @@ import { domain } from '../../tools/domain';
 import { isRefValid, isRefNotValid } from '../../tools/refChecker';
 import '../../General/css/scroll.css';
 import { AiOutlineCloseCircle } from 'react-icons/ai';
+import { Modal } from 'react-bootstrap';
 
 const History = (props) =>
 {
@@ -45,10 +46,11 @@ export default function CustomerPersonalInfo()
       const imageRef = useRef(null);
       const password_input = useRef(null);
       const repassword_input = useRef(null);
+      const formRef = useRef(null);
 
       const div2Height = useRef(null);
 
-      const update_pop_up = useRef(null);
+      const [showPopup, setShowPopup] = useState(false);
 
       const target = useRef(null);
 
@@ -212,12 +214,12 @@ export default function CustomerPersonalInfo()
       }
 
       return (
-            <form className='h-100 w-100 overflow-auto hideBrowserScrollbar' onSubmit={ confirmChange } onKeyDown={ (event) =>
+            <form className='h-100 w-100 overflow-auto hideBrowserScrollbar d-flex align-items-center justify-content-center' onSubmit={ confirmChange } onKeyDown={ (event) =>
             {
                   if (event.key === 'Enter' || event.key === "NumpadEnter")
                         event.preventDefault();
-            } }>
-                  <div className="d-flex flex-column align-items-center w-100 h-100">
+            } } ref={ formRef }>
+                  <div className="w-100 h-100">
                         <div className={ `h-100 w-100 d-flex flex-column` }>
                               <div className={ `mt-4 d-flex flex-column flex-md-row align-items-center justify-content-md-between align-items-md-start w-100` }>
                                     <div className={ `${ styles.imgContainer } ms-md-5 d-flex flex-column` }>
@@ -275,7 +277,10 @@ export default function CustomerPersonalInfo()
                                           <button type='button' className={ `btn btn-sm btn-primary` } onClick={ changeInfo } ref={ edit }>Edit</button>
                                           <div className={ `${ styles.buttons } w-100 align-items-center justify-content-center` } ref={ update }>
                                                 <button type='button' className={ `btn btn-sm btn-danger` } onClick={ cancelUpdate }>Cancel</button>
-                                                <button type='button' className={ `btn btn-sm btn-primary mx-3` } onClick={ () => { if (isRefValid(update_pop_up)) update_pop_up.current.style.display = "flex"; } }>Confirm</button>
+                                                <button type='button' className={ `btn btn-sm btn-primary mx-3` } onClick={ () =>
+                                                {
+                                                      setShowPopup(true);
+                                                } }>Confirm</button>
                                           </div>
                                     </div>
                               </div>
@@ -296,21 +301,18 @@ export default function CustomerPersonalInfo()
                                     </table>
                               </div>
                         </div>
-                        <div className={ `position-absolute flex-column align-items-center justify-content-around ${ styles.pop_up }` } ref={ update_pop_up }>
-                              <h3 className='mx-2'>Do you really want to update your info?</h3>
-                              <div className='d-flex flex-row align-items-center justify-content-center'>
-                                    <button type='button' className={ `btn btn-danger mx-3` } onClick={ () =>
-                                    {
-                                          if (isRefValid(update_pop_up)) update_pop_up.current.style.display = "none";
-                                    } }>Cancel</button>
-                                    <input value='Confirm' type='submit' className={ `btn btn-primary mx-3` } onClick={ () =>
-                                    {
-                                          if (isRefValid(update_pop_up)) update_pop_up.current.style.display = "none";
-                                          confirmChange();
-                                    } }></input>
-                              </div>
-                        </div>
                   </div>
+                  <Modal show={ showPopup } onHide={ () => { setShowPopup(false); } } className={ `${ styles.popUp } position-absolute` } centered container={ formRef.current }>
+                        <Modal.Header closeButton className='border border-0'>
+                        </Modal.Header>
+                        <Modal.Body className='border border-0 d-flex justify-content-center'>
+                              <h4 className='text-center'>Do you want to update your info?</h4>
+                        </Modal.Body>
+                        <Modal.Footer className='justify-content-center border border-0'>
+                              <button className='btn btn-danger me-2 me-md-4' onClick={ () => { setShowPopup(false); } }>NO</button>
+                              <button className='btn btn-primary ms-2 ms-md-4' onClick={ () => { setShowPopup(false); confirmChange(); } }>YES</button>
+                        </Modal.Footer>
+                  </Modal>
             </form>
       )
 }

@@ -182,20 +182,20 @@ BEGIN
 END $$
 DELIMITER ;
 
--- DROP PROCEDURE IF EXISTS generate_random_string;
--- DELIMITER $$
--- CREATE PROCEDURE generate_random_string(OUT random_string VARCHAR(10))
--- BEGIN
---     SET @chars := 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
---     SET @len := 10;
---     SET random_string := '';
---     
---     WHILE @len > 0 DO
---         SET random_string := CONCAT(random_string, SUBSTRING(@chars, FLOOR(1 + RAND() * 36), 1));
---         SET @len := @len - 1;
---     END WHILE;
--- END $$
--- DELIMITER ;
+DROP PROCEDURE IF EXISTS generate_random_string;
+DELIMITER $$
+CREATE PROCEDURE generate_random_string(OUT random_string VARCHAR(10))
+BEGIN
+    SET @chars := 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    SET @len := 10;
+    SET random_string := '';
+    
+    WHILE @len > 0 DO
+        SET random_string := CONCAT(random_string, SUBSTRING(@chars, FLOOR(1 + RAND() * 36), 1));
+        SET @len := @len - 1;
+    END WHILE;
+END $$
+DELIMITER ;
 
 -- DROP PROCEDURE IF EXISTS buyGame;
 -- DELIMITER $$
@@ -239,22 +239,3 @@ DELIMITER ;
 --     update activation_code set status='used' where activation_code.game_id=game_id and activation_code.code=gameCode;
 -- END $$
 -- DELIMITER ;
-
--- select * from purchase_history join purchase_history_description on purchase_history.description_id=purchase_history_description.id  order by date desc;
--- select * from customer;
--- select * from game;
--- select * from activation_code;
-
--- call addCustomer('Test','b_le1@gmail.com',null,'b_le1231','Test',@usedEmail,@usedUsername);
--- select @usedEmail as email, @usedUsername as username;
--- select * from wishlist;
-
--- select * from shopping_cart;
-
--- select * from customer;
-
--- select * from admin;
-
--- select * from game;
--- select * from belongs_to order by game_id;
--- select * from activation_code order by game_id;
