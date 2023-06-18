@@ -451,6 +451,6 @@ insert into activation_code values ('GAME04', 'HVYD219XROCELSH3', 'available'), 
 insert into activation_code values ('GAME06', 'DAA4XQ8FY4OXF32X', 'available'), ('GAME05', 'SKFZA1NRWA0TKJ24', 'available'), ('GAME05','K6XSEDL9HATQSQ2S','available');
 insert into activation_code values ('GAME11', 'Z2KI5Y03B491UB1F', 'available'), ('GAME12','EEWHOUYQAKJ25QQR', 'available'), ('GAME13','1UE640ECX4EE6X52', 'available');
 
--- delete from activation_code where game_id='GAME01';
+--  delete from activation_code where game_id='GAME09';
 
--- delete from game where id='GAME03';
+--  delete from game where id='GAME03';

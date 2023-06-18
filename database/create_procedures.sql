@@ -1,5 +1,5 @@
 	use game_store;
-
+	
 	DROP PROCEDURE IF EXISTS buyGame;
 	DELIMITER $$
 	CREATE PROCEDURE buyGame(

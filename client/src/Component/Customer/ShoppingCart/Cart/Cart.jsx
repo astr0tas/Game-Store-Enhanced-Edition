@@ -31,6 +31,7 @@ const Card = (props) =>
             axios.post(`http://${ domain }/removeFromCart`, formData, { withCredentials: true }).then(res =>
             {
                   console.log(res);
+                  props.setDisablePurchase(false);
                   props.setRender(!props.render);
             })
                   .catch(err => console.log(err))
@@ -67,13 +68,15 @@ const Card = (props) =>
                                     amount.current.disabled = true;
                                     amount.current.value = 0;
                               }
+                              props.setDisablePurchase(true);
                         }
                         else
                         {
                               if (isRefValid(amount)) amount.current.value = props.amount;
                         }
                   }).catch(error => { console.log(error); })
-      }, [props.id, props.amount, render]);
+            // eslint-disable-next-line react-hooks/exhaustive-deps
+      }, [props.id, props.amount, render, props.render]);
 
       let timer;
       const toggle = (e, symbol) =>
@@ -198,6 +201,8 @@ const Cart = () =>
       const [showpopup4, setshowpopup4] = useState(false);
       const [showpopup5, setshowpopup5] = useState(false);
 
+      const [disablePurchase, setDisablePurchase] = useState(false);
+
       const popUpcontainer = useRef(null);
 
       const Navigate = useNavigate();
@@ -207,29 +212,35 @@ const Cart = () =>
             if (isRefValid(div) && isRefNotValid(target))
                   target.current = ReactDOM.createRoot(div.current);
 
-            if (isRefValid(target))
-                  target.current.render(<></>);
-
             axios.get(`http://${ domain }/getCart`, { withCredentials: true })
                   .then(res =>
                   {
-                        const temp = [];
-                        let totalTemp = 0;
-                        for (let i = 0; i < res.data.length; i++)
+                        if (res.data.length)
                         {
-                              if (parseFloat(res.data[i].discount) !== 0)
-                                    totalTemp += (parseFloat(res.data[i].price) + 0.01) * parseFloat(res.data[i].amount) * (100 - parseFloat(res.data[i].discount)) / 100 - 0.01;
-                              else
-                                    totalTemp += (parseFloat(res.data[i].price) + 0.01) * parseFloat(res.data[i].amount) - 0.01;
-                              temp.push(<Card
-                                    setshowpopup1={ setshowpopup1 }
-                                    setshowpopup3={ setshowpopup3 }
-                                    setshowpopup5={ setshowpopup5 }
-                                    render={ render } setRender={ setRender } Navigate={ Navigate } key={ i } img={ res.data[i].picture_1 } id={ res.data[i].id } name={ res.data[i].name } price={ res.data[i].price } discount={ res.data[i].discount } amount={ res.data[i].amount }
-                              />);
+                              const temp = [];
+                              let totalTemp = 0;
+                              for (let i = 0; i < res.data.length; i++)
+                              {
+                                    if (parseFloat(res.data[i].discount) !== 0)
+                                          totalTemp += (parseFloat(res.data[i].price) + 0.01) * parseFloat(res.data[i].amount) * (100 - parseFloat(res.data[i].discount)) / 100 - 0.01;
+                                    else
+                                          totalTemp += (parseFloat(res.data[i].price) + 0.01) * parseFloat(res.data[i].amount) - 0.01;
+                                    temp.push(<Card
+                                          setDisablePurchase={ setDisablePurchase }
+                                          setshowpopup1={ setshowpopup1 }
+                                          setshowpopup3={ setshowpopup3 }
+                                          setshowpopup5={ setshowpopup5 }
+                                          render={ render } setRender={ setRender } Navigate={ Navigate } key={ i } img={ res.data[i].picture_1 } id={ res.data[i].id } name={ res.data[i].name } price={ res.data[i].price } discount={ res.data[i].discount } amount={ res.data[i].amount }
+                                    />);
+                              }
+                              target.current.render(<>{ temp }</>);
+                              setTotal('$' + ((totalTemp * (100 - discount) / 100).toFixed(2)).toString());
                         }
-                        target.current.render(<>{ temp }</>);
-                        setTotal('$' + ((totalTemp * (100 - discount) / 100).toFixed(2)).toString());
+                        else
+                        {
+                              setDisablePurchase(true);
+                              setTotal('$0');
+                        }
                   })
                   .catch(err => console.log(err))
             axios.get(`http://${ domain }/info/discount`, { withCredentials: true })
@@ -273,7 +284,7 @@ const Cart = () =>
                   <hr></hr>
                   <div className='d-flex justify-content-center align-items-center mb-2 w-100'>
                         <input type='text' disabled className={ `me-3 ${ styles.total } text-center` } style={ { fontSize: '1.5rem' } } value={ total }></input>
-                        <button className='btn btn-primary' onClick={ () => setShowPopup(true) }>Purchase</button>
+                        <button className='btn btn-primary' onClick={ () => setShowPopup(true) } disabled={ disablePurchase }>Purchase</button>
                   </div>
                   <Modal show={ showPopup } backdrop="static" onHide={ () => { setShowPopup(false); } } dialogClassName={ `${ styles.dialog }` } className={ `reAdjustModel container-fluid hideBrowserScrollbar` } container={ popUpcontainer.current } style={ { maxWidth: '800px' } }>
                         <Modal.Header closeButton>
