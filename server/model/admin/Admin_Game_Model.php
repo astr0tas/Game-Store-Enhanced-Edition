@@ -19,7 +19,7 @@ class GameModel
 
       public function getList()
       {
-            $sql = "SELECT name,id,price,discount,ratings,status from game order by name";
+            $sql = "SELECT name,id,price,discount,status from game order by name";
             $result = $this->db->query($sql);
 
             $arr = [];
@@ -33,7 +33,7 @@ class GameModel
 
       public function find($data)
       {
-            $sql = "SELECT name,id,price,discount,ratings from game where name like '%$data%' order by name";
+            $sql = "SELECT name,id,price,discount from game where name like '%$data%' order by name";
             $result = $this->db->query($sql);
             $arr = [];
             if ($result->num_rows > 0) {
@@ -46,7 +46,7 @@ class GameModel
 
       public function getGameSales($id)
       {
-            $sql = "SELECT count(activation_code.game_id) as solds from activation_code where status='used' and game_id='$id'";
+            $sql = "    ";
             $result = $this->db->query($sql);
             if ($result->num_rows > 0) {
                   $row = $result->fetch_assoc();

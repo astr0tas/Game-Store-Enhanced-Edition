@@ -1,0 +1,57 @@
+.title {
+      background-color: white;
+      border-bottom-right-radius: 20px;
+      border-bottom-left-radius: 20px;
+      width: 70%;
+      max-width: 250px;
+      border-bottom: 2px solid black;
+      border-left: 2px solid black;
+      border-right: 2px solid black;
+}
+
+.trash {
+      font-size: 1.5rem;
+      color: red;
+      cursor: pointer;
+}
+
+.trash:active {
+      color: rgb(255, 130, 130);
+}
+
+.total {
+      width: 50%;
+      max-width: 200px;
+}
+
+.methods {
+      width: 25%;
+}
+
+.dialog {
+      max-width: 350px !important;
+      margin-left: auto !important;
+      margin-right: auto !important;
+}
+
+@media only screen and (min-width:768px) {
+      .trash {
+            font-size: 2rem;
+      }
+
+      .card {
+            max-height: 600px;
+      }
+
+      .imgs {
+            max-height: 550px;
+      }
+
+      .methods {
+            width: 50%;
+      }
+
+      .dialog {
+            max-width: 600px !important;
+      }
+}

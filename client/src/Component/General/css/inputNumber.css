@@ -1,0 +1,11 @@
+/* Chrome, Safari, Edge, Opera */
+.removeUpAndDown::-webkit-outer-spin-button,
+.removeUpAndDown::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+}
+
+/* Firefox */
+.removeUpAndDown {
+      -moz-appearance: textfield;
+}

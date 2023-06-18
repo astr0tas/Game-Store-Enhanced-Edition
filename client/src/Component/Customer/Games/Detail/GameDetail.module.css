@@ -55,6 +55,10 @@
       color: gray;
 }
 
+.cartOut {
+      color: rgb(180, 180, 180);
+}
+
 @media only screen and (max-width:350px) {
       .img {
             min-height: 200px;

@@ -1,6 +1,6 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import styles from './GameDetail.module.css';
-import { useState, useEffect, React } from 'react';
+import { useState, useEffect, React, useRef } from 'react';
 import axios from 'axios';
 import FormattedText from '../../../tools/formatText';
 import { Carousel } from "react-bootstrap";
@@ -10,6 +10,8 @@ import { AiOutlineHeart } from 'react-icons/ai';
 import { BsCart } from 'react-icons/bs';
 import '../../../General/css/carousel.css';
 import '../../../General/css/scroll.css';
+import { Modal } from 'react-bootstrap';
+import '../../../General/css/modal.css';
 
 
 
@@ -17,7 +19,12 @@ export default function CustomerGameDetail()
 {
       const id = useParams().id;
 
+      const popUpContainer = useRef(null);
+
       const [render, setRender] = useState(false);
+      const [showpopup1, setshowpopup1] = useState(false);
+      const [showpopup2, setshowpopup2] = useState(false);
+      const [showpopup3, setshowpopup3] = useState(false);
 
       const [game, SetGame] = useState({
             name: "N/A",
@@ -37,6 +44,7 @@ export default function CustomerGameDetail()
 
       const [isInWish, setIsInWish] = useState(false);
       const [isInCart, setIsInCart] = useState(false);
+      const [isOut, setIsOut] = useState(false);
 
       const Navigate = useNavigate();
 
@@ -79,19 +87,23 @@ export default function CustomerGameDetail()
                   .then(res =>
                   {
                         if (res.data)
+                        {
                               setStatus({ str: "Available", color: "#128400" });
+                              axios.post(`http://${ domain }/isAddedToCart`, formData, { withCredentials: true }).then(res =>
+                              {
+                                    setIsInCart(res.data);
+                              })
+                                    .catch(err => console.log(err))
+                        }
                         else
+                        {
                               setStatus({ str: "Out of stock", color: "red" });
+                              setIsOut(true);
+                        }
                   }).catch(error => { console.log(error); })
             axios.post(`http://${ domain }/isAddedToWishlist`, formData, { withCredentials: true }).then(res =>
             {
                   setIsInWish(res.data);
-            })
-                  .catch(err => console.log(err))
-
-            axios.post(`http://${ domain }/isAddedToCart`, formData, { withCredentials: true }).then(res =>
-            {
-                  setIsInCart(res.data);
             })
                   .catch(err => console.log(err))
       }, [render, id]);
@@ -113,8 +125,15 @@ export default function CustomerGameDetail()
             {
                   axios.post(`http://${ domain }/addToWishlist`, formData, { withCredentials: true }).then(res =>
                   {
-                        console.log(res);
-                        setRender(!render);
+                        if (res.data.OutDeleted === '1')
+                              setshowpopup3(true);
+                        else
+                        {
+                              if (res.data.OutStatus === '1')
+                                    setRender(!render);
+                              else
+                                    setshowpopup1(true);
+                        }
                   })
                         .catch(err => console.log(err))
             }
@@ -122,6 +141,8 @@ export default function CustomerGameDetail()
 
       const toggleCart = () =>
       {
+            if (isOut)
+                  return;
             const formData = new FormData();
             formData.append('id', id);
             if (isInCart)
@@ -137,15 +158,68 @@ export default function CustomerGameDetail()
             {
                   axios.post(`http://${ domain }/addToCart`, formData, { withCredentials: true }).then(res =>
                   {
-                        console.log(res);
-                        setRender(!render);
+                        if (res.data.OutDeleted === '1')
+                              setshowpopup3(true);
+                        else
+                        {
+                              if (res.data.OutStatus === '0')
+                                    setshowpopup1(true);
+                              else
+                              {
+                                    if (res.data.OutRemain === '0')
+                                          setshowpopup2(true);
+                                    setRender(!render);
+                              }
+                        }
                   })
                         .catch(err => console.log(err))
             }
       }
 
       return (
-            <div className="w-100 h-100 d-flex flex-column align-items-center justify-content-center">
+            <div className="w-100 h-100 d-flex flex-column align-items-center" ref={ popUpContainer }>
+                  <Modal show={ showpopup1 } className={ `reAdjustModel` } container={ popUpContainer.current }>
+                        <Modal.Header className='border border-0'>
+                        </Modal.Header>
+                        <Modal.Body className='border border-0 d-flex justify-content-center'>
+                              <h4 className='text-center'>This game has been suspended!</h4>
+                        </Modal.Body>
+                        <Modal.Footer className='justify-content-center border border-0'>
+                              <button className='btn btn-primary ms-2 ms-md-4' onClick={ () =>
+                              {
+                                    setshowpopup1(false);
+                                    Navigate(-1);
+                              } }>Okay</button>
+                        </Modal.Footer>
+                  </Modal>
+                  <Modal show={ showpopup2 } className={ `reAdjustModel` } container={ popUpContainer.current }>
+                        <Modal.Header className='border border-0'>
+                        </Modal.Header>
+                        <Modal.Body className='border border-0 d-flex justify-content-center'>
+                              <h4 className='text-center'>This game has been sold out!</h4>
+                        </Modal.Body>
+                        <Modal.Footer className='justify-content-center border border-0'>
+                              <button className='btn btn-primary ms-2 ms-md-4' onClick={ () =>
+                              {
+                                    setshowpopup2(false);
+                                    setRender(!render);
+                              } }>Okay</button>
+                        </Modal.Footer>
+                  </Modal>
+                  <Modal show={ showpopup3 } className={ `reAdjustModel` } container={ popUpContainer.current }>
+                        <Modal.Header className='border border-0'>
+                        </Modal.Header>
+                        <Modal.Body className='border border-0 d-flex justify-content-center'>
+                              <h4 className='text-center'>This game has been deleted!</h4>
+                        </Modal.Body>
+                        <Modal.Footer className='justify-content-center border border-0'>
+                              <button className='btn btn-primary ms-2 ms-md-4' onClick={ () =>
+                              {
+                                    setshowpopup3(false);
+                                    Navigate(-1);
+                              } }>Okay</button>
+                        </Modal.Footer>
+                  </Modal>
                   <div className="d-flex align-items-center w-100" style={ { minHeight: "50px" } }>
                         <div className='ms-auto me-3'>
                               <button className={ `ms-2 btn btn-sm btn-secondary` } onClick={ () => { Navigate(-1); } }>Back</button>
@@ -206,13 +280,13 @@ export default function CustomerGameDetail()
                                           { game.discount !== null && parseFloat(game.discount) !== 0 && <CiDiscount1 style={ {
                                                 fontSize: '1.5rem',
                                                 color: 'red',
-                                                marginBottom: '12px'
+                                                marginBottom: '10px'
                                           } } /> }
                                           { game.discount !== null && parseFloat(game.discount) !== 0 && <h4 style={ { color: 'red' } }>{ game.discount }%</h4> }
                                     </div>
                                     <div className='d-flex mt-3 align-items-center'>
                                           <AiOutlineHeart className={ `me-2 ${ styles.icons } ${ isInWish === false ? styles.unwish : styles.wish }` } style={ { fontSize: '2.5rem' } } onClick={ toggleWishlist } />
-                                          <BsCart className={ `ms-2 ${ styles.icons } ${ isInCart === false ? styles.uncart : styles.cart }` } style={ { fontSize: '2.5rem' } } onClick={ toggleCart } />
+                                          <BsCart className={ `ms-2 ${ styles.icons } ${ isOut ? styles.cartOut : (isInCart === false ? styles.uncart : styles.cart) }` } style={ { fontSize: '2.5rem' } } onClick={ toggleCart } />
                                     </div>
                               </div>
                         </div>

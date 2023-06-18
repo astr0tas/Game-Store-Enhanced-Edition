@@ -87,8 +87,15 @@ class CustomerSelfModel
       public function updateInfo($id, $name, $email, $phone, $password, $image)
       {
             $stmt = $this->db->prepare("CALL updateCustomerInfo(?, ?, ?, ?, ?, ?)");
-            $stmt->bind_param("ssssss", $id,$name, $email, $phone, $password, $image);
+            $stmt->bind_param("ssssss", $id, $name, $email, $phone, $password, $image);
             return $stmt->execute();
+      }
+
+      public function getDiscount($id)
+      {
+            $sql = "select membership_discount from customer where id='$id'";
+            $result = $this->db->query($sql);
+            return $result->fetch_assoc();
       }
 
       public function __destruct()

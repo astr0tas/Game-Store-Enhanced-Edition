@@ -53,7 +53,7 @@ class CustomerController
             $email = $_POST['email'];
             $username = $_POST['username'];
             $password = $_POST['password'];
-            $phone = $_POST['phone']==='null'?null:$_POST['phone'];
+            $phone = $_POST['phone'] === 'null' ? null : $_POST['phone'];
             echo json_encode($this->customer_model->signUp($name, $email, $username, $password, $phone));
       }
 
@@ -79,11 +79,11 @@ class CustomerController
             session_id($_COOKIE['PHPSESSID']);
             session_start();
             $id = $_SESSION['id'];
-            
+
             $name = $_POST['name'];
             $email = $_POST['email'];
-            $phone = $_POST['phone']==='null'?null:$_POST['phone'];
-            $password = $_POST['password']==='null'?null:$_POST['password'];
+            $phone = $_POST['phone'] === 'null' ? null : $_POST['phone'];
+            $password = $_POST['password'] === 'null' ? null : $_POST['password'];
 
             $image = null;
             $path = dirname(__FILE__);
@@ -102,13 +102,23 @@ class CustomerController
             echo json_encode(array("message" => $result ? "success" : "failed"));
       }
 
+      public function getDiscount()
+      {
+            session_id($_COOKIE['PHPSESSID']);
+            session_start();
+            $id = $_SESSION['id'];
+
+            $result = $this->customer_model->getDiscount($id);
+            echo json_encode($result);
+      }
+
       /* Home */
 
       /* Games */
       public function getGames()
       {
-            $name=$_POST['name']==='null'?null:$_POST['name'];
-            if($name)
+            $name = $_POST['name'] === 'null' ? null : $_POST['name'];
+            if ($name)
                   $result = $this->game_model->getGames($name);
             else
                   $result = $this->game_model->getGames();
@@ -117,7 +127,7 @@ class CustomerController
 
       public function getGameCategory()
       {
-            $id=$_POST['id'];
+            $id = $_POST['id'];
             $result = $this->game_model->getGameCategory($id);
             echo json_encode($result);
       }
@@ -154,7 +164,7 @@ class CustomerController
             $id = $_SESSION['id'];
             $game_id = $_POST['id'];
             $result = $this->game_model->addToWishlist($id, $game_id);
-            echo json_encode(array("message" => $result ? "success" : "failed"));
+            echo json_encode($result);
       }
 
       public function removeFromWishlist()
@@ -172,8 +182,8 @@ class CustomerController
             session_id($_COOKIE['PHPSESSID']);
             session_start();
             $id = $_SESSION['id'];
-            $name=$_POST['name']==='null'?null:$_POST['name'];
-            $result = $this->game_model->getWishlist($id,$name);
+            $name = $_POST['name'] === 'null' ? null : $_POST['name'];
+            $result = $this->game_model->getWishlist($id, $name);
             echo json_encode($result);
       }
 
@@ -195,7 +205,7 @@ class CustomerController
             $id = $_SESSION['id'];
             $game_id = $_POST['id'];
             $result = $this->game_model->addToCart($id, $game_id);
-            echo json_encode(array("message" => $result ? "success" : "failed"));
+            echo json_encode($result);
       }
 
       public function removeFromCart()
@@ -208,8 +218,35 @@ class CustomerController
             echo json_encode(array("message" => $result ? "success" : "failed"));
       }
 
+      public function getCart()
+      {
+            session_id($_COOKIE['PHPSESSID']);
+            session_start();
+            $id = $_SESSION['id'];
+            $result = $this->game_model->getCart($id);
+            echo json_encode($result);
+      }
 
+      public function adjustAmount()
+      {
+            session_id($_COOKIE['PHPSESSID']);
+            session_start();
+            $id = $_SESSION['id'];
+            $gameID = $_POST['id'];
+            $result = $this->game_model->adjustAmount($id, $gameID, $_POST['mode'], $_POST['mode'] === '3' ? $_POST['amount'] : null);
+            echo json_encode($result);
+      }
 
+      public function buyGame()
+      {
+            session_id($_COOKIE['PHPSESSID']);
+            session_start();
+            $id = $_SESSION['id'];
+            $total = floatval($_POST['total']);
+            $method = $_POST['method'];
+            $result = $this->game_model->buyGame($id, $total, $method);
+            echo json_encode($result);
+      }
 
 
 
@@ -217,31 +254,13 @@ class CustomerController
 
       
 
+
+
+
       public function getBestSeller()
       {
             $arr = $this->game_model->getBestSeller();
             echo json_encode($arr);
-      }
-
-      public function getCart()
-      {
-            $result = $this->game_model->getCart();
-            echo json_encode($result);
-      }
-
-      public function displayCart()
-      {
-            $offset = $_POST['offset'];
-            $result = $this->game_model->displayCart($offset);
-            echo json_encode($result);
-      }
-
-      public function buyGame()
-      {
-            $games=$_POST['games'];
-            $method=$_POST['method'];
-            $result = $this->game_model->buyGame($games,$method);
-            echo json_encode(array("message"=>$result?"success":"failed"));
       }
 
       public function product()

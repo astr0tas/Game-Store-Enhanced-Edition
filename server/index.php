@@ -17,6 +17,7 @@
       $router->get("/info", "CustomerController@getInfo");
       $router->get("/info/history", "CustomerController@getHistory");
       $router->post("/info/update", "CustomerController@updateInfo");
+      $router->get("/info/discount", "CustomerController@getDiscount");
       /* Home */
       /* Games */
       $router->post("/getGames", "CustomerController@getGames");
@@ -33,6 +34,9 @@
       $router->post("/isAddedToCart", "CustomerController@isAddedToCart");
       $router->post("/addToCart", "CustomerController@addToCart");
       $router->post("/removeFromCart", "CustomerController@removeFromCart");
+      $router->get("/getCart", "CustomerController@getCart");
+      $router->post("/adjustAmount", "CustomerController@adjustAmount");
+      $router->post("/buyGame", "CustomerController@buyGame");
 
 
 
@@ -40,9 +44,6 @@
 
 
       $router->get("/getBestSeller", "CustomerController@getBestSeller");
-      $router->get("/getCart", "CustomerController@getCart");
-      $router->post("/displayCart", "CustomerController@displayCart");
-      $router->post("/buyGame", "CustomerController@buyGame");
       $router->post("/product", "CustomerController@product");
 
       ################################## Admin routes ##################################

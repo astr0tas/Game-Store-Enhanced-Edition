@@ -10,12 +10,15 @@ import { AiOutlineHeart } from 'react-icons/ai';
 import { BsCart } from 'react-icons/bs';
 import { CiDiscount1 } from 'react-icons/ci';
 import { FaGamepad } from 'react-icons/fa';
+import { Modal } from 'react-bootstrap';
+import '../../../General/css/modal.css';
 
 const Game = (props) =>
 {
       const [isInWish, setIsInWish] = useState(false);
       const [isInCart, setIsInCart] = useState(false);
       const [render, setRender] = useState(false);
+      const [isOut, setIsOut] = useState(false);
 
       useEffect(() =>
       {
@@ -27,11 +30,19 @@ const Game = (props) =>
             })
                   .catch(err => console.log(err))
 
-            axios.post(`http://${ domain }/isAddedToCart`, formData, { withCredentials: true }).then(res =>
-            {
-                  setIsInCart(res.data);
-            })
-                  .catch(err => console.log(err))
+            axios.post(`http://${ domain }/game/status`, formData)
+                  .then(res =>
+                  {
+                        if (res.data)
+                        {
+                              axios.post(`http://${ domain }/isAddedToCart`, formData, { withCredentials: true }).then(res =>
+                              {
+                                    setIsInCart(res.data);
+                              })
+                                    .catch(err => console.log(err))
+                        }
+                        else setIsOut(true);
+                  }).catch(error => { console.log(error); })
       }, [render, props.id]);
 
       const toggleWishlist = () =>
@@ -51,8 +62,15 @@ const Game = (props) =>
             {
                   axios.post(`http://${ domain }/addToWishlist`, formData, { withCredentials: true }).then(res =>
                   {
-                        console.log(res);
-                        setRender(!render);
+                        if (res.data.OutDeleted === '1')
+                              props.setshowpopup3(true);
+                        else
+                        {
+                              if (res.data.OutStatus === '1')
+                                    setRender(!render);
+                              else
+                                    props.setshowpopup1(true);
+                        }
                   })
                         .catch(err => console.log(err))
             }
@@ -60,6 +78,8 @@ const Game = (props) =>
 
       const toggleCart = () =>
       {
+            if (isOut)
+                  return;
             const formData = new FormData();
             formData.append('id', props.id);
             if (isInCart)
@@ -75,8 +95,19 @@ const Game = (props) =>
             {
                   axios.post(`http://${ domain }/addToCart`, formData, { withCredentials: true }).then(res =>
                   {
-                        console.log(res);
-                        setRender(!render);
+                        if (res.data.OutDeleted === '1')
+                              props.setshowpopup3(true);
+                        else
+                        {
+                              if (res.data.OutStatus === '0')
+                                    props.setshowpopup1(true);
+                              else
+                              {
+                                    if (res.data.OutRemain === '0')
+                                          props.setshowpopup2(true);
+                                    setRender(!render);
+                              }
+                        }
                   })
                         .catch(err => console.log(err))
             }
@@ -103,7 +134,7 @@ const Game = (props) =>
                               </div>
                               <div className='d-flex mt-3 mx-auto align-items-center'>
                                     <AiOutlineHeart className={ `me-2 ${ styles.icons } ${ isInWish === false ? styles.unwish : styles.wish }` } style={ { fontSize: '2.5rem' } } onClick={ toggleWishlist } />
-                                    <BsCart className={ `ms-2 ${ styles.icons } ${ isInCart === false ? styles.uncart : styles.cart }` } style={ { fontSize: '2.5rem' } } onClick={ toggleCart } />
+                                    <BsCart className={ `ms-2 ${ styles.icons } ${ isOut ? styles.cartOut : (isInCart === false ? styles.uncart : styles.cart) }` } style={ { fontSize: '2.5rem' } } onClick={ toggleCart } />
                               </div>
                         </div>
                   </div >
@@ -124,7 +155,7 @@ const Group = (props) =>
             for (let i = 0; i < props.data.length; i++)
             {
                   if (props.data[i] !== undefined)
-                        temp.push(<Game numOfElem={ props.numOfElem } key={ props.i + i } id={ props.data[i].id } name={ props.data[i].name } img={ props.data[i].picture_1 } discount={ props.data[i].discount } price={ props.data[i].price } />);
+                        temp.push(<Game showpopup3={ props.showpopup3 } setshowpopup3={ props.setshowpopup3 } showpopup2={ props.showpopup2 } setshowpopup2={ props.setshowpopup2 } showpopup1={ props.showpopup1 } setshowpopup1={ props.setshowpopup1 } numOfElem={ props.numOfElem } key={ props.i + i } id={ props.data[i].id } name={ props.data[i].name } img={ props.data[i].picture_1 } discount={ props.data[i].discount } price={ props.data[i].price } />);
             }
             target.current.render(<>{ temp }</>)
       });
@@ -144,7 +175,12 @@ const CustomerGameList = () =>
       const searchValue = useRef(null);
       const lastBreakpoint = useRef(0);
 
+      const popUpContainer = useRef(null);
+
       const [render, setRender] = useState(false);
+      const [showpopup1, setshowpopup1] = useState(false);
+      const [showpopup2, setshowpopup2] = useState(false);
+      const [showpopup3, setshowpopup3] = useState(false);
 
       let timer;
       const searchGame = () =>
@@ -207,13 +243,13 @@ const CustomerGameList = () =>
                         for (let i = 0; i < res.data.length / numOfElem; i++)
                         {
                               if (numOfElem === 1)
-                                    temp.push(<Group numOfElem={ numOfElem } i={ i * numOfElem } key={ i } data={ [res.data[i * numOfElem]] } />);
+                                    temp.push(<Group showpopup3={ showpopup3 } setshowpopup3={ setshowpopup3 } showpopup2={ showpopup2 } setshowpopup2={ setshowpopup2 } showpopup1={ showpopup1 } setshowpopup1={ setshowpopup1 } numOfElem={ numOfElem } i={ i * numOfElem } key={ i } data={ [res.data[i * numOfElem]] } />);
                               else if (numOfElem === 2)
-                                    temp.push(<Group numOfElem={ numOfElem } i={ i * numOfElem } key={ i } data={ [res.data[i * numOfElem], res.data[i * numOfElem + 1]] } />);
+                                    temp.push(<Group showpopup3={ showpopup3 } setshowpopup3={ setshowpopup3 } showpopup2={ showpopup2 } setshowpopup2={ setshowpopup2 } showpopup1={ showpopup1 } setshowpopup1={ setshowpopup1 } numOfElem={ numOfElem } i={ i * numOfElem } key={ i } data={ [res.data[i * numOfElem], res.data[i * numOfElem + 1]] } />);
                               else if (numOfElem === 3)
-                                    temp.push(<Group numOfElem={ numOfElem } i={ i * numOfElem } key={ i } data={ [res.data[i * numOfElem], res.data[i * numOfElem + 1], res.data[i * numOfElem + 2]] } />);
+                                    temp.push(<Group showpopup3={ showpopup3 } setshowpopup3={ setshowpopup3 } showpopup2={ showpopup2 } setshowpopup2={ setshowpopup2 } showpopup1={ showpopup1 } setshowpopup1={ setshowpopup1 } numOfElem={ numOfElem } i={ i * numOfElem } key={ i } data={ [res.data[i * numOfElem], res.data[i * numOfElem + 1], res.data[i * numOfElem + 2]] } />);
                               else
-                                    temp.push(<Group numOfElem={ numOfElem } i={ i * numOfElem } key={ i } data={ [res.data[i * numOfElem], res.data[i * numOfElem + 1], res.data[i * numOfElem + 2], res.data[i * numOfElem + 3]] } />);
+                                    temp.push(<Group showpopup3={ showpopup3 } setshowpopup3={ setshowpopup3 } showpopup2={ showpopup2 } setshowpopup2={ setshowpopup2 } showpopup1={ showpopup1 } setshowpopup1={ setshowpopup1 } numOfElem={ numOfElem } i={ i * numOfElem } key={ i } data={ [res.data[i * numOfElem], res.data[i * numOfElem + 1], res.data[i * numOfElem + 2], res.data[i * numOfElem + 3]] } />);
                         }
                         target.current.render(<>{ temp }</>)
                   })
@@ -223,10 +259,11 @@ const CustomerGameList = () =>
             {
                   window.removeEventListener('resize', handleResize);
             };
+            // eslint-disable-next-line react-hooks/exhaustive-deps
       }, [render]);
 
       return (
-            <div className='w-100 h-100 d-flex flex-column'>
+            <div className='w-100 h-100 d-flex flex-column align-items-center' ref={ popUpContainer }>
                   <div className={ `d-flex flex-column align-items-center justify-content-center w-100 mb-2` }>
                         <div className={ `d-flex align-items-center justify-content-center ${ styles.title }` }>
                               <div style={ { color: "red", fontSize: '2rem' } } className='d-flex align-items-center'>
@@ -241,6 +278,47 @@ const CustomerGameList = () =>
                   </div>
                   <div className='flex-grow-1 overflow-auto container-fluid mt-4 mb-4' ref={ div }>
                   </div>
+                  <Modal show={ showpopup1 } className={ `reAdjustModel` } container={ popUpContainer.current }>
+                        <Modal.Header className='border border-0'>
+                        </Modal.Header>
+                        <Modal.Body className='border border-0 d-flex justify-content-center'>
+                              <h4 className='text-center'>This game has been suspended!</h4>
+                        </Modal.Body>
+                        <Modal.Footer className='justify-content-center border border-0'>
+                              <button className='btn btn-primary ms-2 ms-md-4' onClick={ () =>
+                              {
+                                    setshowpopup1(false);
+                                    setRender(!render);
+                              } }>Okay</button>
+                        </Modal.Footer>
+                  </Modal>
+                  <Modal show={ showpopup2 } className={ `reAdjustModel` } container={ popUpContainer.current }>
+                        <Modal.Header className='border border-0'>
+                        </Modal.Header>
+                        <Modal.Body className='border border-0 d-flex justify-content-center'>
+                              <h4 className='text-center'>This game has been sold out!</h4>
+                        </Modal.Body>
+                        <Modal.Footer className='justify-content-center border border-0'>
+                              <button className='btn btn-primary ms-2 ms-md-4' onClick={ () =>
+                              {
+                                    setshowpopup2(false);
+                              } }>Okay</button>
+                        </Modal.Footer>
+                  </Modal>
+                  <Modal show={ showpopup3 } className={ `reAdjustModel` } container={ popUpContainer.current }>
+                        <Modal.Header className='border border-0'>
+                        </Modal.Header>
+                        <Modal.Body className='border border-0 d-flex justify-content-center'>
+                              <h4 className='text-center'>This game has been deleted!</h4>
+                        </Modal.Body>
+                        <Modal.Footer className='justify-content-center border border-0'>
+                              <button className='btn btn-primary ms-2 ms-md-4' onClick={ () =>
+                              {
+                                    setshowpopup3(false);
+                                    setRender(!render);
+                              } }>Okay</button>
+                        </Modal.Footer>
+                  </Modal>
             </div>
       )
 }

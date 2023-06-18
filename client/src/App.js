@@ -18,7 +18,8 @@ import CustomerGameDetail from './Component/Customer/Games/Detail/GameDetail';
 // Customer Wishlist
 import CustomerWishList from './Component/Customer/WishList/WishList';
 // Customer Shopping Cart
-import Cart from './Component/Customer/ShoppingCart/Cart';
+import Cart from './Component/Customer/ShoppingCart/Cart/Cart';
+import Receipt from './Component/Customer/ShoppingCart/Receipt/Receipt';
 
 /* Admin pages */
 // Authentication pages
@@ -78,7 +79,10 @@ function App()
               {/* Wish List */ }
               <Route path='wish-list' element={ <CustomerWishList /> } />
               {/* Shopping Cart */ }
-              <Route path='cart' element={ <Cart /> } />
+              <Route>
+                <Route path='cart' element={ <Cart /> } />
+                <Route path='cart/receipt' element={ <Receipt /> } />
+              </Route>
             </Route>
           </Route>
 

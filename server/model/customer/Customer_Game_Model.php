@@ -17,10 +17,10 @@ class CustomerGameModel
             }
       }
 
-      public function getGames($name=null)
+      public function getGames($name = null)
       {
-            $sql="";
-            if($name)
+            $sql = "";
+            if ($name)
                   $sql = "SELECT id,name,picture_1, price, discount from game where status=true and name like '$name%' order by name asc";
             else
                   $sql = "SELECT id,name,picture_1, price, discount from game where status=true order by name asc";
@@ -56,8 +56,13 @@ class CustomerGameModel
 
       public function addToWishlist($id, $game_id)
       {
-            $sql = "insert into wishlist values('$game_id','$id')";
-            return $this->db->query($sql);
+            $stmt = $this->db->prepare("CALL addToWishlist(?, ?,@OutStatus,@OutDeleted)");
+            $stmt->bind_param("ss", $game_id, $id);
+            $stmt->execute();
+            $stmt->close();
+            $result = $this->db->query("SELECT @OutStatus AS OutStatus,@OutDeleted as OutDeleted");
+            $row = $result->fetch_assoc();
+            return $row;
       }
 
       public function removeFromWishlist($id, $game_id)
@@ -68,8 +73,13 @@ class CustomerGameModel
 
       public function addToCart($id, $game_id)
       {
-            $sql = "insert into shopping_cart(game_id,customer_id) values('$game_id','$id')";
-            return $this->db->query($sql);
+            $stmt = $this->db->prepare("CALL addToCart(?, ?,@OutStatus,@OutRemain,@OutDeleted)");
+            $stmt->bind_param("ss", $game_id, $id);
+            $stmt->execute();
+            $stmt->close();
+            $result = $this->db->query("SELECT @OutStatus AS OutStatus,@OutRemain as OutRemain,@OutDeleted as OutDeleted");
+            $row = $result->fetch_assoc();
+            return $row;
       }
 
       public function removeFromCart($id, $game_id)
@@ -96,11 +106,11 @@ class CustomerGameModel
             $result = $this->db->query($sql);
             $arr = [];
             if ($result->num_rows > 0) {
-                  while ($row = $result->fetch_assoc()) {   
+                  while ($row = $result->fetch_assoc()) {
                         $arr[] = $row;
                   }
             }
-            return $arr;  
+            return $arr;
       }
 
       public function getAllInfo($id)
@@ -114,10 +124,10 @@ class CustomerGameModel
             return null;
       }
 
-      public function getWishlist($id,$name)
+      public function getWishlist($id, $name)
       {
-            $sql="";
-            if($name)
+            $sql = "";
+            if ($name)
                   $sql = "SELECT id,name,picture_1, price, discount from game join wishlist on game_id=id where customer_id='$id' and name like '$name%' and status=true order by name asc";
             else
                   $sql = "SELECT id,name,picture_1, price, discount from game join wishlist on game_id=id where customer_id='$id' and status=true order by name asc";
@@ -131,12 +141,48 @@ class CustomerGameModel
             return $arr;
       }
 
+      public function getCart($id)
+      {
+            $sql = "SELECT game.id, game.name, picture_1, price, discount, amount from game join shopping_cart on game_id=game.id join customer on customer_id=customer.id  where customer_id='$id' and status=true order by game.name asc";
+            $result = $this->db->query($sql);
+            $arr = [];
+            if ($result->num_rows > 0) {
+                  while ($row = $result->fetch_assoc()) {
+                        $arr[] = $row;
+                  }
+            }
+            return $arr;
+      }
+
+      public function adjustAmount($id, $gameID, $mode, $amount)
+      {
+            $stmt = $this->db->prepare("CALL adjustAmount(?, ?, ?, ?,@OutStatus,@OutDeleted,@OutNotEnough)");
+            $stmt->bind_param("ssss", $gameID, $id, $mode, $amount);
+            $stmt->execute();
+            $stmt->close();
+            $result = $this->db->query("SELECT @OutStatus AS OutStatus,@OutDeleted as OutDeleted,@OutNotEnough as OutNotEnough");
+            $row = $result->fetch_assoc();
+            return $row;
+      }
+
+      public function buyGame($id, $total, $method)
+      {
+            $stmt = $this->db->prepare("CALL buyGame(?, ?, ?, @OutStatus,@OutDeleted,@OutNotEnough)");
+            $stmt->bind_param("sds", $id, $total, $method);
+            $stmt->execute();
+            $stmt->close();
+            $result = $this->db->query("SELECT @OutStatus AS OutStatus,@OutDeleted as OutDeleted,@OutNotEnough as OutNotEnough");
+            $row = $result->fetch_assoc();
+            return $row;
+      }
 
 
+      
 
 
 
       
+
 
 
       public function getBestSeller()
@@ -151,53 +197,6 @@ class CustomerGameModel
                   }
             }
             return $arr;
-      }
-
-      public function getCart()
-      {
-            session_id($_COOKIE['PHPSESSID']);
-            session_start();
-            $id = $_SESSION['id'];
-            $sql = "SELECT game.id,game.name,picture_1, price, discount,amount,membership_discount from game join shopping_cart on game_id=game.id join customer on customer_id=customer.id  where customer_id='$id' group by game.name order by game.name asc";
-            $result = $this->db->query($sql);
-            $arr = [];
-            if ($result->num_rows > 0) {
-                  while ($row = $result->fetch_assoc()) {
-                        $row['picture_1'] = unpack('c*', $row['picture_1']);
-                        $arr[] = $row;
-                  }
-            }
-            return $arr;
-      }
-
-      public function displayCart($offset)
-      {
-            session_id($_COOKIE['PHPSESSID']);
-            session_start();
-            $id = $_SESSION['id'];
-            $sql = "SELECT game.id,game.name,picture_1, price, discount,amount,membership_discount from game join shopping_cart on game_id=game.id join customer on customer_id=customer.id  where customer_id='$id' group by game.name order by game.name asc limit 2 offset $offset";
-            $result = $this->db->query($sql);
-            $arr = [];
-            if ($result->num_rows > 0) {
-                  while ($row = $result->fetch_assoc()) {
-                        $row['picture_1'] = unpack('c*', $row['picture_1']);
-                        $arr[] = $row;
-                  }
-            }
-            return $arr;
-      }
-
-      public function buyGame($games,$method)
-      {
-            session_id($_COOKIE['PHPSESSID']);
-            session_start();
-            $id = $_SESSION['id'];
-            $games=explode(',',$games);
-            $sql="";
-            foreach ($games as $element) {
-                  $sql .= "call buyGame('$id','$element','$method');";
-            }
-            return $this->db->multi_query($sql);
       }
 
       public function product($offset)

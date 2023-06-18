@@ -74,7 +74,7 @@ create table shopping_cart(
 create table purchase_history_description(
 	id varchar(10) primary key,
     method varchar(15) check(method='MoMo wallet' or method='Online banking'),
-    date date not null
+    date datetime not null
 );
 
 create table purchase_history(
