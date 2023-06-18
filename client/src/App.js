@@ -1,5 +1,6 @@
 import './App.css';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { useState } from 'react';
 
 /* Customer pages */
 // Authentication pages
@@ -57,7 +58,8 @@ const NotFound = () =>
 
 function App()
 {
-
+  const [isPaid, setIsPaid] = useState(false);
+  
   return (
     <div className="App">
       <BrowserRouter>
@@ -80,8 +82,8 @@ function App()
               <Route path='wish-list' element={ <CustomerWishList /> } />
               {/* Shopping Cart */ }
               <Route>
-                <Route path='cart' element={ <Cart /> } />
-                <Route path='cart/receipt' element={ <Receipt /> } />
+                <Route path='cart' element={ <Cart setIsPaid={ setIsPaid } /> } />
+                <Route path='cart/receipt' element={ <Receipt isPaid={ isPaid } /> } />
               </Route>
             </Route>
           </Route>

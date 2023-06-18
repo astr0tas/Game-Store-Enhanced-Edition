@@ -248,11 +248,18 @@ class CustomerController
             echo json_encode($result);
       }
 
+      public function getReceipt()
+      {
+            session_id($_COOKIE['PHPSESSID']);
+            session_start();
+            $id = $_SESSION['id'];
+            $result = $this->game_model->getReceipt($id);
+            echo json_encode($result);
+      }
 
 
 
 
-      
 
 
 
@@ -261,12 +268,5 @@ class CustomerController
       {
             $arr = $this->game_model->getBestSeller();
             echo json_encode($arr);
-      }
-
-      public function product()
-      {
-            $offset = $_POST['offset'];
-            $result = $this->game_model->product($offset);
-            echo json_encode($result);
       }
 }

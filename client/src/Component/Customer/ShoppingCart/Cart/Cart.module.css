@@ -34,6 +34,23 @@
       margin-right: auto !important;
 }
 
+.wish {
+      color: red;
+}
+
+.wish:hover,
+.unwish:hover {
+      cursor: pointer;
+}
+
+.wish:active {
+      color: rgb(255, 100, 100);
+}
+
+.unwish:active {
+      color: gray;
+}
+
 @media only screen and (min-width:768px) {
       .trash {
             font-size: 2rem;

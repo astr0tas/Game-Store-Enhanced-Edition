@@ -12,13 +12,14 @@ import '../../../General/css/inputNumber.css';
 import { Modal } from 'react-bootstrap';
 import '../../../General/css/modal.css';
 import '../../../General/css/scroll.css';
-import { AiOutlineCloseCircle } from 'react-icons/ai';
+import { AiOutlineCloseCircle, AiOutlineHeart } from 'react-icons/ai';
 
 const Card = (props) =>
 {
       const [category, setCategory] = useState("N/A");
       const [isOut, setIsOut] = useState(false);
       const [render, setRender] = useState(false);
+      const [isInWish, setIsInWish] = useState(false);
 
       const increase = useRef(null);
       const decrease = useRef(null);
@@ -69,6 +70,11 @@ const Card = (props) =>
                                     amount.current.value = 0;
                               }
                               props.setDisablePurchase(true);
+                              axios.post(`http://${ domain }/isAddedToWishlist`, formData, { withCredentials: true }).then(res =>
+                              {
+                                    setIsInWish(res.data);
+                              })
+                                    .catch(err => console.log(err))
                         }
                         else
                         {
@@ -142,6 +148,37 @@ const Card = (props) =>
             }
       }
 
+      const toggleWishlist = () =>
+      {
+            const formData = new FormData();
+            formData.append('id', props.id);
+            if (isInWish)
+            {
+                  axios.post(`http://${ domain }/removeFromWishlist`, formData, { withCredentials: true }).then(res =>
+                  {
+                        console.log(res);
+                        setRender(!render);
+                  })
+                        .catch(err => console.log(err))
+            }
+            else
+            {
+                  axios.post(`http://${ domain }/addToWishlist`, formData, { withCredentials: true }).then(res =>
+                  {
+                        if (res.data.OutDeleted === '1')
+                              props.setshowpopup3(true);
+                        else
+                        {
+                              if (res.data.OutStatus === '1')
+                                    setRender(!render);
+                              else
+                                    props.setshowpopup1(true);
+                        }
+                  })
+                        .catch(err => console.log(err))
+            }
+      }
+
       return (
             <div className={ `border border-dark rounded row p-2 mx-3 my-3 ${ styles.card }` }>
                   <div className='col-12 col-md-5 d-flex p-0' style={ { maxHeight: '80%' } }>
@@ -165,9 +202,15 @@ const Card = (props) =>
                               </div>
                               {
                                     isOut &&
-                                    <div className='d-flex align-items-center mt-2' style={ { color: 'red', fontSize: '1.1rem' } }>
-                                          <AiOutlineCloseCircle style={ { marginBottom: '16px' } } />
-                                          <p className='ms-1'>Currently of of stock!</p>
+                                    <div>
+                                          <div className='d-flex align-items-center mt-2' style={ { color: 'red', fontSize: '1.1rem' } }>
+                                                <AiOutlineCloseCircle style={ { marginBottom: '16px' } } />
+                                                <p className='ms-1'>Currently of of stock!</p>
+                                          </div>
+                                          <div className='d-flex align-items-center mt-2' style={ { fontSize: '1.2rem' } }>
+                                                <p>Add to wishlist?</p>
+                                                <AiOutlineHeart style={ { marginBottom: '16px',fontSize:'2rem' } } className={ `ms-1 ${ isInWish === false ? styles.unwish : styles.wish }` } onClick={ toggleWishlist } />
+                                          </div>
                                     </div>
                               }
                         </div>
@@ -185,7 +228,7 @@ const Card = (props) =>
       );
 }
 
-const Cart = () =>
+const Cart = (props) =>
 {
       document.title = "Your shopping cart";
 
@@ -267,7 +310,10 @@ const Cart = () =>
                         if (res.data.OutStatus === '0' || res.data.OutDeleted === '1' || res.data.OutNotEnough === '1')
                               setshowpopup4(true);
                         else
+                        {
+                              props.setIsPaid(true);
                               Navigate('./receipt');
+                        }
                   })
                   .catch(err => console.log(err));
       }

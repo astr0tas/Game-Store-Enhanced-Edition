@@ -37,6 +37,7 @@
       $router->get("/getCart", "CustomerController@getCart");
       $router->post("/adjustAmount", "CustomerController@adjustAmount");
       $router->post("/buyGame", "CustomerController@buyGame");
+      $router->get("/getReceipt", "CustomerController@getReceipt");
 
 
 

@@ -176,7 +176,18 @@ class CustomerGameModel
             return $row;
       }
 
-
+      public function getReceipt($id)
+      {
+            $sql= "select game.id,game.name,game.picture_1,game.price,game.discount,purchase_history.code from game join purchase_history on game.id=purchase_history.game_id join purchase_history_description on purchase_history_description.id=purchase_history.description_id where purchase_history.customer_id='$id' and purchase_history_description.date >= now() - interval 1 minute";
+            $result = $this->db->query($sql);
+            $arr = [];
+            if ($result->num_rows > 0) {
+                  while ($row = $result->fetch_assoc()) {
+                        $arr[] = $row;
+                  }
+            }
+            return $arr;
+      }
       
 
 
@@ -188,23 +199,6 @@ class CustomerGameModel
       public function getBestSeller()
       {
             $sql = "SELECT id,name,discount,picture_1, price,count(*) as total_sale from game join activation_code on game.id=activation_code.game_id where status=\"used\"  group by name order by total_sale desc,name limit 5";
-            $result = $this->db->query($sql);
-            $arr = [];
-            if ($result->num_rows > 0) {
-                  while ($row = $result->fetch_assoc()) {
-                        $row['picture_1'] = unpack('c*', $row['picture_1']);
-                        $arr[] = $row;
-                  }
-            }
-            return $arr;
-      }
-
-      public function product($offset)
-      {
-            session_id($_COOKIE['PHPSESSID']);
-            session_start();
-            $id = $_SESSION['id'];
-            $sql = "SELECT game.id,game.name,picture_1, price, discount,purchase_history.code from game join purchase_history on purchase_history.game_id=game.id join purchase_history_description on purchase_history_description.id = purchase_history.description_id where purchase_history_description.date=curdate() group by game.name order by game.name asc limit 2 offset $offset";
             $result = $this->db->query($sql);
             $arr = [];
             if ($result->num_rows > 0) {
