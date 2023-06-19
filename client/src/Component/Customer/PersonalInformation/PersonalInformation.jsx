@@ -312,7 +312,7 @@ export default function CustomerPersonalInfo()
                                                       isFuture
                                                       &&
                                                       <p className={ `${ styles.p } text-center` }>
-                                                            Your birth date can not be the future!
+                                                            Your birthdate can not be the future!
                                                       </p>
                                                 }
                                           </div>
