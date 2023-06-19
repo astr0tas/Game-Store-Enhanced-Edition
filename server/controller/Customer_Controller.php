@@ -54,7 +54,8 @@ class CustomerController
             $username = $_POST['username'];
             $password = $_POST['password'];
             $phone = $_POST['phone'] === 'null' ? null : $_POST['phone'];
-            echo json_encode($this->customer_model->signUp($name, $email, $username, $password, $phone));
+            $dob=$_POST['dob']==='null'?null:$_POST['dob'];
+            echo json_encode($this->customer_model->signUp($name, $email, $username, $password, $phone, $dob));
       }
 
       /* Info */
@@ -83,6 +84,7 @@ class CustomerController
             $name = $_POST['name'];
             $email = $_POST['email'];
             $phone = $_POST['phone'] === 'null' ? null : $_POST['phone'];
+            $dob = $_POST['dob'] === 'null' ? null : $_POST['dob'];
             $password = $_POST['password'] === 'null' ? null : $_POST['password'];
 
             $image = null;
@@ -98,7 +100,7 @@ class CustomerController
                   $image = $id . '/' . $_FILES["image"]['name'];
                   move_uploaded_file($_FILES["image"]["tmp_name"], $path . '/' . $_FILES["image"]['name']);
             }
-            $result = $this->customer_model->updateInfo($id, $name, $email, $phone, $password, $image);
+            $result = $this->customer_model->updateInfo($id, $name, $email, $phone, $password, $image, $dob);
             echo json_encode(array("message" => $result ? "success" : "failed"));
       }
 

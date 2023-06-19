@@ -333,13 +333,15 @@
 		in phone varchar(10),
 		in address varchar(150),
 		in userpassword varchar(20),
-		in image text
+		in image text,
+        in dob date
 	)
 	BEGIN
 		update admin set admin.name=name where admin.id=id;
 		update admin set admin.email=email where admin.id=id;
 		update admin set admin.phone=phone where admin.id=id;
 		update admin set admin.address=address where admin.id=id;
+        update admin set admin.dob=dob where admin.id=id;
 		if userpassword is not null then
 			update admin set admin.userpassword=userpassword where admin.id=id;
 		end if;
@@ -355,6 +357,7 @@
 		in name varchar(100),
 		in email varchar(50),
 		in phone varchar(10),
+        in dob date,
 		in username varchar(20),
 		in userpassword varchar(20),
 		out usedEmail varchar(50),
@@ -373,10 +376,10 @@
 		if usedEmail is null and usedUsername is null then
 			select cast(substring(customer.id,9) as unsigned) as value into numberOfCusomer from customer order by customer.id desc limit 1;
 			if numberOfCusomer<10 then
-				insert into customer values(concat("CUSTOMER0",numberOfCusomer+1),name,email,phone,0.0,'None',0,username,userpassword,null);
+				insert into customer values(concat("CUSTOMER0",numberOfCusomer+1),name,email,phone,0.0,'None',0,username,userpassword,null,dob);
 			else
-				insert into customer values(concat("CUSTOMER",numberOfCusomer+1),name,email,phone,0.0,'None',0,username,userpassword,null);
-		end if;
+				insert into customer values(concat("CUSTOMER",numberOfCusomer+1),name,email,phone,0.0,'None',0,username,userpassword,null,dob);
+			end if;
 		end if;
 	END $$
 	DELIMITER ;
@@ -389,12 +392,14 @@
 		in email varchar(20),
 		in phone varchar(10),
 		in userpassword varchar(20),
-		in image text
+		in image text,
+        in dob date
 	)
 	BEGIN
 		update customer set customer.name=name where customer.id=id;
 		update customer set customer.email=email where customer.id=id;
 		update customer set customer.phone=phone where customer.id=id;
+        update customer set customer.dob=dob where customer.id=id;
 		if userpassword is not null then
 			update customer set customer.userpassword=userpassword where customer.id=id;
 		end if;

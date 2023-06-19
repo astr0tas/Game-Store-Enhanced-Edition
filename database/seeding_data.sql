@@ -1,14 +1,14 @@
 use game_store;
 
 -- add customers section
-insert into customer values('CUSTOMER01','Lê Văn B','b_le@gmail.com',null,0.0,'None',0,'customer01','customer123',null);
-insert into customer values('CUSTOMER02','Nguyễn Văn T','t_nguyen@gmail.com',null,0.0,'None',0,'customer02','customer123',null);
-insert into customer values('CUSTOMER03','Trần Trung N','n_trung@gmail.com',null,0.0,'None',0,'customer03','customer123',null);
-insert into customer values('CUSTOMER04','Nguyễn Thị H','h_nguyen@gmail.com',null,0.0,'None',0,'customer04','customer123',null);
-insert into customer values('CUSTOMER05','Dương Minh T','t_duong@gmail.com',null,0.0,'None',0,'customer05','customer123',null);
+insert into customer values('CUSTOMER01','Lê Văn B','b_le@gmail.com',null,0.0,'None',0,'customer01','customer123',null,null);
+insert into customer values('CUSTOMER02','Nguyễn Văn T','t_nguyen@gmail.com',null,0.0,'None',0,'customer02','customer123',null,null);
+insert into customer values('CUSTOMER03','Trần Trung N','n_trung@gmail.com',null,0.0,'None',0,'customer03','customer123',null,null);
+insert into customer values('CUSTOMER04','Nguyễn Thị H','h_nguyen@gmail.com',null,0.0,'None',0,'customer04','customer123',null,null);
+insert into customer values('CUSTOMER05','Dương Minh T','t_duong@gmail.com',null,0.0,'None',0,'customer05','customer123',null,null);
 
 -- add admins section
-insert into admin values('ADMIN01','Nguyễn Văn A','admin@gmail.com','0123456789',null,'admin01','admin123',null);
+insert into admin values('ADMIN01','Nguyễn Văn A','admin@gmail.com','0123456789',null,'admin01','admin123',null,'1999-01-01');
 
 -- add categories section
 insert into category values('Arcade & Rhythm'),

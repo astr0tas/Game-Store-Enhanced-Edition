@@ -1,4 +1,4 @@
-import {  useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import styles from './PersonalInformation.module.css';
 import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
@@ -9,7 +9,7 @@ import '../../General/css/scroll.css';
 export default function AdminPersonalInfo()
 {
       const id = useParams().id;
-      const [admin, setadmin] = useState({ name: "N/A", email: "N/A", phone: "N/A", address: "N/A", username: "N/A", image: null });
+      const [admin, setadmin] = useState({ name: "N/A", email: "N/A", phone: "N/A", address: "N/A", username: "N/A", image: null, dob: "N/A" });
       const [pass, setPass] = useState("");
       const [repass, setRepass] = useState("");
       const [image, setImage] = useState(null);
@@ -21,6 +21,8 @@ export default function AdminPersonalInfo()
       const admin_email_input = useRef(null);
       const admin_phone = useRef(null);
       const admin_phone_input = useRef(null);
+      const admin_dob = useRef(null);
+      const admin_dob_input = useRef(null);
       const admin_address = useRef(null);
       const admin_address_input = useRef(null);
       const admin_password_input = useRef(null);
@@ -41,6 +43,8 @@ export default function AdminPersonalInfo()
       const pop_up_1 = useRef(null);
       const pop_up_2 = useRef(null);
       const pop_up_3 = useRef(null);
+      const pop_up_4 = useRef(null);
+      const pop_up_5 = useRef(null);
       const update_pop_up = useRef(null);
 
       const calculateRemainHeight = () =>
@@ -57,7 +61,6 @@ export default function AdminPersonalInfo()
             axios.get(`http://${ domain }/admin/info`, { withCredentials: true })
                   .then(res =>
                   {
-                        console.log(res);
                         document.title = `Admin ${ res.data.name }`;
                         setadmin({
                               name: res.data.name,
@@ -65,7 +68,8 @@ export default function AdminPersonalInfo()
                               phone: res.data.phone,
                               address: res.data.address === null ? "N/A" : res.data.address,
                               username: res.data.username,
-                              image: res.data.image === null ? "https://media.istockphoto.com/id/1016744004/vector/profile-placeholder-image-gray-silhouette-no-photo.jpg?s=612x612&w=0&k=20&c=mB6A9idhtEtsFXphs1WVwW_iPBt37S2kJp6VpPhFeoA=" : `http://${ domain }/model/data/admins/${ res.data.image }`
+                              image: res.data.image === null ? "https://media.istockphoto.com/id/1016744004/vector/profile-placeholder-image-gray-silhouette-no-photo.jpg?s=612x612&w=0&k=20&c=mB6A9idhtEtsFXphs1WVwW_iPBt37S2kJp6VpPhFeoA=" : `http://${ domain }/model/data/admins/${ res.data.image }`,
+                              dob: res.data.dob
                         });
                         if (isRefValid(profileImg))
                               profileImg.current.src = res.data.image === null ? "https://media.istockphoto.com/id/1016744004/vector/profile-placeholder-image-gray-silhouette-no-photo.jpg?s=612x612&w=0&k=20&c=mB6A9idhtEtsFXphs1WVwW_iPBt37S2kJp6VpPhFeoA=" : `http://${ domain }/model/data/admins/${ res.data.image }`;
@@ -83,6 +87,8 @@ export default function AdminPersonalInfo()
                   admin_email.current.style.display = "none";
             if (isRefValid(admin_phone))
                   admin_phone.current.style.display = "none";
+            if (isRefValid(admin_dob))
+                  admin_dob.current.style.display = "none";
             if (isRefValid(edit))
                   edit.current.style.display = "none";
             if (isRefValid(admin_name))
@@ -102,6 +108,11 @@ export default function AdminPersonalInfo()
             {
                   admin_phone_input.current.style.display = "inline";
                   admin_phone_input.current.value = admin.phone;
+            }
+            if (isRefValid(admin_dob_input))
+            {
+                  admin_dob_input.current.style.display = "inline";
+                  admin_dob_input.current.value = admin.dob;
             }
             if (isRefValid(admin_name_input))
             {
@@ -136,6 +147,8 @@ export default function AdminPersonalInfo()
                   admin_email.current.style.display = "inline";
             if (isRefValid(admin_phone))
                   admin_phone.current.style.display = "inline";
+            if (isRefValid(admin_dob))
+                  admin_dob.current.style.display = "inline";
             if (isRefValid(edit))
                   edit.current.style.display = "inline";
             if (isRefValid(admin_name))
@@ -152,6 +165,8 @@ export default function AdminPersonalInfo()
                   admin_email_input.current.style.display = "none";
             if (isRefValid(admin_phone_input))
                   admin_phone_input.current.style.display = "none";
+            if (isRefValid(admin_dob_input))
+                  admin_dob_input.current.style.display = "none";
             if (isRefValid(admin_password_input))
                   admin_password_input.current.style.display = "none";
             if (isRefValid(admin_repassword_input))
@@ -161,7 +176,7 @@ export default function AdminPersonalInfo()
             if (isRefValid(admin_address_input))
                   admin_address_input.current.style.display = "none";
             if (isRefValid(image_input))
-                  image_input.current.style.setProperty('display','none','important');
+                  image_input.current.style.setProperty('display', 'none', 'important');
       }
 
       function containsAlphabets(str)
@@ -181,6 +196,15 @@ export default function AdminPersonalInfo()
             {
                   if (isRefValid(pop_up)) pop_up.current.style.display = "flex";
             }
+            else if (isRefValid(admin_dob_input) && admin_dob_input.current.value === "")
+            {
+                  if (isRefValid(pop_up_4)) pop_up_4.current.style.display = "flex";
+            }
+            else if (isRefValid(admin_dob_input) && admin_dob_input.current.value !== "" && new Date(admin_dob_input.current.value) > new Date())
+            {
+                  if (isRefValid(pop_up_5))
+                        pop_up_5.current.style.display = "flex";
+            }
             else if (isRefValid(admin_phone_input) && containsAlphabets(admin_phone_input.current.value))
             {
                   if (isRefValid(pop_up_2)) pop_up_2.current.style.display = "flex";
@@ -198,6 +222,7 @@ export default function AdminPersonalInfo()
                   formData.append("address", isRefValid(admin_address_input) ? (admin_address_input.current.value === "" ? null : admin_address_input.current.value) : null);
                   formData.append("password", pass === "" ? null : pass);
                   formData.append("image", image);
+                  formData.append("dob", isRefValid(admin_dob_input) ? admin_dob_input.current.value : null)
                   axios.post(`http://${ domain }/admin/info/edit`, formData, { withCredentials: true })
                         .then(res =>
                         {
@@ -215,7 +240,7 @@ export default function AdminPersonalInfo()
                         <div className={ `d-flex flex-column flex-md-row align-items-center justify-content-md-around justify-content-xxl-center align-items-md-start w-100 my-auto` } ref={ div1Height }>
                               <div className={ `d-flex flex-column ${ styles.containDiv }` }>
                                     <img className={ `${ styles.img } mx-auto w-100` } ref={ profileImg } alt='avatar' />
-                                    <label className={ `btn btn-sm btn-light border border-dark mt-3 mx-auto ${styles.browse}` } ref={ image_input }>
+                                    <label className={ `btn btn-sm btn-light border border-dark mt-3 mx-auto ${ styles.browse }` } ref={ image_input }>
                                           <input type='file' className='d-none' onChange={ e =>
                                           {
                                                 if (e.target.files.length === 0)
@@ -246,6 +271,10 @@ export default function AdminPersonalInfo()
                                     <div className='w-100 text-center' style={ { marginBottom: '16px' } }>Name: &nbsp;
                                           <span ref={ admin_name }>{ admin.name }</span>
                                           <input type="text" className={ `${ styles.update }` } ref={ admin_name_input } ></input>
+                                    </div>
+                                    <div className='text-center w-100' style={ { marginBottom: '16px' } }>Date of birth: &nbsp;
+                                          <span ref={ admin_dob }>{ admin.dob }</span>
+                                          <input type="date" className={ `${ styles.update } ` } ref={ admin_dob_input }></input>
                                     </div>
                                     <div className='text-center w-100' style={ { marginBottom: '16px' } }>Email: &nbsp;
                                           <span ref={ admin_email }>{ admin.email }</span>
@@ -288,6 +317,20 @@ export default function AdminPersonalInfo()
                         <button className={ `btn btn-primary` } onClick={ () =>
                         {
                               if (isRefValid(pop_up)) pop_up.current.style.display = "none";
+                        } }>OKAY</button>
+                  </div>
+                  <div className={ `position-absolute flex-column align-items-center justify-content-around ${ styles.pop_up }` } ref={ pop_up_4 }>
+                        <h3>Your date of birth can not be empty!</h3>
+                        <button className={ `btn btn-primary` } onClick={ () =>
+                        {
+                              if (isRefValid(pop_up_4)) pop_up_4.current.style.display = "none";
+                        } }>OKAY</button>
+                  </div>
+                  <div className={ `position-absolute flex-column align-items-center justify-content-around ${ styles.pop_up }` } ref={ pop_up_5 }>
+                        <h3>Your date of birth can not be the future!</h3>
+                        <button className={ `btn btn-primary` } onClick={ () =>
+                        {
+                              if (isRefValid(pop_up_5)) pop_up_5.current.style.display = "none";
                         } }>OKAY</button>
                   </div>
                   <div className={ `position-absolute flex-column align-items-center justify-content-around ${ styles.pop_up }` } ref={ pop_up_3 }>

@@ -25,7 +25,7 @@ const History = (props) =>
 export default function CustomerDetail()
 {
     const id = useParams().id;
-    const [customer, setCustomer] = useState({ name: "N/A", email: "N/A", phone: "N/A", spending: "N/A", rank: "N/A", discount: "N/A", image: "N/A" });
+    const [customer, setCustomer] = useState({ name: "N/A", email: "N/A", phone: "N/A", spending: "N/A", rank: "N/A", discount: "N/A", image: "N/A", dob: "N/A" });
     const [renderTrigger, setRenderTrigger] = useState(true);
     const Navigate = useNavigate();
 
@@ -79,7 +79,8 @@ export default function CustomerDetail()
                     spending: res.data.total_spending,
                     rank: res.data.membership_rank,
                     discount: res.data.membership_discount,
-                    image: res.data.image === null ? "https://media.istockphoto.com/id/1016744004/vector/profile-placeholder-image-gray-silhouette-no-photo.jpg?s=612x612&w=0&k=20&c=mB6A9idhtEtsFXphs1WVwW_iPBt37S2kJp6VpPhFeoA=" : `http://${ domain }/model/data/customers/${ res.data.image }`
+                    image: res.data.image === null ? "https://media.istockphoto.com/id/1016744004/vector/profile-placeholder-image-gray-silhouette-no-photo.jpg?s=612x612&w=0&k=20&c=mB6A9idhtEtsFXphs1WVwW_iPBt37S2kJp6VpPhFeoA=" : `http://${ domain }/model/data/customers/${ res.data.image }`,
+                    dob: res.data.dob === null ? "N/A" : res.data.dob
                 });
                 if (isRefValid(select_menu))
                     select_menu.current.value = res.data.membership_rank;
@@ -282,6 +283,7 @@ export default function CustomerDetail()
                     <img className={ `${ styles.img } ms-md-5` } src={ customer.image } alt='avatar' />
                     <div className={ `d-flex flex-column justify-content-center align-items-center ${ styles.info } mt-2 mt-md-0 me-xxl-5` }>
                         <div style={ { marginBottom: '16px' } }>Name: &nbsp;{ customer.name }</div>
+                        <div style={ { marginBottom: '16px' } }>Date of birth: &nbsp;{ customer.dob }</div>
                         <div className='text-center' style={ { marginBottom: '16px' } }>Email: &nbsp;
                             <span ref={ customer_email }>{ customer.email }</span>
                             <input type="text" className={ `${ styles.update } ` } ref={ customer_email_input }></input>

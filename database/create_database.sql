@@ -44,7 +44,8 @@ create table customer(
     membership_discount float default 0 check(0<=membership_discount and membership_discount<=5),
     username varchar(20) unique not null,
     userpassword varchar(20) not null,
-	image text
+	image text,
+    dob date
 );
 
 create table admin(
@@ -55,7 +56,8 @@ create table admin(
     address varchar(150),
     username varchar(20) unique not null,
     userpassword varchar(20) not null,
-	image text
+	image text,
+    dob date not null
 );
 
 create table wishlist(

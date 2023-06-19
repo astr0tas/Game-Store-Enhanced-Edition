@@ -47,10 +47,10 @@ class CustomerSelfModel
             $this->db->query($sql);
       }
 
-      public function signUp($name, $email, $username, $password, $phone)
+      public function signUp($name, $email, $username, $password, $phone, $dob)
       {
-            $stmt = $this->db->prepare("call addCustomer(?,?,?,?,?,@usedEmail,@usedUsername)");
-            $stmt->bind_param("sssss", $name, $email, $phone, $username, $password);
+            $stmt = $this->db->prepare("call addCustomer(?,?,?,?,?,?,@usedEmail,@usedUsername)");
+            $stmt->bind_param("ssssss", $name, $email, $phone, $dob, $username, $password);
             $stmt->execute();
             $stmt->close();
             $result = $this->db->query("select @usedEmail as email, @usedUsername as username");
@@ -62,7 +62,7 @@ class CustomerSelfModel
 
       public function getInfo($id)
       {
-            $sql = "SELECT name,email,phone,total_spending,membership_rank,membership_discount,username,image from customer where id= '$id'";
+            $sql = "SELECT name,email,phone,total_spending,membership_rank,membership_discount,username,image,dob from customer where id= '$id'";
             $result = $this->db->query($sql);
             if ($result->num_rows > 0) {
                   return $result->fetch_assoc();
@@ -84,10 +84,10 @@ class CustomerSelfModel
             return $arr;
       }
 
-      public function updateInfo($id, $name, $email, $phone, $password, $image)
+      public function updateInfo($id, $name, $email, $phone, $password, $image, $dob)
       {
-            $stmt = $this->db->prepare("CALL updateCustomerInfo(?, ?, ?, ?, ?, ?)");
-            $stmt->bind_param("ssssss", $id, $name, $email, $phone, $password, $image);
+            $stmt = $this->db->prepare("CALL updateCustomerInfo(?, ?, ?, ?, ?, ?, ?)");
+            $stmt->bind_param("sssssss", $id, $name, $email, $phone, $password, $image, $dob);
             return $stmt->execute();
       }
 

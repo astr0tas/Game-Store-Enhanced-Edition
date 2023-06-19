@@ -10,7 +10,7 @@ import CustomerSignUp from './Component/Customer/Authentication/SignUp/SignUp';
 // Customer navbar
 import CustomerMenu from './Component/Customer/Menu/menu';
 // Customer Personal Info
-import CustomerPersonalInfo from './Component/Customer/PersonalInformation/Personallnformation';
+import CustomerPersonalInfo from './Component/Customer/PersonalInformation/PersonalInformation';
 // Customer Home
 import CustomerHome from './Component/Customer/Home/Home';
 // Customer Games

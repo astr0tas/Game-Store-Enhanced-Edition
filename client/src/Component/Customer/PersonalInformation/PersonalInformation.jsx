@@ -27,12 +27,13 @@ export default function CustomerPersonalInfo()
 {
       document.title = `Profile`;
 
-      const [customer, setCustomer] = useState({ name: "N/A", email: "N/A", phone: "N/A", spending: "N/A", rank: "N/A", discount: "N/A", image: "N/A" });
+      const [customer, setCustomer] = useState({ name: "N/A", email: "N/A", phone: "N/A", spending: "N/A", rank: "N/A", discount: "N/A", image: "N/A", dob: "N/A" });
       const [renderTrigger, setRenderTrigger] = useState(true);
       const [image, setImage] = useState(null);
       const [pass, setPass] = useState("");
       const [repass, setRepass] = useState("");
       const [wrong, setWrong] = useState(false);
+      const [isFuture, setIsFuture] = useState(false);
 
       const customer_name = useRef(null);
       const customer_name_input = useRef(null);
@@ -40,6 +41,9 @@ export default function CustomerPersonalInfo()
       const customer_email_input = useRef(null);
       const customer_phone = useRef(null);
       const customer_phone_input = useRef(null);
+      const customer_dob = useRef(null);
+      const customer_dob_input = useRef(null);
+
       const edit = useRef(null);
       const update = useRef(null);
       const history = useRef(null);
@@ -67,7 +71,8 @@ export default function CustomerPersonalInfo()
                               spending: res.data.total_spending,
                               rank: res.data.membership_rank,
                               discount: res.data.membership_discount,
-                              image: res.data.image === null ? "https://media.istockphoto.com/id/1016744004/vector/profile-placeholder-image-gray-silhouette-no-photo.jpg?s=612x612&w=0&k=20&c=mB6A9idhtEtsFXphs1WVwW_iPBt37S2kJp6VpPhFeoA=" : `http://${ domain }/model/data/customers/${ res.data.image }`
+                              image: res.data.image === null ? "https://media.istockphoto.com/id/1016744004/vector/profile-placeholder-image-gray-silhouette-no-photo.jpg?s=612x612&w=0&k=20&c=mB6A9idhtEtsFXphs1WVwW_iPBt37S2kJp6VpPhFeoA=" : `http://${ domain }/model/data/customers/${ res.data.image }`,
+                              dob: res.data.dob === null ? 'N/A' : res.data.dob,
                         });
                         if (isRefValid(imageRef))
                               imageRef.current.src = res.data.image === null ? "https://media.istockphoto.com/id/1016744004/vector/profile-placeholder-image-gray-silhouette-no-photo.jpg?s=612x612&w=0&k=20&c=mB6A9idhtEtsFXphs1WVwW_iPBt37S2kJp6VpPhFeoA=" : `http://${ domain }/model/data/customers/${ res.data.image }`;
@@ -103,6 +108,8 @@ export default function CustomerPersonalInfo()
                   customer_email.current.style.display = "none";
             if (isRefValid(customer_phone))
                   customer_phone.current.style.display = "none";
+            if (isRefValid(customer_dob))
+                  customer_dob.current.style.display = "none";
             if (isRefValid(edit))
                   edit.current.style.display = "none";
             if (isRefValid(update))
@@ -116,6 +123,11 @@ export default function CustomerPersonalInfo()
             {
                   customer_phone_input.current.style.display = "inline";
                   customer_phone_input.current.value = customer.phone === "N/A" ? "" : customer.phone;
+            }
+            if (isRefValid(customer_dob_input))
+            {
+                  customer_dob_input.current.style.display = "inline";
+                  customer_dob_input.current.value = customer.dob === "N/A" ? "" : customer.dob;
             }
             if (isRefValid(customer_name_input))
             {
@@ -144,6 +156,8 @@ export default function CustomerPersonalInfo()
                   customer_email.current.style.display = "inline";
             if (isRefValid(customer_phone))
                   customer_phone.current.style.display = "inline";
+            if (isRefValid(customer_dob))
+                  customer_dob.current.style.display = "inline";
             if (isRefValid(edit))
                   edit.current.style.display = "inline-block";
             if (isRefValid(update))
@@ -154,12 +168,16 @@ export default function CustomerPersonalInfo()
                   customer_email_input.current.style.display = "none";
             if (isRefValid(customer_phone_input))
                   customer_phone_input.current.style.display = "none";
+            if (isRefValid(customer_dob_input))
+                  customer_dob_input.current.style.display = "none";
             if (isRefValid(image_input))
                   image_input.current.style.setProperty('display', 'none', 'important');
             if (isRefValid(password_input))
                   password_input.current.style.display = "none";
             if (isRefValid(repassword_input))
                   repassword_input.current.style.display = "none";
+            setWrong(false);
+            setIsFuture(false);
       }
 
       const confirmChange = (e) =>
@@ -169,15 +187,19 @@ export default function CustomerPersonalInfo()
                   e.preventDefault();
                   if (pass !== repass)
                         setWrong(true);
+                  else if (isRefValid(customer_dob_input) && customer_dob_input.current.value !== '' && new Date(customer_dob_input.current.value) > new Date())
+                        setIsFuture(true);
                   else
                   {
                         setWrong(false);
+                        setIsFuture(false);
                         const formData = new FormData();
                         formData.append("name", isRefValid(customer_name_input) ? customer_name_input.current.value : null);
                         formData.append("image", image);
                         formData.append("password", pass === '' ? null : pass);
                         formData.append("email", isRefValid(customer_email_input) ? customer_email_input.current.value : null);
                         formData.append("phone", isRefValid(customer_phone_input) ? (customer_phone_input.current.value === "" ? null : customer_phone_input.current.value) : null);
+                        formData.append("dob", isRefValid(customer_dob_input) ? (customer_dob_input.current.value === "" ? null : customer_dob_input.current.value) : null);
                         axios.post(`http://${ domain }/info/update`, formData, { withCredentials: true })
                               .then(res =>
                               {
@@ -235,6 +257,10 @@ export default function CustomerPersonalInfo()
                                                 <span ref={ customer_name }>{ customer.name }</span>
                                                 <input type="text" className={ `${ styles.update } ` } ref={ customer_name_input } required></input>
                                           </div>
+                                          <div className='text-center' style={ { marginBottom: '16px' } }>Date of birth: &nbsp;
+                                                <span ref={ customer_dob }>{ customer.dob }</span>
+                                                <input type="date" className={ `${ styles.update } ` } ref={ customer_dob_input } ></input>
+                                          </div>
                                           <div className='text-center' style={ { marginBottom: '16px' } }>Email: &nbsp;
                                                 <span ref={ customer_email }>{ customer.email }</span>
                                                 <input type="email" className={ `${ styles.update } ` } ref={ customer_email_input } required></input>
@@ -272,6 +298,21 @@ export default function CustomerPersonalInfo()
                                                       &&
                                                       <p className={ `${ styles.p }` }>
                                                             Passwords are not matched!
+                                                      </p>
+                                                }
+                                                {
+                                                      isFuture
+                                                      &&
+                                                      <AiOutlineCloseCircle style={ {
+                                                            marginRight: '5px',
+                                                            marginBottom: '16px'
+                                                      } } className={ `${ styles.p } text-center` } />
+                                                }
+                                                {
+                                                      isFuture
+                                                      &&
+                                                      <p className={ `${ styles.p } text-center` }>
+                                                            Your birth date can not be the future!
                                                       </p>
                                                 }
                                           </div>

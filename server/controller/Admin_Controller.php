@@ -42,6 +42,7 @@ class AdminController
             $name = $_POST['name'];
             $email = $_POST['email'];
             $phone = $_POST['phone'];
+            $dob=$_POST['dob'];
             $address = $_POST['address'] === "null" ? null : $_POST['address'];
             $password = $_POST['password'] === "null" ? null : $_POST['password'];
 
@@ -58,7 +59,7 @@ class AdminController
                   $image = $id . '/' . $_FILES["image"]['name'];
                   move_uploaded_file($_FILES["image"]["tmp_name"], $path . '/' . $_FILES["image"]['name']);
             }
-            $result = $this->admin_model->updatePersonalInfo($id, $name, $email, $phone, $address, $password, $image);
+            $result = $this->admin_model->updatePersonalInfo($id, $name, $email, $phone, $address, $password, $image, $dob);
             echo json_encode(array("message" => $result ? "success" : "failed"));
       }
 

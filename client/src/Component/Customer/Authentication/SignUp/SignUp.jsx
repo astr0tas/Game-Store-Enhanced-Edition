@@ -41,6 +41,7 @@ export default function CustomerSignUp()
                   formData.append("phone", (inputs.phone !== undefined && inputs.phone !== '') ? inputs.phone : null);
                   formData.append("username", inputs.username);
                   formData.append("password", inputs.password);
+                  formData.append("dob", (inputs.dob !== undefined && inputs.dob !== '') ? inputs.dob : null);
                   axios.post(`http://${ domain }/signUp`, formData)
                         .then(res =>
                         {
@@ -86,6 +87,10 @@ export default function CustomerSignUp()
                               <div className="mb-1 form-outline">
                                     <label htmlFor="form_phone" className={ `${ styles.font }` }>Phone number</label>
                                     <input title="Your phone number should not contain alphabetical character(s)" pattern="[0-9]{10}" type="text" maxLength={ 10 } id="form_phone" className={ `form-control ${ styles.font }` } onChange={ formChange } name="phone" />
+                              </div>
+                              <div className="mb-1 form-outline" style={ { width: '221px' } }>
+                                    <label htmlFor="form_dob" className={ `${ styles.font }` }>Date of birth</label>
+                                    <input type="date" id="form_dob" className={ `form-control ${ styles.font }` } onChange={ formChange } name="dob" />
                               </div>
                               <div className="mb-1 form-outline">
                                     <label htmlFor="form_username" className={ `${ styles.font }` }>Username</label>

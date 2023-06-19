@@ -50,7 +50,7 @@ class AdminModel
 
       public function personalInfo($id)
       {
-            $sql = "select name,email,phone,address,username,image from admin where id='$id'";
+            $sql = "select name,email,phone,address,username,image,dob from admin where id='$id'";
             $result = $this->db->query($sql);
             if ($result->num_rows > 0) {
                   $row = $result->fetch_assoc();
@@ -59,10 +59,10 @@ class AdminModel
             return null;
       }
 
-      public function updatePersonalInfo($id,$name, $email, $phone, $address, $password, $image)
+      public function updatePersonalInfo($id,$name, $email, $phone, $address, $password, $image, $dob)
       {
-            $stmt = $this->db->prepare("CALL updateAdminInfo(?, ?, ?, ?, ?, ?, ?)");
-            $stmt->bind_param("sssssss", $id,$name, $email, $phone, $address, $password, $image);
+            $stmt = $this->db->prepare("CALL updateAdminInfo(?, ?, ?, ?, ?, ?, ?, ?)");
+            $stmt->bind_param("ssssssss", $id,$name, $email, $phone, $address, $password, $image, $dob);
             return $stmt->execute();
       }
 
