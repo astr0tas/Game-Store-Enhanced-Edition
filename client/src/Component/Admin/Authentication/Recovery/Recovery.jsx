@@ -3,8 +3,8 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useRef, useState } from 'react';
 import { AiOutlineCloseCircle } from 'react-icons/ai';
-import { domain } from '../../../tools/domain';
-import { isRefValid } from '../../../tools/refChecker';
+import { domain } from '../../../General/tools/domain';
+import { isRefValid } from '../../../General/tools/refChecker';
 
 
 function AdminRecovery()

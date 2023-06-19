@@ -4,8 +4,8 @@ import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import { BiTrash } from 'react-icons/bi';
 import ReactDOM from 'react-dom/client';
-import { domain } from '../../../tools/domain';
-import { isRefValid, isRefNotValid } from '../../../tools/refChecker';
+import { domain } from '../../../General/tools/domain';
+import { isRefValid, isRefNotValid } from '../../../General/tools/refChecker';
 import '../../../General/css/scroll.css';
 
 const History = (props) =>

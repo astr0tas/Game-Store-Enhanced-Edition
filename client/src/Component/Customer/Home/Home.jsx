@@ -1,8 +1,8 @@
 import styles from './Home.module.css';
 import { TbFlame } from 'react-icons/tb';
-import { domain } from '../../tools/domain';
+import { domain } from '../../General/tools/domain';
 import { useEffect, useRef, useState } from 'react';
-import { isRefNotValid, isRefValid } from '../../tools/refChecker';
+import { isRefNotValid, isRefValid } from '../../General/tools/refChecker';
 import ReactDOM from 'react-dom/client';
 import axios from 'axios';
 import { CiDiscount1 } from 'react-icons/ci';

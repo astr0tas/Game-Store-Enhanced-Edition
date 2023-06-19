@@ -1,10 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
 import styles from './Cart.module.css';
 import { BsFillCartFill } from 'react-icons/bs';
-import { isRefNotValid, isRefValid } from '../../../tools/refChecker';
+import { isRefNotValid, isRefValid } from '../../../General/tools/refChecker';
 import ReactDOM from 'react-dom/client';
 import axios from 'axios';
-import { domain } from '../../../tools/domain';
+import { domain } from '../../../General/tools/domain';
 import { CiDiscount1 } from 'react-icons/ci';
 import { useNavigate } from 'react-router-dom';
 import { BiTrash } from 'react-icons/bi';

@@ -2,14 +2,14 @@ import styles from './menu.module.css';
 import { VscAccount } from "react-icons/vsc";
 import { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
-import { domain } from '../../tools/domain';
+import { domain } from '../../General/tools/domain';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faHouse, faGamepad, faRightFromBracket, faHeart, faCartShopping } from '@fortawesome/free-solid-svg-icons';
-import { checkCookie } from '../../tools/cookie';
+import { checkCookie } from '../../General/tools/cookie';
 import { Outlet, useNavigate } from 'react-router-dom';
-import { isRefValid } from '../../tools/refChecker';
+import { isRefValid } from '../../General/tools/refChecker';
 import '../../General/css/scroll.css';
-import { deleteCustomerCookie } from '../../tools/cookie';
+import { deleteCustomerCookie } from '../../General/tools/cookie';
 
 
 const CustomerMenu = () =>

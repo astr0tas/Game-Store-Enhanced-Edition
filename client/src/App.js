@@ -10,7 +10,7 @@ import CustomerSignUp from './Component/Customer/Authentication/SignUp/SignUp';
 // Customer navbar
 import CustomerMenu from './Component/Customer/Menu/menu';
 // Customer Personal Info
-import CustomerPersonalInfo from './Component/Customer/PersonalInformation/Personalnformation';
+import CustomerPersonalInfo from './Component/Customer/PersonalInformation/Personallnformation';
 // Customer Home
 import CustomerHome from './Component/Customer/Home/Home';
 // Customer Games
@@ -59,7 +59,7 @@ const NotFound = () =>
 function App()
 {
   const [isPaid, setIsPaid] = useState(false);
-  
+
   return (
     <div className="App">
       <BrowserRouter>

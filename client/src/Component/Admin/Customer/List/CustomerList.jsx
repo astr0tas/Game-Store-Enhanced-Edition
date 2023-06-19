@@ -4,8 +4,8 @@ import axios from 'axios';
 import styles from './CustomerList.module.css';
 import ReactDOM from 'react-dom/client';
 import { useNavigate } from 'react-router-dom';
-import { domain } from '../../../tools/domain';
-import { isRefValid, isRefNotValid } from '../../../tools/refChecker';
+import { domain } from '../../../General/tools/domain';
+import { isRefValid, isRefNotValid } from '../../../General/tools/refChecker';
 import '../../../General/css/scroll.css';
 
 const Customer = (props) =>

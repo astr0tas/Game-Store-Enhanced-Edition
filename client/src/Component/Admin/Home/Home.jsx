@@ -2,9 +2,9 @@ import styles from './Home.module.css';
 import { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import ReactDOM from 'react-dom/client';
-import { domain } from '../../tools/domain';
+import { domain } from '../../General/tools/domain';
 import '../../General/css/scroll.css';
-import { isRefValid, isRefNotValid } from '../../tools/refChecker';
+import { isRefValid, isRefNotValid } from '../../General/tools/refChecker';
 import { CiDiscount1 } from 'react-icons/ci';
 
 const Game = (props) =>

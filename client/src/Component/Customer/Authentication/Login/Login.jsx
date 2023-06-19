@@ -3,8 +3,8 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { AiOutlineCloseCircle } from 'react-icons/ai';
-import { checkCookie } from '../../../tools/cookie';
-import { domain } from '../../../tools/domain';
+import { checkCookie } from '../../../General/tools/cookie';
+import { domain } from '../../../General/tools/domain';
 import React from 'react';
 
 const CustomerLogin = () =>

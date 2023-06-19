@@ -3,9 +3,9 @@ import styles from './Receipt.module.css';
 import { RiBillFill } from 'react-icons/ri';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { domain } from '../../../tools/domain';
+import { domain } from '../../../General/tools/domain';
 import { useRef } from 'react';
-import { isRefNotValid, isRefValid } from '../../../tools/refChecker';
+import { isRefNotValid, isRefValid } from '../../../General/tools/refChecker';
 import ReactDOM from 'react-dom/client';
 import { CiDiscount1 } from 'react-icons/ci';
 

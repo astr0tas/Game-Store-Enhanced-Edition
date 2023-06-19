@@ -1,9 +1,9 @@
 import styles from './EditGame.module.css';
 import { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
-import { domain } from '../../../tools/domain';
+import { domain } from '../../../General/tools/domain';
 import { useNavigate, useParams } from 'react-router-dom';
-import { isRefNotValid, isRefValid } from '../../../tools/refChecker';
+import { isRefNotValid, isRefValid } from '../../../General/tools/refChecker';
 import ReactDOM from 'react-dom/client';
 
 const Category = (props) =>

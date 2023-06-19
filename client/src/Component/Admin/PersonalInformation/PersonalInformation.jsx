@@ -2,8 +2,8 @@ import {  useParams } from 'react-router-dom';
 import styles from './PersonalInformation.module.css';
 import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
-import { domain } from '../../tools/domain';
-import { isRefValid } from '../../tools/refChecker';
+import { domain } from '../../General/tools/domain';
+import { isRefValid } from '../../General/tools/refChecker';
 import '../../General/css/scroll.css';
 
 export default function AdminPersonalInfo()
