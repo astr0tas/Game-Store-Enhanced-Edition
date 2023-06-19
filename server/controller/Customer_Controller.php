@@ -113,6 +113,11 @@ class CustomerController
       }
 
       /* Home */
+      public function getBestSeller()
+      {
+            $arr = $this->game_model->getBestSeller();
+            echo json_encode($arr);
+      }
 
       /* Games */
       public function getGames()
@@ -255,18 +260,5 @@ class CustomerController
             $id = $_SESSION['id'];
             $result = $this->game_model->getReceipt($id);
             echo json_encode($result);
-      }
-
-
-
-
-
-
-
-
-      public function getBestSeller()
-      {
-            $arr = $this->game_model->getBestSeller();
-            echo json_encode($arr);
       }
 }

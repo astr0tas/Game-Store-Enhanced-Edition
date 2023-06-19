@@ -1,7 +1,6 @@
 import styles from './Home.module.css';
 import { useEffect, useRef } from 'react';
 import axios from 'axios';
-import $ from 'jquery';
 import { TbFlame } from 'react-icons/tb';
 import { CiDiscount1 } from 'react-icons/ci';
 import ReactDOM from 'react-dom/client';
@@ -12,8 +11,8 @@ const BestSeller = (props) =>
 {
       useEffect(() =>
       {
-            if (props.discount === "0")
-                  $(`.discount_${ props.id }`).css("display", "none");
+            // if (props.discount === "0")
+            //       $(`.discount_${ props.id }`).css("display", "none");
       });
 
       // return (

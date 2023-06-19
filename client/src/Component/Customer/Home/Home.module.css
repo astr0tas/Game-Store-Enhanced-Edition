@@ -38,3 +38,29 @@
 .cartOut {
       color: rgb(180, 180, 180);
 }
+
+.cartOut:hover {
+      cursor: auto !important;
+}
+
+.cards {
+      width: 250px;
+}
+
+@media only screen and (min-width:1200px) {
+      .cards {
+            width: 300px;
+      }
+}
+
+@media only screen and (min-width:1600px) {
+      .cards {
+            width: 350px;
+      }
+}
+
+@media only screen and (min-width:2200px) {
+      .cards {
+            width: 450px;
+      }
+}

@@ -188,27 +188,20 @@ class CustomerGameModel
             }
             return $arr;
       }
-      
-
-
-
-      
-
-
 
       public function getBestSeller()
       {
-            $sql = "SELECT id,name,discount,picture_1, price,count(*) as total_sale from game join activation_code on game.id=activation_code.game_id where status=\"used\"  group by name order by total_sale desc,name limit 5";
+            $sql = "SELECT id,name,discount,picture_1, price from game join activation_code on game.id=activation_code.game_id where activation_code.status=\"used\" and game.status=true group by name order by count(*) desc,name limit 5";
             $result = $this->db->query($sql);
             $arr = [];
             if ($result->num_rows > 0) {
                   while ($row = $result->fetch_assoc()) {
-                        $row['picture_1'] = unpack('c*', $row['picture_1']);
                         $arr[] = $row;
                   }
             }
             return $arr;
       }
+      
 
       public function __destruct()
       {

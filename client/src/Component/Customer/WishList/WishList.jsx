@@ -14,16 +14,25 @@ const Game = (props) =>
 {
       const [isInCart, setIsInCart] = useState(false);
       const [localRender, setLocalRender] = useState(false);
+      const [isOut, setIsOut] = useState(false);
 
       useEffect(() =>
       {
             const formData = new FormData();
             formData.append('id', props.id);
-            axios.post(`http://${ domain }/isAddedToCart`, formData, { withCredentials: true }).then(res =>
-            {
-                  setIsInCart(res.data);
-            })
-                  .catch(err => console.log(err))
+            axios.post(`http://${ domain }/game/status`, formData)
+                  .then(res =>
+                  {
+                        if (res.data)
+                        {
+                              axios.post(`http://${ domain }/isAddedToCart`, formData, { withCredentials: true }).then(res =>
+                              {
+                                    setIsInCart(res.data);
+                              })
+                                    .catch(err => console.log(err))
+                        }
+                        else setIsOut(true);
+                  }).catch(error => { console.log(error); })
       }, [localRender, props.id]);
 
       const removeFromWishlist = () =>
@@ -83,7 +92,7 @@ const Game = (props) =>
                               </div>
                               <div className='d-flex mt-3 mx-auto align-items-center'>
                                     <AiOutlineHeart className={ `me-2 ${ styles.icons } ${ styles.wish }` } style={ { fontSize: '2.5rem' } } onClick={ removeFromWishlist } />
-                                    <BsCart className={ `ms-2 ${ styles.icons } ${ isInCart === false ? styles.uncart : styles.cart }` } style={ { fontSize: '2.5rem' } } onClick={ toggleCart } />
+                                    <BsCart className={ `ms-2 ${ styles.icons } ${ isOut ? styles.cartOut : (isInCart === false ? styles.uncart : styles.cart) }` } style={ { fontSize: '2.5rem' } } onClick={ toggleCart } />
                               </div>
                         </div>
                   </div >

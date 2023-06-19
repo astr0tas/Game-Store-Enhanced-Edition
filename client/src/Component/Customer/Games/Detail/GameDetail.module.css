@@ -59,6 +59,10 @@
       color: rgb(180, 180, 180);
 }
 
+.cartOut:hover {
+      cursor: auto !important;
+}
+
 @media only screen and (max-width:350px) {
       .img {
             min-height: 200px;

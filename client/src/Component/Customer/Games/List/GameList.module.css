@@ -45,6 +45,10 @@
       color: rgb(180, 180, 180);
 }
 
+.cartOut:hover {
+      cursor: auto !important;
+}
+
 @media only screen and (min-width:768px) {
       .searchInput {
             font-size: 1.2rem;
