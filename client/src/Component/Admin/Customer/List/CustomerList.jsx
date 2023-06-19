@@ -26,7 +26,7 @@ const Customer = (props) =>
             <td className='col-3 text-center'>{ props.name }</td>
             <td className='col-3 text-center'>{ props.email }</td>
             <td className='col-3 text-center'>{ props.phone }</td>
-            <td className='col-2 text-center'>{ props.spending }</td>
+            <td className='col-2 text-center'>${ props.spending }</td>
         </tr>
     );
 }

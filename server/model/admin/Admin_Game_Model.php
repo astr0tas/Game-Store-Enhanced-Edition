@@ -171,6 +171,65 @@ class GameModel
             return $stmt->execute();
       }
 
+      public function getDailySolds()
+      {
+            $sql = "SELECT game.id,game.name,game.price,game.discount,count(*) as solds from game 
+            join purchase_history on purchase_history.game_id=game.id 
+            join purchase_history_description on purchase_history_description.id=purchase_history.description_id 
+            where date>=CURDATE() and game.status=true group by game.id,game.name,game.price,game.discount
+            order by solds desc limit 5";
+            $result = $this->db->query($sql);
+            $arr = [];
+            if ($result->num_rows > 0) {
+                  while ($row = $result->fetch_assoc()) {
+                        $arr[] = $row;
+                  }
+            }
+            return $arr;
+      }
+
+      public function getWeeklySolds()
+      {
+            $sql = "SELECT game.id,game.name,game.price,game.discount,count(*) as solds from game 
+            join purchase_history on purchase_history.game_id=game.id 
+            join purchase_history_description on purchase_history_description.id=purchase_history.description_id 
+            where date>=DATE_SUB(CURDATE(), INTERVAL WEEKDAY(CURDATE()) DAY) and game.status=true group by game.id,game.name,game.price,game.discount
+            order by solds desc limit 5";
+            $result = $this->db->query($sql);
+            $arr = [];
+            if ($result->num_rows > 0) {
+                  while ($row = $result->fetch_assoc()) {
+                        $arr[] = $row;
+                  }
+            }
+            return $arr;
+      }
+
+      public function getMonthlySolds()
+      {
+            $sql = "SELECT game.id,game.name,game.price,game.discount,count(*) as solds from game 
+            join purchase_history on purchase_history.game_id=game.id 
+            join purchase_history_description on purchase_history_description.id=purchase_history.description_id 
+            where DATE_FORMAT(date, '%Y-%m-01') = DATE_FORMAT(NOW(), '%Y-%m-01') and game.status=true group by game.id,game.name,game.price,game.discount
+            order by solds desc limit 5";
+            $result = $this->db->query($sql);
+            $arr = [];
+            if ($result->num_rows > 0) {
+                  while ($row = $result->fetch_assoc()) {
+                        $arr[] = $row;
+                  }
+            }
+            return $arr;
+      }
+
+      public function latestTransaction($id)
+      {
+            $sql="select date from purchase_history_description join purchase_history on purchase_history.description_id=purchase_history_description.id
+            where game_id='$id' order by date desc limit 1";
+            $result = $this->db->query($sql);
+            return $result->fetch_assoc();
+      }
+
       public function __destruct()
       {
             $this->db->close();

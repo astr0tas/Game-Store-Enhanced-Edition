@@ -3,12 +3,8 @@
       border-bottom-right-radius: 20px;
       border-bottom-left-radius: 20px;
       width: 70%;
-      max-width: 300px;
+      max-width: 250px;
       border-bottom: 2px solid black;
       border-left: 2px solid black;
       border-right: 2px solid black;
-}
-
-.title>h2 {
-      margin-bottom: 0;
 }

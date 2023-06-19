@@ -50,6 +50,10 @@
       $router->get("/admin/info", "AdminController@personalInfo");
       $router->post("/admin/info/edit", "AdminController@updatePersonalInfo");
       /* Home */
+      $router->get("/getDailySolds","AdminController@getDailySolds");
+      $router->get("/getWeeklySolds","AdminController@getWeeklySolds");
+      $router->get("/getMonthlySolds","AdminController@getMonthlySolds");
+      $router->post("/latestTransaction","AdminController@latestTransaction");
       /* Customer */
       $router->get("/admin/customer/getList", "AdminController@getCustomerList");
       $router->post("/admin/customer/find", "AdminController@findCustomer");

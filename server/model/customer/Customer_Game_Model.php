@@ -178,7 +178,7 @@ class CustomerGameModel
 
       public function getReceipt($id)
       {
-            $sql= "select game.id,game.name,game.picture_1,game.price,game.discount,purchase_history.code from game join purchase_history on game.id=purchase_history.game_id join purchase_history_description on purchase_history_description.id=purchase_history.description_id where purchase_history.customer_id='$id' and purchase_history_description.date >= now() - interval 1 minute";
+            $sql= "select game.id,game.name,game.picture_1,game.price,game.discount,purchase_history.code from game join purchase_history on game.id=purchase_history.game_id join purchase_history_description on purchase_history_description.id=purchase_history.description_id where purchase_history.customer_id='$id' and purchase_history_description.date >= now() - interval 1 minute order by game.name";
             $result = $this->db->query($sql);
             $arr = [];
             if ($result->num_rows > 0) {

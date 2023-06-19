@@ -13,6 +13,10 @@
       font-size: 1.2rem;
 }
 
+.imgs:hover {
+      cursor: pointer;
+}
+
 @media only screen and (max-width:575px) {
       .code {
             font-size: 1rem;

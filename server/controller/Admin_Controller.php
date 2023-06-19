@@ -347,4 +347,25 @@ class AdminController
             if (isset($_FILES["minSpec"])) unlink($_FILES["minSpec"]["tmp_name"]);
             if (isset($_FILES["recSpec"])) unlink($_FILES["recSpec"]["tmp_name"]);
       }
+
+      /* Home */
+      public function getDailySolds()
+      {
+            echo json_encode($this->game_model->getDailySolds());
+      }
+
+      public function getWeeklySolds()
+      {
+            echo json_encode($this->game_model->getWeeklySolds());
+      }
+
+      public function getMonthlySolds()
+      {
+            echo json_encode($this->game_model->getMonthlySolds());
+      }
+
+      public function latestTransaction()
+      {
+            echo json_encode($this->game_model->latestTransaction($_POST['id']));
+      }
 }

@@ -209,7 +209,7 @@ const Card = (props) =>
                                           </div>
                                           <div className='d-flex align-items-center mt-2' style={ { fontSize: '1.2rem' } }>
                                                 <p>Add to wishlist?</p>
-                                                <AiOutlineHeart style={ { marginBottom: '16px',fontSize:'2rem' } } className={ `ms-1 ${ isInWish === false ? styles.unwish : styles.wish }` } onClick={ toggleWishlist } />
+                                                <AiOutlineHeart style={ { marginBottom: '16px', fontSize: '2rem' } } className={ `ms-1 ${ isInWish === false ? styles.unwish : styles.wish }` } onClick={ toggleWishlist } />
                                           </div>
                                     </div>
                               }
@@ -339,12 +339,12 @@ const Cart = (props) =>
                         <Modal.Body className='d-flex flex-column flex-md-row overflow-auto my-2' style={ { maxHeight: '300px' } }>
                               <div className='d-flex flex-column align-items-center'>
                                     <h3>MoMo</h3>
-                                    <img className={ `${ styles.methods }` } src="https://play-lh.googleusercontent.com/dQbjuW6Jrwzavx7UCwvGzA_sleZe3-Km1KISpMLGVf1Be5N6hN6-tdKxE5RDQvOiGRg" alt=""></img>
+                                    <img className={ `${ styles.methods }` } src={ require('../../../General/images/momo.jpg') } alt=""></img>
                                     <button className='btn btn-sm btn-primary mt-3' onClick={ () => buyGames(1) }>Choose</button>
                               </div>
                               <div className='d-flex flex-column align-items-center mt-5 mt-md-0'>
                                     <h3>Online banking</h3>
-                                    <img className={ `${ styles.methods }` } src="https://cdn-icons-png.flaticon.com/512/4874/4874090.png" alt=""></img>
+                                    <img className={ `${ styles.methods }` } src={ require('../../../General/images/online_banking.png') } alt=""></img>
                                     <button className='btn btn-sm btn-primary mt-3' onClick={ () => buyGames(2) }>Choose</button>
                               </div>
                         </Modal.Body>
