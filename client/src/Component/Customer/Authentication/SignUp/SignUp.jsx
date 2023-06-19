@@ -76,31 +76,31 @@ export default function CustomerSignUp()
                               <div className="border-bottom border-dark w-100 d-flex flex-column align-items-center mb-2">
                                     <h1 className={ `my-3 mx-5 ${ styles.title }` }>Sign up</h1>
                               </div>
-                              <div className="mb-1 form-outline">
+                              <div className="mb-1 form-outline" style={ { width: '220px' } }>
                                     <label htmlFor="form_name" className={ `${ styles.font }` }>Name</label>
                                     <input type="text" id="form_name" className={ `form-control ${ styles.font }` } onChange={ formChange } name="name" required />
                               </div>
-                              <div className="mb-1 form-outline">
+                              <div className="mb-1 form-outline" style={ { width: '220px' } }>
                                     <label htmlFor="form_email" className={ `${ styles.font }` }>Email address</label>
                                     <input type="email" id="form_email" className={ `form-control ${ styles.font }` } onChange={ formChange } name="email" required />
                               </div>
-                              <div className="mb-1 form-outline">
+                              <div className="mb-1 form-outline" style={ { width: '220px' } }>
                                     <label htmlFor="form_phone" className={ `${ styles.font }` }>Phone number</label>
                                     <input title="Your phone number should not contain alphabetical character(s)" pattern="[0-9]{10}" type="text" maxLength={ 10 } id="form_phone" className={ `form-control ${ styles.font }` } onChange={ formChange } name="phone" />
                               </div>
-                              <div className="mb-1 form-outline" style={ { width: '221px' } }>
+                              <div className="mb-1 form-outline" style={ { width: '220px' } }>
                                     <label htmlFor="form_dob" className={ `${ styles.font }` }>Date of birth</label>
                                     <input type="date" id="form_dob" className={ `form-control ${ styles.font }` } onChange={ formChange } name="dob" />
                               </div>
-                              <div className="mb-1 form-outline">
+                              <div className="mb-1 form-outline" style={ { width: '220px' } }>
                                     <label htmlFor="form_username" className={ `${ styles.font }` }>Username</label>
                                     <input type="text" id="form_username" className={ `form-control ${ styles.font }` } onChange={ formChange } name="username" required />
                               </div>
-                              <div className="form-outline mb-1">
+                              <div className="form-outline mb-1" style={ { width: '220px' } }>
                                     <label htmlFor="form_password" className={ `${ styles.font }` } >Password</label>
                                     <input type="password" id="form_password" className={ `form-control ${ styles.font }` } onChange={ formChange } name="password" required />
                               </div>
-                              <div className="mb-2 form-outline">
+                              <div className="mb-2 form-outline" style={ { width: '220px' } }>
                                     <label htmlFor="form_repassword" className={ `${ styles.font }` }>Re-enter your password</label>
                                     <input type="password" id="form_repassword" className={ `form-control ${ styles.font }` } onChange={ formChange } name="repassword" required />
                               </div>

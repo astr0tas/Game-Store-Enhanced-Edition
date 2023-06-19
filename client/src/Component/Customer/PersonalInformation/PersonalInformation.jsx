@@ -93,7 +93,7 @@ export default function CustomerPersonalInfo()
                         for (let i = 0; i < res.data.length; i++)
                               temp.push(<History key={ i } name={ res.data[i].name } code={ res.data[i].code } date={ res.data[i].date } price={ res.data[i].price } method={ res.data[i].method } />);
 
-                        if (isRefNotValid(target))
+                        if (isRefNotValid(target) && isRefValid(history))
                               target.current = ReactDOM.createRoot(history.current);
                         target.current.render(<>{ temp }</>);
                   })

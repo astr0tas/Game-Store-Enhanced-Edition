@@ -75,7 +75,7 @@ const AdminMenu = () =>
     document.addEventListener('mousedown', function (event)
     {
       // This event listener is used to close the side menu when the user clicked something outside of it.
-
+      
       // Check if clicked element is inside the side menu or the toggle button
       if (isRefValid(navbar) && isRefValid(tabs) && isRefValid(navToggler)
         && !navbar.current.contains(event.target) && !navToggler.current.contains(event.target))
@@ -94,7 +94,7 @@ const AdminMenu = () =>
 
   return (
     <div className='w-100 h-100' style={ { backgroundColor: '#B9FDFD' } }>
-      <button className={ `${ styles.navToggler } position-fixed` } onClick={ handleToggleSidebar }><FontAwesomeIcon icon={ faBars } style={ { color: "#000000", fontSize: '1.5rem' } } ref={ navToggler } /></button>
+      <button className={ `${ styles.navToggler } position-fixed` } onClick={ handleToggleSidebar } ref={ navToggler }><FontAwesomeIcon icon={ faBars } style={ { color: "#000000", fontSize: '1.5rem' } } /></button>
       <div className={ `h-100 d-flex flex-column position-fixed ${ styles.navbar }` } style={ { backgroundColor: '#E6E6E6' } } ref={ navbar }>
         <div className={ `w-100 ${ styles.dummy }` } style={ { minHeight: '50px' } }></div>
         <div className={ `flex-grow-1 d-flex flex-column overflow-auto ${ styles.tabs } mt-md-3 hideBrowserScrollbar` } ref={ tabs }>
