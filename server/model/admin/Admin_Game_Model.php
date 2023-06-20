@@ -164,7 +164,7 @@ class GameModel
             return $this->db->multi_query($sql);
       }
 
-      public function update($id,$name, $price, $discount, $description, $minSpec, $recSpec, $picture1, $picture2, $picture3, $picture4)
+      public function update($id, $name, $price, $discount, $description, $minSpec, $recSpec, $picture1, $picture2, $picture3, $picture4)
       {
             $stmt = $this->db->prepare("CALL updateGame(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
             $stmt->bind_param("sssssssssss", $id, $name, $price, $discount, $description, $minSpec, $recSpec, $picture1, $picture2, $picture3, $picture4);
@@ -222,9 +222,26 @@ class GameModel
             return $arr;
       }
 
+      public function getAnnuallySolds()
+      {
+            $sql = "SELECT game.id,game.name,game.price,game.discount,count(*) as solds from game 
+            join purchase_history on purchase_history.game_id=game.id 
+            join purchase_history_description on purchase_history_description.id=purchase_history.description_id 
+            where DATE_FORMAT(date, '%Y-01-01') = DATE_FORMAT(NOW(), '%Y-01-01') and game.status=true group by game.id,game.name,game.price,game.discount
+            order by solds desc limit 5";
+            $result = $this->db->query($sql);
+            $arr = [];
+            if ($result->num_rows > 0) {
+                  while ($row = $result->fetch_assoc()) {
+                        $arr[] = $row;
+                  }
+            }
+            return $arr;
+      }
+
       public function latestTransaction($id)
       {
-            $sql="select date from purchase_history_description join purchase_history on purchase_history.description_id=purchase_history_description.id
+            $sql = "select date from purchase_history_description join purchase_history on purchase_history.description_id=purchase_history_description.id
             where game_id='$id' order by date desc limit 1";
             $result = $this->db->query($sql);
             return $result->fetch_assoc();
@@ -232,31 +249,52 @@ class GameModel
 
       public function getOverall($choice)
       {
-            $sql="";
-            if($choice==='0')
-                  $sql.="select belongs_to.category_type as name, count(*) as value from belongs_to 
+            $sql = "";
+            if ($choice === '0')
+                  $sql .= "select belongs_to.category_type as name, count(*) as value from belongs_to 
                   join purchase_history on purchase_history.game_id=belongs_to.game_id
                   join purchase_history_description on purchase_history_description.id=purchase_history.description_id
                   join game on game.id=belongs_to.game_id
                   where purchase_history_description.date>=CURDATE() and game.status=true
                   group by belongs_to.category_type
                   order by belongs_to.category_type";
-            else if($choice==='1')
-                  $sql.="select belongs_to.category_type as name, count(*) as value from belongs_to 
+            else if ($choice === '1')
+                  $sql .= "select belongs_to.category_type as name, count(*) as value from belongs_to 
                   join purchase_history on purchase_history.game_id=belongs_to.game_id
                   join purchase_history_description on purchase_history_description.id=purchase_history.description_id
                   join game on game.id=belongs_to.game_id
                   where purchase_history_description.date>=DATE_SUB(CURDATE(), INTERVAL WEEKDAY(CURDATE()) DAY) and game.status=true
                   group by belongs_to.category_type
                   order by belongs_to.category_type";
-            else
-                  $sql.="select belongs_to.category_type as name, count(*) as value from belongs_to 
+            else if ($choice === '2')
+                  $sql .= "select belongs_to.category_type as name, count(*) as value from belongs_to 
                   join purchase_history on purchase_history.game_id=belongs_to.game_id
                   join purchase_history_description on purchase_history_description.id=purchase_history.description_id
                   join game on game.id=belongs_to.game_id
                   where DATE_FORMAT(purchase_history_description.date, '%Y-%m-01') = DATE_FORMAT(NOW(), '%Y-%m-01') and game.status=true
                   group by belongs_to.category_type
                   order by belongs_to.category_type";
+            else
+                  $sql .= "select belongs_to.category_type as name, count(*) as value from belongs_to 
+                  join purchase_history on purchase_history.game_id=belongs_to.game_id
+                  join purchase_history_description on purchase_history_description.id=purchase_history.description_id
+                  join game on game.id=belongs_to.game_id
+                  where DATE_FORMAT(purchase_history_description.date, '%Y-01-01') = DATE_FORMAT(NOW(), '%Y-01-01') and game.status=true
+                  group by belongs_to.category_type
+                  order by belongs_to.category_type";
+            $result = $this->db->query($sql);
+            $arr = [];
+            if ($result->num_rows > 0) {
+                  while ($row = $result->fetch_assoc()) {
+                        $arr[] = $row;
+                  }
+            }
+            return $arr;
+      }
+
+      public function getCategories2($name)
+      {
+            $sql = "SELECT * from category where type like '$name%'";
             $result = $this->db->query($sql);
             $arr = [];
             if ($result->num_rows > 0) {

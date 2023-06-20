@@ -50,10 +50,11 @@
       $router->get("/admin/info", "AdminController@personalInfo");
       $router->post("/admin/info/edit", "AdminController@updatePersonalInfo");
       /* Home */
-      $router->get("/getDailySolds","AdminController@getDailySolds");
-      $router->get("/getWeeklySolds","AdminController@getWeeklySolds");
-      $router->get("/getMonthlySolds","AdminController@getMonthlySolds");
-      $router->post("/latestTransaction","AdminController@latestTransaction");
+      $router->get("/admin/getDailySolds","AdminController@getDailySolds");
+      $router->get("/admin/getWeeklySolds","AdminController@getWeeklySolds");
+      $router->get("/admin/getMonthlySolds","AdminController@getMonthlySolds");
+      $router->get("/admin/getAnnuallySolds", "AdminController@getAnnuallySolds");
+      $router->post("/admin/latestTransaction","AdminController@latestTransaction");
       /* Customer */
       $router->get("/admin/customer/getList", "AdminController@getCustomerList");
       $router->post("/admin/customer/find", "AdminController@findCustomer");
@@ -77,7 +78,8 @@
       $router->post("/admin/game/addTag", "AdminController@addTag");
       $router->post("/admin/game/update", "AdminController@updateGame");
       /* Statistic */
-      $router->post("/getOverall", "AdminController@getOverall");
+      $router->post("/admin/getOverall", "AdminController@getOverall");
+      $router->post("/admin/getCategories", "AdminController@getCategories2");
       // Run router
       $router->run();
       ?>

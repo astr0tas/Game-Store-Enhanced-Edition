@@ -26,7 +26,7 @@ const Game = (props) =>
                   })
                   .catch(err => console.log(err))
 
-            axios.post(`http://${ domain }/latestTransaction`, formData)
+            axios.post(`http://${ domain }/admin/latestTransaction`, formData)
                   .then(res =>
                   {
                         setLastest(res.data.date);
@@ -61,10 +61,12 @@ const AdminHome = () =>
       const day = useRef(null);
       const week = useRef(null);
       const month = useRef(null);
+      const year = useRef(null);
 
       const targetDay = useRef(null);
       const targetWeek = useRef(null);
       const targetMonth = useRef(null);
+      const targetYear = useRef(null);
 
 
       useEffect(() =>
@@ -75,8 +77,10 @@ const AdminHome = () =>
                   targetMonth.current = ReactDOM.createRoot(month.current);
             if (isRefNotValid(targetWeek) && isRefValid(week))
                   targetWeek.current = ReactDOM.createRoot(week.current);
+            if (isRefNotValid(targetYear) && isRefValid(year))
+                  targetYear.current = ReactDOM.createRoot(year.current);
 
-            axios.get(`http://${ domain }/getDailySolds`)
+            axios.get(`http://${ domain }/admin/getDailySolds`)
                   .then(res =>
                   {
                         const temp = [];
@@ -87,7 +91,7 @@ const AdminHome = () =>
                   })
                   .catch(err => console.log(err));
 
-            axios.get(`http://${ domain }/getWeeklySolds`)
+            axios.get(`http://${ domain }/admin/getWeeklySolds`)
                   .then(res =>
                   {
                         const temp = [];
@@ -98,7 +102,7 @@ const AdminHome = () =>
                   })
                   .catch(err => console.log(err));
 
-            axios.get(`http://${ domain }/getMonthlySolds`)
+            axios.get(`http://${ domain }/admin/getMonthlySolds`)
                   .then(res =>
                   {
                         const temp = [];
@@ -106,6 +110,17 @@ const AdminHome = () =>
                               temp.push(<Game i={ i + 1 } id={ res.data[i].id } solds={ res.data[i].solds } name={ res.data[i].name } price={ res.data[i].price } discount={ res.data[i].discount } key={ i } />);
                         if (isRefValid(targetMonth))
                               targetMonth.current.render(<>{ temp }</>);
+                  })
+                  .catch(err => console.log(err));
+            
+            axios.get(`http://${ domain }/admin/getAnnuallySolds`)
+                  .then(res =>
+                  {
+                        const temp = [];
+                        for (let i = 0; i < res.data.length; i++)
+                              temp.push(<Game i={ i + 1 } id={ res.data[i].id } solds={ res.data[i].solds } name={ res.data[i].name } price={ res.data[i].price } discount={ res.data[i].discount } key={ i } />);
+                        if (isRefValid(targetYear))
+                              targetYear.current.render(<>{ temp }</>);
                   })
                   .catch(err => console.log(err));
       }, []);
@@ -166,6 +181,23 @@ const AdminHome = () =>
                                           </tr>
                                     </thead>
                                     <tbody ref={ month }>
+                                    </tbody>
+                              </table>
+                        </div>
+                        <h4 className='ms-4 mt-3'>Solds of year</h4>
+                        <div className='overflow-auto hideBrowserScrollbar' style={ { minHeight: '180px' } }>
+                              <table className="table table-hover" style={ { borderCollapse: 'separate' } }>
+                                    <thead style={ { position: "sticky", top: "0", backgroundColor: "#BFBFBF" } }>
+                                          <tr>
+                                                <th scope='col' className='col-1 text-center'>#</th>
+                                                <th scope="col" className='col-3 text-center'>Game</th>
+                                                <th scope="col" className='col-2 text-center'>Price</th>
+                                                <th scope="col" className='col-2 text-center'>Total solds</th>
+                                                <th scope="col" className='col-2 text-center'>Sell status</th>
+                                                <th scope="col" className='col-2 text-center'>Latest transaction</th>
+                                          </tr>
+                                    </thead>
+                                    <tbody ref={ year }>
                                     </tbody>
                               </table>
                         </div>

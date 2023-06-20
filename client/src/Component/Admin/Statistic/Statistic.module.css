@@ -10,8 +10,8 @@
 }
 
 .hover {
-      width: 1rem;
-      height: 1rem;
+      min-width: 1rem;
+      min-height: 1rem;
 }
 
 .fonts {
@@ -22,23 +22,61 @@
       cursor: pointer;
 }
 
+.modal_body {
+      max-height: 200px;
+}
+
+.modal {
+      top: 0;
+}
+
 @media only screen and (min-width:768px) {
       .hover {
-            width: 1.2rem;
-            height: 1.2rem;
+            min-width: 1.2rem;
+            min-height: 1.2rem;
       }
 
       .fonts {
             font-size: 1.2rem;
       }
+
+      .modal {
+            max-width: 500px;
+      }
+
+      .dialog {
+            max-width: 500px !important;
+      }
+
+      .modal_body {
+            max-height: 250px;
+      }
 }
 
 @media only screen and (min-width:992px) {
       .modal {
-            max-width: 600px;
+            max-width: 700px;
       }
 
       .dialog {
-            max-width: 600px !important;
+            max-width: 700px !important;
+      }
+
+      .modal_body {
+            max-height: 300px;
+      }
+}
+
+@media only screen and (min-width:1600px) {
+      .modal {
+            max-width: 900px;
+      }
+
+      .dialog {
+            max-width: 900px !important;
+      }
+
+      .modal_body {
+            max-height: 400px;
       }
 }

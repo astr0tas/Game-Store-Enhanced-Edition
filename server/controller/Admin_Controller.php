@@ -365,6 +365,11 @@ class AdminController
             echo json_encode($this->game_model->getMonthlySolds());
       }
 
+      public function getAnnuallySolds()
+      {
+            echo json_encode($this->game_model->getAnnuallySolds());
+      }
+      
       public function latestTransaction()
       {
             echo json_encode($this->game_model->latestTransaction($_POST['id']));
@@ -374,5 +379,11 @@ class AdminController
       public function getOverall()
       {
             echo json_encode($this->game_model->getOverall($_POST['choice']));
+      }
+
+      public function getCategories2()
+      {
+            $arr = $this->game_model->getCategories2($_POST['name']);
+            echo json_encode($arr);
       }
 }
