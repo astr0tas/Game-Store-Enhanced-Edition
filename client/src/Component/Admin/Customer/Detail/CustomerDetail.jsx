@@ -110,7 +110,8 @@ export default function CustomerDetail()
 
                 if (isRefNotValid(target) && isRefValid(history))
                     target.current = ReactDOM.createRoot(history.current);
-                target.current.render(<>{ temp }</>);
+                if (isRefValid(target))
+                    target.current.render(<>{ temp }</>);
             })
             .catch(error => console.log(error));
     }

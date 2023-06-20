@@ -11,10 +11,27 @@ import '../../General/css/modal.css';
 
 const History = (props) =>
 {
+      function formatString(input)
+      {
+            const hyphenPositions = [4, 8, 12];
+            let formattedString = "";
+
+            for (let i = 0; i < input.length; i++)
+            {
+                  if (hyphenPositions.includes(i))
+                  {
+                        formattedString += "-";
+                  }
+                  formattedString += input[i];
+            }
+
+            return formattedString;
+      }
+
       return (
             <tr>
                   <td className='col-3 text-center'>{ props.name }</td>
-                  <td className='col-3 text-center'>{ props.code }</td>
+                  <td className='col-3 text-center'>{ formatString(props.code) }</td>
                   <td className='col-2 text-center'>{ props.date }</td>
                   <td className='col-2 text-center'>${ props.price }</td>
                   <td className='col-2 text-center'>{ props.method }</td>
@@ -95,7 +112,8 @@ export default function CustomerPersonalInfo()
 
                         if (isRefNotValid(target) && isRefValid(history))
                               target.current = ReactDOM.createRoot(history.current);
-                        target.current.render(<>{ temp }</>);
+                        if (isRefValid(target))
+                              target.current.render(<>{ temp }</>);
                   })
                   .catch(error => console.log(error));
       }

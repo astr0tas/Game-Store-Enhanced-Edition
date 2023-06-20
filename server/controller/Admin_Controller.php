@@ -369,4 +369,10 @@ class AdminController
       {
             echo json_encode($this->game_model->latestTransaction($_POST['id']));
       }
+
+      /* Statistics */
+      public function getOverall()
+      {
+            echo json_encode($this->game_model->getOverall($_POST['choice']));
+      }
 }

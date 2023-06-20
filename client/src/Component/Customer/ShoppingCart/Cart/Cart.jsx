@@ -276,7 +276,8 @@ const Cart = (props) =>
                                           render={ render } setRender={ setRender } Navigate={ Navigate } key={ i } img={ res.data[i].picture_1 } id={ res.data[i].id } name={ res.data[i].name } price={ res.data[i].price } discount={ res.data[i].discount } amount={ res.data[i].amount }
                                     />);
                               }
-                              target.current.render(<>{ temp }</>);
+                              if (isRefValid(target))
+                                    target.current.render(<>{ temp }</>);
                               setTotal('$' + ((totalTemp * (100 - discount) / 100).toFixed(2)).toString());
                         }
                         else

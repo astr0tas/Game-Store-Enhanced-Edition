@@ -157,7 +157,8 @@ const Group = (props) =>
                   if (props.data[i] !== undefined)
                         temp.push(<Game showpopup3={ props.showpopup3 } setshowpopup3={ props.setshowpopup3 } showpopup2={ props.showpopup2 } setshowpopup2={ props.setshowpopup2 } showpopup1={ props.showpopup1 } setshowpopup1={ props.setshowpopup1 } numOfElem={ props.numOfElem } key={ props.i + i } id={ props.data[i].id } name={ props.data[i].name } img={ props.data[i].picture_1 } discount={ props.data[i].discount } price={ props.data[i].price } />);
             }
-            target.current.render(<>{ temp }</>)
+            if (isRefValid(target))
+                  target.current.render(<>{ temp }</>)
       });
 
       return (
@@ -251,7 +252,8 @@ const CustomerGameList = () =>
                               else
                                     temp.push(<Group showpopup3={ showpopup3 } setshowpopup3={ setshowpopup3 } showpopup2={ showpopup2 } setshowpopup2={ setshowpopup2 } showpopup1={ showpopup1 } setshowpopup1={ setshowpopup1 } numOfElem={ numOfElem } i={ i * numOfElem } key={ i } data={ [res.data[i * numOfElem], res.data[i * numOfElem + 1], res.data[i * numOfElem + 2], res.data[i * numOfElem + 3]] } />);
                         }
-                        target.current.render(<>{ temp }</>)
+                        if (isRefValid(target))
+                              target.current.render(<>{ temp }</>)
                   })
                   .catch(err => console.log(err));
 

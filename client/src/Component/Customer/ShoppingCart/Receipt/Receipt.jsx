@@ -99,7 +99,8 @@ const Receipt = (props) =>
                         const temp = [];
                         for (let i = 0; i < res.data.length; i++)
                               temp.push(<Game key={ i } Navigate={ Navigate } code={ res.data[i].code } id={ res.data[i].id } name={ res.data[i].name } discount={ res.data[i].discount } price={ res.data[i].price } img={ res.data[i].picture_1 } />);
-                        target.current.render(<>{ temp }</>);
+                        if (isRefValid(target))
+                              target.current.render(<>{ temp }</>);
                   })
                   .catch(err => console.log(err));
       }, [Navigate, props.isPaid]);

@@ -115,7 +115,8 @@ const Group = (props) =>
                   if (props.data[i] !== undefined)
                         temp.push(<Game render={ props.render } setRender={ props.setRender } numOfElem={ props.numOfElem } key={ props.i + i } id={ props.data[i].id } name={ props.data[i].name } img={ props.data[i].picture_1 } discount={ props.data[i].discount } price={ props.data[i].price } />);
             }
-            target.current.render(<>{ temp }</>)
+            if (isRefValid(target))
+                  target.current.render(<>{ temp }</>)
       });
 
       return (
@@ -204,7 +205,8 @@ const CustomerWishList = () =>
                               else
                                     temp.push(<Group render={ render } setRender={ setRender } numOfElem={ numOfElem } i={ i * numOfElem } key={ i } data={ [res.data[i * numOfElem], res.data[i * numOfElem + 1], res.data[i * numOfElem + 2], res.data[i * numOfElem + 3]] } />);
                         }
-                        target.current.render(<>{ temp }</>)
+                        if (isRefValid(target))
+                              target.current.render(<>{ temp }</>)
                   })
                   .catch(err => console.log(err));
 
@@ -218,8 +220,8 @@ const CustomerWishList = () =>
             <div className='w-100 h-100 d-flex flex-column'>
                   <div className={ `d-flex flex-column align-items-center justify-content-center w-100 mb-2` }>
                         <div className={ `d-flex align-items-center justify-content-center ${ styles.title }` }>
-                              <div className='d-flex align-items-center' style={ { color: "red",fontSize:'2rem' } }>
-                                    <BsHeartFill className='mb-0'/>&nbsp;
+                              <div className='d-flex align-items-center' style={ { color: "red", fontSize: '2rem' } }>
+                                    <BsHeartFill className='mb-0' />&nbsp;
                                     <h2 className='mb-0'>Wishlist</h2>
                               </div>
                         </div>

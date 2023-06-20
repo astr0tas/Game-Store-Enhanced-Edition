@@ -38,7 +38,8 @@ const Line = (props) =>
                   if (props.data[i] !== undefined)
                         temp.push(<Category length={ props.data.length } key={ i } category={ props.data[i].type } setRemovedTag={ props.setRemovedTag } setTag={ props.setTag } checkbox={ props.checkbox } index={ props.elementPerLine * props.i + i } />);
             }
-            root.current.render(<>{ temp }</>);
+            if (isRefValid(root))
+                  root.current.render(<>{ temp }</>);
       });
 
       return (
@@ -257,7 +258,8 @@ const AddGame = () =>
                         else
                               temp.push(<Line key={ i } elementPerLine={ elementPerLine } i={ i } data={ [res.data[i * 4], res.data[i * 4 + 1], res.data[i * 4 + 2], res.data[i * 4 + 3]] } checkbox={ checkbox } setTag={ setTag } setRemovedTag={ setRemovedTag } />);
                   }
-                  root.current.render(<>{ temp }</>);
+                  if (isRefValid(root))
+                        root.current.render(<>{ temp }</>);
             }).catch(error => { console.log(error); });
 
             return () =>

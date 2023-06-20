@@ -82,7 +82,8 @@ const AdminHome = () =>
                         const temp = [];
                         for (let i = 0; i < res.data.length; i++)
                               temp.push(<Game i={ i + 1 } id={ res.data[i].id } solds={ res.data[i].solds } name={ res.data[i].name } price={ res.data[i].price } discount={ res.data[i].discount } key={ i } />);
-                        targetDay.current.render(<>{ temp }</>);
+                        if (isRefValid(targetDay))
+                              targetDay.current.render(<>{ temp }</>);
                   })
                   .catch(err => console.log(err));
 
@@ -92,7 +93,8 @@ const AdminHome = () =>
                         const temp = [];
                         for (let i = 0; i < res.data.length; i++)
                               temp.push(<Game i={ i + 1 } id={ res.data[i].id } solds={ res.data[i].solds } name={ res.data[i].name } price={ res.data[i].price } discount={ res.data[i].discount } key={ i } />);
-                        targetWeek.current.render(<>{ temp }</>);
+                        if (isRefValid(targetWeek))
+                              targetWeek.current.render(<>{ temp }</>);
                   })
                   .catch(err => console.log(err));
 
@@ -102,7 +104,8 @@ const AdminHome = () =>
                         const temp = [];
                         for (let i = 0; i < res.data.length; i++)
                               temp.push(<Game i={ i + 1 } id={ res.data[i].id } solds={ res.data[i].solds } name={ res.data[i].name } price={ res.data[i].price } discount={ res.data[i].discount } key={ i } />);
-                        targetMonth.current.render(<>{ temp }</>);
+                        if (isRefValid(targetMonth))
+                              targetMonth.current.render(<>{ temp }</>);
                   })
                   .catch(err => console.log(err));
       }, []);
@@ -150,7 +153,7 @@ const AdminHome = () =>
                               </table>
                         </div>
                         <h4 className='ms-4 mt-3'>Solds of month</h4>
-                        <div className='overflow-auto hideBrowserScrollbar' style={ { minHeight:'180px'}}>
+                        <div className='overflow-auto hideBrowserScrollbar' style={ { minHeight: '180px' } }>
                               <table className="table table-hover" style={ { borderCollapse: 'separate' } }>
                                     <thead style={ { position: "sticky", top: "0", backgroundColor: "#BFBFBF" } }>
                                           <tr>

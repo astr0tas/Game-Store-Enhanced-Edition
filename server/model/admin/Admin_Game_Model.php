@@ -230,6 +230,43 @@ class GameModel
             return $result->fetch_assoc();
       }
 
+      public function getOverall($choice)
+      {
+            $sql="";
+            if($choice==='0')
+                  $sql.="select belongs_to.category_type as name, count(*) as value from belongs_to 
+                  join purchase_history on purchase_history.game_id=belongs_to.game_id
+                  join purchase_history_description on purchase_history_description.id=purchase_history.description_id
+                  join game on game.id=belongs_to.game_id
+                  where purchase_history_description.date>=CURDATE() and game.status=true
+                  group by belongs_to.category_type
+                  order by belongs_to.category_type";
+            else if($choice==='1')
+                  $sql.="select belongs_to.category_type as name, count(*) as value from belongs_to 
+                  join purchase_history on purchase_history.game_id=belongs_to.game_id
+                  join purchase_history_description on purchase_history_description.id=purchase_history.description_id
+                  join game on game.id=belongs_to.game_id
+                  where purchase_history_description.date>=DATE_SUB(CURDATE(), INTERVAL WEEKDAY(CURDATE()) DAY) and game.status=true
+                  group by belongs_to.category_type
+                  order by belongs_to.category_type";
+            else
+                  $sql.="select belongs_to.category_type as name, count(*) as value from belongs_to 
+                  join purchase_history on purchase_history.game_id=belongs_to.game_id
+                  join purchase_history_description on purchase_history_description.id=purchase_history.description_id
+                  join game on game.id=belongs_to.game_id
+                  where DATE_FORMAT(purchase_history_description.date, '%Y-%m-01') = DATE_FORMAT(NOW(), '%Y-%m-01') and game.status=true
+                  group by belongs_to.category_type
+                  order by belongs_to.category_type";
+            $result = $this->db->query($sql);
+            $arr = [];
+            if ($result->num_rows > 0) {
+                  while ($row = $result->fetch_assoc()) {
+                        $arr[] = $row;
+                  }
+            }
+            return $arr;
+      }
+
       public function __destruct()
       {
             $this->db->close();

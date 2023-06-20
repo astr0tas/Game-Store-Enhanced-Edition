@@ -170,8 +170,10 @@ const CustomerHome = () =>
                               else
                                     temp2.push(<Game key={ i } id={ res.data[i].id } name={ res.data[i].name } img={ res.data[i].picture_1 } price={ res.data[i].price } discount={ res.data[i].discount } />);
                         }
-                        target1.current.render(<>{ temp1 }</>);
-                        target2.current.render(<>{ temp2 }</>);
+                        if (isRefValid(target1))
+                              target1.current.render(<>{ temp1 }</>);
+                        if (isRefValid(target2))
+                              target2.current.render(<>{ temp2 }</>);
                   })
                   .catch(err => console.log(err));
       }, [render]);

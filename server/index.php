@@ -77,7 +77,7 @@
       $router->post("/admin/game/addTag", "AdminController@addTag");
       $router->post("/admin/game/update", "AdminController@updateGame");
       /* Statistic */
-
+      $router->post("/getOverall", "AdminController@getOverall");
       // Run router
       $router->run();
       ?>
