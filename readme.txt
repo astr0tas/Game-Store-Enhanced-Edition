@@ -4,4 +4,4 @@ The database is MySQL server so you just need to run the .sql files in MySQL Wor
 
 The server is using XAMPP so you will need to put the content of the `server` folder into your XAMPP root directory (default is C:/xampp/htdocs) to establish the server.
 
-P/S: The project still has some bugs and weird behaviors but they're minors and don't affect much, also the server doesn't send http status code accordingly, the web app itself doesn't have anything security methods to prevent threats like SQL Injection, XSS, etc... These problems can be fixed but since I really don't have much time so I'm just leaving them there. Afterall, this is just a project to improve my understanding of React and vanilla PHP.
+P/S: The project still has some bugs and weird behaviors but they're minors and don't affect much, also the server doesn't send http status code accordingly, the web app itself doesn't have anything protection methods to prevent threats like SQL Injection, XSS, etc... These problems can be fixed but since I really don't have much time so I'm just leaving them there. Afterall, this is just a project to improve my understanding of React and vanilla PHP.
