@@ -81,6 +81,7 @@
       $router->post("/admin/getOverall", "AdminController@getOverall");
       $router->post("/admin/getCategories", "AdminController@getCategories2");
       $router->post("/admin/getStats", "AdminController@getStats");
+      $router->get("/admin/getTopCustomers", "AdminController@getTopCustomers");
       // Run router
       $router->run();
       ?>

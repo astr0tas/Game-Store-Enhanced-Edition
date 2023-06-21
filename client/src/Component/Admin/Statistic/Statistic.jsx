@@ -149,7 +149,7 @@ const Game = (props) =>
       return (
             <tr className={ `${ styles.rows }` } onClick={ () => props.Navigate(`/admin/game-list/${ props.id }`) }>
                   <td className='text-center'>{ props.i }</td>
-                  <td>{ props.name }</td>
+                  <td className='text-center'   >{ props.name }</td>
                   <td className='d-flex align-items-center justify-content-center'>
                         { !props.price && 'N/A' }{ props.price && '$' }{ props.discount === '0' && props.price }{ props.discount !== '0' && props.discount !== null && ((parseFloat(props.price) + 0.01) * (100 - parseFloat(props.discount)) / 100).toFixed(2) - 0.01 }
                         { props.discount !== null && parseFloat(props.discount) !== 0 && <CiDiscount1 style={ {
@@ -165,7 +165,7 @@ const Game = (props) =>
       )
 }
 
-const DrawTable = ({ div, Navigate }) =>
+const DrawGameTable = ({ div, Navigate }) =>
 {
       const [choice, setChoice] = useState(0);
       const [category, setCategory] = useState('First-Person Shooter');
@@ -351,6 +351,54 @@ const DrawTable = ({ div, Navigate }) =>
       )
 }
 
+const DrawCustomerTale = ({ Navigate }) =>
+{
+      const [tableContent, setTableContent] = useState([]);
+
+      useEffect(() =>
+      {
+            axios.get(`http://${ domain }/admin/getTopCustomers`)
+                  .then(res =>
+                  {
+                        if (res.data.length)
+                        {
+                              const temp = [];
+                              for (let i = 0; i < res.data.length; i++)
+                                    temp.push(
+                                          <tr key={ i } className={ `${ styles.rows }` } onClick={ () => Navigate(`/admin/customer-list/${ res.data[i].id }`) }>
+                                                <td className='text-center'>{ i + 1 }</td>
+                                                <td className='text-center'>{ res.data[i].name }</td>
+                                                <td className='text-center'>{ res.data[i].email }</td>
+                                                <td className='text-center'>${ res.data[i].total_spending }</td>
+                                          </tr>
+                                    );
+                              setTableContent(temp);
+                        }
+                        else
+                              setTableContent([]);
+                  })
+                  .catch(err => console.log(err));
+      }, [Navigate]);
+
+      return (
+            <div className='overflow-auto hideBrowserScrollbar mb-2' style={ { minHeight: tableContent.length ? '300px' : '50px', width: '95%' } }>
+                  <table className="table table-hover" style={ { borderCollapse: 'separate' } }>
+                        <thead style={ { position: "sticky", top: "0", backgroundColor: "#BFBFBF" } }>
+                              <tr>
+                                    <th scope='col' className='col-1 text-center'>#</th>
+                                    <th scope="col" className='col-4 text-center'>Name</th>
+                                    <th scope="col" className='col-4 text-center'>Email</th>
+                                    <th scope="col" className='col-3 text-center'>Total spendings</th>
+                              </tr>
+                        </thead>
+                        <tbody>
+                              { tableContent }
+                        </tbody>
+                  </table>
+            </div>
+      )
+}
+
 const Statistic = () =>
 {
       document.title = "Statistics";
@@ -370,7 +418,9 @@ const Statistic = () =>
                         <h2 className='mt-2'>Overall solds</h2>
                         <DrawOverall />
                         <h2 className='mt-5'>Category solds</h2>
-                        <DrawTable div={ div } Navigate={ Navigate } />
+                        <DrawGameTable div={ div } Navigate={ Navigate } />
+                        <h2 className='mt-5'>Top 10    customers</h2>
+                        <DrawCustomerTale Navigate={ Navigate } />
                   </div>
             </div>
       )

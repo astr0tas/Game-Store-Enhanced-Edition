@@ -109,6 +109,19 @@ class CustomerModel
             return $this->db->query($sql);
       }
 
+      public function getTopCustomers()
+      {
+            $sql = "select id,name,email,total_spending from customer order by total_spending desc, name limit 10";
+            $result = $this->db->query($sql);
+            $arr = [];
+            if ($result->num_rows > 0) {
+                  while ($row = $result->fetch_assoc()) {
+                        $arr[] = $row;
+                  }
+            }
+            return $arr;
+      }
+
       public function __destruct()
       {
             $this->db->close();

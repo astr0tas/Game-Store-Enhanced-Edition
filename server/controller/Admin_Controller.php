@@ -42,7 +42,7 @@ class AdminController
             $name = $_POST['name'];
             $email = $_POST['email'];
             $phone = $_POST['phone'];
-            $dob=$_POST['dob'];
+            $dob = $_POST['dob'];
             $address = $_POST['address'] === "null" ? null : $_POST['address'];
             $password = $_POST['password'] === "null" ? null : $_POST['password'];
 
@@ -277,7 +277,7 @@ class AdminController
             $code = null;
             if (isset($_FILES["codes"])) {
                   move_uploaded_file($_FILES["codes"]["tmp_name"], $_FILES["codes"]["tmp_name"]);
-                  $code=str_replace([' ','\t','\n','\r'],'',file_get_contents($_FILES["codes"]["tmp_name"]));
+                  $code = str_replace([' ', '\t', '\n', '\r'], '', file_get_contents($_FILES["codes"]["tmp_name"]));
                   $code = explode(",", $code);
             }
             $result = $this->game_model->addCode($_POST['id'], $code);
@@ -369,7 +369,7 @@ class AdminController
       {
             echo json_encode($this->game_model->getAnnuallySolds());
       }
-      
+
       public function latestTransaction()
       {
             echo json_encode($this->game_model->latestTransaction($_POST['id']));
@@ -389,7 +389,12 @@ class AdminController
 
       public function getStats()
       {
-            $arr = $this->game_model->getStats($_POST['choice'],$_POST['category'],$_POST['name']);
+            $arr = $this->game_model->getStats($_POST['choice'], $_POST['category'], $_POST['name']);
             echo json_encode($arr);
+      }
+
+      public function getTopCustomers()
+      {
+            echo json_encode($this->customer_model->getTopCustomers());
       }
 }
