@@ -278,7 +278,7 @@ class AdminController
             if (isset($_FILES["codes"])) {
                   move_uploaded_file($_FILES["codes"]["tmp_name"], $_FILES["codes"]["tmp_name"]);
                   $code=str_replace([' ','\t','\n','\r'],'',file_get_contents($_FILES["codes"]["tmp_name"]));
-                  $code = explode(", ", $code);
+                  $code = explode(",", $code);
             }
             $result = $this->game_model->addCode($_POST['id'], $code);
             echo json_encode(array("message" => $result ? "success" : "failed"));
