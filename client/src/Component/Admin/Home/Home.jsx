@@ -6,6 +6,7 @@ import { domain } from '../../General/tools/domain';
 import '../../General/css/scroll.css';
 import { isRefValid, isRefNotValid } from '../../General/tools/refChecker';
 import { CiDiscount1 } from 'react-icons/ci';
+import { useNavigate } from 'react-router-dom';
 
 const Game = (props) =>
 {
@@ -35,7 +36,7 @@ const Game = (props) =>
       }, [props.id]);
 
       return (
-            <tr>
+            <tr className={ `${ styles.rows }` } onClick={ () => props.Navigate(`/admin/game-list/${ props.id }`) }>
                   <td className='text-center'>{ props.i }</td>
                   <td>{ props.name }</td>
                   <td className='d-flex align-items-center justify-content-center'>
@@ -68,6 +69,8 @@ const AdminHome = () =>
       const targetMonth = useRef(null);
       const targetYear = useRef(null);
 
+      const Navigate = useNavigate();
+
 
       useEffect(() =>
       {
@@ -85,7 +88,7 @@ const AdminHome = () =>
                   {
                         const temp = [];
                         for (let i = 0; i < res.data.length; i++)
-                              temp.push(<Game i={ i + 1 } id={ res.data[i].id } solds={ res.data[i].solds } name={ res.data[i].name } price={ res.data[i].price } discount={ res.data[i].discount } key={ i } />);
+                              temp.push(<Game Navigate={ Navigate } i={ i + 1 } id={ res.data[i].id } solds={ res.data[i].solds } name={ res.data[i].name } price={ res.data[i].price } discount={ res.data[i].discount } key={ i } />);
                         if (isRefValid(targetDay))
                               targetDay.current.render(<>{ temp }</>);
                   })
@@ -96,7 +99,7 @@ const AdminHome = () =>
                   {
                         const temp = [];
                         for (let i = 0; i < res.data.length; i++)
-                              temp.push(<Game i={ i + 1 } id={ res.data[i].id } solds={ res.data[i].solds } name={ res.data[i].name } price={ res.data[i].price } discount={ res.data[i].discount } key={ i } />);
+                              temp.push(<Game Navigate={ Navigate } i={ i + 1 } id={ res.data[i].id } solds={ res.data[i].solds } name={ res.data[i].name } price={ res.data[i].price } discount={ res.data[i].discount } key={ i } />);
                         if (isRefValid(targetWeek))
                               targetWeek.current.render(<>{ temp }</>);
                   })
@@ -107,23 +110,23 @@ const AdminHome = () =>
                   {
                         const temp = [];
                         for (let i = 0; i < res.data.length; i++)
-                              temp.push(<Game i={ i + 1 } id={ res.data[i].id } solds={ res.data[i].solds } name={ res.data[i].name } price={ res.data[i].price } discount={ res.data[i].discount } key={ i } />);
+                              temp.push(<Game Navigate={ Navigate } i={ i + 1 } id={ res.data[i].id } solds={ res.data[i].solds } name={ res.data[i].name } price={ res.data[i].price } discount={ res.data[i].discount } key={ i } />);
                         if (isRefValid(targetMonth))
                               targetMonth.current.render(<>{ temp }</>);
                   })
                   .catch(err => console.log(err));
-            
+
             axios.get(`http://${ domain }/admin/getAnnuallySolds`)
                   .then(res =>
                   {
                         const temp = [];
                         for (let i = 0; i < res.data.length; i++)
-                              temp.push(<Game i={ i + 1 } id={ res.data[i].id } solds={ res.data[i].solds } name={ res.data[i].name } price={ res.data[i].price } discount={ res.data[i].discount } key={ i } />);
+                              temp.push(<Game Navigate={ Navigate } i={ i + 1 } id={ res.data[i].id } solds={ res.data[i].solds } name={ res.data[i].name } price={ res.data[i].price } discount={ res.data[i].discount } key={ i } />);
                         if (isRefValid(targetYear))
                               targetYear.current.render(<>{ temp }</>);
                   })
                   .catch(err => console.log(err));
-      }, []);
+      }, [Navigate]);
 
       return (
             <div className='w-100 h-100 d-flex flex-column'>

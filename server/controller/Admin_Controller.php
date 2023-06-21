@@ -386,4 +386,10 @@ class AdminController
             $arr = $this->game_model->getCategories2($_POST['name']);
             echo json_encode($arr);
       }
+
+      public function getStats()
+      {
+            $arr = $this->game_model->getStats($_POST['choice'],$_POST['category'],$_POST['name']);
+            echo json_encode($arr);
+      }
 }

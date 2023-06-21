@@ -305,6 +305,51 @@ class GameModel
             return $arr;
       }
 
+      public function getStats($choice,$category,$name)
+      {
+            $sql = "";
+            if ($choice === '0')
+                  $sql .= "SELECT game.id,game.name,game.price,game.discount,count(*) as solds from game 
+            join purchase_history on purchase_history.game_id=game.id 
+            join purchase_history_description on purchase_history_description.id=purchase_history.description_id
+            join belongs_to on belongs_to.game_id=game.id
+            where date>=CURDATE() and game.status=true and game.name like '$name%' and belongs_to.category_type='$category'
+            group by game.id,game.name,game.price,game.discount
+            order by solds desc";
+            else if ($choice === '1')
+                  $sql .= "SELECT game.id,game.name,game.price,game.discount,count(*) as solds from game 
+            join purchase_history on purchase_history.game_id=game.id 
+            join purchase_history_description on purchase_history_description.id=purchase_history.description_id 
+            join belongs_to on belongs_to.game_id=game.id
+            where date>=DATE_SUB(CURDATE(), INTERVAL WEEKDAY(CURDATE()) DAY) and game.status=true and game.name like '$name%' and belongs_to.category_type='$category'
+            group by game.id,game.name,game.price,game.discount
+            order by solds desc";
+            else if ($choice === '2')
+                  $sql .= "SELECT game.id,game.name,game.price,game.discount,count(*) as solds from game 
+            join purchase_history on purchase_history.game_id=game.id 
+            join purchase_history_description on purchase_history_description.id=purchase_history.description_id 
+            join belongs_to on belongs_to.game_id=game.id
+            where DATE_FORMAT(date, '%Y-%m-01') = DATE_FORMAT(NOW(), '%Y-%m-01') and game.status=true and game.name like '$name%' and belongs_to.category_type='$category'
+            group by game.id,game.name,game.price,game.discount
+            order by solds desc";
+            else
+                  $sql .= "SELECT game.id,game.name,game.price,game.discount,count(*) as solds from game 
+            join purchase_history on purchase_history.game_id=game.id 
+            join purchase_history_description on purchase_history_description.id=purchase_history.description_id 
+            join belongs_to on belongs_to.game_id=game.id
+            where DATE_FORMAT(date, '%Y-01-01') = DATE_FORMAT(NOW(), '%Y-01-01') and game.status=true and game.name like '$name%' and belongs_to.category_type='$category'
+            group by game.id,game.name,game.price,game.discount
+            order by solds desc";
+            $result = $this->db->query($sql);
+            $arr = [];
+            if ($result->num_rows > 0) {
+                  while ($row = $result->fetch_assoc()) {
+                        $arr[] = $row;
+                  }
+            }
+            return $arr;
+      }
+
       public function __destruct()
       {
             $this->db->close();

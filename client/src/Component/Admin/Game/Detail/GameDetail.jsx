@@ -52,7 +52,6 @@ export default function AdminGameDetail()
                   .then(res =>
                   {
                         document.title = res.data.name;
-                        console.log(res);
                         SetGame({
 
                               name: res.data.name,

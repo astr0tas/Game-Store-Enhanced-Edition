@@ -80,6 +80,7 @@
       /* Statistic */
       $router->post("/admin/getOverall", "AdminController@getOverall");
       $router->post("/admin/getCategories", "AdminController@getCategories2");
+      $router->post("/admin/getStats", "AdminController@getStats");
       // Run router
       $router->run();
       ?>

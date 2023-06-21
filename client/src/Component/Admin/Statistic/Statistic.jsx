@@ -1,6 +1,5 @@
 import styles from './Statistic.module.css';
 import { PieChart, Pie, ResponsiveContainer, Cell, Legend, Tooltip } from 'recharts';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid } from 'recharts';
 import React, { useEffect, useRef, useState } from 'react';
 import { Button, Modal } from 'react-bootstrap';
 import axios from 'axios';
@@ -10,6 +9,9 @@ import { isRefNotValid, isRefValid } from '../../General/tools/refChecker';
 import ReactDOM from 'react-dom/client';
 import '../../General/css/scroll.css';
 import { BsSearch } from 'react-icons/bs';
+import { CiDiscount1 } from 'react-icons/ci';
+import { useNavigate } from 'react-router-dom';
+
 
 function generateUniqueRGBAColors(n)
 {
@@ -43,15 +45,20 @@ const DrawOverall = () =>
             axios.post(`http://${ domain }/admin/getOverall`, formData)
                   .then(res =>
                   {
-                        for (let i = 0; i < res.data.length; i++)
-                              res.data[i].value = parseInt(res.data[i].value);
-                        setData(res.data);
+                        if (res.data.length)
+                        {
+                              for (let i = 0; i < res.data.length; i++)
+                                    res.data[i].value = parseInt(res.data[i].value);
+                              setData(res.data);
+                        }
+                        else
+                              setData([]);
                   })
                   .catch(err => console.log(err));
       }, [choice])
 
       return (
-            <div className='w-100 mb-5' style={ { maxHeight: '500px', maxWidth: '800px' } }>
+            <div className='w-100 mb-5' style={ { maxHeight: data.length ? '500px' : '50px', maxWidth: '800px' } }>
                   <fieldset className='mx-auto mt-3 d-flex align-items-center justify-content-sm-center justify-content-around'>
                         <div className='me-sm-5 me-2 text-center'>
                               <label htmlFor="daily" className={ `me-2 ${ styles.fonts }` }>Daily</label>
@@ -120,12 +127,53 @@ const Line = (props) =>
       )
 }
 
-const DrawBarChar = ({ div }) =>
+const Game = (props) =>
+{
+      const [status, setStatus] = useState("N/A");
+
+      useEffect(() =>
+      {
+            const formData = new FormData();
+            formData.append("id", props.id);
+            axios.post(`http://${ domain }/admin/game/status`, formData)
+                  .then(res =>
+                  {
+                        if (res.data)
+                              setStatus("Available");
+                        else
+                              setStatus("Out of stock");
+                  })
+                  .catch(err => console.log(err))
+      }, [props.id]);
+
+      return (
+            <tr className={ `${ styles.rows }` } onClick={ () => props.Navigate(`/admin/game-list/${ props.id }`) }>
+                  <td className='text-center'>{ props.i }</td>
+                  <td>{ props.name }</td>
+                  <td className='d-flex align-items-center justify-content-center'>
+                        { !props.price && 'N/A' }{ props.price && '$' }{ props.discount === '0' && props.price }{ props.discount !== '0' && props.discount !== null && ((parseFloat(props.price) + 0.01) * (100 - parseFloat(props.discount)) / 100).toFixed(2) - 0.01 }
+                        { props.discount !== null && parseFloat(props.discount) !== 0 && <CiDiscount1 style={ {
+                              fontSize: '1.5rem',
+                              color: 'red',
+                              marginLeft: '10px'
+                        } } /> }
+                        { props.discount !== null && parseFloat(props.discount) !== 0 && <p style={ { color: 'red', marginBottom: '0' } }>{ props.discount }%</p> }
+                  </td>
+                  <td className='text-center'>{ props.solds } units</td>
+                  <td className='text-center' style={ { color: status === "Available" ? 'green' : 'red' } }>{ status }</td>
+            </tr>
+      )
+}
+
+const DrawTable = ({ div, Navigate }) =>
 {
       const [choice, setChoice] = useState(0);
       const [category, setCategory] = useState('First-Person Shooter');
       const [search, setSearch] = useState("");
       const [content, setContent] = useState(<></>);
+
+      const [searchTable, setSearchTable] = useState("");
+      const [tableContent, setTableContent] = useState([]);
 
       const [render, setRender] = useState(false);
 
@@ -133,7 +181,7 @@ const DrawBarChar = ({ div }) =>
 
       const breakpoint = useRef(0);
 
-      let timer;
+      let timer, timer1;
 
 
       useEffect(() =>
@@ -194,58 +242,35 @@ const DrawBarChar = ({ div }) =>
                   }
             }
 
+            const formData1 = new FormData();
+            formData1.append('choice', choice);
+            formData1.append('category', category);
+            formData1.append('name', searchTable);
+
+            axios.post(`http://${ domain }/admin/getStats`, formData1)
+                  .then(res =>
+                  {
+                        if (res.data.length)
+                        {
+                              const temp = [];
+                              for (let i = 0; i < res.data.length; i++)
+                                    temp.push(<Game Navigate={ Navigate } i={ i + 1 } id={ res.data[i].id } solds={ res.data[i].solds } name={ res.data[i].name } price={ res.data[i].price } discount={ res.data[i].discount } key={ i } />);
+                              setTableContent(temp);
+                        }
+                        else
+                              setTableContent([]);
+
+
+                  })
+                  .catch(err => console.log(err));
+
             window.addEventListener('resize', handleResize);
 
             return () =>
             {
                   window.removeEventListener('resize', handleResize);
             }
-      }, [choice, category, render, search]);
-
-      // const data = [
-      //       {
-      //             name: 'Page A',
-      //             uv: 4000,
-      //             pv: 2400,
-      //             amt: 2400,
-      //       },
-      //       {
-      //             name: 'Page B',
-      //             uv: 3000,
-      //             pv: 1398,
-      //             amt: 2210,
-      //       },
-      //       {
-      //             name: 'Page C',
-      //             uv: 2000,
-      //             pv: 9800,
-      //             amt: 2290,
-      //       },
-      //       {
-      //             name: 'Page D',
-      //             uv: 2780,
-      //             pv: 3908,
-      //             amt: 2000,
-      //       },
-      //       {
-      //             name: 'Page E',
-      //             uv: 1890,
-      //             pv: 4800,
-      //             amt: 2181,
-      //       },
-      //       {
-      //             name: 'Page F',
-      //             uv: 2390,
-      //             pv: 3800,
-      //             amt: 2500,
-      //       },
-      //       {
-      //             name: 'Page G',
-      //             uv: 3490,
-      //             pv: 4300,
-      //             amt: 2100,
-      //       },
-      // ];
+      }, [choice, category, render, search, searchTable, Navigate]);
 
       return (
             <>
@@ -272,19 +297,32 @@ const DrawBarChar = ({ div }) =>
                         </div>
                   </fieldset>
 
-                  {/* <ResponsiveContainer>
-                        <BarChart
-                              data={ data }
-                        >
-                              <CartesianGrid strokeDasharray="3 3" />
-                              <XAxis dataKey="name" />
-                              <YAxis />
-                              <Tooltip />
-                              <Legend />
-                              <Bar dataKey="pv" fill="#8884d8" />
-                              <Bar dataKey="uv" fill="#82ca9d" />
-                        </BarChart>
-                  </ResponsiveContainer> */}
+                  <input type='text' placeholder='Search game' className={ `border border-dark rounded ${ styles.fonts } mt-3 mb-3` } onChange={ e =>
+                  {
+                        clearTimeout(timer1);
+
+                        timer1 = setTimeout(() =>
+                        {
+                              setSearchTable(e.target.value);
+                        }, 1000);
+                  } }></input>
+
+                  <div className='overflow-auto hideBrowserScrollbar mb-2' style={ { minHeight: tableContent.length ? '400px' : '50px', width: '95%' } }>
+                        <table className="table table-hover" style={ { borderCollapse: 'separate' } }>
+                              <thead style={ { position: "sticky", top: "0", backgroundColor: "#BFBFBF" } }>
+                                    <tr>
+                                          <th scope='col' className='col-1 text-center'>#</th>
+                                          <th scope="col" className='col-4 text-center'>Game</th>
+                                          <th scope="col" className='col-3 text-center'>Price</th>
+                                          <th scope="col" className='col-2 text-center'>Total solds</th>
+                                          <th scope="col" className='col-2 text-center'>Sell status</th>
+                                    </tr>
+                              </thead>
+                              <tbody>
+                                    { tableContent }
+                              </tbody>
+                        </table>
+                  </div>
 
                   <Modal show={ showPopup } onHide={ () =>
                   {
@@ -294,7 +332,7 @@ const DrawBarChar = ({ div }) =>
                         <Modal.Header className='d-flex align-items-center justify-content-lg-between flex-column flex-lg-row'>
                               <h4 className='mb-0'>Choose a category</h4>
                               <div className='w-50 ms-lg-3 mt-2 mt-lg-0 me-lg-3 d-flex justify-content-end'>
-                                    <input className='w-100 pe-4' style={ { maxWidth: '250px' } } placeholder='Search category' onChange={ e =>
+                                    <input type='text' className='w-100 pe-4' style={ { maxWidth: '250px' } } placeholder='Search category' onChange={ e =>
                                     {
                                           clearTimeout(timer);
 
@@ -319,6 +357,8 @@ const Statistic = () =>
 
       const div = useRef(null);
 
+      const Navigate = useNavigate();
+
       return (
             <div className='w-100 h-100 d-flex flex-column align-items-center' ref={ div }>
                   <div className='w-100 d-flex align-items-center justify-content-center'>
@@ -330,7 +370,7 @@ const Statistic = () =>
                         <h2 className='mt-2'>Overall solds</h2>
                         <DrawOverall />
                         <h2 className='mt-5'>Category solds</h2>
-                        <DrawBarChar div={ div } />
+                        <DrawTable div={ div } Navigate={ Navigate } />
                   </div>
             </div>
       )

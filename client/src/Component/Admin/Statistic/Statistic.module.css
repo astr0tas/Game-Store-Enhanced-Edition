@@ -30,6 +30,14 @@
       top: 0;
 }
 
+.rows:hover {
+      cursor: pointer;
+}
+
+.rows:active {
+      background-color: rgb(190, 190, 190);
+}
+
 @media only screen and (min-width:768px) {
       .hover {
             min-width: 1.2rem;
