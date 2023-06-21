@@ -4,4 +4,4 @@ The database is MySQL server so you just need to run the .sql files in MySQL Wor
 
 The server is using XAMPP so you will need to put the content of the `server` folder into your XAMPP root directory (default is C:/xampp/htdocs) to establish the server.
 
-P/S: The project still has some bugs and weird behaviors but they're minors and don't affect much so I'm really lazy and tired of trying to fix them :)
+P/S: The project still has some bugs and weird behaviors but they're minors and don't affect much so I'm really lazy and tired of trying to fix them :) And also the server doesn't send http status code accordingly, I'm also lazy about that :) 
