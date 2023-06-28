@@ -160,7 +160,7 @@ function AdminRecovery()
           <input type="submit" className={ `btn btn-primary btn-block mb-4 ${ styles.font }` } value="Continue" />
           <div className="row mb-4">
             <div className="col">
-              <span>Go back to <a href="/admin" className={ `text-decoration-none ${ styles.font }` }>login</a></span>
+              <span className={ `${ styles.font }` }>Go back to <a href="/admin" className={ `text-decoration-none` }>login</a></span>
             </div>
           </div>
         </form>
