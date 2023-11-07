@@ -2,7 +2,6 @@
     // Include required files
     require_once('controller/Admin_Controller.php');
     require_once('controller/Customer_Controller.php');
-    require_once('controller/General_Controller.php');
 
     class Router
     {
